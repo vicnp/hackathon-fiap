@@ -73,6 +73,5 @@ namespace TC_Domain.Seguranca.Servicos
             using StreamReader sr = new(cs);
             return sr.ReadToEnd();
         }
-
     }
 }

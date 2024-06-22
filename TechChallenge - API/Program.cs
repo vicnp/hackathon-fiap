@@ -1,12 +1,12 @@
 using TC_IOC.DBContext;
-using TC_Application.RequisicoesConteudo.Servicos;
-using TC_Domain.RequisicoesConteudo.Repositorios;
 using System.Text.Json.Serialization;
 using TC_Domain.Usuarios.Servicos;
 using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using TC_Infra.Usuarios;
+using TC_Application.Usuarios;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,8 +17,8 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddTransient<DapperContext>();
 
-builder.Services.Scan(scan => scan.FromAssemblyOf<RequisicoesConteudoAppServico>().AddClasses().AsImplementedInterfaces().WithScopedLifetime());
-builder.Services.Scan(scan => scan.FromAssemblyOf<RequisicoesConteudoRepositorio>().AddClasses().AsImplementedInterfaces().WithScopedLifetime());
+builder.Services.Scan(scan => scan.FromAssemblyOf<UsuariosAppServico>().AddClasses().AsImplementedInterfaces().WithScopedLifetime());
+builder.Services.Scan(scan => scan.FromAssemblyOf<UsuariosRepositorio>().AddClasses().AsImplementedInterfaces().WithScopedLifetime());
 builder.Services.Scan(scan => scan.FromAssemblyOf<UsuariosServico>().AddClasses().AsImplementedInterfaces().WithScopedLifetime());
 
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
