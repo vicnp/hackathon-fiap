@@ -11,7 +11,7 @@ namespace TC_DataTransfer.Usuarios.Request
     {
         public string? NomeUsuario { get; set; }
         public string? Email {  get; set; }
-        public UsuarioListarRequest() : base("CodigoUsuario", TipoOrdernacao.Desc)
+        public UsuarioListarRequest() : base("nome", TipoOrdernacao.Desc)
         {
         }
     }
