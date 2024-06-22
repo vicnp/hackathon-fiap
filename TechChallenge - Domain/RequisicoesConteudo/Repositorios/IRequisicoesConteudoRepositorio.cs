@@ -1,15 +1,15 @@
-﻿using LHS_DataTransfer.RequisicoesConteudo.Request;
-using LHS_DataTransfer.RequisicoesConteudo.Response;
-using LHS_Domain.RequisicoesConteudo.Entidades;
-using LHS_Domain.RequisicoesConteudo.Enumerators;
-using LHS_IOT.Bibliotecas;
+﻿using TC_DataTransfer.RequisicoesConteudo.Request;
+using TC_DataTransfer.RequisicoesConteudo.Response;
+using TC_Domain.RequisicoesConteudo.Entidades;
+using TC_Domain.RequisicoesConteudo.Enumerators;
+using TC_IOC.Bibliotecas;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LHS_Domain.RequisicoesConteudo.Repositorios
+namespace TC_Domain.RequisicoesConteudo.Repositorios
 {
     public interface IRequisicoesConteudoRepositorio
     {

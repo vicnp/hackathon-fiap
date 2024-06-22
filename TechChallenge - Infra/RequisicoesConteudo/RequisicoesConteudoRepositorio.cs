@@ -1,19 +1,19 @@
 ﻿using Dapper;
-using LHS_IOT.Bibliotecas;
-using LHS_IOT.DBContext;
-using LHS_Domain.RequisicoesConteudo.Enumerators;
+using TC_IOC.Bibliotecas;
+using TC_IOC.DBContext;
+using TC_Domain.RequisicoesConteudo.Enumerators;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using LHS_DataTransfer.Usuarios.Request;
-using LHS_Domain.Usuarios.Entidades;
-using LHS_Domain.RequisicoesConteudo.Entidades;
-using LHS_DataTransfer.RequisicoesConteudo.Request;
+using TC_DataTransfer.Usuarios.Request;
+using TC_Domain.Usuarios.Entidades;
+using TC_Domain.RequisicoesConteudo.Entidades;
+using TC_DataTransfer.RequisicoesConteudo.Request;
 using Mysqlx.Expr;
 
-namespace LHS_Domain.RequisicoesConteudo.Repositorios
+namespace TC_Domain.RequisicoesConteudo.Repositorios
 {
     public class RequisicoesConteudoRepositorio(DapperContext dapperContext) : RepositorioDapper<RequisicaoConteudo>(dapperContext), IRequisicoesConteudoRepositorio
     {

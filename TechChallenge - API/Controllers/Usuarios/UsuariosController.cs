@@ -1,11 +1,10 @@
-﻿using LHS_Application.Usuarios.Interfaces;
-using LHS_DataTransfer.Usuarios.Request;
-using LHS_DataTransfer.Usuarios.Response;
-using LHS_Domain.Usuarios.Entidades;
-using LHS_IOT.Bibliotecas;
+﻿using TC_Application.Usuarios.Interfaces;
+using TC_DataTransfer.Usuarios.Request;
+using TC_DataTransfer.Usuarios.Response;
+using TC_IOC.Bibliotecas;
 using Microsoft.AspNetCore.Mvc;
 
-namespace LHS___API.Controllers.HealthCheck
+namespace TC_API.Controllers.HealthCheck
 {
     [Route ("api/usuarios")]
     [ApiController]

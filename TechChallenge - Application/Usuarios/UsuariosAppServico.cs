@@ -1,12 +1,12 @@
 ﻿using AutoMapper;
-using LHS_Application.Usuarios.Interfaces;
-using LHS_DataTransfer.Usuarios.Request;
-using LHS_DataTransfer.Usuarios.Response;
-using LHS_Domain.Usuarios.Entidades;
-using LHS_Domain.Usuarios.Repositorios;
-using LHS_IOT.Bibliotecas;
+using TC_Application.Usuarios.Interfaces;
+using TC_DataTransfer.Usuarios.Request;
+using TC_DataTransfer.Usuarios.Response;
+using TC_Domain.Usuarios.Entidades;
+using TC_Domain.Usuarios.Repositorios;
+using TC_IOC.Bibliotecas;
 
-namespace LHS_Application.Usuarios
+namespace TC_Application.Usuarios
 {
     public class UsuariosAppServico(IUsuariosRepositorio usuariosRepositorio, IMapper mapper) : IUsuariosAppServico
     {

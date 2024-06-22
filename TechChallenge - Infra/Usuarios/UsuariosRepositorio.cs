@@ -1,8 +1,8 @@
-﻿using LHS_DataTransfer.Usuarios.Request;
-using LHS_Domain.Usuarios.Entidades;
-using LHS_Domain.Usuarios.Repositorios;
-using LHS_IOT.Bibliotecas;
-using LHS_IOT.DBContext;
+﻿using TC_DataTransfer.Usuarios.Request;
+using TC_Domain.Usuarios.Entidades;
+using TC_Domain.Usuarios.Repositorios;
+using TC_IOC.Bibliotecas;
+using TC_IOC.DBContext;
 
 namespace LHS_Infra.Usuarios
 {

@@ -1,15 +1,8 @@
 ﻿using Dapper;
-using LHS_IOT.DBContext;
-using MySqlX.XDevAPI;
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using TC_IOC.DBContext;
 using static Dapper.SqlMapper;
 
-namespace LHS_IOT.Bibliotecas
+namespace TC_IOC.Bibliotecas
 {
     public class PaginacaoConsulta<T> where T : class
     {

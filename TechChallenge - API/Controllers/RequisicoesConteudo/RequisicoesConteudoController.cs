@@ -1,13 +1,10 @@
-﻿using LHS_Application.Usuarios.Interfaces;
-using LHS_DataTransfer.Usuarios.Request;
-using LHS_DataTransfer.Usuarios.Response;
-using LHS_IOT.Bibliotecas;
+﻿using TC_IOC.Bibliotecas;
 using Microsoft.AspNetCore.Mvc;
-using LHS_DataTransfer.RequisicoesConteudo.Request;
-using LHS_Application.RequisicoesConteudo.Interfaces;
-using LHS_DataTransfer.RequisicoesConteudo.Response;
+using TC_DataTransfer.RequisicoesConteudo.Request;
+using TC_Application.RequisicoesConteudo.Interfaces;
+using TC_DataTransfer.RequisicoesConteudo.Response;
 
-namespace LHS___API.Controllers.RequisicoesConteudo
+namespace TC_API.Controllers.RequisicoesConteudo
 {
     [Route("api/requisicoes")]
     [ApiController]

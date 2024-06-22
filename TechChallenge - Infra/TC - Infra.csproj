@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
-    <RootNamespace>LHS___Infra</RootNamespace>
+    <RootNamespace>TC_Infra</RootNamespace>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>
@@ -14,7 +14,7 @@
   <ItemGroup>
     <ProjectReference Include="..\TechChallenge - DataTransfer\TC - DataTransfer.csproj" />
     <ProjectReference Include="..\TechChallenge - Domain\TC - Domain.csproj" />
-    <ProjectReference Include="..\TechChallenge - IOT\TC - IOT.csproj" />
+    <ProjectReference Include="..\TechChallenge - IOT\TC - IOC.csproj" />
   </ItemGroup>
 
 </Project>

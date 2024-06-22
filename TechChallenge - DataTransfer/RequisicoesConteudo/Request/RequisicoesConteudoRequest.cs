@@ -1,12 +1,12 @@
-﻿using LHS_Domain.RequisicoesConteudo.Enumerators;
-using LHS_IOT.Bibliotecas;
+﻿using TC_Domain.RequisicoesConteudo.Enumerators;
+using TC_IOC.Bibliotecas;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LHS_DataTransfer.RequisicoesConteudo.Request
+namespace TC_DataTransfer.RequisicoesConteudo.Request
 {
     public class RequisicoesConteudoRequest : PaginacaoFiltro
     {

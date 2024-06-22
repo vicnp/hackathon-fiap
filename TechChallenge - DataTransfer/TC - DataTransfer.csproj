@@ -2,13 +2,13 @@
 
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
-    <RootNamespace>LHS___DataTransfer</RootNamespace>
+    <RootNamespace>YCTC_DataTransfer</RootNamespace>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\TechChallenge - IOT\TC - IOT.csproj" />
+    <ProjectReference Include="..\TechChallenge - IOT\TC - IOC.csproj" />
   </ItemGroup>
 
 </Project>

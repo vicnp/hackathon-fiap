@@ -13,7 +13,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TC - Domain", "TechChalleng
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TC - Infra", "TechChallenge - Infra\TC - Infra.csproj", "{69721366-CA8C-43F9-99FC-FD7484524847}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TC - IOT", "TechChallenge - IOT\TC - IOT.csproj", "{9ABA4269-1698-4848-A504-60EE2E11A4E3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TC - IOC", "TechChallenge - IOT\TC - IOC.csproj", "{9ABA4269-1698-4848-A504-60EE2E11A4E3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

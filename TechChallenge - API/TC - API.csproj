@@ -4,7 +4,8 @@
     <TargetFramework>net8.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
-    <RootNamespace>LHS___API</RootNamespace>
+    <RootNamespace>TC
+	_API</RootNamespace>
     <UserSecretsId>3f701c9a-19e3-4451-bc40-e20b1d5ebac6</UserSecretsId>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
     <DockerfileContext>.</DockerfileContext>
@@ -24,7 +25,7 @@
     <ProjectReference Include="..\TechChallenge - DataTransfer\TC - DataTransfer.csproj" />
     <ProjectReference Include="..\TechChallenge - Domain\TC - Domain.csproj" />
     <ProjectReference Include="..\TechChallenge - Infra\TC - Infra.csproj" />
-    <ProjectReference Include="..\TechChallenge - IOT\TC - IOT.csproj" />
+    <ProjectReference Include="..\TechChallenge - IOT\TC - IOC.csproj" />
   </ItemGroup>
 
 </Project>
