@@ -1,7 +1,6 @@
 ﻿using Dapper;
 using Microsoft.IdentityModel.Tokens;
 using TC_DataTransfer.Usuarios.Request;
-using TC_Domain.RequisicoesConteudo.Enumerators;
 using TC_Domain.Usuarios.Entidades;
 using TC_Domain.Usuarios.Repositorios;
 using TC_IOC.Bibliotecas;
