@@ -12,7 +12,8 @@ namespace TC_Application.Usuarios
     {
         public PaginacaoConsulta<UsuarioResponse> ListarUsuarios(UsuarioListarRequest request)
         {
-            throw new NotImplementedException();
+            PaginacaoConsulta<Usuario> response = usuariosRepositorio.ListarUsuarios(request);
+            return mapper.Map<PaginacaoConsulta<UsuarioResponse>>(response);
         }
     }
 }

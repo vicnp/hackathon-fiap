@@ -1,4 +1,5 @@
 ﻿using Dapper;
+using Microsoft.IdentityModel.Tokens;
 using TC_DataTransfer.Usuarios.Request;
 using TC_Domain.RequisicoesConteudo.Enumerators;
 using TC_Domain.Usuarios.Entidades;
@@ -29,6 +30,31 @@ namespace TC_Infra.Usuarios
             using var con = dapperContext.CreateConnection();
             return con.QueryFirstOrDefault<Usuario>(SQL, dynamicParameters);
         }
+        public PaginacaoConsulta<Usuario> ListarUsuarios(UsuarioListarRequest request)
+        {
+            string SQL = $@"
+                           SELECT u.id as Id,
+		                    u.nome as Nome,
+		                    u.email as Email,
+		                    u.hash as Hash,
+		                    u.data_criacao as DataCriacao,
+		                    u.permissao as Permissao
+                    FROM TECHCHALLENGE.usuario u
+	                    WHERE 1 = 1 
+                        ";
+            
+            if (!request.Email.IsNullOrEmpty())
+            {
+                SQL += ($@" AND u.email = '{request.Email}'"); 
+            }
 
+            if (!request.NomeUsuario.IsNullOrEmpty())
+            {
+                SQL += ($@" AND u.nome = '{request.NomeUsuario}'");
+            }
+
+            using var con = dapperContext.CreateConnection();
+            return ListarPaginado(SQL, request.Pg, request.Qt, request.CpOrd, request.TpOrd.ToString());
+        }
     }
 }
