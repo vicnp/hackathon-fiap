@@ -1,10 +1,10 @@
-﻿using LHS_DataTransfer.Usuarios.Request;
-using LHS_Domain.Usuarios.Entidades;
-using LHS_Domain.Usuarios.Repositorios;
-using LHS_IOT.Bibliotecas;
-using LHS_IOT.DBContext;
+﻿using TC_DataTransfer.Usuarios.Request;
+using TC_Domain.Usuarios.Entidades;
+using TC_Domain.Usuarios.Repositorios;
+using TC_IOT.Bibliotecas;
+using TC_IOT.DBContext;
 
-namespace LHS_Infra.Usuarios
+namespace TC_Infra.Usuarios
 {
     public class UsuariosRepositorio(DapperContext dapperContext) : RepositorioDapper<Usuario>(dapperContext), IUsuariosRepositorio
     {

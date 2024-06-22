@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LHS_Domain.Usuarios.Entidades
+namespace TC_Domain.Usuarios.Entidades
 {
     public class Usuario
     {

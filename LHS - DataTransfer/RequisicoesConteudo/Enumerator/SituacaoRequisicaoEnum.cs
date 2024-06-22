@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 
-namespace LHS_Domain.RequisicoesConteudo.Enumerators
+namespace TC_Domain.RequisicoesConteudo.Enumerators
 {
     public enum SituacaoRequisicaoEnum
     {
