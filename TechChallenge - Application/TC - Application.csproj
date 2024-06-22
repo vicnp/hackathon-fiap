@@ -12,9 +12,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\LHS - DataTransfer\LHS - DataTransfer.csproj" />
-    <ProjectReference Include="..\LHS - Domain\LHS - Domain.csproj" />
-    <ProjectReference Include="..\LHS - Infra\LHS - Infra.csproj" />
+    <ProjectReference Include="..\TechChallenge - DataTransfer\TC - DataTransfer.csproj" />
+    <ProjectReference Include="..\TechChallenge - Domain\TC - Domain.csproj" />
+    <ProjectReference Include="..\TechChallenge - Infra\TC - Infra.csproj" />
   </ItemGroup>
 
 </Project>

@@ -8,7 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\LHS - IOT\LHS - IOT.csproj" />
+    <ProjectReference Include="..\TechChallenge - IOT\TC - IOT.csproj" />
   </ItemGroup>
 
 </Project>

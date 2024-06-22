@@ -8,7 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\LHS - DataTransfer\LHS - DataTransfer.csproj" />
+    <ProjectReference Include="..\TechChallenge - DataTransfer\TC - DataTransfer.csproj" />
   </ItemGroup>
 
 </Project>

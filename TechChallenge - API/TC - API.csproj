@@ -20,11 +20,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\LHS - Application\LHS - Application.csproj" />
-    <ProjectReference Include="..\LHS - DataTransfer\LHS - DataTransfer.csproj" />
-    <ProjectReference Include="..\LHS - Domain\LHS - Domain.csproj" />
-    <ProjectReference Include="..\LHS - Infra\LHS - Infra.csproj" />
-    <ProjectReference Include="..\LHS - IOT\LHS - IOT.csproj" />
+    <ProjectReference Include="..\TechChallenge - Application\TC - Application.csproj" />
+    <ProjectReference Include="..\TechChallenge - DataTransfer\TC - DataTransfer.csproj" />
+    <ProjectReference Include="..\TechChallenge - Domain\TC - Domain.csproj" />
+    <ProjectReference Include="..\TechChallenge - Infra\TC - Infra.csproj" />
+    <ProjectReference Include="..\TechChallenge - IOT\TC - IOT.csproj" />
   </ItemGroup>
 
 </Project>
