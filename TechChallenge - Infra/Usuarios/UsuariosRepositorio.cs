@@ -4,7 +4,7 @@ using TC_Domain.Usuarios.Repositorios;
 using TC_IOC.Bibliotecas;
 using TC_IOC.DBContext;
 
-namespace LHS_Infra.Usuarios
+namespace TC_Infra.Usuarios
 {
     public class UsuariosRepositorio(DapperContext dapperContext) : RepositorioDapper<Usuario>(dapperContext), IUsuariosRepositorio
     {

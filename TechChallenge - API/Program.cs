@@ -1,14 +1,7 @@
-using TC_Application.Usuarios;
-using TC_Application.Usuarios.Interfaces;
-using TC_Domain.Usuarios.Repositorios;
 using TC_IOC.DBContext;
-using TC_Application.RequisicoesConteudo.Interfaces;
 using TC_Application.RequisicoesConteudo.Servicos;
 using TC_Domain.RequisicoesConteudo.Repositorios;
-using System.Text.Json;
 using System.Text.Json.Serialization;
-using LHS_Infra.Usuarios;
-using TC_Domain.Usuarios.Servicos.Interfaces;
 using TC_Domain.Usuarios.Servicos;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -19,13 +12,6 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddTransient<DapperContext>();
-
-//builder.Services.AddTransient<IUsuariosRepositorio, UsuariosRepositorio>();
-//builder.Services.AddTransient<IRequisicoesConteudoAppServico, RequisicoesConteudoAppServico>();
-//builder.Services.AddTransient<IRequisicoesConteudoRepositorio, RequisicoesConteudoRepositorio>();
-//builder.Services.AddTransient<IUsuariosRepositorio, UsuariosRepositorio>();
-//builder.Services.AddScoped<IUsuariosAppServico, UsuariosAppServico>();
-
 
 
 builder.Services.Scan(scan => scan.FromAssemblyOf<RequisicoesConteudoAppServico>().AddClasses().AsImplementedInterfaces().WithScopedLifetime());
