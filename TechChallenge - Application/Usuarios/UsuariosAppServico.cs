@@ -10,11 +10,9 @@ namespace TC_Application.Usuarios
 {
     public class UsuariosAppServico(IUsuariosRepositorio usuariosRepositorio, IMapper mapper) : IUsuariosAppServico
     {
-
         public PaginacaoConsulta<UsuarioResponse> ListarUsuarios(UsuarioListarRequest request)
         {
-            PaginacaoConsulta<Usuario> usuarios = usuariosRepositorio.ListarUsuarios(request);
-            return mapper.Map<PaginacaoConsulta<UsuarioResponse>>(usuarios);
+            throw new NotImplementedException();
         }
     }
 }
