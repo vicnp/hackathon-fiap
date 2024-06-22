@@ -1,13 +1,13 @@
-﻿using TC_DataTransfer.Usuarios.Request;
-using TC_Domain.Usuarios.Entidades;
-using TC_IOT.Bibliotecas;
+﻿using LHS_DataTransfer.Usuarios.Request;
+using LHS_Domain.Usuarios.Entidades;
+using LHS_IOT.Bibliotecas;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TC_Domain.Usuarios.Repositorios
+namespace LHS_Domain.Usuarios.Repositorios
 {
     public interface IUsuariosRepositorio
     {

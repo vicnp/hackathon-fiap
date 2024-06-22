@@ -1,14 +1,14 @@
-﻿using TC_Domain.RequisicoesConteudo.Repositorios;
-using TC_Application.RequisicoesConteudo.Interfaces;
-using TC_DataTransfer.RequisicoesConteudo.Request;
-using TC_Domain.RequisicoesConteudo.Enumerators;
-using TC_IOT.Bibliotecas;
-using TC_DataTransfer.RequisicoesConteudo.Response;
-using TC_Domain.RequisicoesConteudo.Entidades;
+﻿using LHS_Domain.RequisicoesConteudo.Repositorios;
+using LHS_Application.RequisicoesConteudo.Interfaces;
+using LHS_DataTransfer.RequisicoesConteudo.Request;
+using LHS_Domain.RequisicoesConteudo.Enumerators;
+using LHS_IOT.Bibliotecas;
+using LHS_DataTransfer.RequisicoesConteudo.Response;
+using LHS_Domain.RequisicoesConteudo.Entidades;
 using AutoMapper;
 using Microsoft.IdentityModel.Tokens;
 
-namespace TC_Application.RequisicoesConteudo.Servicos
+namespace LHS_Application.RequisicoesConteudo.Servicos
 {
     public class RequisicoesConteudoAppServico(IRequisicoesConteudoRepositorio repositorio, IMapper mapper) : IRequisicoesConteudoAppServico
     {

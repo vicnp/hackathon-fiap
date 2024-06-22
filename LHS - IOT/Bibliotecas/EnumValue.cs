@@ -6,7 +6,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TC_IOT.Bibliotecas
+namespace LHS_IOT.Bibliotecas
 {
     public class EnumValue
     {

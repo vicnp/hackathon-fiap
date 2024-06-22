@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TC_Domain.Usuarios.Servicos.Interfaces
+namespace LHS_Domain.Usuarios.Servicos.Interfaces
 {
     public interface IUsuariosServico
     {

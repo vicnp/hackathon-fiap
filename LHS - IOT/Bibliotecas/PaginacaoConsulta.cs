@@ -1,5 +1,5 @@
 ﻿using Dapper;
-using TC_IOT.DBContext;
+using LHS_IOT.DBContext;
 using MySqlX.XDevAPI;
 using System;
 using System.Collections;
@@ -9,7 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using static Dapper.SqlMapper;
 
-namespace TC_IOT.Bibliotecas
+namespace LHS_IOT.Bibliotecas
 {
     public class PaginacaoConsulta<T> where T : class
     {

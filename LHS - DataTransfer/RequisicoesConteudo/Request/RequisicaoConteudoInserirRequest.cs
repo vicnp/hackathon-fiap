@@ -1,6 +1,6 @@
-﻿using TC_Domain.RequisicoesConteudo.Enumerators;
+﻿using LHS_Domain.RequisicoesConteudo.Enumerators;
 
-namespace TC_DataTransfer.RequisicoesConteudo.Request
+namespace LHS_DataTransfer.RequisicoesConteudo.Request
 {
     public class RequisicaoConteudoInserirRequest
     {

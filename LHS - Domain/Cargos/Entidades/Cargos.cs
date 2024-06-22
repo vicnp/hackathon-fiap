@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TC_Domain.Cargos.Entidades
+namespace LHS_Domain.Cargos.Entidades
 {
     public class Cargos
     { 

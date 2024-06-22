@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TC_DataTransfer.Usuarios.Response
+namespace LHS_DataTransfer.Usuarios.Response
 {
     public class UsuarioResponse
     {
