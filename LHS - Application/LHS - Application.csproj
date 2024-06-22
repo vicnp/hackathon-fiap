@@ -1,0 +1,20 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <RootNamespace>LHS___Application</RootNamespace>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="13.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\LHS - DataTransfer\LHS - DataTransfer.csproj" />
+    <ProjectReference Include="..\LHS - Domain\LHS - Domain.csproj" />
+    <ProjectReference Include="..\LHS - Infra\LHS - Infra.csproj" />
+  </ItemGroup>
+
+</Project>
