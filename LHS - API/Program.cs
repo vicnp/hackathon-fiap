@@ -1,15 +1,15 @@
-using LHS_Application.Usuarios;
-using LHS_Application.Usuarios.Interfaces;
-using LHS_Domain.Usuarios.Repositorios;
-using LHS_IOT.DBContext;
-using LHS_Application.RequisicoesConteudo.Interfaces;
-using LHS_Application.RequisicoesConteudo.Servicos;
-using LHS_Domain.RequisicoesConteudo.Repositorios;
+using TC_Application.Usuarios;
+using TC_Application.Usuarios.Interfaces;
+using TC_Domain.Usuarios.Repositorios;
+using TC_IOT.DBContext;
+using TC_Application.RequisicoesConteudo.Interfaces;
+using TC_Application.RequisicoesConteudo.Servicos;
+using TC_Domain.RequisicoesConteudo.Repositorios;
 using System.Text.Json;
 using System.Text.Json.Serialization;
-using LHS_Infra.Usuarios;
-using LHS_Domain.Usuarios.Servicos.Interfaces;
-using LHS_Domain.Usuarios.Servicos;
+using TC_Infra.Usuarios;
+using TC_Domain.Usuarios.Servicos.Interfaces;
+using TC_Domain.Usuarios.Servicos;
 
 var builder = WebApplication.CreateBuilder(args);
 

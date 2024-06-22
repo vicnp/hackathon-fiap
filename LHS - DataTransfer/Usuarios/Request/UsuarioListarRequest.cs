@@ -1,11 +1,11 @@
-﻿using LHS_IOT.Bibliotecas;
+﻿using TC_IOT.Bibliotecas;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LHS_DataTransfer.Usuarios.Request
+namespace TC_DataTransfer.Usuarios.Request
 {
     public class UsuarioListarRequest : PaginacaoFiltro
     {
