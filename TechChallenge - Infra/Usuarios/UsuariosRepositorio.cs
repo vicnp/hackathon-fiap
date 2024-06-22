@@ -1,4 +1,6 @@
-﻿using TC_DataTransfer.Usuarios.Request;
+﻿using Dapper;
+using TC_DataTransfer.Usuarios.Request;
+using TC_Domain.RequisicoesConteudo.Enumerators;
 using TC_Domain.Usuarios.Entidades;
 using TC_Domain.Usuarios.Repositorios;
 using TC_IOC.Bibliotecas;
@@ -8,25 +10,25 @@ namespace TC_Infra.Usuarios
 {
     public class UsuariosRepositorio(DapperContext dapperContext) : RepositorioDapper<Usuario>(dapperContext), IUsuariosRepositorio
     {
-        public PaginacaoConsulta<Usuario> ListarUsuarios(UsuarioListarRequest request)
+        public Usuario RecuperarUsuario(string email, string hash)
         {
-      
-            string SQL = $@"select u.codusuario as CodigoUsuario,
-                                  u.nome as Nome,
-                                  u.email as Email,
-                                  u.codcargo as CodigoCargo
-                         from lhs_usuario u where 1 = 1
+            string SQL = $@"
+                           SELECT u.id as Id,
+		                    u.nome as Nome,
+		                    u.email as Email,
+		                    u.hash as Hash,
+		                    u.data_criacao as DataCriacao,
+		                    u.permissao as Permissao
+                    FROM TECHCHALLENGE.usuario u
+	                    WHERE u.email = @email
+	                    AND u.hash = @hash
                         ";
-
-            if (request.NomeUsuario != null && request.NomeUsuario.Length > 0)
-                SQL += $@"
-                            and u.nome like '%{request.NomeUsuario}%'";
-
-            if (request.Email != null && request.Email.Length > 0)
-                SQL += $@"
-                            and u.email like '%{request.Email}%'";
-
-            return ListarPaginado(SQL.ToString(), request.Pg, request.Qt, request.CpOrd, request.TpOrd.ToString());
+            DynamicParameters dynamicParameters = new();
+            dynamicParameters.Add("email", email);
+            dynamicParameters.Add("hash", hash);
+            using var con = dapperContext.CreateConnection();
+            return con.QueryFirstOrDefault<Usuario>(SQL, dynamicParameters);
         }
+
     }
 }

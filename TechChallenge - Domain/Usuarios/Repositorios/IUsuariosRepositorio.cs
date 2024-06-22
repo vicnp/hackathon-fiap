@@ -11,11 +11,6 @@ namespace TC_Domain.Usuarios.Repositorios
 {
     public interface IUsuariosRepositorio
     {
-        /// <summary>
-        /// Listagem pagina de usuários registrados no banco de dados.
-        /// </summary>
-        /// <param name="request"></param>
-        /// <returns>Total de registros na base e lista de registros recuperados da página.  </T>></returns>
-        PaginacaoConsulta<Usuario> ListarUsuarios(UsuarioListarRequest request);
+        Usuario RecuperarUsuario(string email, string hash);
     }
 }
