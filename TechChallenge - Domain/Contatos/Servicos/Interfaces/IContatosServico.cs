@@ -8,7 +8,7 @@ using TC_Domain.Contatos.Repositorios.Filtros;
 using TC_IOC.Bibliotecas;
 using TC_DataTransfer.Contatos.Reponses;
 using TC_DataTransfer.Contatos.Requests;
-using YCTC_DataTransfer.Contatos.Requests;
+using TC_DataTransfer.Contatos.Requests;
 
 namespace TC_Domain.Contatos.Servicos.Interfaces
 {

@@ -17,7 +17,7 @@ namespace TC_Application.Contatos.Profiles
         public ContatoProfile()
         {
            CreateMap<ContatoRequest, ContatosFiltro>();
-           CreateMap<Contato, ContatoResponse>();  
+           CreateMap<Contato, ContatoResponse>().ForMember(x => x.Regiao, opt => opt.Ignore()); ;  
            CreateMap<PaginacaoConsulta<Contato>, PaginacaoConsulta<ContatoResponse>>();
         }
     }
