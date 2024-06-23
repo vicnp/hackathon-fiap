@@ -11,6 +11,7 @@ namespace TC_Domain.Contatos.Repositorios
 {
     public interface IContatosRepositorio
     {
+        Contato InserirContato(Contato contato);
         PaginacaoConsulta<Contato> ListarContatos(ContatosFiltro filtro);
     }
 }

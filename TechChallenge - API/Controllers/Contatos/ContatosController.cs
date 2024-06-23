@@ -5,6 +5,7 @@ using TC_Domain.Contatos.Servicos.Interfaces;
 using TC_DataTransfer.Contatos.Requests;
 using TC_IOC.Bibliotecas;
 using TC_DataTransfer.Contatos.Reponses;
+using YCTC_DataTransfer.Contatos.Requests;
 
 namespace TC_API.Controllers.Contatos
 {
@@ -24,6 +25,20 @@ namespace TC_API.Controllers.Contatos
             return Ok(contatosAppServico.ListarContatosComPaginacao(request));
         }
 
+        [HttpPost]
+        //[Authorize]
+        public ActionResult<ContatoResponse> InserirContato(ContatoInserirRequest request) 
+        {
+            try
+            {
+                return Ok(contatosAppServico.InserirContato(request));
+            }
+            catch (ArgumentException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+            
+        }
     }
 
 }
