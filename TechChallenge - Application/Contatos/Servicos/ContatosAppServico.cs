@@ -12,13 +12,13 @@ using TC_Domain.Regioes.Repositorios.Consultas;
 
 namespace TC_Application.Contatos.Servicos
 {
-    public class ContatosAppServico(IContatosServico contatosservico,IRegioesRepositorio regioesRepositorio, IMapper mapper) : IContatosAppServico
+    public class ContatosAppServico(IContatosServico contatosServico,IRegioesRepositorio regioesRepositorio, IMapper mapper) : IContatosAppServico
     {
         public PaginacaoConsulta<ContatoResponse> ListarContatosComPaginacao (ContatoRequest request)
         {
             ContatosFiltro contatosFiltro = mapper.Map<ContatosFiltro>(request);
 
-            PaginacaoConsulta<Contato> consulta = contatosservico.ListarContatos(contatosFiltro);
+            PaginacaoConsulta<Contato> consulta = contatosServico.ListarContatos(contatosFiltro);
 
             PaginacaoConsulta<ContatoResponse> response = mapper.Map<PaginacaoConsulta<ContatoResponse>>(consulta);
 
@@ -38,7 +38,7 @@ namespace TC_Application.Contatos.Servicos
 
         public ContatoResponse InserirContato(ContatoInserirRequest request)
         {
-            Contato contato = contatosservico.InserirContato(request);
+            Contato contato = contatosServico.InserirContato(request);
             return  mapper.Map<ContatoResponse>(contato);   
         }
 

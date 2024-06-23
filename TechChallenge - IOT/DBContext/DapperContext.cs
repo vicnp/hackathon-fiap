@@ -13,7 +13,7 @@ namespace TC_IOC.DBContext
         {
 
             _configuration = configuration;
-            connectionString = configuration.GetConnectionString("mysql");
+            connectionString = configuration.GetConnectionString("mysql")!;
         }
 
         public IDbConnection CreateConnection() =>new MySqlConnection(connectionString);
