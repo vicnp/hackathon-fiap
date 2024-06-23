@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace YCTC_DataTransfer.Contatos.Requests
+namespace TC_DataTransfer.Contatos.Requests
 {
     public class ContatoInserirRequest
     {

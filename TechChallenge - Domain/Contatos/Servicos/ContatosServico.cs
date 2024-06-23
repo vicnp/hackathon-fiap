@@ -12,7 +12,7 @@ using TC_DataTransfer.Contatos.Reponses;
 using TC_DataTransfer.Contatos.Requests;
 using Microsoft.IdentityModel.Tokens;
 using System.Text.RegularExpressions;
-using YCTC_DataTransfer.Contatos.Requests;
+using TC_DataTransfer.Contatos.Requests;
 using System.ComponentModel.DataAnnotations;
 
 namespace TC_Domain.Contatos.Servicos

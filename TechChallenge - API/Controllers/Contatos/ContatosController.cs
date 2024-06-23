@@ -5,7 +5,7 @@ using TC_Domain.Contatos.Servicos.Interfaces;
 using TC_DataTransfer.Contatos.Requests;
 using TC_IOC.Bibliotecas;
 using TC_DataTransfer.Contatos.Reponses;
-using YCTC_DataTransfer.Contatos.Requests;
+using TC_DataTransfer.Contatos.Requests;
 
 namespace TC_API.Controllers.Contatos
 {
