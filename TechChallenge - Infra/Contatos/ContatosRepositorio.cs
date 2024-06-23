@@ -1,4 +1,5 @@
-﻿using Microsoft.IdentityModel.Tokens;
+﻿using Dapper;
+using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -47,5 +48,24 @@ namespace TC_Infra.Contatos
            return ListarPaginado(SQL, filtro.Pg, filtro.Qt, filtro.CpOrd, filtro.TpOrd.ToString());
         }
 
+        public Contato InserirContato(Contato contato)
+        {
+            string SQL = @"
+                       INSERT INTO TECHCHALLENGE.contatos
+                              (nome, email, ddd, telefone)
+                       VALUES(@NOME, @EMAIL, @DDD, @TELEFONE);
+                       SELECT LAST_INSERT_ID(); -- Captura a ID gerada ";
+
+            DynamicParameters parametros = new();
+            parametros.Add("@NOME", contato.Nome);
+            parametros.Add("@EMAIL", contato.Email);
+            parametros.Add("@DDD", contato.DDD);
+            parametros.Add("@TELEFONE", contato.Telefone);
+
+            using var con = dapperContext.CreateConnection();
+            var idGerado = con.QuerySingle<int>(SQL, parametros);
+            contato.SetId(idGerado);
+            return contato;
+        }
     }
 }
