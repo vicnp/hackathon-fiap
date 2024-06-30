@@ -1,17 +1,12 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
-using System;
-using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
 using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
-using System.Threading.Tasks;
 using TC_Domain.Seguranca.Servicos.Interfaces;
 using TC_Domain.Usuarios.Entidades;
 using TC_Domain.Usuarios.Repositorios;
-using static Mysqlx.Expect.Open.Types.Condition.Types;
 
 namespace TC_Domain.Seguranca.Servicos
 {

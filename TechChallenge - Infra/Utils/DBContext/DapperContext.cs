@@ -11,9 +11,8 @@ namespace TC_IOC.DBContext
         private readonly string connectionString;
         public DapperContext(IConfiguration configuration)
         {
-
             _configuration = configuration;
-            connectionString = configuration.GetConnectionString("mysql")!;
+            connectionString = _configuration.GetConnectionString("mysql")!;
         }
 
         public IDbConnection CreateConnection() =>new MySqlConnection(connectionString);

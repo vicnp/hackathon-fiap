@@ -8,7 +8,7 @@ namespace TC_DataTransfer.Regiao.Responses
 {
     public class RegiaoResponse
     {
-        public int DDD {  get; set; }
+        public int RegiaoDDD {  get; set; }
         public string? Estado {  get; set; }
         public string? Descricao{ get; set; }
 
@@ -19,7 +19,7 @@ namespace TC_DataTransfer.Regiao.Responses
 
         public RegiaoResponse(int dDD, string estado, string descricao)
         {
-            DDD = dDD;
+            RegiaoDDD = dDD;
             Estado = estado;
             Descricao = descricao;
         }

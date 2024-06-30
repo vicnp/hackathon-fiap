@@ -1,11 +1,6 @@
 ﻿using AutoMapper;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TC_DataTransfer.Regiao.Responses;
-using TC_Domain.Regioes.Repositorios.Consultas;
+using TC_Domain.Regioes.Entidades;
 
 namespace TC_Application.Regioes.Profiles
 {
@@ -13,7 +8,7 @@ namespace TC_Application.Regioes.Profiles
     {
         public RegioesProfile()
         {
-            CreateMap<RegiaoConsulta, RegiaoResponse>();    
+            CreateMap<Regiao, RegiaoResponse>();    
         }
     }
 }

@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel;
 using System.Reflection;
 
-namespace TC_IOC.Bibliotecas
+namespace TC_Domain.Utils
 {
     public class EnumValue
     {

@@ -3,12 +3,12 @@ using TC_Application.Contatos.Interfaces;
 using TC_Domain.Contatos.Entidades;
 using TC_Domain.Contatos.Repositorios.Filtros;
 using TC_Domain.Contatos.Servicos.Interfaces;
-using TC_IOC.Bibliotecas;
 using TC_DataTransfer.Contatos.Reponses;
 using TC_DataTransfer.Contatos.Requests;
 using TC_Domain.Regioes.Repositorios;
 using TC_DataTransfer.Regiao.Responses;
-using TC_Domain.Regioes.Repositorios.Consultas;
+using TC_Domain.Utils;
+using TC_Domain.Regioes.Entidades;
 
 namespace TC_Application.Contatos.Servicos
 {
@@ -22,24 +22,20 @@ namespace TC_Application.Contatos.Servicos
 
             PaginacaoConsulta<ContatoResponse> response = mapper.Map<PaginacaoConsulta<ContatoResponse>>(consulta);
 
-            foreach (var contato in response.Registros)
-            {
-                RegiaoConsulta? regiaoConsulta = regioesRepositorio.ListarRegioes((int)contato.DDD!).FirstOrDefault();
-
-                if(regiaoConsulta == null)
-                    continue;
-
-                RegiaoResponse regiaoResponse = mapper.Map<RegiaoResponse>(regiaoConsulta);
-                contato.Regiao = regiaoResponse;
-            }
-
             return response;
         }
 
         public ContatoResponse InserirContato(ContatoInserirRequest request)
         {
             Contato contato = contatosServico.InserirContato(request);
-            return  mapper.Map<ContatoResponse>(contato);   
+
+            ContatoResponse contatoResponse = mapper.Map<ContatoResponse>(contato);
+
+            Regiao? regiaoConsulta = regioesRepositorio.ListarRegioes((int)contatoResponse.DDD!).FirstOrDefault();
+            RegiaoResponse regiaoResponse = mapper.Map<RegiaoResponse>(regiaoConsulta);
+
+            contatoResponse.Regiao = regiaoResponse;
+            return contatoResponse;
         }
 
     }

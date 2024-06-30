@@ -9,6 +9,7 @@ using TC_Domain.Contatos.Repositorios.Filtros;
 using TC_IOC.Bibliotecas;
 using TC_DataTransfer.Contatos.Reponses;
 using TC_DataTransfer.Contatos.Requests;
+using TC_Domain.Utils;
 
 namespace TC_Application.Contatos.Profiles
 {
@@ -17,7 +18,7 @@ namespace TC_Application.Contatos.Profiles
         public ContatoProfile()
         {
            CreateMap<ContatoRequest, ContatosFiltro>();
-           CreateMap<Contato, ContatoResponse>().ForMember(x => x.Regiao, opt => opt.Ignore()); ;  
+           CreateMap<Contato, ContatoResponse>();  
            CreateMap<PaginacaoConsulta<Contato>, PaginacaoConsulta<ContatoResponse>>();
         }
     }

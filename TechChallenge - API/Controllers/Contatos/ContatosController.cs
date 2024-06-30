@@ -1,11 +1,10 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using TC_Application.Contatos.Interfaces;
-using TC_Domain.Contatos.Servicos.Interfaces;
 using TC_DataTransfer.Contatos.Requests;
 using TC_IOC.Bibliotecas;
 using TC_DataTransfer.Contatos.Reponses;
-using TC_DataTransfer.Contatos.Requests;
+using TC_Domain.Utils;
+using Microsoft.AspNetCore.Authorization;
 
 namespace TC_API.Controllers.Contatos
 {
@@ -17,16 +16,21 @@ namespace TC_API.Controllers.Contatos
         /// Lista os contatos, permitindo filtragem.
         /// </summary>
         /// <param name="request"></param>
-        /// <returns>Listagem pagina de contatos.</returns>
+        /// <returns>Listagem paginada de contatos.</returns>
         [HttpGet]
-        //[Authorize]
+        [Authorize]
         public ActionResult<PaginacaoConsulta<ContatoResponse>> ListarContatosComPaginacao([FromQuery]ContatoRequest request)
         {
             return Ok(contatosAppServico.ListarContatosComPaginacao(request));
         }
 
+        /// <summary>
+        /// Realiza o cadastro de um contato na base de dados.
+        /// </summary>
+        /// <param name="request">Dados para cadastro do contato.</param>
+        /// <returns>O contato cadastrado.</returns>
         [HttpPost]
-        //[Authorize]
+        [Authorize]
         public ActionResult<ContatoResponse> InserirContato(ContatoInserirRequest request) 
         {
             try
