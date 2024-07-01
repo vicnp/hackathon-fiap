@@ -4,6 +4,7 @@ using TC_DataTransfer.Usuarios.Response;
 using TC_IOC.Bibliotecas;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
+using TC_Domain.Utils;
 
 namespace TC_API.Controllers.HealthCheck
 {

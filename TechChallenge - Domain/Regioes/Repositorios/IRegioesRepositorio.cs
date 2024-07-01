@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TC_Domain.Regioes.Repositorios.Consultas;
+﻿using TC_Domain.Regioes.Entidades;
 
 namespace TC_Domain.Regioes.Repositorios
 {
     public interface IRegioesRepositorio
     {
-        List<RegiaoConsulta> ListarRegioes(int ddd = 0);
+        List<Regiao> ListarRegioes(int ddd = 0);
     }
 }

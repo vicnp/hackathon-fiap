@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TC_Domain.Regioes.Entidades;
 
 namespace TC_Domain.Contatos.Entidades
 {
@@ -13,6 +14,7 @@ namespace TC_Domain.Contatos.Entidades
         public string? Email { get; protected set; }
         public int? DDD { get; protected set; }
         public string? Telefone { get; protected set; }
+        public Regiao? Regiao { get; protected set; }
 
         public Contato()
         {
@@ -51,5 +53,9 @@ namespace TC_Domain.Contatos.Entidades
             Telefone =  telefone;
         }
 
+        public void SetRegiao(Regiao regiao)
+        {
+            Regiao = regiao;
+        }
     }
 }

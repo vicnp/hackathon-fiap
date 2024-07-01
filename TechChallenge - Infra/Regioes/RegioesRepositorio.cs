@@ -1,22 +1,17 @@
 ﻿using Dapper;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using TC_Domain.Regioes.Entidades;
 using TC_Domain.Regioes.Repositorios;
-using TC_Domain.Regioes.Repositorios.Consultas;
 using TC_IOC.Bibliotecas;
 using TC_IOC.DBContext;
 
 namespace TC_Infra.Regioes
 {
-    public class RegioesRepositorio(DapperContext dapperContext) : RepositorioDapper<RegiaoConsulta>(dapperContext), IRegioesRepositorio
+    public class RegioesRepositorio(DapperContext dapperContext) : RepositorioDapper<Regiao>(dapperContext), IRegioesRepositorio
     {
-        public List<RegiaoConsulta> ListarRegioes(int ddd = 0)
+        public List<Regiao> ListarRegioes(int ddd = 0)
         {
             string SQL = @"
-                            SELECT ddd,
+                            SELECT ddd as RegiaoDDD,
                                    estado,
                                    regiao as Descricao
                             FROM TECHCHALLENGE.regioes
@@ -27,9 +22,8 @@ namespace TC_Infra.Regioes
                 SQL += $@"
                         AND ddd = {ddd}
                         ";
-            }
-            using var con = dapperContext.CreateConnection();
-            return con.Query<RegiaoConsulta>(SQL).ToList();
+            } 
+            return session.Query<Regiao>(SQL).ToList();
         }
     }
 }

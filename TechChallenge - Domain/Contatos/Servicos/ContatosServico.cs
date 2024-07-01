@@ -1,19 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TC_Domain.Contatos.Entidades;
+﻿using TC_Domain.Contatos.Entidades;
 using TC_Domain.Contatos.Repositorios;
 using TC_Domain.Contatos.Repositorios.Filtros;
 using TC_Domain.Contatos.Servicos.Interfaces;
-using TC_IOC.Bibliotecas;
-using TC_DataTransfer.Contatos.Reponses;
-using TC_DataTransfer.Contatos.Requests;
-using Microsoft.IdentityModel.Tokens;
-using System.Text.RegularExpressions;
 using TC_DataTransfer.Contatos.Requests;
 using System.ComponentModel.DataAnnotations;
+using TC_Domain.Utils;
 
 namespace TC_Domain.Contatos.Servicos
 {
@@ -37,16 +28,16 @@ namespace TC_Domain.Contatos.Servicos
 
         private static void ValidarCampos(ContatoInserirRequest contatoRequest)
         {
-            if (contatoRequest.Nome.IsNullOrEmpty())
+            if (string.IsNullOrEmpty(contatoRequest.Nome))
                 throw new ArgumentException("Nome não preenchido.");
 
-            if (contatoRequest.Email.IsNullOrEmpty())
+            if (string.IsNullOrEmpty(contatoRequest.Email))
                 throw new ArgumentException("Email não preenchido.");
 
             if (!ValidarEmail(contatoRequest.Email))
                 throw new ArgumentException($"Email inválido: {contatoRequest.Email}");
 
-            if (contatoRequest.Telefone.IsNullOrEmpty())
+            if (string.IsNullOrEmpty(contatoRequest.Telefone))
                 throw new ArgumentException("Telefone não preenchido.");
 
             if (!contatoRequest.Telefone!.All(char.IsDigit))
@@ -66,6 +57,6 @@ namespace TC_Domain.Contatos.Servicos
 
             return false;
         }
-
+ 
     }
 }
