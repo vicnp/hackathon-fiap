@@ -17,7 +17,8 @@ namespace TC_Application.Contatos.Profiles
     {
         public ContatoProfile()
         {
-           CreateMap<ContatoRequest, ContatosFiltro>();
+           CreateMap<ContatoRequest, ContatosPaginadosFiltro>();
+           CreateMap<ContatoCrudRequest, ContatoFiltro>();
            CreateMap<Contato, ContatoResponse>();  
            CreateMap<PaginacaoConsulta<Contato>, PaginacaoConsulta<ContatoResponse>>();
         }

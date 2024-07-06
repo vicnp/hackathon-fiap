@@ -9,6 +9,8 @@ using TC_Domain.Regioes.Repositorios;
 using TC_DataTransfer.Regiao.Responses;
 using TC_Domain.Utils;
 using TC_Domain.Regioes.Entidades;
+using MySqlX.XDevAPI;
+using TC_Infra.Contatos;
 
 namespace TC_Application.Contatos.Servicos
 {
@@ -16,7 +18,7 @@ namespace TC_Application.Contatos.Servicos
     {
         public PaginacaoConsulta<ContatoResponse> ListarContatosComPaginacao (ContatoRequest request)
         {
-            ContatosFiltro contatosFiltro = mapper.Map<ContatosFiltro>(request);
+            ContatosPaginadosFiltro contatosFiltro = mapper.Map<ContatosPaginadosFiltro>(request);
 
             PaginacaoConsulta<Contato> consulta = contatosServico.ListarContatos(contatosFiltro);
 
@@ -25,9 +27,11 @@ namespace TC_Application.Contatos.Servicos
             return response;
         }
 
-        public ContatoResponse InserirContato(ContatoInserirRequest request)
+        public ContatoResponse InserirContato(ContatoCrudRequest request)
         {
-            Contato contato = contatosServico.InserirContato(request);
+            ContatoFiltro contatoFiltro = mapper.Map<ContatoFiltro>(request);
+
+            Contato contato = contatosServico.InserirContato(contatoFiltro);
 
             ContatoResponse contatoResponse = mapper.Map<ContatoResponse>(contato);
 
@@ -36,6 +40,24 @@ namespace TC_Application.Contatos.Servicos
 
             contatoResponse.Regiao = regiaoResponse;
             return contatoResponse;
+        }
+
+        public ContatoResponse? AtualizarContato(ContatoCrudRequest request, int id)
+        {
+            Contato contatoAtualizado = contatosServico.RecuperarContato(id);
+            if (contatoAtualizado == null) {
+                return null;
+            }
+            contatoAtualizado.SetDDD((int)request.DDD!);
+            contatoAtualizado.SetEmail(request.Email!);
+            contatoAtualizado.SetNome(request.Nome!);    
+            contatoAtualizado.SetTelefone(request.Telefone!);    
+            return mapper.Map<ContatoResponse>(contatosServico.AtualizarContato(contatoAtualizado));
+        }
+
+        public void RemoverContato(int id)
+        {
+            contatosServico.RemoverContato(id);
         }
 
     }

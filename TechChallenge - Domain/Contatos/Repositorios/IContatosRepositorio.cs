@@ -6,7 +6,10 @@ namespace TC_Domain.Contatos.Repositorios
 {
     public interface IContatosRepositorio
     {
+        Contato AtualizarContato(Contato contato);
         Contato InserirContato(Contato contato);
-        PaginacaoConsulta<Contato> ListarContatos(ContatosFiltro filtro);
+        PaginacaoConsulta<Contato> ListarContatos(ContatosPaginadosFiltro filtro);
+        Contato RecuperarContato(int id);
+        void RemoverContato(int id);
     }
 }
