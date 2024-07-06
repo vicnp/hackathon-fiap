@@ -10,23 +10,41 @@ namespace TC_Domain.Contatos.Servicos
 {
     public class ContatosServico(IContatosRepositorio contatosRepositorio) : IContatosServico
     {
-        public PaginacaoConsulta<Contato> ListarContatos (ContatosFiltro request)
+        public PaginacaoConsulta<Contato> ListarContatos (ContatosPaginadosFiltro request)
         {
             PaginacaoConsulta<Contato> consultaPaginada = contatosRepositorio.ListarContatos(request);
             return consultaPaginada;
         }
 
-        public Contato InserirContato(ContatoInserirRequest contatoRequest)
+        public Contato InserirContato(ContatoFiltro novoContato)
         {
-            ValidarCampos(contatoRequest);
+            ValidarCampos(novoContato);
 
-            Contato contatoInserir = new(contatoRequest.Nome!,contatoRequest.Email!, (int)contatoRequest.DDD!, contatoRequest.Telefone!);
+            Contato contatoInserir = new(novoContato.Nome!,novoContato.Email!, (int)novoContato.DDD!, novoContato.Telefone!);
 
             Contato response = contatosRepositorio.InserirContato(contatoInserir);
             return response;
         }
 
-        private static void ValidarCampos(ContatoInserirRequest contatoRequest)
+        public void RemoverContato(int id)
+        {
+            Contato contato = RecuperarContato(id);
+            if (contato != null) 
+                contatosRepositorio.RemoverContato((int)contato.Id!);
+
+        }
+
+        public Contato RecuperarContato(int id)
+        {
+           return  contatosRepositorio.RecuperarContato(id);
+        }
+
+        public Contato AtualizarContato(Contato contato)
+        {
+            return contatosRepositorio.AtualizarContato(contato);
+        }
+
+        private static void ValidarCampos(ContatoFiltro contatoRequest)
         {
             if (string.IsNullOrEmpty(contatoRequest.Nome))
                 throw new ArgumentException("Nome não preenchido.");
@@ -57,6 +75,6 @@ namespace TC_Domain.Contatos.Servicos
 
             return false;
         }
- 
+
     }
 }

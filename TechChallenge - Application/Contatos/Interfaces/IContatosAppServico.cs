@@ -7,7 +7,9 @@ namespace TC_Application.Contatos.Interfaces
 {
     public interface IContatosAppServico
     {
-        ContatoResponse InserirContato(ContatoInserirRequest request);
+        ContatoResponse? AtualizarContato(ContatoCrudRequest request, int id);
+        ContatoResponse InserirContato(ContatoCrudRequest request);
         PaginacaoConsulta<ContatoResponse> ListarContatosComPaginacao(ContatoRequest request);
+        void RemoverContato(int id);
     }
 }

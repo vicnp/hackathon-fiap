@@ -13,7 +13,7 @@ namespace TC_Infra.Contatos
 {
     public class ContatosRepositorio(DapperContext dapperContext) : RepositorioDapper<Contato>(dapperContext), IContatosRepositorio
     {
-        public PaginacaoConsulta<Contato> ListarContatos(ContatosFiltro filtro)
+        public PaginacaoConsulta<Contato> ListarContatos(ContatosPaginadosFiltro filtro)
         {
             string SQL = @"
                         SELECT  c.id,
@@ -100,5 +100,41 @@ namespace TC_Infra.Contatos
             return contato;
         }
 
+        public Contato RecuperarContato(int id) {
+            string SQL = $@"
+                        SELECT  c.id,
+                                c.nome,
+                                c.email,
+                                c.ddd,
+                                c.telefone,
+                                r.ddd as RegiaoDDD,
+                                r.estado,
+                                r.regiao as Descricao 
+                        FROM TECHCHALLENGE.contatos c
+                        LEFT JOIN TECHCHALLENGE.regioes r
+                                ON r.ddd = c.ddd
+
+                        WHERE c.id = {id}
+                        ";
+            return session.QueryFirst<Contato>(SQL);
+        }
+
+        public void RemoverContato(int id ) {
+            string SQL = $@"
+                        DELETE FROM TECHCHALLENGE.contatos WHERE id= {id};
+                        ";
+
+            session.Execute(SQL);
+        }
+
+        public Contato AtualizarContato(Contato contato) {
+            string SQL = $@"
+                        UPDATE TECHCHALLENGE.contatos
+                        SET nome='{contato.Nome}', email='{contato.Email}', ddd={contato.DDD}, telefone='{contato.Telefone}'
+                        WHERE id= {contato.Id};
+                ";
+            session.Execute(SQL);
+            return RecuperarContato((int)contato.Id!);
+        }
     }
 }

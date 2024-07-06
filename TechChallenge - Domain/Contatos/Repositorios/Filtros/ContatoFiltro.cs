@@ -4,12 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TC_DataTransfer.Contatos.Requests
+namespace TC_Domain.Contatos.Repositorios.Filtros
 {
-    public class ContatoInserirRequest
+    public class ContatoFiltro
     {
         public int? DDD { get; set; }
-        public string? Regiao { get; set; }
         public string? Nome { get; set; }
         public string? Email { get; set; }
         public string? Telefone { get; set; }
