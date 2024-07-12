@@ -7,7 +7,10 @@ namespace TC_Domain.Contatos.Servicos.Interfaces
 {
     public interface IContatosServico
     {
-        Contato InserirContato(ContatoInserirRequest contato);
-        PaginacaoConsulta<Contato> ListarContatos(ContatosFiltro request);
+        Contato AtualizarContato(Contato contato);
+        Contato InserirContato(ContatoFiltro contato);
+        PaginacaoConsulta<Contato> ListarContatos(ContatosPaginadosFiltro request);
+        Contato RecuperarContato(int id);
+        void RemoverContato(int id);
     }
 }

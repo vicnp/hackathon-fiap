@@ -31,7 +31,7 @@ namespace TC_API.Controllers.Contatos
         /// <returns>O contato cadastrado.</returns>
         [HttpPost]
         [Authorize]
-        public ActionResult<ContatoResponse> InserirContato(ContatoInserirRequest request) 
+        public ActionResult<ContatoResponse> InserirContato(ContatoCrudRequest request) 
         {
             try
             {
@@ -42,6 +42,52 @@ namespace TC_API.Controllers.Contatos
                 return BadRequest(ex.Message);
             }
             
+        }
+
+        /// <summary>
+        /// Remove um contato da base de dados.
+        /// </summary>
+        /// <param name="id">Código do contato a ser removido</param>
+        /// <returns></returns>
+        [HttpDelete]
+        [Authorize]
+        public ActionResult<ContatoResponse> RemoverContato(int id)
+        {
+            try
+            {
+                contatosAppServico.RemoverContato(id);
+                return Ok();
+            }
+            catch (ArgumentException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+
+        }
+
+        /// <summary>
+        /// Atualiza os dados de um contato.
+        /// </summary>
+        /// <param name="id">Código do contato a ser editado</param>
+        /// <param name="request">Dados atualizados</param>
+        /// <returns></returns>
+        [HttpPut]
+        [Authorize]
+        public ActionResult<ContatoResponse> AtualizarContato(int id, ContatoCrudRequest request)
+        {
+            try
+            {
+                ContatoResponse? contatoResponse = contatosAppServico.AtualizarContato(request, id);
+                if(contatoResponse == null)
+                    return BadRequest("Contato não encontrado.");
+
+                return Ok(contatoResponse);
+            }
+            catch (ArgumentException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+
         }
     }
 

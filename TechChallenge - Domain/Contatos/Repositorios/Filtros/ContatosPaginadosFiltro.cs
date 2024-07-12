@@ -3,9 +3,9 @@ using TC_Domain.Utils.Enumeradores;
 
 namespace TC_Domain.Contatos.Repositorios.Filtros
 {
-    public class ContatosFiltro : PaginacaoFiltro
+    public class ContatosPaginadosFiltro : PaginacaoFiltro
     {
-        public ContatosFiltro() : base("nome", TipoOrdernacao.Desc)
+        public ContatosPaginadosFiltro() : base("nome", TipoOrdernacao.Desc)
         {
         }
 
