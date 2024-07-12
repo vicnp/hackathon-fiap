@@ -18,7 +18,7 @@ namespace TC_API.Controllers.Contatos
         /// <param name="request"></param>
         /// <returns>Listagem paginada de contatos.</returns>
         [HttpGet]
-        [Authorize]
+        //[Authorize]
         public ActionResult<PaginacaoConsulta<ContatoResponse>> ListarContatosComPaginacao([FromQuery]ContatoRequest request)
         {
             return Ok(contatosAppServico.ListarContatosComPaginacao(request));

@@ -1,6 +1,5 @@
 ﻿using TC_Domain.Contatos.Entidades;
 using TC_Domain.Contatos.Repositorios.Filtros;
-using TC_IOC.Bibliotecas;
 using TC_DataTransfer.Contatos.Requests;
 using TC_Domain.Utils;
 
