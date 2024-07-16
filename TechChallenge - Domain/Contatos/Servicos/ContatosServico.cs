@@ -10,11 +10,15 @@ namespace TC_Domain.Contatos.Servicos
 {
     public class ContatosServico(IContatosRepositorio contatosRepositorio) : IContatosServico
     {
-        public PaginacaoConsulta<Contato> ListarContatos (ContatosPaginadosFiltro request)
+        public PaginacaoConsulta<Contato> ListarPaginacaoContatos (ContatosPaginadosFiltro request)
         {
-            PaginacaoConsulta<Contato> consultaPaginada = contatosRepositorio.ListarContatos(request);
+            PaginacaoConsulta<Contato> consultaPaginada = contatosRepositorio.ListarPaginacaoContatos(request);
             return consultaPaginada;
         }
+
+        public List<Contato> ListarContatos(ContatoFiltro request)
+            => contatosRepositorio.ListarContatos(request);
+
 
         public Contato InserirContato(ContatoFiltro novoContato)
         {

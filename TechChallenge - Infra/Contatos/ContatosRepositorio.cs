@@ -13,7 +13,7 @@ namespace TC_Infra.Contatos
 {
     public class ContatosRepositorio(DapperContext dapperContext) : RepositorioDapper<Contato>(dapperContext), IContatosRepositorio
     {
-        public PaginacaoConsulta<Contato> ListarContatos(ContatosPaginadosFiltro filtro)
+        public PaginacaoConsulta<Contato> ListarPaginacaoContatos(ContatosPaginadosFiltro filtro)
         {
             string SQL = @"
                         SELECT  c.id,
@@ -71,6 +71,49 @@ namespace TC_Infra.Contatos
 
            return response;
         }
+
+        public List<Contato> ListarContatos(ContatoFiltro filtro)
+        {
+            string SQL = @"
+                        SELECT  c.id,
+                                c.nome,
+                                c.email,
+                                c.ddd,
+                                c.telefone,
+                                r.ddd as RegiaoDDD,
+                                r.estado,
+                                r.regiao as Descricao 
+                        FROM TECHCHALLENGE.contatos c
+                        LEFT JOIN TECHCHALLENGE.regioes r
+                                ON r.ddd = c.ddd
+
+                        WHERE 1 = 1
+                        ";
+
+            if (!filtro.Email.IsNullOrEmpty())
+                SQL += $" AND c.email = '{filtro.Email}' ";
+
+            if (!filtro.Nome.IsNullOrEmpty())
+                SQL += $" AND c.nome like '%{filtro.Nome}%' ";
+
+            if (filtro.DDD > 0)
+                SQL += $" AND c.ddd = {filtro.DDD} ";
+
+            if (!filtro.Telefone.IsNullOrEmpty())
+                SQL += $" AND c.telefone = '{filtro.Telefone}' ";
+
+            if (!filtro.Regiao.IsNullOrEmpty())
+                SQL += $" AND r.regiao like '%{filtro.Regiao}%' ";
+
+
+            return session.Query<Contato, Regiao, Contato>(SQL, (contato, regiao) =>
+            {
+                contato.SetRegiao(regiao);
+                return contato;
+            }, splitOn: "RegiaoDDD").ToList();
+
+        }
+
 
         public Contato InserirContato(Contato contato)
         {

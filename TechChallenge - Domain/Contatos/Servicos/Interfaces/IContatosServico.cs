@@ -1,6 +1,5 @@
 ﻿using TC_Domain.Contatos.Entidades;
 using TC_Domain.Contatos.Repositorios.Filtros;
-using TC_IOC.Bibliotecas;
 using TC_DataTransfer.Contatos.Requests;
 using TC_Domain.Utils;
 
@@ -10,7 +9,8 @@ namespace TC_Domain.Contatos.Servicos.Interfaces
     {
         Contato AtualizarContato(Contato contato);
         Contato InserirContato(ContatoFiltro contato);
-        PaginacaoConsulta<Contato> ListarContatos(ContatosPaginadosFiltro request);
+        List<Contato> ListarContatos(ContatoFiltro request);
+        PaginacaoConsulta<Contato> ListarPaginacaoContatos(ContatosPaginadosFiltro request);
         Contato RecuperarContato(int id);
         void RemoverContato(int id);
     }

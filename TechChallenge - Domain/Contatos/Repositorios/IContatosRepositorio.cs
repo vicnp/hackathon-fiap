@@ -8,7 +8,8 @@ namespace TC_Domain.Contatos.Repositorios
     {
         Contato AtualizarContato(Contato contato);
         Contato InserirContato(Contato contato);
-        PaginacaoConsulta<Contato> ListarContatos(ContatosPaginadosFiltro filtro);
+        List<Contato> ListarContatos(ContatoFiltro filtro);
+        PaginacaoConsulta<Contato> ListarPaginacaoContatos(ContatosPaginadosFiltro filtro);
         Contato RecuperarContato(int id);
         void RemoverContato(int id);
     }

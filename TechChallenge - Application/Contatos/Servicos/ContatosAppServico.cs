@@ -11,16 +11,17 @@ using TC_Domain.Utils;
 using TC_Domain.Regioes.Entidades;
 using MySqlX.XDevAPI;
 using TC_Infra.Contatos;
+using YCTC_DataTransfer.Contatos.Requests;
 
 namespace TC_Application.Contatos.Servicos
 {
     public class ContatosAppServico(IContatosServico contatosServico,IRegioesRepositorio regioesRepositorio, IMapper mapper) : IContatosAppServico
     {
-        public PaginacaoConsulta<ContatoResponse> ListarContatosComPaginacao (ContatoRequest request)
+        public PaginacaoConsulta<ContatoResponse> ListarContatosComPaginacao (ContatoPaginacaoRequest request)
         {
             ContatosPaginadosFiltro contatosFiltro = mapper.Map<ContatosPaginadosFiltro>(request);
 
-            PaginacaoConsulta<Contato> consulta = contatosServico.ListarContatos(contatosFiltro);
+            PaginacaoConsulta<Contato> consulta = contatosServico.ListarPaginacaoContatos(contatosFiltro);
 
             PaginacaoConsulta<ContatoResponse> response = mapper.Map<PaginacaoConsulta<ContatoResponse>>(consulta);
 
@@ -60,5 +61,15 @@ namespace TC_Application.Contatos.Servicos
             contatosServico.RemoverContato(id);
         }
 
+        public List<ContatoResponse> ListarContatosSemPaginacao(ContatoRequest request)
+        {
+            ContatoFiltro contatosFiltro = mapper.Map<ContatoFiltro>(request);
+
+            List<Contato> consulta = contatosServico.ListarContatos(contatosFiltro);
+
+            List<ContatoResponse> response = mapper.Map<List<ContatoResponse>>(consulta);
+
+            return response;
+        }
     }
 }

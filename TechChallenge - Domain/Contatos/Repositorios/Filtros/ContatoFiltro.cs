@@ -12,5 +12,7 @@ namespace TC_Domain.Contatos.Repositorios.Filtros
         public string? Nome { get; set; }
         public string? Email { get; set; }
         public string? Telefone { get; set; }
+        public string? Regiao { get; set; }
+
     }
 }

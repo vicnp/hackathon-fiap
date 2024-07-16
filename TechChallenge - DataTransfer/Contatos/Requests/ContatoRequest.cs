@@ -1,19 +1,17 @@
-﻿using TC_Domain.Utils;
-using TC_Domain.Utils.Enumeradores;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace TC_DataTransfer.Contatos.Requests
+namespace YCTC_DataTransfer.Contatos.Requests
 {
-    public class ContatoRequest : PaginacaoFiltro
+    public class ContatoRequest
     {
-        public ContatoRequest() : base("nome", TipoOrdernacao.Desc)
-        {
-        }
-
         public int? DDD { get; set; }
         public string? Regiao { get; set; }
         public string? Nome { get; set; }
         public string? Email { get; set; }
         public string? Telefone { get; set; }
-
     }
 }
