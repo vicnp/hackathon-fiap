@@ -15,6 +15,42 @@
             </div>
 
             <div class="card-body">
+
+                @using (Html.BeginForm("Index", "Home", FormMethod.Post, new { Id = "login-form" }))
+                {
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label>Nome</label>
+                                @Html.Editor("Contato.Nome", new { htmlAttributes = new { @class = "form-control", @placeholder = "Nome", type = "text" } })
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label>Nome</label>
+                                @Html.Editor("Contato.Email", new { htmlAttributes = new { @class = "form-control", @placeholder = "Email", type = "text" } })
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label>Nome</label>
+                                @Html.Editor("Contato.DDD", new { htmlAttributes = new { @class = "form-control", @placeholder = "DDD", type = "text" } })
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label>Nome</label>
+                                @Html.Editor("Contato.Regiao.Descricao", new { htmlAttributes = new { @class = "form-control", @placeholder = "Região", type = "text" } })
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-primary my-4">Filtrar</button>
+                    </div>
+                }
+
+
                 <div class="py-4">
                     <table class="table table-flush datatable">
                         <thead class="thead-light">
@@ -36,7 +72,7 @@
                                     <td>@item.Email</td>
                                     <td>@item.DDD</td>
                                     <td>@item.Telefone</td>
-                                    <td>@item.Regiao</td>
+                                    <td>@item.Regiao?.Descricao</td>
                                 </tr>
                             }
                         </tbody>

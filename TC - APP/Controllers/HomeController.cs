@@ -1,5 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Hosting;
 using System.Diagnostics;
+using System.Text.Json;
 using TC_APP.Models;
 
 namespace TC_APP.Controllers
@@ -13,17 +15,41 @@ namespace TC_APP.Controllers
             _logger = logger;
         }
 
+        [HttpGet]
         public IActionResult Index()
         {
-            List<Contato> lista = new List<Contato> { new Contato
-            {
-                DDD = 27,
-                Email = "vitin@asd.com",
-                Id = 1,
-                Nome = "Vitin do RJ",
-                Telefone = "+55 (27) 99881-1224"
-            } };
+            List<Contato> lista = GetContatosAsync(new Contato()).Result;
             return View(lista);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Index(Contato contato)
+        {
+            List<Contato> lista = await GetContatosAsync(contato);
+            return View(lista);
+        }
+
+        private async Task<List<Contato>> GetContatosAsync(Contato contato)
+        {
+            using HttpClient client = new HttpClient();
+
+            try
+            {
+                // Converte o objeto Contato em uma string de consulta
+                var queryString = $"?nome={contato.Nome}&email={contato.Email}&DDD={contato.DDD}&Regiao={contato.Regiao?.Descricao}"; // Exemplo básico, modifique conforme suas propriedades
+
+                HttpResponseMessage response = await client.GetAsync($"https://localhost:7192/api/contatos/itens{queryString}");
+                response.EnsureSuccessStatusCode();
+
+                string responseBody = await response.Content.ReadAsStringAsync();
+                List<Contato> dados =  JsonSerializer.Deserialize<List<Contato>>(responseBody);
+
+                return dados;
+            }
+            catch
+            {
+                return new List<Contato>();
+            }
         }
 
         public IActionResult Privacy()

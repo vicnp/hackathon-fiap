@@ -5,6 +5,7 @@ using TC_IOC.Bibliotecas;
 using TC_DataTransfer.Contatos.Reponses;
 using TC_Domain.Utils;
 using Microsoft.AspNetCore.Authorization;
+using YCTC_DataTransfer.Contatos.Requests;
 
 namespace TC_API.Controllers.Contatos
 {
@@ -19,9 +20,21 @@ namespace TC_API.Controllers.Contatos
         /// <returns>Listagem paginada de contatos.</returns>
         [HttpGet]
         //[Authorize]
-        public ActionResult<PaginacaoConsulta<ContatoResponse>> ListarContatosComPaginacao([FromQuery]ContatoRequest request)
+        public ActionResult<PaginacaoConsulta<ContatoResponse>> ListarContatosComPaginacao([FromQuery]ContatoPaginacaoRequest request)
         {
             return Ok(contatosAppServico.ListarContatosComPaginacao(request));
+        }
+
+        /// <summary>
+        /// Lista os contatos, permitindo filtragem.
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns>Listagem paginada de contatos.</returns>
+        [HttpGet("itens")]
+        //[Authorize]
+        public ActionResult<List<ContatoResponse>> ListarContatosSemPaginacao([FromQuery] ContatoRequest request)
+        {
+            return Ok(contatosAppServico.ListarContatosSemPaginacao(request));
         }
 
         /// <summary>

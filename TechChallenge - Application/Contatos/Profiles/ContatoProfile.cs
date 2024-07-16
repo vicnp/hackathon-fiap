@@ -10,6 +10,7 @@ using TC_IOC.Bibliotecas;
 using TC_DataTransfer.Contatos.Reponses;
 using TC_DataTransfer.Contatos.Requests;
 using TC_Domain.Utils;
+using YCTC_DataTransfer.Contatos.Requests;
 
 namespace TC_Application.Contatos.Profiles
 {
@@ -17,8 +18,9 @@ namespace TC_Application.Contatos.Profiles
     {
         public ContatoProfile()
         {
-           CreateMap<ContatoRequest, ContatosPaginadosFiltro>();
+           CreateMap<ContatoPaginacaoRequest, ContatosPaginadosFiltro>();
            CreateMap<ContatoCrudRequest, ContatoFiltro>();
+           CreateMap<ContatoRequest, ContatoFiltro>();
            CreateMap<Contato, ContatoResponse>();  
            CreateMap<PaginacaoConsulta<Contato>, PaginacaoConsulta<ContatoResponse>>();
         }
