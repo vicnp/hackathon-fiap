@@ -11,7 +11,7 @@ namespace TC_API.Controllers.Contatos
 {
     [ApiController]
     [Route("api/contatos")]
-    public class ContatosController(IContatosAppServico contatosAppServico): ControllerBase
+    public class ContatosController(IContatosAppServico contatosAppServico) : ControllerBase
     {
         /// <summary>
         /// Lista os contatos, permitindo filtragem.
@@ -20,7 +20,7 @@ namespace TC_API.Controllers.Contatos
         /// <returns>Listagem paginada de contatos.</returns>
         [HttpGet]
         //[Authorize]
-        public ActionResult<PaginacaoConsulta<ContatoResponse>> ListarContatosComPaginacao([FromQuery]ContatoPaginacaoRequest request)
+        public ActionResult<PaginacaoConsulta<ContatoResponse>> ListarContatosComPaginacao([FromQuery] ContatoPaginacaoRequest request)
         {
             return Ok(contatosAppServico.ListarContatosComPaginacao(request));
         }
@@ -38,13 +38,25 @@ namespace TC_API.Controllers.Contatos
         }
 
         /// <summary>
+        /// Lista os contatos, permitindo filtragem.
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns>Listagem paginada de contatos.</returns>
+        [HttpGet("{id}")]
+        //[Authorize]
+        public ActionResult<List<ContatoResponse>> RecuperarContato(int id)
+        {
+            return Ok(contatosAppServico.RecuperarContato(id));
+        }
+
+        /// <summary>
         /// Realiza o cadastro de um contato na base de dados.
         /// </summary>
         /// <param name="request">Dados para cadastro do contato.</param>
         /// <returns>O contato cadastrado.</returns>
         [HttpPost]
-        [Authorize]
-        public ActionResult<ContatoResponse> InserirContato(ContatoCrudRequest request) 
+        //[Authorize]
+        public ActionResult<ContatoResponse> InserirContato(ContatoCrudRequest request)
         {
             try
             {
@@ -54,7 +66,7 @@ namespace TC_API.Controllers.Contatos
             {
                 return BadRequest(ex.Message);
             }
-            
+
         }
 
         /// <summary>
@@ -62,8 +74,8 @@ namespace TC_API.Controllers.Contatos
         /// </summary>
         /// <param name="id">Código do contato a ser removido</param>
         /// <returns></returns>
-        [HttpDelete]
-        [Authorize]
+        [HttpDelete("{id}")]
+        //[Authorize]
         public ActionResult<ContatoResponse> RemoverContato(int id)
         {
             try
@@ -84,9 +96,9 @@ namespace TC_API.Controllers.Contatos
         /// <param name="id">Código do contato a ser editado</param>
         /// <param name="request">Dados atualizados</param>
         /// <returns></returns>
-        [HttpPut]
-        [Authorize]
-        public ActionResult<ContatoResponse> AtualizarContato(int id, ContatoCrudRequest request)
+        [HttpPut("{id}")]
+        //[Authorize]
+        public ActionResult<ContatoResponse> AtualizarContato(int id, [FromBody] ContatoCrudRequest request)
         {
             try
             {

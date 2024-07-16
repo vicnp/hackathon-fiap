@@ -12,6 +12,7 @@ using TC_Domain.Regioes.Entidades;
 using MySqlX.XDevAPI;
 using TC_Infra.Contatos;
 using YCTC_DataTransfer.Contatos.Requests;
+using Azure;
 
 namespace TC_Application.Contatos.Servicos
 {
@@ -70,6 +71,12 @@ namespace TC_Application.Contatos.Servicos
             List<ContatoResponse> response = mapper.Map<List<ContatoResponse>>(consulta);
 
             return response;
+        }
+
+        public ContatoResponse RecuperarContato(int id)
+        {
+            Contato consulta = contatosServico.RecuperarContato(id);
+            return mapper.Map<ContatoResponse>(consulta);
         }
     }
 }
