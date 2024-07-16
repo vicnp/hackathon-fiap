@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Hosting;
+using Newtonsoft.Json;
 using System.Diagnostics;
-using System.Text.Json;
+using System.Text;
 using TC_APP.Models;
 
 namespace TC_APP.Controllers
@@ -9,6 +9,7 @@ namespace TC_APP.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private static readonly HttpClient client = new HttpClient();
 
         public HomeController(ILogger<HomeController> logger)
         {
@@ -22,6 +23,65 @@ namespace TC_APP.Controllers
             return View(lista);
         }
 
+        [HttpGet]
+        public async Task<IActionResult> CriarContato(int id = 0)
+        {
+            if (id != 0)
+            {
+                Contato contato = await GetContatoAsync(id);
+                return View(contato);
+            }
+
+            return View(new Contato());
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CrudContato(Contato contato)
+        {
+            if (contato.Id == null || contato.Id == 0)
+                await CriarRegistroContato(contato);
+            else
+                await EditarRegistroContato(contato);
+
+            return RedirectToAction("Index");
+        }
+
+        private async Task CriarRegistroContato(Contato contato)
+        {
+            var json = JsonConvert.SerializeObject(contato);
+            var data = new StringContent(json, Encoding.UTF8, "application/json");
+
+            var url = "https://localhost:7192/api/contatos";
+
+            var response = await client.PostAsync(url, data);
+
+            await response.Content.ReadAsStringAsync();
+        }
+
+        private async Task EditarRegistroContato(Contato contato)
+        {
+            var json = JsonConvert.SerializeObject(contato);
+            var data = new StringContent(json, Encoding.UTF8, "application/json");
+
+            var url = $"https://localhost:7192/api/contatos/{contato.Id}";
+
+            var response = await client.PutAsync(url, data);
+
+            await response.Content.ReadAsStringAsync();
+        }
+
+        public async Task<IActionResult> ExcluirRegistroContato(int id)
+        {
+            var queryString = $"/{id}";
+
+            HttpResponseMessage response = await client.DeleteAsync($"https://localhost:7192/api/contatos{queryString}");
+            response.EnsureSuccessStatusCode();
+
+            string responseBody = await response.Content.ReadAsStringAsync();
+
+            return RedirectToAction("Index");
+        }
+
         [HttpPost]
         public async Task<IActionResult> Index(Contato contato)
         {
@@ -31,8 +91,6 @@ namespace TC_APP.Controllers
 
         private async Task<List<Contato>> GetContatosAsync(Contato contato)
         {
-            using HttpClient client = new HttpClient();
-
             try
             {
                 // Converte o objeto Contato em uma string de consulta
@@ -42,13 +100,34 @@ namespace TC_APP.Controllers
                 response.EnsureSuccessStatusCode();
 
                 string responseBody = await response.Content.ReadAsStringAsync();
-                List<Contato> dados =  JsonSerializer.Deserialize<List<Contato>>(responseBody);
+                List<Contato> dados = System.Text.Json.JsonSerializer.Deserialize<List<Contato>>(responseBody);
 
                 return dados;
             }
             catch
             {
                 return new List<Contato>();
+            }
+        }
+
+        private async Task<Contato> GetContatoAsync(int id)
+        {
+            try
+            {
+                // Converte o objeto Contato em uma string de consulta
+                var queryString = $"/{id}";
+
+                HttpResponseMessage response = await client.GetAsync($"https://localhost:7192/api/contatos{queryString}");
+                response.EnsureSuccessStatusCode();
+
+                string responseBody = await response.Content.ReadAsStringAsync();
+                Contato dado = System.Text.Json.JsonSerializer.Deserialize<Contato>(responseBody);
+
+                return dado;
+            }
+            catch
+            {
+                return null;
             }
         }
 

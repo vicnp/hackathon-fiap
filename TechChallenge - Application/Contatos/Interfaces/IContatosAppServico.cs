@@ -12,6 +12,7 @@ namespace TC_Application.Contatos.Interfaces
         ContatoResponse InserirContato(ContatoCrudRequest request);
         PaginacaoConsulta<ContatoResponse> ListarContatosComPaginacao(ContatoPaginacaoRequest request);
         List<ContatoResponse> ListarContatosSemPaginacao(ContatoRequest request);
+        ContatoResponse RecuperarContato(int id);
         void RemoverContato(int id);
     }
 }
