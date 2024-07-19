@@ -1,7 +1,6 @@
 ﻿using TC_Application.Usuarios.Interfaces;
 using TC_DataTransfer.Usuarios.Request;
 using TC_DataTransfer.Usuarios.Response;
-using TC_IOC.Bibliotecas;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 using TC_Domain.Utils;
