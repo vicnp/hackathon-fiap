@@ -8,7 +8,7 @@ namespace TC_Infra.Regioes
 {
     public class RegioesRepositorio(DapperContext dapperContext) : RepositorioDapper<Regiao>(dapperContext), IRegioesRepositorio
     {
-        public List<Regiao> ListarRegioes(int ddd = 0)
+        public async Task<List<Regiao>> ListarRegioesAsync(int ddd = 0)
         {
             string SQL = @"
                             SELECT ddd as RegiaoDDD,
@@ -23,7 +23,9 @@ namespace TC_Infra.Regioes
                         AND ddd = {ddd}
                         ";
             } 
-            return session.Query<Regiao>(SQL).ToList();
+            
+            var result =  await session.QueryAsync<Regiao>(SQL);
+            return result.ToList();
         }
     }
 }

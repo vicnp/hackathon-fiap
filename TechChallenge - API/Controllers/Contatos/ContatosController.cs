@@ -20,9 +20,9 @@ namespace TC_API.Controllers.Contatos
         /// <returns>Listagem paginada de contatos.</returns>
         [HttpGet]
         //[Authorize]
-        public ActionResult<PaginacaoConsulta<ContatoResponse>> ListarContatosComPaginacao([FromQuery] ContatoPaginacaoRequest request)
+        public async Task<ActionResult<PaginacaoConsulta<ContatoResponse>>> ListarContatosComPaginacaoAsync([FromQuery] ContatoPaginacaoRequest request)
         {
-            return Ok(contatosAppServico.ListarContatosComPaginacao(request));
+            return Ok(await contatosAppServico.ListarContatosComPaginacaoAsync(request));
         }
 
         /// <summary>
@@ -32,9 +32,9 @@ namespace TC_API.Controllers.Contatos
         /// <returns>Listagem paginada de contatos.</returns>
         [HttpGet("itens")]
         //[Authorize]
-        public ActionResult<List<ContatoResponse>> ListarContatosSemPaginacao([FromQuery] ContatoRequest request)
+        public async Task<ActionResult<List<ContatoResponse>>> ListarContatosSemPaginacaoAsync([FromQuery] ContatoRequest request)
         {
-            return Ok(contatosAppServico.ListarContatosSemPaginacao(request));
+            return Ok(await contatosAppServico.ListarContatosSemPaginacaoAsync(request));
         }
 
         /// <summary>
@@ -44,9 +44,9 @@ namespace TC_API.Controllers.Contatos
         /// <returns>Listagem paginada de contatos.</returns>
         [HttpGet("{id}")]
         //[Authorize]
-        public ActionResult<List<ContatoResponse>> RecuperarContato(int id)
+        public async Task<ActionResult<List<ContatoResponse>>> RecuperarContatoAsync(int id)
         {
-            return Ok(contatosAppServico.RecuperarContato(id));
+            return Ok(await contatosAppServico.RecuperarContatoAsync(id));
         }
 
         /// <summary>
@@ -56,11 +56,11 @@ namespace TC_API.Controllers.Contatos
         /// <returns>O contato cadastrado.</returns>
         [HttpPost]
         //[Authorize]
-        public ActionResult<ContatoResponse> InserirContato(ContatoCrudRequest request)
+        public async Task<ActionResult<ContatoResponse>> InserirContato(ContatoCrudRequest request)
         {
             try
             {
-                return Ok(contatosAppServico.InserirContato(request));
+                return Ok(await contatosAppServico.InserirContatoAsync(request));
             }
             catch (ArgumentException ex)
             {
@@ -76,11 +76,11 @@ namespace TC_API.Controllers.Contatos
         /// <returns></returns>
         [HttpDelete("{id}")]
         //[Authorize]
-        public ActionResult<ContatoResponse> RemoverContato(int id)
+        public async Task<ActionResult<ContatoResponse>> RemoverContatoAsync(int id)
         {
             try
             {
-                contatosAppServico.RemoverContato(id);
+                await contatosAppServico.RemoverContatoAsync(id);
                 return Ok();
             }
             catch (ArgumentException ex)
@@ -98,11 +98,11 @@ namespace TC_API.Controllers.Contatos
         /// <returns></returns>
         [HttpPut("{id}")]
         //[Authorize]
-        public ActionResult<ContatoResponse> AtualizarContato(int id, [FromBody] ContatoCrudRequest request)
+        public async Task<ActionResult<ContatoResponse>> AtualizarContatoAsync(int id, [FromBody] ContatoCrudRequest request)
         {
             try
             {
-                ContatoResponse? contatoResponse = contatosAppServico.AtualizarContato(request, id);
+                ContatoResponse? contatoResponse = await contatosAppServico.AtualizarContatoAsync(request, id);
                 if(contatoResponse == null)
                     return BadRequest("Contato não encontrado.");
 

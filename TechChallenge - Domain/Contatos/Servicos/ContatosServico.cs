@@ -10,42 +10,42 @@ namespace TC_Domain.Contatos.Servicos
 {
     public class ContatosServico(IContatosRepositorio contatosRepositorio) : IContatosServico
     {
-        public PaginacaoConsulta<Contato> ListarPaginacaoContatos (ContatosPaginadosFiltro request)
+        public async Task<PaginacaoConsulta<Contato>> ListarPaginacaoContatosAsync (ContatosPaginadosFiltro request)
         {
-            PaginacaoConsulta<Contato> consultaPaginada = contatosRepositorio.ListarPaginacaoContatos(request);
+            PaginacaoConsulta<Contato> consultaPaginada = await contatosRepositorio.ListarPaginacaoContatosAsync(request);
             return consultaPaginada;
         }
 
-        public List<Contato> ListarContatos(ContatoFiltro request)
-            => contatosRepositorio.ListarContatos(request);
+        public async Task<List<Contato>> ListarContatosAsync(ContatoFiltro request)
+            => await contatosRepositorio.ListarContatosAsync(request);
 
 
-        public Contato InserirContato(ContatoFiltro novoContato)
+        public async Task<Contato> InserirContatoAsync(ContatoFiltro novoContato)
         {
             ValidarCampos(novoContato);
 
             Contato contatoInserir = new(novoContato.Nome!,novoContato.Email!, (int)novoContato.DDD!, novoContato.Telefone!);
 
-            Contato response = contatosRepositorio.InserirContato(contatoInserir);
+            Contato response = await contatosRepositorio.InserirContatoAsync(contatoInserir);
             return response;
         }
 
-        public void RemoverContato(int id)
+        public async Task RemoverContatoAsync(int id)
         {
-            Contato contato = RecuperarContato(id);
+            Contato contato = await RecuperarContatoAsync(id);
             if (contato != null) 
-                contatosRepositorio.RemoverContato((int)contato.Id!);
+                await contatosRepositorio.RemoverContatoAsync((int)contato.Id!);
 
         }
 
-        public Contato RecuperarContato(int id)
+        public async Task<Contato> RecuperarContatoAsync(int id)
         {
-           return  contatosRepositorio.RecuperarContato(id);
+           return await contatosRepositorio.RecuperarContatoAsync(id);
         }
 
-        public Contato AtualizarContato(Contato contato)
+        public async Task<Contato> AtualizarContatoAsync(Contato contato)
         {
-            return contatosRepositorio.AtualizarContato(contato);
+            return await contatosRepositorio.AtualizarContatoAsync(contato);
         }
 
         private static void ValidarCampos(ContatoFiltro contatoRequest)

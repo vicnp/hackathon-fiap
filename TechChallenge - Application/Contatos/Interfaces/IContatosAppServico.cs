@@ -8,11 +8,11 @@ namespace TC_Application.Contatos.Interfaces
 {
     public interface IContatosAppServico
     {
-        ContatoResponse? AtualizarContato(ContatoCrudRequest request, int id);
-        ContatoResponse InserirContato(ContatoCrudRequest request);
-        PaginacaoConsulta<ContatoResponse> ListarContatosComPaginacao(ContatoPaginacaoRequest request);
-        List<ContatoResponse> ListarContatosSemPaginacao(ContatoRequest request);
-        ContatoResponse RecuperarContato(int id);
-        void RemoverContato(int id);
+        Task<ContatoResponse?> AtualizarContatoAsync(ContatoCrudRequest request, int id);
+        Task<ContatoResponse> InserirContatoAsync(ContatoCrudRequest request);
+        Task<PaginacaoConsulta<ContatoResponse>> ListarContatosComPaginacaoAsync(ContatoPaginacaoRequest request);
+        Task<List<ContatoResponse>> ListarContatosSemPaginacaoAsync(ContatoRequest request);
+        Task<ContatoResponse> RecuperarContatoAsync(int id);
+        Task RemoverContatoAsync(int id);
     }
 }

@@ -4,6 +4,6 @@ namespace TC_Domain.Regioes.Repositorios
 {
     public interface IRegioesRepositorio
     {
-        List<Regiao> ListarRegioes(int ddd = 0);
+        Task<List<Regiao>> ListarRegioesAsync(int ddd = 0);
     }
 }

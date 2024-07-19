@@ -13,7 +13,7 @@ namespace TC_Infra.Contatos
 {
     public class ContatosRepositorio(DapperContext dapperContext) : RepositorioDapper<Contato>(dapperContext), IContatosRepositorio
     {
-        public PaginacaoConsulta<Contato> ListarPaginacaoContatos(ContatosPaginadosFiltro filtro)
+        public async Task<PaginacaoConsulta<Contato>> ListarPaginacaoContatosAsync(ContatosPaginadosFiltro filtro)
         {
             string SQL = @"
                         SELECT  c.id,
@@ -46,13 +46,12 @@ namespace TC_Infra.Contatos
             if(!filtro.Regiao.IsNullOrEmpty()) 
                 SQL += $" AND r.regiao like '%{filtro.Regiao}%' ";
 
-           string sqlPaginado = GerarQueryPaginacao(SQL, filtro.Pg, filtro.Qt, filtro.CpOrd, filtro.TpOrd.ToString());
+            string sqlPaginado = GerarQueryPaginacao(SQL, filtro.Pg, filtro.Qt, filtro.CpOrd, filtro.TpOrd.ToString());
 
-            //IEnumerable<Contato> registros = session.Query<Contato>(sqlPaginado);
-
+            
             var registros = new Dictionary<int, Contato>();
 
-            var queryResult = session.Query<Contato, Regiao, Contato>(sqlPaginado, (contato, regiao) =>
+            var queryResult = await session.QueryAsync<Contato, Regiao, Contato>(sqlPaginado, (contato, regiao) =>
             {
                 if (!registros.TryGetValue(contato.Id.Value, out var existingContato))
                 {
@@ -72,7 +71,7 @@ namespace TC_Infra.Contatos
            return response;
         }
 
-        public List<Contato> ListarContatos(ContatoFiltro filtro)
+        public async Task<List<Contato>> ListarContatosAsync(ContatoFiltro filtro)
         {
             string SQL = @"
                         SELECT  c.id,
@@ -105,17 +104,17 @@ namespace TC_Infra.Contatos
             if (!filtro.Regiao.IsNullOrEmpty())
                 SQL += $" AND r.regiao like '%{filtro.Regiao}%' ";
 
-
-            return session.Query<Contato, Regiao, Contato>(SQL, (contato, regiao) =>
+            var result =  await session.QueryAsync<Contato, Regiao, Contato>(SQL, (contato, regiao) =>
             {
                 contato.SetRegiao(regiao);
                 return contato;
-            }, splitOn: "RegiaoDDD").ToList();
+            }, splitOn: "RegiaoDDD");
 
+            return result.ToList();
         }
 
 
-        public Contato InserirContato(Contato contato)
+        public async Task<Contato> InserirContatoAsync(Contato contato)
         {
             string SQL = @"
                             INSERT INTO TECHCHALLENGE.contatos
@@ -136,14 +135,14 @@ namespace TC_Infra.Contatos
             parametros.Add("@DDD", contato.DDD);
             parametros.Add("@TELEFONE", contato.Telefone);
 
-            var result = session.QuerySingle<dynamic>(SQL, parametros);
+            var result = await session.QuerySingleAsync<dynamic>(SQL, parametros);
             Regiao regiao = new(result.ddd, result.estado, result.Descricao);
             contato.SetId(result.id);
             contato.SetRegiao(regiao); 
             return contato;
         }
 
-        public Contato RecuperarContato(int id) {
+        public async Task<Contato> RecuperarContatoAsync(int id) {
             string SQL = $@"
                         SELECT  c.id,
                                 c.nome,
@@ -159,25 +158,25 @@ namespace TC_Infra.Contatos
 
                         WHERE c.id = {id}
                         ";
-            return session.QueryFirst<Contato>(SQL);
+            return await session.QueryFirstOrDefaultAsync<Contato>(SQL);
         }
 
-        public void RemoverContato(int id ) {
+        public async Task RemoverContatoAsync(int id) {
             string SQL = $@"
                         DELETE FROM TECHCHALLENGE.contatos WHERE id= {id};
                         ";
 
-            session.Execute(SQL);
+            await session.ExecuteAsync(SQL);
         }
 
-        public Contato AtualizarContato(Contato contato) {
+        public async Task<Contato> AtualizarContatoAsync(Contato contato) {
             string SQL = $@"
                         UPDATE TECHCHALLENGE.contatos
                         SET nome='{contato.Nome}', email='{contato.Email}', ddd={contato.DDD}, telefone='{contato.Telefone}'
                         WHERE id= {contato.Id};
                 ";
-            session.Execute(SQL);
-            return RecuperarContato((int)contato.Id!);
+            await session.ExecuteAsync(SQL);
+            return await RecuperarContatoAsync((int)contato.Id!);
         }
     }
 }

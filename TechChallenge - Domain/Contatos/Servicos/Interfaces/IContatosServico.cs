@@ -7,11 +7,11 @@ namespace TC_Domain.Contatos.Servicos.Interfaces
 {
     public interface IContatosServico
     {
-        Contato AtualizarContato(Contato contato);
-        Contato InserirContato(ContatoFiltro contato);
-        List<Contato> ListarContatos(ContatoFiltro request);
-        PaginacaoConsulta<Contato> ListarPaginacaoContatos(ContatosPaginadosFiltro request);
-        Contato RecuperarContato(int id);
-        void RemoverContato(int id);
+        Task<Contato> AtualizarContatoAsync(Contato contato);
+        Task<Contato> InserirContatoAsync(ContatoFiltro contato);
+        Task<List<Contato>> ListarContatosAsync(ContatoFiltro request);
+        Task<PaginacaoConsulta<Contato>> ListarPaginacaoContatosAsync(ContatosPaginadosFiltro request);
+        Task<Contato> RecuperarContatoAsync(int id);
+        Task RemoverContatoAsync(int id);
     }
 }
