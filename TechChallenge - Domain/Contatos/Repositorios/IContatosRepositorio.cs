@@ -6,11 +6,11 @@ namespace TC_Domain.Contatos.Repositorios
 {
     public interface IContatosRepositorio
     {
-        Contato AtualizarContato(Contato contato);
-        Contato InserirContato(Contato contato);
-        List<Contato> ListarContatos(ContatoFiltro filtro);
-        PaginacaoConsulta<Contato> ListarPaginacaoContatos(ContatosPaginadosFiltro filtro);
-        Contato RecuperarContato(int id);
-        void RemoverContato(int id);
+        Task<Contato> AtualizarContatoAsync(Contato contato);
+        Task<Contato> InserirContatoAsync(Contato contato);
+        Task<List<Contato>> ListarContatosAsync(ContatoFiltro filtro);
+        Task<PaginacaoConsulta<Contato>> ListarPaginacaoContatosAsync(ContatosPaginadosFiltro filtro);
+        Task<Contato> RecuperarContatoAsync(int id);
+        Task RemoverContatoAsync(int id);
     }
 }
