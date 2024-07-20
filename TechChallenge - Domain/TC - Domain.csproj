@@ -16,4 +16,16 @@
     <ProjectReference Include="..\TechChallenge - DataTransfer\TC - DataTransfer.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Remove="Usuarios\Servicos\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Remove="Usuarios\Servicos\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Usuarios\Servicos\**" />
+  </ItemGroup>
+
 </Project>

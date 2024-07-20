@@ -1,9 +1,8 @@
-﻿using TC_Domain.Contatos.Entidades;
+﻿using System.ComponentModel.DataAnnotations;
+using TC_Domain.Contatos.Entidades;
 using TC_Domain.Contatos.Repositorios;
 using TC_Domain.Contatos.Repositorios.Filtros;
 using TC_Domain.Contatos.Servicos.Interfaces;
-using TC_DataTransfer.Contatos.Requests;
-using System.ComponentModel.DataAnnotations;
 using TC_Domain.Utils;
 
 namespace TC_Domain.Contatos.Servicos
