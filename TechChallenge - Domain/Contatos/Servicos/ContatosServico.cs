@@ -52,9 +52,6 @@ namespace TC_Domain.Contatos.Servicos
             if (string.IsNullOrEmpty(contatoRequest.Nome))
                 throw new ArgumentException("Nome não preenchido.");
 
-            if (string.IsNullOrEmpty(contatoRequest.Email))
-                throw new ArgumentException("Email não preenchido.");
-
             if (!ValidarEmail(contatoRequest.Email))
                 throw new ArgumentException($"Email inválido: {contatoRequest.Email}");
 
@@ -64,7 +61,10 @@ namespace TC_Domain.Contatos.Servicos
             if (!contatoRequest.Telefone!.All(char.IsDigit))
                 throw new ArgumentException($"Telefone inválido: {contatoRequest.Telefone}");
 
-            if (contatoRequest.DDD == null || contatoRequest.DDD <= 0)
+            if (contatoRequest.DDD == null)
+                throw new ArgumentException("DDD não preenchido.");
+            
+            if (contatoRequest.DDD.Value <= 0)
                 throw new ArgumentException("DDD não preenchido.");
         }
 

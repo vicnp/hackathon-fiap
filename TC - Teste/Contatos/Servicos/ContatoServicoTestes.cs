@@ -111,9 +111,11 @@ public class ContatoServicoTestes
         [InlineData(11, "fiap@contato.com.br", "Fiap Contato", "Sudeste", null)]
         [InlineData(11, "fiap@contato.com.br", "Fiap Contato", "Sudeste", "A12345678")]
         [InlineData(null, "fiap@contato.com.br", "Fiap Contato", "Sudeste", "912345678")]
+        [InlineData(11, "confrontationasd.com.br", "Flap Contact", "Sudeste", "912345678")]
         [InlineData(0, "fiap@contato.com.br", "Fiap Contato", "Sudeste", "912345678")]
-        [InlineData(11, "fiapcontato.com.br", "Fiap Contato", "Sudeste", "912345678")]
-        
+        [InlineData(-1, "fiap@contato.com.br", "Fiap Contato", "Sudeste", "912345678")]
+        [InlineData(11, null, "Fiap Contato", "Sudeste", "912345678")]
+        [InlineData(11, "", "Fiap Contato", "Sudeste", "912345678")]
         public async Task Quando_ListoContatosComPaginacao_Espero_ListaDeContatosValidos( int? ddd, string email, string nome, string regiao, string telefone)
         {
             var contatoFiltro = new ContatoFiltro
@@ -126,7 +128,42 @@ public class ContatoServicoTestes
             };
 
             await contatoServico.Invoking(x => x.InserirContatoAsync(contatoFiltro)).Should().ThrowAsync<ArgumentException>();
+        }
+        
+        [Fact]
+        public async Task Quando_ListoContatosComPaginacao_Espero_ListaDeContatosValidosOk()
+        {
+            var contatoFiltro = new ContatoFiltro
+            {
+                DDD = 27,
+                Email = "email@asd.com",
+                Nome = "nome",
+                Regiao = "Sudeste",
+                Telefone = "23423432",
+            };
 
+            await contatoServico.Invoking(x => x.InserirContatoAsync(contatoFiltro)).Should().NotThrowAsync();
+        }
+        
+        [Fact]
+        public async Task Quando_ListoContatosComPaginacao_Espero_AtualizarDeContatosValidosOk()
+        {
+            var contato = new Contato("27", "email@asd.com", 27, "23423432");
+            await contatoServico.Invoking(x => x.AtualizarContatoAsync(contato)).Should().NotThrowAsync();
+        }
+        
+        [Fact]
+        public async Task Quando_ListoContatosComPaginacao_Espero_RecuperarDeContatosValidosOk()
+        {
+            await contatoServico.Invoking(x => x.RecuperarContatoAsync(1)).Should().NotThrowAsync();
+        }
+        
+        [Fact]
+        public async Task Quando_ListoContatosComPaginacao_Espero_ExcluirDeContatosValidosOk()
+        {
+            var contato = new Contato("27", "email@asd.com", 27, "23423432");
+            contatoRepositorio.RecuperarContatoAsync(1).Returns(contato);
+            await contatoServico.Invoking(x => x.RemoverContatoAsync(1)).Should().NotThrowAsync();
         }
     }
 }

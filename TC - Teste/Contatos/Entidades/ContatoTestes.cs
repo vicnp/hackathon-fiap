@@ -23,6 +23,9 @@ public class ContatoTestes
         Assert.Equal(email, contato.Email);
         Assert.Equal(ddd, contato.DDD);
         Assert.Equal(telefone, contato.Telefone);
+
+        contato = new Contato();
+        Assert.Equal(contato.Nome, null);
     }
 }
 

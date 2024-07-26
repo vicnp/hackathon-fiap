@@ -18,6 +18,7 @@
 
   <ItemGroup>
     <Compile Remove="Usuarios\Servicos\**" />
+    <Compile Remove="Utils\Mapper.cs" />
   </ItemGroup>
 
   <ItemGroup>

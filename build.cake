@@ -15,6 +15,7 @@ Task("Clean")
             Verbosity = DotNetVerbosity.Quiet
         };
         DotNetClean(".", settings);
+        CleanDirectory("./TestReports");
 	});
 
 Task("BuildSolution")
@@ -78,7 +79,7 @@ Task("TestReport")
             };
 
             ReportGenerator(new FilePath("./TestReports/**/coverage.cobertura.xml"), new DirectoryPath("./TestReports/ReportGeneratorOutput"), reportGeneratorSettings);
-			var reportFilePath = "./TestReports/ReportGeneratorOutput//index.html";
+			var reportFilePath = "./TestReports/ReportGeneratorOutput/index.html";
          
             if (System.Environment.OSVersion.Platform == PlatformID.Unix)
             {

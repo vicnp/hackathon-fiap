@@ -1,7 +1,6 @@
-﻿using Microsoft.Data.SqlClient;
+﻿using System.Data;
 using Microsoft.Extensions.Configuration;
 using MySql.Data.MySqlClient;
-using System.Data;
 
 namespace TC_IOC.DBContext
 {
@@ -15,6 +14,6 @@ namespace TC_IOC.DBContext
             connectionString = _configuration.GetConnectionString("mysql")!;
         }
 
-        public IDbConnection CreateConnection() =>new MySqlConnection(connectionString);
+        public IDbConnection CreateConnection() => new MySqlConnection(connectionString);
     }
 }

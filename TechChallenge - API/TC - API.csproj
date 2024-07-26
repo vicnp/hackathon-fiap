@@ -27,7 +27,6 @@
     <ProjectReference Include="..\TechChallenge - DataTransfer\TC - DataTransfer.csproj" />
     <ProjectReference Include="..\TechChallenge - Domain\TC - Domain.csproj" />
     <ProjectReference Include="..\TechChallenge - Infra\TC - Infra.csproj" />
-    <ProjectReference Include="..\TechChallenge - IOT\TC - IOC.csproj" />
   </ItemGroup>
 
 </Project>
