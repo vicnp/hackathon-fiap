@@ -11,27 +11,22 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="coverlet.collector" Version="6.0.0"/>
+        <PackageReference Include="coverlet.collector" Version="6.0.0" />
         <PackageReference Include="FluentAssertions" Version="7.0.0-alpha.4" />
-        <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.8.0"/>
+        <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.8.0" />
         <PackageReference Include="NSubstitute" Version="5.1.0" />
-        <PackageReference Include="xunit" Version="2.5.3"/>
-        <PackageReference Include="xunit.runner.visualstudio" Version="2.5.3"/>
+        <PackageReference Include="xunit" Version="2.5.3" />
+        <PackageReference Include="xunit.runner.visualstudio" Version="2.5.3" />
     </ItemGroup>
 
     <ItemGroup>
-        <Using Include="Xunit"/>
+        <Using Include="Xunit" />
     </ItemGroup>
 
     <ItemGroup>
       <Compile Remove="UnitTest1.cs" />
       <Compile Remove="Regioes\**" />
-      <Compile Remove="Seguranca\Entidades\**" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <Folder Include="Seguranca\Servicos\" />
-      <Folder Include="Usuarios\Servicos\" />
+      <Compile Remove="Usuarios\Servicos\**" />
     </ItemGroup>
 
     <ItemGroup>
@@ -40,12 +35,12 @@
 
     <ItemGroup>
       <EmbeddedResource Remove="Regioes\**" />
-      <EmbeddedResource Remove="Seguranca\Entidades\**" />
+      <EmbeddedResource Remove="Usuarios\Servicos\**" />
     </ItemGroup>
 
     <ItemGroup>
       <None Remove="Regioes\**" />
-      <None Remove="Seguranca\Entidades\**" />
+      <None Remove="Usuarios\Servicos\**" />
     </ItemGroup>
 
 </Project>

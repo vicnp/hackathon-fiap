@@ -7,10 +7,11 @@ using System.Text;
 using TC_Domain.Seguranca.Servicos.Interfaces;
 using TC_Domain.Usuarios.Entidades;
 using TC_Domain.Usuarios.Repositorios;
+using TC_Domain.Utils.Repositorios;
 
 namespace TC_Domain.Seguranca.Servicos
 {
-    public class TokenServico (IConfiguration configuration, IUsuariosRepositorio usuariosRepositorio) : ITokenServico
+    public class TokenServico (IConfiguration configuration, IUsuariosRepositorio usuariosRepositorio, IUtilRepositorio utilRepositorio) : ITokenServico
     {
         public string GetToken(string email, string senha)
         {
@@ -22,7 +23,7 @@ namespace TC_Domain.Seguranca.Servicos
                 return string.Empty;
 
             var tokenHanlder = new JwtSecurityTokenHandler();
-            var chaveCriptografia = Encoding.ASCII.GetBytes(configuration.GetValue<string>("SecretJWT"));
+            var chaveCriptografia = Encoding.ASCII.GetBytes(utilRepositorio.GetValueConfigurationKeyJWT(configuration));
 
             var tokenProps = new SecurityTokenDescriptor()
             {
@@ -43,7 +44,7 @@ namespace TC_Domain.Seguranca.Servicos
         {
             using (Aes aes = Aes.Create())
             {
-                aes.Key = Encoding.UTF8.GetBytes(configuration.GetValue<string>("SeedHash"));
+                aes.Key = Encoding.UTF8.GetBytes(utilRepositorio.GetValueConfigurationHash(configuration));
                 aes.IV = new byte[16]; // Vetor de inicialização com 16 bytes (pode ser personalizado ou gerado aleatoriamente)
                 ICryptoTransform encryptor = aes.CreateEncryptor(aes.Key, aes.IV);
 
@@ -56,10 +57,11 @@ namespace TC_Domain.Seguranca.Servicos
                 return Convert.ToBase64String(ms.ToArray());
             }
         }
+
         public string DecryptPassword(string encryptedPassword)
         {
             using Aes aes = Aes.Create();
-            aes.Key = Encoding.UTF8.GetBytes(configuration.GetValue<string>("SeedHash"));
+            aes.Key = Encoding.UTF8.GetBytes(utilRepositorio.GetValueConfigurationHash(configuration));
             aes.IV = new byte[16]; // O mesmo vetor de inicialização usado na criptografia
             ICryptoTransform decryptor = aes.CreateDecryptor(aes.Key, aes.IV);
 

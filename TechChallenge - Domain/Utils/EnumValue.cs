@@ -1,15 +1,18 @@
 ﻿using System.ComponentModel;
+using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 
 namespace TC_Domain.Utils
 {
+    [ExcludeFromCodeCoverage]
     public class EnumValue
     {
         public string? Value { get; set; }
         public string? Description {  get; set; }
     }
 
-   public static class EnumExtension
+    [ExcludeFromCodeCoverage]
+    public static class EnumExtension
     {
         public static EnumValue GetValue(this Enum value)
         {

@@ -16,9 +16,10 @@ public class UsuarioTestes
         
         //ACT
         var usuario = new Usuario(id, nome, hash, email, permissao);
-        
-        
+        var usuarioDefault = new Usuario();
+
         //ASSERT
+        Assert.Equal(0, usuarioDefault.Id);
         Assert.Equal(id, usuario.Id);
         Assert.Equal(nome, usuario.Nome);
         Assert.Equal(hash, usuario.Hash);

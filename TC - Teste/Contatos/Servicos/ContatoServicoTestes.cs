@@ -162,6 +162,7 @@ public class ContatoServicoTestes
         public async Task Quando_ListoContatosComPaginacao_Espero_ExcluirDeContatosValidosOk()
         {
             var contato = new Contato("27", "email@asd.com", 27, "23423432");
+            contato.SetId(1);
             contatoRepositorio.RecuperarContatoAsync(1).Returns(contato);
             await contatoServico.Invoking(x => x.RemoverContatoAsync(1)).Should().NotThrowAsync();
         }
