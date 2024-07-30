@@ -51,7 +51,7 @@ namespace TC_APP.Controllers
             var json = JsonConvert.SerializeObject(contato);
             var data = new StringContent(json, Encoding.UTF8, "application/json");
 
-            var url = "https://localhost:44350/api/contatos";
+            var url = "https://localhost:7192/api/contatos";
 
             var response = await client.PostAsync(url, data);
 
@@ -63,7 +63,7 @@ namespace TC_APP.Controllers
             var json = JsonConvert.SerializeObject(contato);
             var data = new StringContent(json, Encoding.UTF8, "application/json");
 
-            var url = $"https://localhost:44350/api/contatos/{contato.Id}";
+            var url = $"https://localhost:7192/api/contatos/{contato.Id}";
 
             var response = await client.PutAsync(url, data);
 
@@ -74,7 +74,7 @@ namespace TC_APP.Controllers
         {
             var queryString = $"/{id}";
 
-            HttpResponseMessage response = await client.DeleteAsync($"https://localhost:44350/api/contatos{queryString}");
+            HttpResponseMessage response = await client.DeleteAsync($"https://localhost:7192/api/contatos{queryString}");
             response.EnsureSuccessStatusCode();
 
             string responseBody = await response.Content.ReadAsStringAsync();
@@ -96,7 +96,7 @@ namespace TC_APP.Controllers
                 // Converte o objeto Contato em uma string de consulta
                 var queryString = $"?nome={contato.Nome}&email={contato.Email}&DDD={contato.DDD}&Regiao={contato.Regiao?.Descricao}"; // Exemplo b�sico, modifique conforme suas propriedades
 
-                HttpResponseMessage response = await client.GetAsync($"https://localhost:44350/api/contatos/itens{queryString}");
+                HttpResponseMessage response = await client.GetAsync($"https://localhost:7192/api/contatos/itens{queryString}");
                 response.EnsureSuccessStatusCode();
 
                 string responseBody = await response.Content.ReadAsStringAsync();
@@ -117,7 +117,7 @@ namespace TC_APP.Controllers
                 // Converte o objeto Contato em uma string de consulta
                 var queryString = $"/{id}";
 
-                HttpResponseMessage response = await client.GetAsync($"https://localhost:44350/api/contatos{queryString}");
+                HttpResponseMessage response = await client.GetAsync($"https://localhost:7192/api/contatos{queryString}");
                 response.EnsureSuccessStatusCode();
 
                 string responseBody = await response.Content.ReadAsStringAsync();
