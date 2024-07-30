@@ -6,6 +6,7 @@ using Microsoft.OpenApi.Models;
 using TC_Application.Contatos.Servicos;
 using TC_Domain.Contatos.Servicos;
 using TC_Infra.Contatos;
+using TC_Infra.Utils.Repositorios;
 using TC_IOC.DBContext;
 
 var builder = WebApplication.CreateBuilder(args);
