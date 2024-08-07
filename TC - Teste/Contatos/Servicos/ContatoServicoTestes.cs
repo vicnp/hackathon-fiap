@@ -21,7 +21,6 @@ public class ContatoServicoTestes
     }
     
     
-
     public class ListarPaginacaoContatosAsyncMetodo : ContatoServicoTestes
     {
         [Fact]

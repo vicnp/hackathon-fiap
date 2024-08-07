@@ -38,6 +38,7 @@ namespace TC_APP.Controllers
         [HttpPost]
         public async Task<IActionResult> CrudContato(Contato contato)
         {
+
             if (contato.Id == null || contato.Id == 0)
                 await CriarRegistroContato(contato);
             else

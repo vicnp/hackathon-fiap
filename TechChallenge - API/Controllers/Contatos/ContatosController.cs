@@ -1,10 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using TC_Application.Contatos.Interfaces;
-using TC_DataTransfer.Contatos.Requests;
-using TC_IOC.Bibliotecas;
 using TC_DataTransfer.Contatos.Reponses;
+using TC_DataTransfer.Contatos.Requests;
 using TC_Domain.Utils;
-using Microsoft.AspNetCore.Authorization;
 using YCTC_DataTransfer.Contatos.Requests;
 
 namespace TC_API.Controllers.Contatos

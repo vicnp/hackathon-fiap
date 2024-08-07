@@ -79,7 +79,11 @@ namespace TC_Application.Contatos.Servicos
 
         public async Task<ContatoResponse> RecuperarContatoAsync(int id)
         {
-            Contato consulta = await contatosServico.RecuperarContatoAsync(id);
+            Contato consulta = await contatosServico.RecuperarContatoAsync(id) ?? throw new Exception("Registro não encontrado!");
+
+            List<Regiao> regiao = await regioesRepositorio.ListarRegioesAsync((int)consulta.DDD!);
+           
+            consulta.SetRegiao(regiao.FirstOrDefault());
             return mapper.Map<ContatoResponse>(consulta);
         }
     }

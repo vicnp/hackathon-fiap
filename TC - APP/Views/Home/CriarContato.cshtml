@@ -1,7 +1,7 @@
 ﻿@model TC_APP.Models.Contato
 
 @{
-    ViewData["Title"] = Model.Id == 0 ? "Criar" : "Editar";
+    ViewData["Title"] = Model.Id == null ? "Criar" : "Editar";
 }
 
 <h1>@ViewData["Title"] Contato</h1>
