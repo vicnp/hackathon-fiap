@@ -13,9 +13,14 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TC - Domain", "TechChalleng
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TC - Infra", "TechChallenge - Infra\TC - Infra.csproj", "{69721366-CA8C-43F9-99FC-FD7484524847}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TC - APP", "TC - APP\TC - APP.csproj", "{F18D0939-AC5E-43DA-B174-409DFD0ACF61}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TC - APP", "TC - APP\TC - APP.csproj", "{F18D0939-AC5E-43DA-B174-409DFD0ACF61}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TC - Teste", "TC - Teste\TC - Teste.csproj", "{7AD2750D-DB2A-4623-A23C-14F3C4C77907}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TC - Teste", "TC - Teste\TC - Teste.csproj", "{7AD2750D-DB2A-4623-A23C-14F3C4C77907}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{20B94ED7-6997-4D71-834F-A95DD73DFA0B}"
+	ProjectSection(SolutionItems) = preProject
+		Dockerfile = Dockerfile
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

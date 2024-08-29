@@ -29,10 +29,12 @@ var configuration = new ConfigurationBuilder().AddJsonFile("appsettings.json").B
 var chaveCriptografia = Encoding.ASCII.GetBytes(configuration.GetValue<string>("SecretJWT"));
 
 
-builder.Services.AddAuthentication(x => {
+builder.Services.AddAuthentication(x =>
+{
     x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
     x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-}).AddJwtBearer(jwt => {
+}).AddJwtBearer(jwt =>
+{
     jwt.RequireHttpsMetadata = false;
     jwt.SaveToken = true;
     jwt.TokenValidationParameters = new TokenValidationParameters()
@@ -46,11 +48,12 @@ builder.Services.AddAuthentication(x => {
 
 builder.Services.AddControllers().AddJsonOptions(options =>
 {
-        options.JsonSerializerOptions.PropertyNamingPolicy = null;
-        options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+    options.JsonSerializerOptions.PropertyNamingPolicy = null;
+    options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
 });
 
-builder.Services.AddSwaggerGen(b => {
+builder.Services.AddSwaggerGen(b =>
+{
     b.SwaggerDoc("v1", new OpenApiInfo { Title = "TC - API" });
     b.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
     {
@@ -81,16 +84,17 @@ builder.Services.AddSwaggerGen(b => {
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
+
+
+app.UseSwagger();
+app.UseSwaggerUI();
+
+
 app.UseCors(c =>
 {
     c.AllowAnyHeader();
     c.AllowAnyMethod();
-    c.AllowAnyOrigin(); 
+    c.AllowAnyOrigin();
 });
 
 app.UseHttpsRedirection();

@@ -24,8 +24,8 @@ namespace TC_Infra.Contatos
                                 r.ddd as RegiaoDDD,
                                 r.estado,
                                 r.regiao as Descricao 
-                        FROM TECHCHALLENGE.contatos c
-                        LEFT JOIN TECHCHALLENGE.regioes r
+                        FROM techchallenge.contatos c
+                        LEFT JOIN techchallenge.regioes r
                                 ON r.ddd = c.ddd
 
                         WHERE 1 = 1
@@ -82,8 +82,8 @@ namespace TC_Infra.Contatos
                                 r.ddd as RegiaoDDD,
                                 r.estado,
                                 r.regiao as Descricao 
-                        FROM TECHCHALLENGE.contatos c
-                        LEFT JOIN TECHCHALLENGE.regioes r
+                        FROM techchallenge.contatos c
+                        LEFT JOIN techchallenge.regioes r
                                 ON r.ddd = c.ddd
 
                         WHERE 1 = 1
@@ -117,15 +117,15 @@ namespace TC_Infra.Contatos
         public async Task<Contato> InserirContatoAsync(Contato contato)
         {
             string SQL = @"
-                            INSERT INTO TECHCHALLENGE.contatos
+                            INSERT INTO techchallenge.contatos
                                    (nome, email, ddd, telefone)
                             VALUES(@NOME, @EMAIL, @DDD, @TELEFONE);
                             SELECT c.id,
                                    r.ddd,
                                    r.estado,
                                    r.regiao AS Descricao
-                              FROM TECHCHALLENGE.contatos c
-                              JOIN TECHCHALLENGE.regioes r ON c.ddd = r.ddd
+                              FROM techchallenge.contatos c
+                              JOIN techchallenge.regioes r ON c.ddd = r.ddd
                              WHERE c.id = LAST_INSERT_ID();
                         ";
 
@@ -152,8 +152,8 @@ namespace TC_Infra.Contatos
                                 r.ddd as RegiaoDDD,
                                 r.estado,
                                 r.regiao as Descricao 
-                        FROM TECHCHALLENGE.contatos c
-                        LEFT JOIN TECHCHALLENGE.regioes r
+                        FROM techchallenge.contatos c
+                        LEFT JOIN techchallenge.regioes r
                                 ON r.ddd = c.ddd
 
                         WHERE c.id = {id}
@@ -163,7 +163,7 @@ namespace TC_Infra.Contatos
 
         public async Task RemoverContatoAsync(int id) {
             string SQL = $@"
-                        DELETE FROM TECHCHALLENGE.contatos WHERE id= {id};
+                        DELETE FROM techchallenge.contatos WHERE id= {id};
                         ";
 
             await session.ExecuteAsync(SQL);
@@ -171,7 +171,7 @@ namespace TC_Infra.Contatos
 
         public async Task<Contato> AtualizarContatoAsync(Contato contato) {
             string SQL = $@"
-                        UPDATE TECHCHALLENGE.contatos
+                        UPDATE techchallenge.contatos
                         SET nome='{contato.Nome}', email='{contato.Email}', ddd={contato.DDD}, telefone='{contato.Telefone}'
                         WHERE id= {contato.Id};
                 ";
