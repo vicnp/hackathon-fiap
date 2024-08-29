@@ -14,7 +14,7 @@ namespace TC_Infra.Regioes
                             SELECT ddd as RegiaoDDD,
                                    estado,
                                    regiao as Descricao
-                            FROM TECHCHALLENGE.regioes
+                            FROM techchallenge.regioes
                             WHERE 1 = 1
                          ";
             if(ddd > 0)

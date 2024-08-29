@@ -20,7 +20,7 @@ namespace TC_Infra.Usuarios
 		                    u.hash as Hash,
 		                    u.data_criacao as DataCriacao,
 		                    u.permissao as Permissao
-                    FROM TECHCHALLENGE.usuarios u
+                    FROM techchallenge.usuarios u
 	                    WHERE u.email = @email
 	                    AND u.hash = @hash
                         ";
@@ -39,7 +39,7 @@ namespace TC_Infra.Usuarios
 		                    u.hash as Hash,
 		                    u.data_criacao as DataCriacao,
 		                    u.permissao as Permissao
-                    FROM TECHCHALLENGE.usuarios u
+                    FROM techchallenge.usuarios u
 	                    WHERE 1 = 1 
                         ";
             
