@@ -24,6 +24,12 @@ jobs:
     - name: Baixar codigo fonte
       uses: actions/checkout@v4
 
+    - name: Configuira Docker Compose
+      run: |
+        sudo apt-get update
+        sudo apt-get install docker-compose-plugin
+
+
     - name: Conectar no Docker Hub
       uses: docker/login-action@v2
       with:
@@ -32,7 +38,7 @@ jobs:
 
     - name: Construir usando Docker Compose
       run: |
-        docker-compose up --build -d
+        docker compose -f docker-compose.yml up --build -d
 
     - name: Enviar imagens para o Docker Hub
       run: |
