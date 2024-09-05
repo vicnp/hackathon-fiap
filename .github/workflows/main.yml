@@ -8,27 +8,9 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
-    services:
-      db:
-        image: mysql:latest
-        env:
-          MYSQL_ROOT_PASSWORD: ${{ secrets.MYSQL_ROOT_PASSWORD }}
-          MYSQL_DATABASE: ${{ secrets.MYSQL_DATABASE }}
-          MYSQL_USER: ${{ secrets.MYSQL_USER }}
-          MYSQL_PASSWORD: ${{ secrets.MYSQL_PASSWORD }}
-        ports:
-          - 3306:3306
-
-
     steps:
     - name: Baixar codigo fonte
       uses: actions/checkout@v4
-
-    - name: Configuira Docker Compose
-      run: |
-        sudo curl -L "https://github.com/docker/compose/releases/download/v2.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
-        sudo chmod +x /usr/local/bin/docker-compose
-        docker-compose --version
 
     - name: Conectar no Docker Hub
       uses: docker/login-action@v3.3.0
