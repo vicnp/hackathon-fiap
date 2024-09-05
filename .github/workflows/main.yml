@@ -16,8 +16,6 @@ jobs:
           MYSQL_DATABASE: techchallenge
           MYSQL_USER: sis_techchallenge
           MYSQL_PASSWORD: 123456Tech
-        options: > 
-          --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
         ports:
           - 3306:3306
 
