@@ -37,15 +37,10 @@ jobs:
         password: ${{ secrets.DOCKER_TOKEN }}
 
     - name: Build and push Docker images
-      run: |
-        docker-compose build
-        docker-compose push
-
-#    - name: Build and push Docker images
-#      uses: docker/build-push-action@v6.7.0
-#      with:
-#        context: .
-#        push: true
-#        tags: ${{ secrets.DOCKER_USERNAME }}/techchallenge:latest
+      uses: docker/build-push-action@v6.7.0
+      with:
+        context: .
+        push: true
+        tags: ${{ secrets.DOCKER_USERNAME }}/techchallenge:latest
 
               
