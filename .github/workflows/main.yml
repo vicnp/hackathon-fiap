@@ -39,7 +39,7 @@ jobs:
 
     - name: Construir usando Docker Compose
       run: |
-        docker compose -f docker-compose.yml up --build -d
+        docker compose -f docker-compose.yml --build
 
     - name: Enviar imagens para o Docker Hub
       run: |
