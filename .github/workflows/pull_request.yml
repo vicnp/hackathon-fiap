@@ -1,4 +1,4 @@
-name: TechChallenge-Fase2
+name: TechChallenge-PR
 
 on:
   pull_request:
