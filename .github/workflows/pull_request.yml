@@ -1,7 +1,7 @@
 name: TechChallenge-CI
 
 on:
-  pull_request:
+  push:
     branches: [ 'feature/*' ]
 
 jobs:
