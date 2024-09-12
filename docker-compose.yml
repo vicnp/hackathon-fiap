@@ -32,6 +32,7 @@ services:
       - technetwork
     volumes:
       - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+      - prometheus_data:/prometheus
 
   grafana:
     image: grafana/grafana:latest
@@ -39,6 +40,8 @@ services:
       - "3000:3000"
     networks:
       - technetwork
+    volumes:
+      - grafana_data:/var/lib/grafana
 
 
 networks:
@@ -47,3 +50,5 @@ networks:
 
 volumes:
   db_data:
+  prometheus_data:
+  grafana_data:
