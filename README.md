@@ -1,3 +1,37 @@
+# Tech Challenge - Fase 2
+
+## O Problema
+A fase anterior do Tech Challenge envolveu a criação de um aplicativo .NET para cadastro de contatos regionais, com funcionalidades de adicionar, consultar, atualizar e excluir contatos, utilizando Entity Framework Core ou Dapper para persistência de dados e implementação de validações de dados.   
+
+Agora, vamos elevar o nível deste projeto, integrando práticas de Integração Contínua (CI), testes de integração e monitoramento de performance.
+
+
+## Objetivos
+
+- **Testes de Integração:** assegurar que os componentes do sistema funcionem corretamente quando integrados.
+- **Integração Contínua (CI) com GitHub Actions:** automatizar testes unitários, testes de integração e build.
+- **Monitoramento com Prometheus e Grafana:** implementar métricas para monitorar a saúde e o desempenho do aplicativo (é possível utilizar o Docker local para esta etapa).
+
+## Requisitos Técnicos Detalhados
+
+**GitHub Actions**   
+
+**CI Pipeline:**
+- **Build:** compilar o projeto para garantir que não há erros de compilação.
+- **Testes Unitários:** executar testes unitários para garantir que as funcionalidades estão trabalhando conforme o esperado.
+- **Testes de Integração:** executar testes de integração para validar o funcionamento correto entre os componentes do sistema, como o banco de dados e a aplicação.
+
+
+**Prometheus:**
+- Integrar Prometheus ao aplicativo para coletar métricas como latência das requisições, uso de CPU e memória.
+- Configurar os endpoints de métricas no aplicativo.
+
+**Grafana:**
+- Configurar um dashboard em Grafana para visualizar as métricas coletadas pelo Prometheus.
+- Criar painéis para exibir métricas específicas como latência por endpoint, contagem de requisições por status de resposta, uso de recursos do sistema etc
+
+___
+
 # Tech Challenge - Fase 1
 
 ## O Problema
