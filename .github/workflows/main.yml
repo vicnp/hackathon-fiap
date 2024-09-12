@@ -1,4 +1,4 @@
-name: TechChallenge-Fase2
+name: TechChallenge-CD
 
 on:
   push:
