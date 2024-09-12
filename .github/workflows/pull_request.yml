@@ -1,4 +1,4 @@
-name: TechChallenge-PR
+name: TechChallenge-CI
 
 on:
   pull_request:
