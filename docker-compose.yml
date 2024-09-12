@@ -6,7 +6,7 @@ services:
     ports:
       - "8080:8080"
     networks:
-      - mynetwork
+      - technetwork
     depends_on:
       - db
 
@@ -20,12 +20,29 @@ services:
     ports:
       - "3306:3306"
     networks:
-      - mynetwork
+      - technetwork
     volumes:
       - db_data:/var/lib/mysql
 
+  prometheus:
+    image: prom/prometheus:latest
+    ports:
+      - "9090:9090"
+    networks:
+      - technetwork
+    volumes:
+      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+
+  grafana:
+    image: grafana/grafana:latest
+    ports:
+      - "3000:3000"
+    networks:
+      - technetwork
+
+
 networks:
-  mynetwork:
+  technetwork:
     driver: bridge
 
 volumes:

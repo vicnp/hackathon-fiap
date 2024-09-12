@@ -1,12 +1,12 @@
-using System.Text;
-using System.Text.Json.Serialization;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using Prometheus;
+using System.Text;
+using System.Text.Json.Serialization;
 using TC_Application.Contatos.Servicos;
 using TC_Domain.Contatos.Servicos;
 using TC_Infra.Contatos;
-using TC_Infra.Utils.Repositorios;
 using TC_IOC.DBContext;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -14,6 +14,9 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+
+builder.Services.UseHttpClientMetrics();
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddTransient<DapperContext>();
@@ -88,6 +91,8 @@ var app = builder.Build();
 
 app.UseSwagger();
 app.UseSwaggerUI();
+app.UseMetricServer();
+app.UseHttpMetrics();
 
 
 app.UseCors(c =>
