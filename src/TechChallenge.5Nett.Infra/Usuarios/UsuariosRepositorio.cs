@@ -1,5 +1,6 @@
 ﻿using Dapper;
 using Microsoft.IdentityModel.Tokens;
+using System.Text;
 using Usuarios.Entidades;
 using Usuarios.Repositorios;
 using Usuarios.Request;

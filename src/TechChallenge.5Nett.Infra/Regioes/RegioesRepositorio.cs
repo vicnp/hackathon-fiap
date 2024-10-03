@@ -1,6 +1,7 @@
 ﻿using Dapper;
 using Regioes.Entidades;
 using Regioes.Repositorios;
+using System.Text;
 using Utils;
 using Utils.DBContext;
 

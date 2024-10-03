@@ -4,6 +4,7 @@ using Contatos.Repositorios.Filtros;
 using Dapper;
 using Microsoft.IdentityModel.Tokens;
 using Regioes.Entidades;
+using System.Text;
 using Utils;
 using Utils.DBContext;
 
