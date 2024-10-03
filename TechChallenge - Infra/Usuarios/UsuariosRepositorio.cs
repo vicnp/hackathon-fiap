@@ -1,5 +1,6 @@
 ﻿using Dapper;
 using Microsoft.IdentityModel.Tokens;
+using System.Text;
 using TC_DataTransfer.Usuarios.Request;
 using TC_Domain.Usuarios.Entidades;
 using TC_Domain.Usuarios.Repositorios;
@@ -13,7 +14,7 @@ namespace TC_Infra.Usuarios
     {
         public Usuario RecuperarUsuario(string email, string hash)
         {
-            string SQL = $@"
+            StringBuilder sql = new($@"
                            SELECT u.id as Id,
 		                    u.nome as Nome,
 		                    u.email as Email,
@@ -22,17 +23,16 @@ namespace TC_Infra.Usuarios
 		                    u.permissao as Permissao
                     FROM techchallenge.usuarios u
 	                    WHERE u.email = @email
-	                    AND u.hash = @hash
-                        ";
+	                    AND u.hash = @hash");
             DynamicParameters dynamicParameters = new();
             dynamicParameters.Add("email", email);
             dynamicParameters.Add("hash", hash);
             
-            return session.QueryFirstOrDefault<Usuario>(SQL, dynamicParameters);
+            return session.QueryFirstOrDefault<Usuario>(sql.ToString(), dynamicParameters);
         }
         public PaginacaoConsulta<Usuario> ListarUsuarios(UsuarioListarRequest request)
         {
-            string SQL = $@"
+            StringBuilder sql = new($@"
                            SELECT u.id as Id,
 		                    u.nome as Nome,
 		                    u.email as Email,
@@ -40,20 +40,19 @@ namespace TC_Infra.Usuarios
 		                    u.data_criacao as DataCriacao,
 		                    u.permissao as Permissao
                     FROM techchallenge.usuarios u
-	                    WHERE 1 = 1 
-                        ";
+	                    WHERE 1 = 1");
             
             if (!request.Email.IsNullOrEmpty())
             {
-                SQL += ($@" AND u.email = '{request.Email}'"); 
+                sql.AppendLine($@" AND u.email = '{request.Email}' "); 
             }
 
             if (!request.NomeUsuario.IsNullOrEmpty())
             {
-                SQL += ($@" AND u.nome = '{request.NomeUsuario}'");
+                sql.AppendLine($@" AND u.nome = '{request.NomeUsuario}' ");
             }
  
-            return ListarPaginado(SQL, request.Pg, request.Qt, request.CpOrd, request.TpOrd.ToString());
+            return ListarPaginado(sql.ToString(), request.Pg, request.Qt, request.CpOrd, request.TpOrd.ToString());
         }
     }
 }

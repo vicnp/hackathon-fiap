@@ -1,4 +1,5 @@
 ﻿using Dapper;
+using System.Text;
 using TC_Domain.Regioes.Entidades;
 using TC_Domain.Regioes.Repositorios;
 using TC_IOC.Bibliotecas;
@@ -10,21 +11,18 @@ namespace TC_Infra.Regioes
     {
         public async Task<List<Regiao>> ListarRegioesAsync(int ddd = 0)
         {
-            string SQL = @"
+            StringBuilder sql = new(@"
                             SELECT ddd as RegiaoDDD,
                                    estado,
                                    regiao as Descricao
                             FROM techchallenge.regioes
-                            WHERE 1 = 1
-                         ";
+                            WHERE 1 = 1");
             if(ddd > 0)
             {
-                SQL += $@"
-                        AND ddd = {ddd}
-                        ";
+                sql.AppendLine($@"  AND ddd = {ddd} ");
             } 
             
-            var result =  await session.QueryAsync<Regiao>(SQL);
+            var result =  await session.QueryAsync<Regiao>(sql.ToString());
             return result.ToList();
         }
     }
