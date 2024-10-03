@@ -5,10 +5,10 @@ EXPOSE 8080
 
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
-WORKDIR /src
-COPY ["TechChallenge.5Nett.API/TechChallenge.5Nett.API.csproj", "TechChallenge.5Nett.API/"]
+WORKDIR /app
+COPY ["./src/TechChallenge.5Nett.API/TechChallenge.5Nett.API.csproj", "TechChallenge.5Nett.API/"]
 COPY . .
-WORKDIR "/src/TechChallenge.5Nett.API"
+WORKDIR "/app/src/TechChallenge.5Nett.API"
 
 
 RUN dotnet build "./TechChallenge.5Nett.API.csproj" -c $BUILD_CONFIGURATION -o /app/build
