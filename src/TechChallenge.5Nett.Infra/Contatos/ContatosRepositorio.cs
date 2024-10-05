@@ -28,19 +28,19 @@ namespace Contatos
                           ON r.ddd = c.ddd
                   WHERE 1 = 1");
 
-            if(!filtro.Email.IsNullOrEmpty()) 
+            if (!filtro.Email.IsNullOrEmpty())
                 sql.AppendLine($" AND c.email = '{filtro.Email}' ");
 
-            if(!filtro.Nome.IsNullOrEmpty())
+            if (!filtro.Nome.IsNullOrEmpty())
                 sql.AppendLine($" AND c.nome like '%{filtro.Nome}%' ");
 
-            if(filtro.DDD > 0)
+            if (filtro.DDD > 0)
                 sql.AppendLine($" AND c.ddd = {filtro.DDD} ");
 
-            if(!filtro.Telefone.IsNullOrEmpty())
+            if (!filtro.Telefone.IsNullOrEmpty())
                 sql.AppendLine($" AND c.telefone = '{filtro.Telefone}' ");
 
-            if(!filtro.Regiao.IsNullOrEmpty())
+            if (!filtro.Regiao.IsNullOrEmpty())
                 sql.AppendLine($" AND r.regiao like '%{filtro.Regiao}%' ");
 
             string sqlPaginado = GerarQueryPaginacao(sql.ToString(), filtro.Pg, filtro.Qt, filtro.CpOrd, filtro.TpOrd.ToString());
@@ -100,7 +100,7 @@ namespace Contatos
             if (!filtro.Regiao.IsNullOrEmpty())
                 sql.AppendLine($" AND r.regiao like '%{filtro.Regiao}%' ");
 
-            var result =  await session.QueryAsync<Contato, Regiao, Contato>(sql.ToString(), (contato, regiao) =>
+            var result = await session.QueryAsync<Contato, Regiao, Contato>(sql.ToString(), (contato, regiao) =>
             {
                 contato.SetRegiao(regiao);
                 return contato;
@@ -137,7 +137,8 @@ namespace Contatos
             return contato;
         }
 
-        public async Task<Contato> RecuperarContatoAsync(int id) {
+        public async Task<Contato> RecuperarContatoAsync(int id)
+        {
             StringBuilder sql = new($@"
                         SELECT  c.id,
                                 c.nome,
@@ -154,13 +155,15 @@ namespace Contatos
             return await session.QueryFirstOrDefaultAsync<Contato>(sql.ToString());
         }
 
-        public async Task RemoverContatoAsync(int id) {
+        public async Task RemoverContatoAsync(int id)
+        {
             StringBuilder sql = new($@"DELETE FROM techchallenge.contatos WHERE id= {id};");
 
             await session.ExecuteAsync(sql.ToString());
         }
 
-        public async Task<Contato> AtualizarContatoAsync(Contato contato) {
+        public async Task<Contato> AtualizarContatoAsync(Contato contato)
+        {
             StringBuilder sql = new($@"
                         UPDATE techchallenge.contatos
                         SET nome='{contato.Nome}', 
