@@ -1,6 +1,6 @@
-﻿using System.Data;
-using Microsoft.Extensions.Configuration;
+﻿using Microsoft.Extensions.Configuration;
 using MySql.Data.MySqlClient;
+using System.Data;
 
 namespace Utils.DBContext
 {
@@ -8,6 +8,12 @@ namespace Utils.DBContext
     {
         private readonly IConfiguration _configuration;
         private readonly string connectionString;
+
+        public DapperContext(string connectionString)
+        {
+            this.connectionString = connectionString;
+        }
+
         public DapperContext(IConfiguration configuration)
         {
             _configuration = configuration;
