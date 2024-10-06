@@ -1,4 +1,5 @@
-﻿using Contatos.Requests;
+﻿using Contatos.Reponses;
+using Contatos.Requests;
 using FluentAssertions;
 using Integracao.TechChallengeApi.Factory;
 using Newtonsoft.Json;
@@ -18,8 +19,7 @@ namespace Integracao.ContatosIntegracaoTeste
             apiFactoryClient = techChallengeApiFactory.CreateClient();
         }
 
-        [Fact]
-        public async Task Cria_Contatos_Corretamente()
+        private async Task<HttpResponseMessage> CriaContato()
         {
             var contato = new ContatoCrudRequest
             {
@@ -32,36 +32,59 @@ namespace Integracao.ContatosIntegracaoTeste
             var requestContent = new StringContent(JsonConvert.SerializeObject(contato), Encoding.UTF8, "application/json");
 
             var result = await apiFactoryClient.PostAsync("api/contatos", requestContent);
+            return result;
+        }
+
+        [Fact]
+        public async Task Cria_Contatos_Corretamente()
+        {
+            HttpResponseMessage result = await CriaContato();
+
+            ContatoResponse? contato = JsonConvert.DeserializeObject<ContatoResponse>(await result.Content.ReadAsStringAsync());
 
             result.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
+            contato.Should().NotBeNull();
+            contato.Regiao.Descricao.Should().Be("Sudeste");
         }
+
 
         [Fact]
         public async Task Listar_Contatos_Corretamente()
         {
-            var result = await apiFactoryClient.GetAsync("api/contatos/itens");
+            _ = await CriaContato();
+            HttpResponseMessage result = await apiFactoryClient.GetAsync("api/contatos/itens");
+
+            List<ContatoResponse>? contatos = JsonConvert.DeserializeObject<List<ContatoResponse>>(await result.Content.ReadAsStringAsync());
 
             result.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
+            contatos.Should().NotBeNull();
+            contatos.Count.Should().BeGreaterThan(0);
         }
 
         [Fact]
         public async Task Editar_Contatos_Corretamente()
         {
-            int idEdicao = 1;
 
-            var contato = new ContatoCrudRequest
+            HttpResponseMessage contatoCriado = await CriaContato();
+
+            ContatoResponse? contato = JsonConvert.DeserializeObject<ContatoResponse>(await contatoCriado.Content.ReadAsStringAsync());
+
+            int idEdicao = -1;
+            if (contato!.Id.HasValue)
             {
-                Nome = "Jorge da Silva Sauro",
-                Email = "jorge@dino.com.br",
-                DDD = 11,
-                Telefone = "912345678"
-            };
+                idEdicao = contato.Id.Value;
+                contato.Nome = "Contato Editado";
+            }
 
-            var requestContent = new StringContent(JsonConvert.SerializeObject(contato), Encoding.UTF8, "application/json");
+            StringContent requestContent = new StringContent(JsonConvert.SerializeObject(contato), Encoding.UTF8, "application/json");
 
-            var result = await apiFactoryClient.PutAsync($"api/contatos/{idEdicao}", requestContent);
+            HttpResponseMessage result = await apiFactoryClient.PutAsync($"api/contatos/{idEdicao}", requestContent);
+
+            ContatoResponse? contatoEditado = JsonConvert.DeserializeObject<ContatoResponse>(await result.Content.ReadAsStringAsync());
 
             result.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
+            contatoEditado.Should().NotBeNull();
+            contatoEditado.Nome.Should().Be(contato.Nome);
         }
 
         [Fact]
