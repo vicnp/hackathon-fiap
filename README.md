@@ -49,3 +49,6 @@ O Tech Challenge desta fase será desenvolver um aplicativo utilizando a platafo
 - **Persistência de Dados:** utilizar um banco de dados para armazenar as informações dos contatos. Escolha entre Entity Framework Core ou Dapper para a camada de acesso a dados.
 - **Validações:** implementar validações para garantir dados consistentes (por exemplo: validação de formato de e-mail, telefone, campos obrigatórios).
 - **Testes unitários:** desenvolver testes unitários utilizando xUnit ou NUnit.
+
+## Apresentação
+- **Data da gravação:** 07/10/2024
