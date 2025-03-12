@@ -59,10 +59,10 @@ Explicação e demonstração do pipeline de deploy da aplicação.
 
 4. Demonstração do MVP
 Aplicação executando na nuvem ou local, os itens de 1 a 6 dos requisitos funcionais, contemplando:
-### Autenticação do Usuário (Médico)
-### Cadastro/Edição de Horários Disponíveis (Médico)
-### Aceite ou Recusa de Consultas Médicas (Médico)
-### Autenticação do Usuário (Paciente)
-### Busca por Médicos (Paciente)
-### Agendamento de Consultas (Paciente)
+- Autenticação do Usuário (Médico)
+- Cadastro/Edição de Horários Disponíveis (Médico)
+- Aceite ou Recusa de Consultas Médicas (Médico)
+- Autenticação do Usuário (Paciente)
+- Busca por Médicos (Paciente)
+- Agendamento de Consultas (Paciente)
 
