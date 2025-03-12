@@ -11,8 +11,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TechChallenge.5Nett.API", "src\TechChallenge.5Nett.API\TechChallenge.5Nett.API.csproj", "{B9684C35-6A70-443B-B0DA-56748F75250F}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TechChallenge.5Nett.APP", "src\TechChallenge.5Nett.APP\TechChallenge.5Nett.APP.csproj", "{ADD81CE0-F150-4FD1-9AA4-621AE56FAEAB}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TechChallenge.5Nett.Application", "src\TechChallenge.5Nett.Application\TechChallenge.5Nett.Application.csproj", "{FBDBF639-4A16-4F66-9999-95436B91602A}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TechChallenge.5Nett.DataTransfer", "src\TechChallenge.5Nett.DataTransfer\TechChallenge.5Nett.DataTransfer.csproj", "{4ECBD8EC-2313-481E-9B13-14D854100F63}"
@@ -33,10 +31,6 @@ Global
 		{B9684C35-6A70-443B-B0DA-56748F75250F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B9684C35-6A70-443B-B0DA-56748F75250F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B9684C35-6A70-443B-B0DA-56748F75250F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{ADD81CE0-F150-4FD1-9AA4-621AE56FAEAB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{ADD81CE0-F150-4FD1-9AA4-621AE56FAEAB}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{ADD81CE0-F150-4FD1-9AA4-621AE56FAEAB}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{ADD81CE0-F150-4FD1-9AA4-621AE56FAEAB}.Release|Any CPU.Build.0 = Release|Any CPU
 		{FBDBF639-4A16-4F66-9999-95436B91602A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{FBDBF639-4A16-4F66-9999-95436B91602A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FBDBF639-4A16-4F66-9999-95436B91602A}.Release|Any CPU.ActiveCfg = Release|Any CPU

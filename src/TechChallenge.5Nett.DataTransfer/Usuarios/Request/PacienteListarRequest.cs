@@ -3,11 +3,13 @@ using Utils.Enumeradores;
 
 namespace Usuarios.Request
 {
-    public class UsuarioListarRequest : PaginacaoFiltro
+    public class PacienteListarRequest : PaginacaoFiltro
     {
         public string? NomeUsuario { get; set; }
         public string? Email { get; set; }
-        public UsuarioListarRequest() : base("nome", TipoOrdernacao.Desc)
+
+        public string? Cpf {  get; set; }
+        public PacienteListarRequest() : base("nome", TipoOrdernacao.Desc)
         {
         }
     }

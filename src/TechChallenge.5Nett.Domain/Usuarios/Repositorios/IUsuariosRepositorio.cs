@@ -6,7 +6,8 @@ namespace Usuarios.Repositorios
 {
     public interface IUsuariosRepositorio
     {
-        PaginacaoConsulta<Usuario> ListarUsuarios(UsuarioListarRequest request);
+        PaginacaoConsulta<Usuario> ListarPacientes(PacienteListarRequest request);
+        PaginacaoConsulta<Usuario> ListarUsuarios(PacienteListarRequest request);
         Usuario RecuperarUsuario(string email, string hash);
     }
 }

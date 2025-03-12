@@ -13,11 +13,11 @@ namespace Seguranca.Servicos
 {
     public class TokenServico(IConfiguration configuration, IUsuariosRepositorio usuariosRepositorio, IUtilRepositorio utilRepositorio) : ITokenServico
     {
-        public string GetToken(string email, string senha)
+        public string GetToken(string identificador, string senha)
         {
             var hash = EncryptPassword(senha);
 
-            Usuario usuario = usuariosRepositorio.RecuperarUsuario(email, hash);
+            Usuario usuario = usuariosRepositorio.RecuperarUsuario(identificador, hash);
 
             if (usuario == null)
                 return string.Empty;
@@ -30,7 +30,7 @@ namespace Seguranca.Servicos
                 Subject = new ClaimsIdentity([
                     new Claim(ClaimTypes.Email, usuario.Email),
                     new Claim(ClaimTypes.Name, usuario.Nome),
-                    new Claim(ClaimTypes.Role, usuario.Permissao.ToString())
+                    new Claim(ClaimTypes.Role, usuario.Tipo.ToString())
                 ]),
 
                 Expires = DateTime.UtcNow.AddHours(5),

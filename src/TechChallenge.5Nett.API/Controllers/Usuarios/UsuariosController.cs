@@ -4,6 +4,7 @@ using Utils;
 using Usuarios.Request;
 using Usuarios.Response;
 using Usuarios.Interfaces;
+using Usuarios.Entidades;
 
 namespace Controllers.Usuarios
 {
@@ -12,10 +13,10 @@ namespace Controllers.Usuarios
     public class UsuariosController(IUsuariosAppServico usuariosAppServico) : ControllerBase
     {
         [HttpGet]
-        [Authorize(Roles = "1")]
-        public ActionResult<PaginacaoConsulta<UsuarioResponse>> RecuperarUsuarios([FromQuery] UsuarioListarRequest request)
+        [Authorize(Roles = $"{Roles.Paciente},{Roles.Medico}")]
+        public ActionResult<PaginacaoConsulta<UsuarioResponse>> RecuperarPacientes([FromQuery] PacienteListarRequest request)
         {
-            PaginacaoConsulta<UsuarioResponse> usuarios = usuariosAppServico.ListarUsuarios(request);
+            PaginacaoConsulta<UsuarioResponse> usuarios = usuariosAppServico.ListarPacientes(request);
             return Ok(usuarios);
         }
     }

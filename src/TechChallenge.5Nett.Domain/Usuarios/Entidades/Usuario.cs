@@ -1,27 +1,47 @@
-﻿namespace Usuarios.Entidades
+﻿using System.Drawing;
+using Usuarios.Enumeradores;
+
+namespace Usuarios.Entidades
 {
     public class Usuario
     {
-        public int Id { get; set; }
-        public string Nome { get; set; }
+        public int Id { get; protected set; }
+        public string Nome { get; protected set; }
+        public string Email { get; protected set; }
+        public string Cpf { get; protected set; }
         public string Hash { get; set; }
-        public string Email { get; set; }
-        public DateTime DataCriacao { get; set; }
-        public int Permissao { get; set; }
+        public TipoUsuario Tipo { get; protected set; }
+        public DateTime CriadoEm { get; protected set; }
 
         public Usuario()
         {
-
+            
         }
 
-        public Usuario(int id, string nome, string hash, string email, int permissao)
+        public Usuario(int id, string nome, string email, string cpf, string senhaHash, TipoUsuario tipo)
         {
             Id = id;
             Nome = nome;
-            Hash = hash;
             Email = email;
-            DataCriacao = DateTime.Now;
-            Permissao = permissao;
+            Cpf = cpf;
+            Hash = senhaHash;
+            Tipo = tipo;
+            CriadoEm = DateTime.Now;
+        }
+
+        public void AtualizarNome(string novoNome)
+        {
+            Nome = novoNome;
+        }
+
+        public void AtualizarEmail(string novoEmail)
+        {
+            Email = novoEmail;
+        }
+
+        public void AtualizarSenha(string novaSenhaHash)
+        {
+            Hash = novaSenhaHash;
         }
     }
 }
