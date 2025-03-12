@@ -10,37 +10,37 @@ Para viabilizar o desenvolvimento de um sistema que esteja em conformidade com a
 
 ## Requisitos Funcionais
 1. Autenticação do Usuário (Médico)
-O sistema deve permitir que o médico faça login usando o número de CRM e uma senha.
+- O sistema deve permitir que o médico faça login usando o número de CRM e uma senha.
 
 2. Cadastro/Edição de Horários Disponíveis (Médico)
-O sistema deve permitir que o médico cadastre e edite os horários disponíveis para agendamento de consultas.
+- O sistema deve permitir que o médico cadastre e edite os horários disponíveis para agendamento de consultas.
 
 3. Aceite ou Recusa de Consultas Médicas (Médico)
-O médico deve poder aceitar ou recusar consultas médicas agendadas.
+- O médico deve poder aceitar ou recusar consultas médicas agendadas.
 
 4. Autenticação do Usuário (Paciente)
-O sistema deve permitir que o paciente faça login usando um e-mail ou CPF e uma senha.
+- O sistema deve permitir que o paciente faça login usando um e-mail ou CPF e uma senha.
 
 5. Busca por Médicos (Paciente)
-O sistema deve permitir que o paciente visualize a lista de médicos disponíveis, utilizando filtros como especialidade.
+- O sistema deve permitir que o paciente visualize a lista de médicos disponíveis, utilizando filtros como especialidade.
 
 6. Agendamento de Consultas (Paciente)
-Após selecionar o médico, o paciente deve poder visualizar a agenda do médico e o valor da consulta, e efetuar o agendamento.
-O usuário paciente poderá cancelar a consulta mediante justificativa.
+- Após selecionar o médico, o paciente deve poder visualizar a agenda do médico e o valor da consulta, e efetuar o agendamento.
+- O usuário paciente poderá cancelar a consulta mediante justificativa.
 
 
 
 ## Requisitos Não Funcionais
 
 1. Alta Disponibilidade
-O sistema deve estar disponível 24/7 devido à sua natureza crítica no setor de saúde.
+- O sistema deve estar disponível 24/7 devido à sua natureza crítica no setor de saúde.
 
 2. Escalabilidade
-O sistema deve ser capaz de lidar com alta demanda, especialmente para profissionais muito procurados.
-O sistema deve suportar até 20.000 usuários simultâneos em horários de pico.
+- O sistema deve ser capaz de lidar com alta demanda, especialmente para profissionais muito procurados.
+- O sistema deve suportar até 20.000 usuários simultâneos em horários de pico.
 
 3. Segurança
-A proteção dos dados sensíveis dos pacientes deve seguir as melhores práticas de segurança da informação.
+- A proteção dos dados sensíveis dos pacientes deve seguir as melhores práticas de segurança da informação.
 
 
 ## Entregáveis Mínimos
@@ -48,21 +48,21 @@ A proteção dos dados sensíveis dos pacientes deve seguir as melhores prática
 Os grupos deverão entregar o seguinte:
 
 1. Desenho da Solução MVP
-  Diagrama da arquitetura que atenda aos requisitos funcionais e justificativas das escolhas técnicas.
-  Descrição de como os requisitos não funcionais serão atendidos.
+- Diagrama da arquitetura que atenda aos requisitos funcionais e justificativas das escolhas técnicas.
+- Descrição de como os requisitos não funcionais serão atendidos.
 
 2. Demonstração da Infraestrutura
-Mostrando a aplicação funcionando na infraestrutura, com exemplos de uso real (como chamadas de API).
+- Mostrando a aplicação funcionando na infraestrutura, com exemplos de uso real (como chamadas de API).
 
 3. Demonstração da Esteira de CI/CD
-Explicação e demonstração do pipeline de deploy da aplicação.
+- Explicação e demonstração do pipeline de deploy da aplicação.
 
 4. Demonstração do MVP
-Aplicação executando na nuvem ou local, os itens de 1 a 6 dos requisitos funcionais, contemplando:
-- Autenticação do Usuário (Médico)
-- Cadastro/Edição de Horários Disponíveis (Médico)
-- Aceite ou Recusa de Consultas Médicas (Médico)
-- Autenticação do Usuário (Paciente)
-- Busca por Médicos (Paciente)
-- Agendamento de Consultas (Paciente)
+- Aplicação executando na nuvem ou local, os itens de 1 a 6 dos requisitos funcionais, contemplando:
+ - Autenticação do Usuário (Médico)
+ - Cadastro/Edição de Horários Disponíveis (Médico)
+ - Aceite ou Recusa de Consultas Médicas (Médico)
+ - Autenticação do Usuário (Paciente)
+ - Busca por Médicos (Paciente)
+ - Agendamento de Consultas (Paciente)
 
