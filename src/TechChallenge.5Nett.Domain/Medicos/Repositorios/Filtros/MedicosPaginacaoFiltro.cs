@@ -14,9 +14,10 @@ namespace Medicos.Repositorios.Filtros
         {
         }
 
-        public int CodigoEspecialidade { get; set; } = 0;
+        public int? CodigoEspecialidade { get; set; }
+        public string NomeEspecialidade { get; set; } = string.Empty;
         public string Nome {  get; set; } = string.Empty;
-
         public string Email { get; set; } = string.Empty;
+        public string Crm { get; set; } = string.Empty;
     }
 }

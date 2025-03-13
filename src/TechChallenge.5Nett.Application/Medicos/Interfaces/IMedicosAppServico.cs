@@ -12,6 +12,6 @@ namespace Medicos.Interfaces
 {
     public interface IMedicosAppServico
     {
-        Task<PaginacaoConsulta<MedicoResponse>> ListarContatosComPaginacaoAsync(MedicosPaginacaoRequest request);
+        Task<PaginacaoConsulta<MedicoResponse>> ListarMedicosComPaginacaoAsync(MedicosPaginacaoRequest request);
     }
 }

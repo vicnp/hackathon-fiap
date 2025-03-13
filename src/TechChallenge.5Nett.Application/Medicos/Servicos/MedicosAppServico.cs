@@ -12,7 +12,7 @@ namespace Medicos.Servicos
 {
     public class MedicosAppServico(IMapper mapper, IMedicosRepositorio medicosRepositorio) : IMedicosAppServico
     {
-        public async Task<PaginacaoConsulta<MedicoResponse>> ListarContatosComPaginacaoAsync(MedicosPaginacaoRequest request)
+        public async Task<PaginacaoConsulta<MedicoResponse>> ListarMedicosComPaginacaoAsync(MedicosPaginacaoRequest request)
         {
             MedicosPaginacaoFiltro contatosFiltro = mapper.Map<MedicosPaginacaoFiltro>(request);
 

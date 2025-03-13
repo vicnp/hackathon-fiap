@@ -43,6 +43,14 @@ namespace Medicos
             if (!filtro.Nome.InvalidOrEmpty())
                 sql.AppendLine($" AND u.nome like '%{filtro.Nome}%' ");
 
+            if (!filtro.Crm.InvalidOrEmpty())
+                sql.AppendLine($" AND m.crm = '{filtro.Crm}' ");
+
+            if (!filtro.CodigoEspecialidade.HasValue)
+                sql.AppendLine($" AND e.id = '{filtro.CodigoEspecialidade}' ");
+
+            if (!filtro.NomeEspecialidade.InvalidOrEmpty())
+                sql.AppendLine($" AND e.nome like '%{filtro.NomeEspecialidade}%' ");
             string sqlPaginado = GerarQueryPaginacao(sql.ToString(), filtro.Pg, filtro.Qt, filtro.CpOrd, filtro.TpOrd.ToString());
 
             var registros = new Dictionary<int, Medico>();

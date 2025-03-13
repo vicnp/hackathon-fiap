@@ -18,9 +18,9 @@ namespace Controllers.Medicos
         [HttpGet]
         [Route("paginados")]
         [Authorize(Roles = $"{Roles.Paciente},{Roles.Medico}")]
-        public async Task<ActionResult<PaginacaoConsulta<MedicoResponse>>> ListarMedicosComPaginacao([FromQuery] MedicosPaginacaoRequest request)
+        public async Task<ActionResult<PaginacaoConsulta<MedicoResponse>>> ListarMedicosComPaginacaoAsync([FromQuery] MedicosPaginacaoRequest request)
         {
-            PaginacaoConsulta<MedicoResponse> paginacaoConsulta = await medicosAppServico.ListarContatosComPaginacaoAsync(request);
+            PaginacaoConsulta<MedicoResponse> paginacaoConsulta = await medicosAppServico.ListarMedicosComPaginacaoAsync(request);
             return Ok(paginacaoConsulta);
         }
     }
