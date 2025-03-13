@@ -56,7 +56,7 @@ builder.Services.AddControllers().AddJsonOptions(options =>
 
 builder.Services.AddSwaggerGen(b =>
 {
-    b.SwaggerDoc("v1", new OpenApiInfo { Title = "TechChallenge.5Nett.API" });
+    b.SwaggerDoc("v1", new OpenApiInfo { Title = "Hackathon.Fiap" });
     b.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
     {
         Description = "JWT Authorization Header",

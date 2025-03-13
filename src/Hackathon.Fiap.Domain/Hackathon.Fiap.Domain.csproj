@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
-    <RootNamespace>TechChallenge.5Nett.Domain</RootNamespace>
+    <RootNamespace>Hackathon.Fiap.Domain</RootNamespace>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>
@@ -14,7 +14,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\TechChallenge.5Nett.DataTransfer\TechChallenge.5Nett.DataTransfer.csproj" />
+    <ProjectReference Include="..\Hackathon.Fiap.DataTransfer\Hackathon.Fiap.DataTransfer.csproj" />
+    <ProjectReference Include="..\Hackathon.Fiap.DataTransfer\Hackathon.Fiap.DataTransfer.csproj" />
   </ItemGroup>
 
   <ItemGroup>

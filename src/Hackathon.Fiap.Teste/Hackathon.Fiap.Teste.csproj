@@ -2,7 +2,7 @@
 
 	<PropertyGroup>
 		<TargetFramework>net8.0</TargetFramework>
-		<RootNamespace>TechChallenge.5Nett.Teste</RootNamespace>
+		<RootNamespace>Hackathon.Fiap.Teste</RootNamespace>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
 
@@ -40,8 +40,8 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\TechChallenge.5Nett.API\TechChallenge.5Nett.API.csproj" />
-		<ProjectReference Include="..\TechChallenge.5Nett.Domain\TechChallenge.5Nett.Domain.csproj" />
+		<ProjectReference Include="..\Hackathon.Fiap.API\Hackathon.Fiap.API.csproj" />
+		<ProjectReference Include="..\Hackathon.Fiap.Domain\Hackathon.Fiap.Domain.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>
