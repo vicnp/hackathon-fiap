@@ -1,5 +1,4 @@
-﻿using System.Drawing;
-using Usuarios.Enumeradores;
+﻿using Usuarios.Enumeradores;
 
 namespace Usuarios.Entidades
 {

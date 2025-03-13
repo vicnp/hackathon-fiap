@@ -33,38 +33,9 @@ namespace Usuarios
             return session.QueryFirstOrDefault<Usuario>(sql.ToString(), parametros);
         }
 
-        public PaginacaoConsulta<Usuario> ListarPacientes(PacienteListarRequest request)
-        {
-            StringBuilder sql = new($@"
-                                    SELECT id as Id,
-                                           nome as Nome,
-                                           email as Email,
-                                           cpf as Cpf,
-                                           hash as Hash,
-                                           tipo as Tipo,
-                                           criado_em as CriadoEm
-                                    FROM techchallenge.Usuarios u
-	                                WHERE u.tipo = 'Paciente'");
+        
 
-            if (!request.Email.IsNullOrEmpty())
-            {
-                sql.AppendLine($@" AND u.email = '{request.Email}' ");
-            }
-
-            if (!request.NomeUsuario.IsNullOrEmpty())
-            {
-                sql.AppendLine($@" AND u.nome = '{request.NomeUsuario}' ");
-            }
-
-            if (!request.Cpf.IsNullOrEmpty())
-            {
-                sql.AppendLine($@" AND u.cpf = '{request.Cpf}' ");
-            }
-
-            return ListarPaginado(sql.ToString(), request.Pg, request.Qt, request.CpOrd, request.TpOrd.ToString());
-        }
-
-        public PaginacaoConsulta<Usuario> ListarUsuarios(PacienteListarRequest request)
+        public PaginacaoConsulta<Usuario> ListarUsuarios(UsuarioListarRequest request)
         {
             StringBuilder sql = new($@"
                            SELECT u.id as Id,

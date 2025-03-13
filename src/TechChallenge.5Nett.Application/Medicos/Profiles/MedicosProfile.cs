@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using AutoMapper;
-using Contatos.Repositorios.Filtros;
-using Contatos.Requests;
+﻿using AutoMapper;
 using Medicos.Entidades;
 using Medicos.Repositorios.Filtros;
 using Medicos.Requests;

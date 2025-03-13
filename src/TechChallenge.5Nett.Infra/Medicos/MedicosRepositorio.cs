@@ -1,10 +1,7 @@
-﻿using Contatos.Entidades;
-using Contatos.Repositorios.Filtros;
-using Dapper;
+﻿using Dapper;
 using System.Text;
 using Medicos.Entidades;
 using Medicos.Repositorios;
-using Regioes.Entidades;
 using Utils;
 using Utils.DBContext;
 using Medicos.Repositorios.Filtros;

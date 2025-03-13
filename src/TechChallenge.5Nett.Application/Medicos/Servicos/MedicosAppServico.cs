@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using Contatos.Requests;
 using Medicos.Entidades;
 using Medicos.Interfaces;
 using Medicos.Repositorios;

@@ -1,11 +1,11 @@
 ﻿using Utils;
-using Usuarios.Request;
 using Usuarios.Response;
+using Usuarios.Request;
 
 namespace Usuarios.Interfaces
 {
     public interface IUsuariosAppServico
     {
-        PaginacaoConsulta<UsuarioResponse> ListarPacientes(PacienteListarRequest request);
+        PaginacaoConsulta<UsuarioResponse> ListarPacientes(UsuarioListarRequest request);
     }
 }

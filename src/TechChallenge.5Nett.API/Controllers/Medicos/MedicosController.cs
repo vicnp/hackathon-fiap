@@ -1,7 +1,4 @@
-﻿using Contatos.Reponses;
-using Contatos.Requests;
-using Contatos.Servicos;
-using Medicos.Interfaces;
+﻿using Medicos.Interfaces;
 using Medicos.Requests;
 using Medicos.Responses;
 using Microsoft.AspNetCore.Authorization;

@@ -30,7 +30,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Pacientes\Entidades\" />
     <Folder Include="Pacientes\Repositorios\Filtros\" />
     <Folder Include="Pacientes\Servicos\Interfaces\" />
     <Folder Include="Medicos\Servicos\Interfaces\" />

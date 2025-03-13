@@ -10,9 +10,9 @@ namespace Usuarios
 {
     public class UsuariosAppServico(IUsuariosRepositorio usuariosRepositorio, IMapper mapper) : IUsuariosAppServico
     {
-        public PaginacaoConsulta<UsuarioResponse> ListarPacientes(PacienteListarRequest request)
+        public PaginacaoConsulta<UsuarioResponse> ListarPacientes(UsuarioListarRequest request)
         {
-            PaginacaoConsulta<Usuario> response = usuariosRepositorio.ListarPacientes(request);
+            PaginacaoConsulta<Usuario> response = usuariosRepositorio.ListarUsuarios(request);
             return mapper.Map<PaginacaoConsulta<UsuarioResponse>>(response);
         }
     }
