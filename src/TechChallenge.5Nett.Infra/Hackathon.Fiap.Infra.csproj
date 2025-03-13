@@ -14,6 +14,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\TechChallenge.5Nett.DataTransfer\TechChallenge.5Nett.DataTransfer.csproj" />
+    <ProjectReference Include="..\TechChallenge.5Nett.Domain\Hackathon.fiap.Domain.csproj" />
     <ProjectReference Include="..\TechChallenge.5Nett.Domain\TechChallenge.5Nett.Domain.csproj" />
   </ItemGroup>
 

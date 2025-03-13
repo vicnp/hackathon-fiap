@@ -9,17 +9,17 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		Dockerfile = Dockerfile
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TechChallenge.5Nett.API", "src\TechChallenge.5Nett.API\TechChallenge.5Nett.API.csproj", "{B9684C35-6A70-443B-B0DA-56748F75250F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hackathon.Fiap.API", "src\TechChallenge.5Nett.API\Hackathon.Fiap.API.csproj", "{B9684C35-6A70-443B-B0DA-56748F75250F}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TechChallenge.5Nett.Application", "src\TechChallenge.5Nett.Application\TechChallenge.5Nett.Application.csproj", "{FBDBF639-4A16-4F66-9999-95436B91602A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hackathon.Fiap.Application", "src\TechChallenge.5Nett.Application\Hackathon.Fiap.Application.csproj", "{FBDBF639-4A16-4F66-9999-95436B91602A}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TechChallenge.5Nett.DataTransfer", "src\TechChallenge.5Nett.DataTransfer\TechChallenge.5Nett.DataTransfer.csproj", "{4ECBD8EC-2313-481E-9B13-14D854100F63}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hackathon.Fiap.DataTransfer", "src\TechChallenge.5Nett.DataTransfer\Hackathon.Fiap.DataTransfer.csproj", "{4ECBD8EC-2313-481E-9B13-14D854100F63}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TechChallenge.5Nett.Domain", "src\TechChallenge.5Nett.Domain\TechChallenge.5Nett.Domain.csproj", "{2E26D46B-2450-44AB-8A40-A7B6B8644383}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hackathon.Fiap.Domain", "src\TechChallenge.5Nett.Domain\Hackathon.Fiap.Domain.csproj", "{2E26D46B-2450-44AB-8A40-A7B6B8644383}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TechChallenge.5Nett.Infra", "src\TechChallenge.5Nett.Infra\TechChallenge.5Nett.Infra.csproj", "{1A223A8E-9E05-4131-ACA3-C4FF04E352AC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hackathon.Fiap.Infra", "src\TechChallenge.5Nett.Infra\Hackathon.Fiap.Infra.csproj", "{1A223A8E-9E05-4131-ACA3-C4FF04E352AC}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TechChallenge.5Nett.Teste", "src\TechChallenge.5Nett.Teste\TechChallenge.5Nett.Teste.csproj", "{C99EA3B0-68EC-43A2-BA3B-2BACE25FB9FF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hackathon.Fiap.Teste", "src\TechChallenge.5Nett.Teste\Hackathon.Fiap.Teste.csproj", "{C99EA3B0-68EC-43A2-BA3B-2BACE25FB9FF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

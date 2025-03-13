@@ -40,8 +40,8 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\TechChallenge.5Nett.API\TechChallenge.5Nett.API.csproj" />
-		<ProjectReference Include="..\TechChallenge.5Nett.Domain\TechChallenge.5Nett.Domain.csproj" />
+		<ProjectReference Include="..\TechChallenge.5Nett.API\Hackathon.Fiap.API.csproj" />
+		<ProjectReference Include="..\TechChallenge.5Nett.Domain\Hackathon.Fiap.Domain.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>
