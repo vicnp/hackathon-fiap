@@ -9,9 +9,9 @@ namespace Controllers.Seguranca
     public class SegurancaController(ITokenAppSevico tokenAppSevico) : ControllerBase
     {
         [HttpPost]
-        public IActionResult Autenticar(string email, string senha)
+        public IActionResult Autenticar(string identificador, string senha)
         {
-            string token = tokenAppSevico.GetToken(email, senha);
+            string token = tokenAppSevico.GetToken(identificador, senha);
             if (token.IsNullOrEmpty())
             {
                 return Unauthorized("Usuário ou senha errados.");

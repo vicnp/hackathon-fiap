@@ -30,7 +30,8 @@ namespace Seguranca.Servicos
                 Subject = new ClaimsIdentity([
                     new Claim(ClaimTypes.Email, usuario.Email),
                     new Claim(ClaimTypes.Name, usuario.Nome),
-                    new Claim(ClaimTypes.Role, usuario.Tipo.ToString())
+                    new Claim(ClaimTypes.Role, usuario.Tipo.ToString()),
+                    new Claim(ClaimTypes.Sid, usuario.Id.ToString())
                 ]),
 
                 Expires = DateTime.UtcNow.AddHours(5),

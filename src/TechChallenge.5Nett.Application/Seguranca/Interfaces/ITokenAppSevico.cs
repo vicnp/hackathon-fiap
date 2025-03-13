@@ -2,6 +2,6 @@
 {
     public interface ITokenAppSevico
     {
-        string GetToken(string email, string senha);
+        string GetToken(string identificador, string senha);
     }
 }

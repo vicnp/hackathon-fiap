@@ -23,7 +23,7 @@ builder.Services.AddTransient<DapperContext>();
 builder.Services.Scan(scan => scan.FromAssemblyOf<MedicosAppServico>().AddClasses().AsImplementedInterfaces().WithScopedLifetime());
 builder.Services.Scan(scan => scan.FromAssemblyOf<MedicosRepositorio>().AddClasses().AsImplementedInterfaces().WithScopedLifetime());
 builder.Services.Scan(scan => scan.FromAssemblyOf<MedicosServico>().AddClasses().AsImplementedInterfaces().WithScopedLifetime());
-
+builder.Services.AddHttpContextAccessor();
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 var configuration = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build();

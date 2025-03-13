@@ -5,9 +5,9 @@ namespace Seguranca.Servicos
 {
     public class TokenAppSevico(ITokenServico tokenServico) : ITokenAppSevico
     {
-        public string GetToken(string email, string senha)
+        public string GetToken(string identificador, string senha)
         {
-            var token = tokenServico.GetToken(email, senha);
+            var token = tokenServico.GetToken(identificador, senha);
             return token;
         }
     }
