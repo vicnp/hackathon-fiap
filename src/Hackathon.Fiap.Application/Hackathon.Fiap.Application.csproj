@@ -1,0 +1,20 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <RootNamespace>Hackathon.Fiap.Application</RootNamespace>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="13.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Hackathon.Fiap.DataTransfer\Hackathon.Fiap.DataTransfer.csproj" />
+    <ProjectReference Include="..\Hackathon.Fiap.Domain\Hackathon.Fiap.Domain.csproj" />
+    <ProjectReference Include="..\Hackathon.Fiap.Infra\Hackathon.Fiap.Infra.csproj" />
+  </ItemGroup>
+
+</Project>

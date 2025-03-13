@@ -4,7 +4,7 @@
     <TargetFramework>net8.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
-    <RootNamespace>TechChallenge.5Nett.API</RootNamespace>
+    <RootNamespace>Hackathon.Fiap.API</RootNamespace>
     <UserSecretsId>3f701c9a-19e3-4451-bc40-e20b1d5ebac6</UserSecretsId>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
     <DockerfileContext>.</DockerfileContext>
@@ -24,10 +24,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\TechChallenge.5Nett.Application\Hackathon.Fiap.Application.csproj" />
-    <ProjectReference Include="..\TechChallenge.5Nett.DataTransfer\Hackathon.Fiap.DataTransfer.csproj" />
-    <ProjectReference Include="..\TechChallenge.5Nett.Domain\Hackathon.Fiap.Domain.csproj" />
-    <ProjectReference Include="..\TechChallenge.5Nett.Infra\Hackathon.Fiap.Infra.csproj" />
+    <ProjectReference Include="..\Hackathon.Fiap.Application\Hackathon.Fiap.Application.csproj" />
+    <ProjectReference Include="..\Hackathon.Fiap.DataTransfer\Hackathon.Fiap.DataTransfer.csproj" />
+    <ProjectReference Include="..\Hackathon.Fiap.Infra\Hackathon.Fiap.Infra.csproj" />
   </ItemGroup>
 
 </Project>
