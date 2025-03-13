@@ -1,6 +1,4 @@
-﻿using Contatos.Reponses;
-using Contatos.Requests;
-using FluentAssertions;
+﻿using FluentAssertions;
 using Integracao.TechChallengeApi.Factory;
 using Newtonsoft.Json;
 using System.Text;

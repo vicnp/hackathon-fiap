@@ -1,6 +1,3 @@
-using Contatos.Entidades;
-using Contatos.Repositorios;
-using Contatos.Repositorios.Filtros;
 using FluentAssertions;
 using NSubstitute;
 using Utils;

@@ -1,6 +1,4 @@
-﻿using Regioes.Entidades;
-
-namespace Contatos.Entidades
+﻿namespace Contatos.Entidades
 {
     public class RegiaoTestes
     {

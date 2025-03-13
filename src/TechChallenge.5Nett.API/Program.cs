@@ -1,5 +1,5 @@
-using Contatos;
-using Contatos.Servicos;
+using Medicos;
+using Medicos.Servicos;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
@@ -20,9 +20,9 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddTransient<DapperContext>();
 
-builder.Services.Scan(scan => scan.FromAssemblyOf<ContatosAppServico>().AddClasses().AsImplementedInterfaces().WithScopedLifetime());
-builder.Services.Scan(scan => scan.FromAssemblyOf<ContatosRepositorio>().AddClasses().AsImplementedInterfaces().WithScopedLifetime());
-builder.Services.Scan(scan => scan.FromAssemblyOf<ContatosServico>().AddClasses().AsImplementedInterfaces().WithScopedLifetime());
+builder.Services.Scan(scan => scan.FromAssemblyOf<MedicosAppServico>().AddClasses().AsImplementedInterfaces().WithScopedLifetime());
+builder.Services.Scan(scan => scan.FromAssemblyOf<MedicosRepositorio>().AddClasses().AsImplementedInterfaces().WithScopedLifetime());
+builder.Services.Scan(scan => scan.FromAssemblyOf<MedicosServico>().AddClasses().AsImplementedInterfaces().WithScopedLifetime());
 
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 

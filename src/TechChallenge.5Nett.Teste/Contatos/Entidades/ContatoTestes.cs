@@ -1,5 +1,3 @@
-using Regioes.Entidades;
-
 namespace Contatos.Entidades;
 
 public class ContatoTestes
