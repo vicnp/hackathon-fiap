@@ -9,7 +9,7 @@ Para viabilizar o desenvolvimento de um sistema que esteja em conformidade com a
 
 
 ## Requisitos Funcionais
-1. Autenticação do Usuário (Médico)
+1. Autenticação do Usuário (Médico) ✔
  - O sistema deve permitir que o médico faça login usando o número de CRM e uma senha.
 
 2. Cadastro/Edição de Horários Disponíveis (Médico)
@@ -18,7 +18,7 @@ Para viabilizar o desenvolvimento de um sistema que esteja em conformidade com a
 3. Aceite ou Recusa de Consultas Médicas (Médico)
  - O médico deve poder aceitar ou recusar consultas médicas agendadas.
 
-4. Autenticação do Usuário (Paciente)
+4. Autenticação do Usuário (Paciente) ✔
  - O sistema deve permitir que o paciente faça login usando um e-mail ou CPF e uma senha.
 
 5. Busca por Médicos (Paciente)
