@@ -1,8 +1,8 @@
-﻿using Pacientes.Responses;
-using Usuarios.Request;
-using Utils;
+﻿using Hackathon.Fiap.DataTransfer.Pacientes.Responses;
+using Hackathon.Fiap.DataTransfer.Usuarios.Request;
+using Hackathon.Fiap.DataTransfer.Utils;
 
-namespace Pacientes.Interfaces
+namespace Hackathon.Fiap.Application.Pacientes.Interfaces
 {
     public interface IPacientesAppServico
     {

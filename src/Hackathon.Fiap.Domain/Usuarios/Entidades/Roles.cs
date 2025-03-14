@@ -1,4 +1,4 @@
-﻿namespace Usuarios.Entidades
+﻿namespace Hackathon.Fiap.Domain.Usuarios.Entidades
 {
     public static class Roles
     {

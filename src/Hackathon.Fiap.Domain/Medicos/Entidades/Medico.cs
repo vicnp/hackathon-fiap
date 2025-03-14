@@ -1,6 +1,6 @@
-﻿using Usuarios.Entidades;
+﻿using Hackathon.Fiap.Domain.Usuarios.Entidades;
 
-namespace Medicos.Entidades
+namespace Hackathon.Fiap.Domain.Medicos.Entidades
 {
     public class Medico : Usuario
     {

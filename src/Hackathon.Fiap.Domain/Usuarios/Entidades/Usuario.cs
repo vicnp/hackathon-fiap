@@ -1,6 +1,6 @@
-﻿using Usuarios.Enumeradores;
+﻿using Hackathon.Fiap.Domain.Usuarios.Enumeradores;
 
-namespace Usuarios.Entidades
+namespace Hackathon.Fiap.Domain.Usuarios.Entidades
 {
     public class Usuario
     {
@@ -14,7 +14,7 @@ namespace Usuarios.Entidades
 
         public Usuario()
         {
-            
+
         }
 
         public Usuario(int id, string nome, string email, string cpf, string senhaHash, TipoUsuario tipo)

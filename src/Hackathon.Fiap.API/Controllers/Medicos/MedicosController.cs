@@ -1,12 +1,12 @@
-﻿using Medicos.Interfaces;
-using Medicos.Requests;
-using Medicos.Responses;
+﻿using Hackathon.Fiap.Application.Medicos.Interfaces;
+using Hackathon.Fiap.DataTransfer.Medicos.Requests;
+using Hackathon.Fiap.DataTransfer.Medicos.Responses;
+using Hackathon.Fiap.DataTransfer.Utils;
+using Hackathon.Fiap.Domain.Usuarios.Entidades;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Usuarios.Entidades;
-using Utils;
 
-namespace Controllers.Medicos
+namespace Hackathon.Fiap.API.Controllers.Medicos
 {
     [ApiController]
     [Route("api/medicos")]

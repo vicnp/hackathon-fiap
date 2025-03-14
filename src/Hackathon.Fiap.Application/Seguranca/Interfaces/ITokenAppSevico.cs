@@ -1,4 +1,4 @@
-﻿namespace Seguranca.Interfaces
+﻿namespace Hackathon.Fiap.Application.Seguranca.Interfaces
 {
     public interface ITokenAppSevico
     {

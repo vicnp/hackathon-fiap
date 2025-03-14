@@ -1,16 +1,16 @@
 ﻿using AutoMapper;
-using Pacientes.Interfaces;
-using Utils;
-using Pacientes.Repositorios;
-using Pacientes.Entidades;
-using Pacientes.Responses;
-using Usuarios.Request;
-using Seguranca.Servicos.Interfaces;
-using Usuarios.Enumeradores;
+using Hackathon.Fiap.DataTransfer.Utils;
+using Hackathon.Fiap.DataTransfer.Pacientes.Responses;
+using Hackathon.Fiap.DataTransfer.Usuarios.Request;
+using Hackathon.Fiap.Application.Pacientes.Interfaces;
+using Hackathon.Fiap.Domain.Pacientes.Repositorios;
+using Hackathon.Fiap.Domain.Seguranca.Servicos.Interfaces;
+using Hackathon.Fiap.Domain.Pacientes.Entidades;
+using Hackathon.Fiap.Domain.Usuarios.Enumeradores;
 
-namespace Pacientes.Servicos
+namespace Hackathon.Fiap.Application.Pacientes.Servicos
 {
-    public class PacientesAppServico(IMapper mapper,IPacientesRepositorio pacientesRepositorio, ISessaoServico sessaoServico) : IPacientesAppServico
+    public class PacientesAppServico(IMapper mapper, IPacientesRepositorio pacientesRepositorio, ISessaoServico sessaoServico) : IPacientesAppServico
     {
         public PaginacaoConsulta<PacienteResponse> ListarPacientes(UsuarioListarRequest request)
         {

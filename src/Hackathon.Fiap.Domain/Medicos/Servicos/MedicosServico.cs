@@ -1,6 +1,6 @@
-﻿using Medicos.Servicos.Interfaces;
+﻿using Hackathon.Fiap.Domain.Medicos.Servicos.Interfaces;
 
-namespace Medicos.Servicos
+namespace Hackathon.Fiap.Domain.Medicos.Servicos
 {
     public class MedicosServico : IMedicosServico
     {

@@ -1,4 +1,4 @@
-namespace Contatos.Entidades;
+namespace Hackathon.Fiap.Teste.Contatos.Entidades;
 
 public class ContatoTestes
 {

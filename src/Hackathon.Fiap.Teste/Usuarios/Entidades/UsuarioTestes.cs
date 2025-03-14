@@ -1,4 +1,4 @@
-namespace Usuarios.Entidades;
+namespace Hackathon.Fiap.Teste.Usuarios.Entidades;
 
 public class UsuarioTestes
 {

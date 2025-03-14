@@ -1,4 +1,4 @@
-﻿namespace Pacientes.Responses
+﻿namespace Hackathon.Fiap.DataTransfer.Pacientes.Responses
 {
     public class PacienteResponse
     {

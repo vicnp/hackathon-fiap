@@ -1,12 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Usuarios.Interfaces;
+﻿using Hackathon.Fiap.Application.Usuarios.Interfaces;
+using Microsoft.AspNetCore.Mvc;
 
-namespace Controllers.Usuarios
+namespace Hackathon.Fiap.API.Controllers.Usuarios
 {
     [Route("api/usuarios")]
     [ApiController]
     public class UsuariosController(IUsuariosAppServico usuariosAppServico) : ControllerBase
     {
-       
+
     }
 }

@@ -1,12 +1,13 @@
-using Medicos;
-using Medicos.Servicos;
+using Hackathon.Fiap.Application.Medicos.Servicos;
+using Hackathon.Fiap.Domain.Medicos.Servicos;
+using Hackathon.Fiap.Infra.Medicos;
+using Hackathon.Fiap.Infra.Utils.DBContext;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Prometheus;
 using System.Text;
 using System.Text.Json.Serialization;
-using Utils.DBContext;
 
 var builder = WebApplication.CreateBuilder(args);
 

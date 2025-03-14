@@ -2,7 +2,7 @@
 using MySql.Data.MySqlClient;
 using System.Data;
 
-namespace Utils.DBContext
+namespace Hackathon.Fiap.Infra.Utils.DBContext
 {
     public class DapperContext
     {

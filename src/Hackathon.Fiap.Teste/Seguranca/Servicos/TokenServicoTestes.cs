@@ -1,11 +1,12 @@
 ﻿using FluentAssertions;
+using Hackathon.Fiap.Domain.Seguranca.Servicos;
+using Hackathon.Fiap.Domain.Usuarios.Repositorios;
+using Hackathon.Fiap.Domain.Utils.Repositorios;
 using Microsoft.Extensions.Configuration;
 using NSubstitute;
 using Usuarios.Entidades;
-using Usuarios.Repositorios;
-using Utils.Repositorios;
 
-namespace Seguranca.Servicos
+namespace Hackathon.Fiap.Teste.Seguranca.Servicos
 {
     public class TokenServicoTestes
     {

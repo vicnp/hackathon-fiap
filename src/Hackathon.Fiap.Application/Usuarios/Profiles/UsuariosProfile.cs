@@ -1,9 +1,9 @@
 ﻿using AutoMapper;
-using Usuarios.Entidades;
-using Usuarios.Response;
-using Utils;
+using Hackathon.Fiap.DataTransfer.Usuarios.Response;
+using Hackathon.Fiap.DataTransfer.Utils;
+using Hackathon.Fiap.Domain.Usuarios.Entidades;
 
-namespace Usuarios.Profiles
+namespace Hackathon.Fiap.Application.Usuarios.Profiles
 {
     public class UsuariosProfile : Profile
     {

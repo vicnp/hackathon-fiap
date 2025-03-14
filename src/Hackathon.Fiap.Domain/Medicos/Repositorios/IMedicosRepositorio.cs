@@ -1,8 +1,8 @@
-﻿using Medicos.Entidades;
-using Medicos.Repositorios.Filtros;
-using Utils;
+﻿using Hackathon.Fiap.DataTransfer.Utils;
+using Hackathon.Fiap.Domain.Medicos.Entidades;
+using Hackathon.Fiap.Domain.Medicos.Repositorios.Filtros;
 
-namespace Medicos.Repositorios
+namespace Hackathon.Fiap.Domain.Medicos.Repositorios
 {
     public interface IMedicosRepositorio
     {

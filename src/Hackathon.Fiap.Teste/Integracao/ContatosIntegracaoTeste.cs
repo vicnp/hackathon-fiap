@@ -1,9 +1,8 @@
 ﻿using FluentAssertions;
-using Integracao.TechChallengeApi.Factory;
 using Newtonsoft.Json;
 using System.Text;
 
-namespace Integracao.ContatosIntegracaoTeste
+namespace Hackathon.Fiap.Teste.Integracao
 {
 
     public class ContatosIntegracaoTeste : IClassFixture<TechChallengeApiFactory>

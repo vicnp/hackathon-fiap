@@ -1,7 +1,7 @@
-﻿using Utils;
-using Utils.Enumeradores;
+﻿using Hackathon.Fiap.DataTransfer.Utils;
+using Hackathon.Fiap.DataTransfer.Utils.Enumeradores;
 
-namespace Usuarios.Request
+namespace Hackathon.Fiap.DataTransfer.Usuarios.Request
 {
     public class UsuarioListarRequest : PaginacaoFiltro
     {

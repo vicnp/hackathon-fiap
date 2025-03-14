@@ -1,9 +1,9 @@
 using FluentAssertions;
+using Hackathon.Fiap.DataTransfer.Utils.Enumeradores;
 using NSubstitute;
 using Utils;
-using Utils.Enumeradores;
 
-namespace Contatos.Servicos;
+namespace Hackathon.Fiap.Teste.Contatos.Servicos;
 
 public class ContatoServicoTestes
 {

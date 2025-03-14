@@ -1,4 +1,4 @@
-﻿namespace Medicos.Responses
+﻿namespace Hackathon.Fiap.DataTransfer.Medicos.Responses
 {
     public class EspecialidadeResponse
     {

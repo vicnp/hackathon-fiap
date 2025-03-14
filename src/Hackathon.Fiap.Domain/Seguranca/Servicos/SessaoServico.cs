@@ -1,9 +1,9 @@
 ﻿using System.Security.Claims;
-using Seguranca.Servicos.Interfaces;
-using Usuarios.Enumeradores;
 using Microsoft.AspNetCore.Http;
+using Hackathon.Fiap.Domain.Seguranca.Servicos.Interfaces;
+using Hackathon.Fiap.Domain.Usuarios.Enumeradores;
 
-namespace Seguranca.Servicos
+namespace Hackathon.Fiap.Domain.Seguranca.Servicos
 {
     public class SessaoServico(IHttpContextAccessor httpContextAccessor) : ISessaoServico
     {
@@ -26,7 +26,7 @@ namespace Seguranca.Servicos
         {
             string? value = httpContextAccessor.HttpContext?.User.FindFirst(ClaimTypes.Sid)?.Value;
 
-            if(value == null)
+            if (value == null)
                 return null;
 
             return int.Parse(value);

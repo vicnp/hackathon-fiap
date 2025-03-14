@@ -1,4 +1,4 @@
-﻿namespace Usuarios.Response
+﻿namespace Hackathon.Fiap.DataTransfer.Usuarios.Response
 {
     public class UsuarioResponse
     {

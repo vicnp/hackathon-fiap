@@ -1,8 +1,8 @@
-﻿using Usuarios.Entidades;
-using Usuarios.Request;
-using Utils;
+﻿using Hackathon.Fiap.DataTransfer.Usuarios.Request;
+using Hackathon.Fiap.DataTransfer.Utils;
+using Hackathon.Fiap.Domain.Usuarios.Entidades;
 
-namespace Usuarios.Repositorios
+namespace Hackathon.Fiap.Domain.Usuarios.Repositorios
 {
     public interface IUsuariosRepositorio
     {

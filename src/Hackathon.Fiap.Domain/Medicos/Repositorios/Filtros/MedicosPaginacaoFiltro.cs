@@ -1,7 +1,7 @@
-﻿using Utils;
-using Utils.Enumeradores;
+﻿using Hackathon.Fiap.DataTransfer.Utils;
+using Hackathon.Fiap.DataTransfer.Utils.Enumeradores;
 
-namespace Medicos.Repositorios.Filtros
+namespace Hackathon.Fiap.Domain.Medicos.Repositorios.Filtros
 {
     public class MedicosPaginacaoFiltro : PaginacaoFiltro
     {

@@ -1,8 +1,8 @@
-﻿using Pacientes.Entidades;
-using Usuarios.Request;
-using Utils;
+﻿using Hackathon.Fiap.DataTransfer.Usuarios.Request;
+using Hackathon.Fiap.DataTransfer.Utils;
+using Hackathon.Fiap.Domain.Pacientes.Entidades;
 
-namespace Pacientes.Repositorios
+namespace Hackathon.Fiap.Domain.Pacientes.Repositorios
 {
     public interface IPacientesRepositorio
     {

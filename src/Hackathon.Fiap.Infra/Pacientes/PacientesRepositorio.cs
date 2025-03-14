@@ -1,11 +1,13 @@
 ﻿using System.Text;
-using Pacientes.Entidades;
-using Pacientes.Repositorios;
-using Usuarios.Request;
-using Utils;
-using Utils.DBContext;
+using Hackathon.Fiap.DataTransfer.Usuarios.Request;
+using Hackathon.Fiap.DataTransfer.Utils;
+using Hackathon.Fiap.Domain.Pacientes.Entidades;
+using Hackathon.Fiap.Domain.Pacientes.Repositorios;
+using Hackathon.Fiap.Domain.Utils;
+using Hackathon.Fiap.Infra.Utils;
+using Hackathon.Fiap.Infra.Utils.DBContext;
 
-namespace Pacientes
+namespace Hackathon.Fiap.Infra.Pacientes
 {
     public class PacientesRepositorio(DapperContext dapperContext) : RepositorioDapper<Paciente>(dapperContext), IPacientesRepositorio
     {

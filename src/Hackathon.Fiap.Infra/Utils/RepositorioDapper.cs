@@ -1,8 +1,9 @@
 ﻿using Dapper;
+using Hackathon.Fiap.DataTransfer.Utils;
+using Hackathon.Fiap.Infra.Utils.DBContext;
 using System.Data;
-using Utils.DBContext;
 
-namespace Utils
+namespace Hackathon.Fiap.Infra.Utils
 {
     public class RepositorioDapper<T>(DapperContext dapperContext) where T : class
     {

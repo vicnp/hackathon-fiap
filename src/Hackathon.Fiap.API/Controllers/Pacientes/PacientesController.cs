@@ -1,12 +1,12 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Usuarios.Entidades;
-using Utils;
-using Pacientes.Interfaces;
-using Pacientes.Responses;
-using Usuarios.Request;
+using Hackathon.Fiap.DataTransfer.Utils;
+using Hackathon.Fiap.DataTransfer.Pacientes.Responses;
+using Hackathon.Fiap.DataTransfer.Usuarios.Request;
+using Hackathon.Fiap.Application.Pacientes.Interfaces;
+using Hackathon.Fiap.Domain.Usuarios.Entidades;
 
-namespace Controllers.Pacientes
+namespace Hackathon.Fiap.API.Controllers.Pacientes
 {
     [ApiController]
     [Route("api/pacientes")]

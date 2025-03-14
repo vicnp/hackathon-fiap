@@ -1,13 +1,14 @@
 ﻿using Dapper;
+using Hackathon.Fiap.DataTransfer.Usuarios.Request;
+using Hackathon.Fiap.DataTransfer.Utils;
+using Hackathon.Fiap.Domain.Usuarios.Entidades;
+using Hackathon.Fiap.Domain.Usuarios.Repositorios;
+using Hackathon.Fiap.Infra.Utils;
+using Hackathon.Fiap.Infra.Utils.DBContext;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
-using Usuarios.Entidades;
-using Usuarios.Repositorios;
-using Usuarios.Request;
-using Utils;
-using Utils.DBContext;
 
-namespace Usuarios
+namespace Hackathon.Fiap.Infra.Usuarios
 {
     public class UsuariosRepositorio(DapperContext dapperContext) : RepositorioDapper<Usuario>(dapperContext), IUsuariosRepositorio
     {
@@ -29,11 +30,11 @@ namespace Usuarios
             DynamicParameters parametros = new();
             parametros.Add("identificador", identificador);
             parametros.Add("hash", hash);
-            
+
             return session.QueryFirstOrDefault<Usuario>(sql.ToString(), parametros);
         }
 
-        
+
 
         public PaginacaoConsulta<Usuario> ListarUsuarios(UsuarioListarRequest request)
         {
@@ -46,17 +47,17 @@ namespace Usuarios
 		                    u.permissao as Permissao
                     FROM techchallenge.usuarios u
 	                    WHERE 1 = 1");
-            
+
             if (!request.Email.IsNullOrEmpty())
             {
-                sql.AppendLine($@" AND u.email = '{request.Email}' "); 
+                sql.AppendLine($@" AND u.email = '{request.Email}' ");
             }
 
             if (!request.NomeUsuario.IsNullOrEmpty())
             {
                 sql.AppendLine($@" AND u.nome = '{request.NomeUsuario}' ");
             }
- 
+
             return ListarPaginado(sql.ToString(), request.Pg, request.Qt, request.CpOrd, request.TpOrd.ToString());
         }
     }

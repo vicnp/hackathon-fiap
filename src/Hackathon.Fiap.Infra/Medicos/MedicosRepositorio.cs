@@ -1,12 +1,14 @@
 ﻿using Dapper;
 using System.Text;
-using Medicos.Entidades;
-using Medicos.Repositorios;
-using Utils;
-using Utils.DBContext;
-using Medicos.Repositorios.Filtros;
+using Hackathon.Fiap.DataTransfer.Utils;
+using Hackathon.Fiap.Domain.Utils;
+using Hackathon.Fiap.Domain.Medicos.Entidades;
+using Hackathon.Fiap.Domain.Medicos.Repositorios;
+using Hackathon.Fiap.Domain.Medicos.Repositorios.Filtros;
+using Hackathon.Fiap.Infra.Utils;
+using Hackathon.Fiap.Infra.Utils.DBContext;
 
-namespace Medicos
+namespace Hackathon.Fiap.Infra.Medicos
 {
     public class MedicosRepositorio(DapperContext dapperContext) : RepositorioDapper<Medico>(dapperContext), IMedicosRepositorio
     {

@@ -1,11 +1,11 @@
 ﻿using AutoMapper;
-using Medicos.Entidades;
-using Medicos.Repositorios.Filtros;
-using Medicos.Requests;
-using Medicos.Responses;
-using Utils;
+using Hackathon.Fiap.DataTransfer.Medicos.Requests;
+using Hackathon.Fiap.DataTransfer.Medicos.Responses;
+using Hackathon.Fiap.DataTransfer.Utils;
+using Hackathon.Fiap.Domain.Medicos.Entidades;
+using Hackathon.Fiap.Domain.Medicos.Repositorios.Filtros;
 
-namespace Medicos.Profiles
+namespace Hackathon.Fiap.Application.Medicos.Profiles
 {
     public class MedicosProfile : Profile
     {

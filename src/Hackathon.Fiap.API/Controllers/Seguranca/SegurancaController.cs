@@ -1,8 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Hackathon.Fiap.Application.Seguranca.Interfaces;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
-using Seguranca.Interfaces;
 
-namespace Controllers.Seguranca
+namespace Hackathon.Fiap.API.Controllers.Seguranca
 {
     [ApiController]
     [Route("/auth")]

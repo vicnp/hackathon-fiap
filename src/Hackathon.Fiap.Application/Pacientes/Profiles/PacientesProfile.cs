@@ -1,9 +1,9 @@
 ﻿using AutoMapper;
-using Pacientes.Entidades;
-using Pacientes.Responses;
-using Utils;
+using Hackathon.Fiap.DataTransfer.Pacientes.Responses;
+using Hackathon.Fiap.DataTransfer.Utils;
+using Hackathon.Fiap.Domain.Pacientes.Entidades;
 
-namespace Pacientes.Profiles
+namespace Hackathon.Fiap.Application.Pacientes.Profiles
 {
     public class PacientesProfile : Profile
     {

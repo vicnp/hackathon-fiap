@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 
-namespace Utils.Repositorios
+namespace Hackathon.Fiap.Domain.Utils.Repositorios
 {
     public interface IUtilRepositorio
     {

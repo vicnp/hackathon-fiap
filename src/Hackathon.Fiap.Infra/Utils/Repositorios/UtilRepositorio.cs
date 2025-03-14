@@ -1,6 +1,7 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using Hackathon.Fiap.Domain.Utils.Repositorios;
+using Microsoft.Extensions.Configuration;
 
-namespace Utils.Repositorios
+namespace Hackathon.Fiap.Infra.Utils.Repositorios
 {
     public class UtilRepositorio : IUtilRepositorio
     {

@@ -1,8 +1,8 @@
-﻿using Utils;
-using Usuarios.Response;
-using Usuarios.Request;
+﻿using Hackathon.Fiap.DataTransfer.Utils;
+using Hackathon.Fiap.DataTransfer.Usuarios.Response;
+using Hackathon.Fiap.DataTransfer.Usuarios.Request;
 
-namespace Usuarios.Interfaces
+namespace Hackathon.Fiap.Application.Usuarios.Interfaces
 {
     public interface IUsuariosAppServico
     {

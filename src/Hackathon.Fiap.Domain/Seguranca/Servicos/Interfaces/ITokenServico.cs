@@ -1,4 +1,4 @@
-﻿namespace Seguranca.Servicos.Interfaces
+﻿namespace Hackathon.Fiap.Domain.Seguranca.Servicos.Interfaces
 {
     public interface ITokenServico
     {

@@ -1,13 +1,13 @@
 ﻿using Dapper;
 using DotNet.Testcontainers.Builders;
 using DotNet.Testcontainers.Containers;
+using Hackathon.Fiap.Infra.Utils.DBContext;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.Extensions.DependencyInjection;
 using MySql.Data.MySqlClient;
-using Utils.DBContext;
 
-namespace Integracao.TechChallengeApi.Factory
+namespace Hackathon.Fiap.Teste.Integracao
 {
     public class TechChallengeApiFactory : WebApplicationFactory<Program>, IAsyncLifetime
     {
@@ -90,7 +90,7 @@ namespace Integracao.TechChallengeApi.Factory
                     services.Remove(descriptor);
                 }
 
-                services.AddSingleton<DapperContext>(new DapperContext(connectionString));
+                services.AddSingleton(new DapperContext(connectionString));
 
             });
         }

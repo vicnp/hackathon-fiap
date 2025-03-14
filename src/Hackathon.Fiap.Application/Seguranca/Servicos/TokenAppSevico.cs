@@ -1,7 +1,7 @@
-﻿using Seguranca.Interfaces;
-using Seguranca.Servicos.Interfaces;
+﻿using Hackathon.Fiap.Application.Seguranca.Interfaces;
+using Hackathon.Fiap.Domain.Seguranca.Servicos.Interfaces;
 
-namespace Seguranca.Servicos
+namespace Hackathon.Fiap.Application.Seguranca.Servicos
 {
     public class TokenAppSevico(ITokenServico tokenServico) : ITokenAppSevico
     {

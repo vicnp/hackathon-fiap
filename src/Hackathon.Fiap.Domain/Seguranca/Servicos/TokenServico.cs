@@ -1,15 +1,15 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using Hackathon.Fiap.Domain.Seguranca.Servicos.Interfaces;
+using Hackathon.Fiap.Domain.Usuarios.Entidades;
+using Hackathon.Fiap.Domain.Usuarios.Repositorios;
+using Hackathon.Fiap.Domain.Utils.Repositorios;
+using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
-using Seguranca.Servicos.Interfaces;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
-using Usuarios.Entidades;
-using Usuarios.Repositorios;
-using Utils.Repositorios;
 
-namespace Seguranca.Servicos
+namespace Hackathon.Fiap.Domain.Seguranca.Servicos
 {
     public class TokenServico(IConfiguration configuration, IUsuariosRepositorio usuariosRepositorio, IUtilRepositorio utilRepositorio) : ITokenServico
     {

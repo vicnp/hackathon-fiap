@@ -1,6 +1,6 @@
-﻿using Usuarios.Request;
+﻿using Hackathon.Fiap.DataTransfer.Usuarios.Request;
 
-namespace Pacientes.Requests
+namespace Hackathon.Fiap.DataTransfer.Pacientes.Requests
 {
     public class PacienteListarRequest : UsuarioListarRequest
     {

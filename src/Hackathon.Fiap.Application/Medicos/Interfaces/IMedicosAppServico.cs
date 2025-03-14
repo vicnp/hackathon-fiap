@@ -1,8 +1,8 @@
-﻿using Medicos.Requests;
-using Medicos.Responses;
-using Utils;
+﻿using Hackathon.Fiap.DataTransfer.Medicos.Requests;
+using Hackathon.Fiap.DataTransfer.Medicos.Responses;
+using Hackathon.Fiap.DataTransfer.Utils;
 
-namespace Medicos.Interfaces
+namespace Hackathon.Fiap.Application.Medicos.Interfaces
 {
     public interface IMedicosAppServico
     {

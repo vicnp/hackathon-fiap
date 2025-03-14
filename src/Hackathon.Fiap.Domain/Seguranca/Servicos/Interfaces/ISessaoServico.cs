@@ -1,6 +1,6 @@
-﻿using Usuarios.Enumeradores;
+﻿using Hackathon.Fiap.Domain.Usuarios.Enumeradores;
 
-namespace Seguranca.Servicos.Interfaces
+namespace Hackathon.Fiap.Domain.Seguranca.Servicos.Interfaces
 {
     public interface ISessaoServico
     {

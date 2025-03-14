@@ -1,4 +1,4 @@
-﻿namespace Utils.Enumeradores
+﻿namespace Hackathon.Fiap.DataTransfer.Utils.Enumeradores
 {
     public enum TipoOrdernacao
     {
