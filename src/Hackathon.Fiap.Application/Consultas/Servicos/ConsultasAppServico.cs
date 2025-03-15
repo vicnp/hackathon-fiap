@@ -14,7 +14,7 @@ using Hackathon.Fiap.Infra.Medicos;
 
 namespace Hackathon.Fiap.Application.Consultas.Servicos
 {
-    public class ConsultasAppServico(IMapper mapper, IConsultaServico consultasServico, IMedicosRepositorio medicosRepositorio) : IConsultasAppServico
+    public class ConsultasAppServico(IMapper mapper, IConsultaServico consultasServico) : IConsultasAppServico
     {
         public async Task<PaginacaoConsulta<ConsultaResponse>> ListarConsultasAsync(ConsultaListarRequest request, CancellationToken ct)
         {

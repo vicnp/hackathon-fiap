@@ -2,6 +2,8 @@
 using Hackathon.Fiap.DataTransfer.Consultas.Requests;
 using Hackathon.Fiap.DataTransfer.Consultas.Responses;
 using Hackathon.Fiap.DataTransfer.Utils;
+using Hackathon.Fiap.Domain.Usuarios.Entidades;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Hackathon.Fiap.API.Controllers.Consultas
@@ -18,6 +20,7 @@ namespace Hackathon.Fiap.API.Controllers.Consultas
         /// <returns></returns>
         [HttpGet]
         [Route("paginados")]
+        [Authorize(Roles = $"{Roles.Paciente},{Roles.Medico}")]
         public async Task<ActionResult<PaginacaoConsulta<ConsultaResponse>>> ListarConsultasPaginadasAsync([FromQuery] ConsultaListarRequest request, CancellationToken ct)
         {
             PaginacaoConsulta<ConsultaResponse> response = await consultasAppServico.ListarConsultasAsync(request, ct);

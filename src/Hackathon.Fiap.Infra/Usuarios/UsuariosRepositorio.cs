@@ -12,7 +12,7 @@ namespace Hackathon.Fiap.Infra.Usuarios
 {
     public class UsuariosRepositorio(DapperContext dapperContext) : RepositorioDapper<Usuario>(dapperContext), IUsuariosRepositorio
     {
-        public Usuario RecuperarUsuario(string identificador, string hash)
+        public Usuario? RecuperarUsuario(string identificador, string hash)
         {
             StringBuilder sql = new($@"
                                      SELECT u.id as IdUsuario,
@@ -27,11 +27,11 @@ namespace Hackathon.Fiap.Infra.Usuarios
                         	         WHERE u.hash = @hash
                         	         AND (u.email = @identificador OR u.cpf = @identificador OR m.crm = @identificador)");
 
-            DynamicParameters parametros = new();
-            parametros.Add("identificador", identificador);
-            parametros.Add("hash", hash);
+            DynamicParameters dp = new();
+            dp.Add("identificador", identificador);
+            dp.Add("hash", hash);
 
-            return session.QueryFirstOrDefault<Usuario>(sql.ToString(), parametros);
+            return session.QueryFirstOrDefault<Usuario>(sql.ToString(), dp);
         }
 
 
@@ -39,13 +39,13 @@ namespace Hackathon.Fiap.Infra.Usuarios
         public PaginacaoConsulta<Usuario> ListarUsuarios(UsuarioListarRequest request)
         {
             StringBuilder sql = new($@"
-                           SELECT u.id as Id,
-		                    u.nome as Nome,
-		                    u.email as Email,
-		                    u.hash as Hash,
-		                    u.data_criacao as DataCriacao,
-		                    u.permissao as Permissao
-                    FROM techchallenge.usuarios u
+                           SELECT u.id as IdUsuario,
+		                          u.nome as Nome,
+		                          u.email as Email,
+		                          u.hash as Hash,
+		                          u.criado_em as CriadoEm,
+		                          u.tipo as Tipo
+                    FROM techchallenge.Usuarios u
 	                    WHERE 1 = 1");
 
             if (!request.Email.IsNullOrEmpty())

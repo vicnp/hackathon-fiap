@@ -28,8 +28,8 @@ builder.Services.AddHttpContextAccessor();
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 var configuration = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build();
-
-var chaveCriptografia = Encoding.ASCII.GetBytes(configuration.GetValue<string>("SecretJWT"));
+string? secretsValue = configuration.GetValue<string>("SecretJWT") ?? throw new NullReferenceException("Null SecretJWT");
+var chaveCriptografia = Encoding.ASCII.GetBytes(secretsValue);
 
 
 builder.Services.AddAuthentication(x =>

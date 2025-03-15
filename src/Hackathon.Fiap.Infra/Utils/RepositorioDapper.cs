@@ -20,20 +20,20 @@ namespace Hackathon.Fiap.Infra.Utils
             return Resultado;
         }
 
-        public PaginacaoConsulta<T> ListarPaginado(string query, int pg, int qt, string cpOrd, string tpOrd)
+        public PaginacaoConsulta<T> ListarPaginado(string query, int pg, int qt, string cpOrd, string tpOrd, DynamicParameters? param = null)
         {
             PaginacaoConsulta<T> Resultado = new()
             {
-                Total = RecuperarTotalLinhas(query),
-                Registros = session.Query<T>(RepositorioDapper<T>.GerarQueryPaginacao(query, pg, qt, cpOrd, tpOrd)).ToList()
+                Total = RecuperarTotalLinhas(query, param),
+                Registros = session.Query<T>(RepositorioDapper<T>.GerarQueryPaginacao(query, pg, qt, cpOrd, tpOrd), param).ToList()
             };
 
             return Resultado;
         }
 
-        public int RecuperarTotalLinhas(string query)
+        public int RecuperarTotalLinhas(string query, DynamicParameters? param = null)
         {
-            return session.QueryFirst<int>("SELECT COUNT(1) FROM ( " + query + " ) T");
+            return session.QueryFirst<int>("SELECT COUNT(1) FROM ( " + query + " ) T", param);
         }
 
         public static string GerarQueryPaginacao(string query, int pg, int qt, string cpOrd, string tpOrd)
@@ -47,7 +47,7 @@ namespace Hackathon.Fiap.Infra.Utils
             return $"{query} {text} LIMIT {qt} OFFSET {num} ";
         }
 
-        public IEnumerable<T> Listar(string query, DynamicParameters dynamicParameters = null)
+        public IEnumerable<T> Listar(string query, DynamicParameters? dynamicParameters = null)
         {
             if (dynamicParameters == null)
                 return session.Query<T>(query);

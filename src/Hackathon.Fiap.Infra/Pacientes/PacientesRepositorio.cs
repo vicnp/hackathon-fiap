@@ -1,4 +1,5 @@
 ﻿using System.Text;
+using Dapper;
 using Hackathon.Fiap.DataTransfer.Utils;
 using Hackathon.Fiap.Domain.Pacientes.Entidades;
 using Hackathon.Fiap.Domain.Pacientes.Repositorios;
@@ -11,8 +12,9 @@ namespace Hackathon.Fiap.Infra.Pacientes
 {
     public class PacientesRepositorio(DapperContext dapperContext) : RepositorioDapper<Paciente>(dapperContext), IPacientesRepositorio
     {
-        public PaginacaoConsulta<Paciente> ListarPacientes(UsuarioListarFiltro request)
+        public PaginacaoConsulta<Paciente> ListarPacientes(UsuarioListarFiltro filtro)
         {
+            DynamicParameters dp = new ();
             StringBuilder sql = new($@"
                                     SELECT id as IdUsuario,
                                            nome as Nome,
@@ -24,22 +26,25 @@ namespace Hackathon.Fiap.Infra.Pacientes
                                     FROM techchallenge.Usuarios u
 	                                WHERE u.tipo = 'Paciente'");
 
-            if (!request.Email.InvalidOrEmpty())
+            if (!filtro.Email.InvalidOrEmpty())
             {
-                sql.AppendLine($@" AND u.email = '{request.Email}' ");
+                sql.AppendLine($@" AND u.email = @EMAIL ");
+                dp.Add("@EMAIL", filtro.Email);
             }
 
-            if (!request.NomeUsuario.InvalidOrEmpty())
+            if (!filtro.NomeUsuario.InvalidOrEmpty())
             {
-                sql.AppendLine($@" AND u.nome = '{request.NomeUsuario}' ");
+                sql.AppendLine($@" AND u.nome = @NOME ");
+                dp.Add("@NOME", filtro.NomeUsuario);
             }
 
-            if (!request.Cpf.InvalidOrEmpty())
+            if (!filtro.Cpf.InvalidOrEmpty())
             {
-                sql.AppendLine($@" AND u.cpf = '{request.Cpf}' ");
+                sql.AppendLine($@" AND u.cpf = @CPF ");
+                dp.Add("@CPF", filtro.Cpf);
             }
 
-            return ListarPaginado(sql.ToString(), request.Pg, request.Qt, request.CpOrd, request.TpOrd.ToString());
+            return ListarPaginado(sql.ToString(), filtro.Pg, filtro.Qt, filtro.CpOrd, filtro.TpOrd.ToString(), dp);
         }
 
         public async Task<Paciente?> RecuperarPaciente(int idPaciente)

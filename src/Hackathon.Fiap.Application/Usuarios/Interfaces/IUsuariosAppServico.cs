@@ -6,6 +6,6 @@ namespace Hackathon.Fiap.Application.Usuarios.Interfaces
 {
     public interface IUsuariosAppServico
     {
-        PaginacaoConsulta<UsuarioResponse> ListarPacientes(UsuarioListarRequest request);
+        PaginacaoConsulta<UsuarioResponse> ListarUsuarios(UsuarioListarRequest request);
     }
 }

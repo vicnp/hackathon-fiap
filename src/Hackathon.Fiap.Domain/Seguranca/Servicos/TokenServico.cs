@@ -17,13 +17,15 @@ namespace Hackathon.Fiap.Domain.Seguranca.Servicos
         {
             var hash = EncryptPassword(senha);
 
-            Usuario usuario = usuariosRepositorio.RecuperarUsuario(identificador, hash);
+            Usuario? usuario = usuariosRepositorio.RecuperarUsuario(identificador, hash);
 
             if (usuario == null)
                 return string.Empty;
 
             var tokenHanlder = new JwtSecurityTokenHandler();
-            var chaveCriptografia = Encoding.ASCII.GetBytes(utilRepositorio.GetValueConfigurationKeyJWT(configuration));
+            string? configurationValue = utilRepositorio.GetValueConfigurationKeyJWT(configuration)
+                ?? throw new NullReferenceException("GetValueConfigurationKeyJWT Retornou valor nulo.");
+            var chaveCriptografia = Encoding.ASCII.GetBytes(configurationValue);
 
             var tokenProps = new SecurityTokenDescriptor()
             {
@@ -43,27 +45,29 @@ namespace Hackathon.Fiap.Domain.Seguranca.Servicos
         }
         public string EncryptPassword(string password)
         {
-            using (Aes aes = Aes.Create())
-            {
-                aes.Key = Encoding.UTF8.GetBytes(utilRepositorio.GetValueConfigurationHash(configuration));
-                aes.IV = new byte[16]; // Vetor de inicialização com 16 bytes (pode ser personalizado ou gerado aleatoriamente)
-                ICryptoTransform encryptor = aes.CreateEncryptor(aes.Key, aes.IV);
+            using Aes aes = Aes.Create();
+            string? configurationValue = utilRepositorio.GetValueConfigurationHash(configuration) 
+                ?? throw new NullReferenceException("GetValueConfigurationKeyJWT Retornou valor nulo.");
+            aes.Key = Encoding.UTF8.GetBytes(configurationValue);
+            aes.IV = new byte[16];
+            ICryptoTransform encryptor = aes.CreateEncryptor(aes.Key, aes.IV);
 
-                using MemoryStream ms = new();
-                using (CryptoStream cs = new(ms, encryptor, CryptoStreamMode.Write))
-                {
-                    using StreamWriter sw = new(cs);
-                    sw.Write(password);
-                }
-                return Convert.ToBase64String(ms.ToArray());
+            using MemoryStream ms = new();
+            using (CryptoStream cs = new(ms, encryptor, CryptoStreamMode.Write))
+            {
+                using StreamWriter sw = new(cs);
+                sw.Write(password);
             }
+            return Convert.ToBase64String(ms.ToArray());
         }
 
         public string DecryptPassword(string encryptedPassword)
         {
             using Aes aes = Aes.Create();
-            aes.Key = Encoding.UTF8.GetBytes(utilRepositorio.GetValueConfigurationHash(configuration));
-            aes.IV = new byte[16]; // O mesmo vetor de inicialização usado na criptografia
+            string? configurationValue = utilRepositorio.GetValueConfigurationKeyJWT(configuration) 
+                ?? throw new NullReferenceException("GetValueConfigurationKeyJWT Retornou valor nulo.");
+            aes.Key = Encoding.UTF8.GetBytes(configurationValue);
+            aes.IV = new byte[16];
             ICryptoTransform decryptor = aes.CreateDecryptor(aes.Key, aes.IV);
 
             using MemoryStream ms = new(Convert.FromBase64String(encryptedPassword));

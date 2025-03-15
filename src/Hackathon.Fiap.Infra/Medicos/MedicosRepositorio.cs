@@ -14,6 +14,7 @@ namespace Hackathon.Fiap.Infra.Medicos
     {
         public async Task<PaginacaoConsulta<Medico>> ListarMedicosPaginadosAsync(MedicosPaginacaoFiltro filtro)
         {
+            DynamicParameters dp = new();
             StringBuilder sql = new(
                 @"SELECT
 	                    u.id as IdUsuario,
@@ -37,22 +38,41 @@ namespace Hackathon.Fiap.Infra.Medicos
                   WHERE 1 = 1");
 
             if (filtro.Id > 0)
-                sql.AppendLine($" AND u.id = {filtro.Id} ");
+            {
+                sql.AppendLine($" AND u.id = @IDMEDICO ");
+                dp.Add("@IDMEDICO", filtro.Id);
+            }
 
             if (!filtro.Email.InvalidOrEmpty())
-                sql.AppendLine($" AND u.email = '{filtro.Email}' ");
+            {
+                sql.AppendLine($" AND u.email = @EMAIL ");
+                dp.Add("@EMAIL", filtro.Email);
+            }
 
             if (!filtro.Nome.InvalidOrEmpty())
-                sql.AppendLine($" AND u.nome like '%{filtro.Nome}%' ");
+            {
+                sql.AppendLine($" AND u.nome like '%@NOME%' ");
+                dp.Add("@NOME", filtro.Nome);
+            }
 
             if (!filtro.Crm.InvalidOrEmpty())
-                sql.AppendLine($" AND m.crm = '{filtro.Crm}' ");
+            {
+                sql.AppendLine($" AND m.crm = @CRM ");
+                dp.Add("@CRM", filtro.Crm);
+            }
 
             if (!filtro.CodigoEspecialidade.HasValue && filtro.CodigoEspecialidade != null)
-                sql.AppendLine($" AND e.id = '{filtro.CodigoEspecialidade}' ");
+            {
+                sql.AppendLine($" AND e.id = @IDESPECIALIDADE ");
+                dp.Add("@IDESPECIALIDADE", filtro.CodigoEspecialidade.Value);
+            }
 
             if (!filtro.NomeEspecialidade.InvalidOrEmpty())
-                sql.AppendLine($" AND e.nome like '%{filtro.NomeEspecialidade}%' ");
+            {
+                sql.AppendLine($" AND e.nome like '%@NOMESPECIALIDADE%' ");
+                dp.Add("@NOMESPECIALIDADE", filtro.NomeEspecialidade);
+            }
+
             string sqlPaginado = GerarQueryPaginacao(sql.ToString(), filtro.Pg, filtro.Qt, filtro.CpOrd, filtro.TpOrd.ToString());
 
             var registros = new Dictionary<int, Medico>();
@@ -66,12 +86,12 @@ namespace Hackathon.Fiap.Infra.Medicos
                 }
                 existingMedico.SetEspecialidade(especialidade);
                 return existingMedico;
-            }, splitOn: "IdEspecialidade");
+            }, splitOn: "IdEspecialidade", param: dp);
 
             PaginacaoConsulta<Medico> response = new()
             {
                 Registros = registros.Values,
-                Total = RecuperarTotalLinhas(sql.ToString())
+                Total = RecuperarTotalLinhas(sql.ToString(), dp)
             };
 
             return response;

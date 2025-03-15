@@ -3,6 +3,7 @@
     public enum TipoUsuario
     {
         Medico,
-        Paciente
+        Paciente,
+        Administrador
     }
 }

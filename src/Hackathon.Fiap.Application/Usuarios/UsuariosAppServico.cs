@@ -10,7 +10,7 @@ namespace Hackathon.Fiap.Application.Usuarios
 {
     public class UsuariosAppServico(IUsuariosRepositorio usuariosRepositorio, IMapper mapper) : IUsuariosAppServico
     {
-        public PaginacaoConsulta<UsuarioResponse> ListarPacientes(UsuarioListarRequest request)
+        public PaginacaoConsulta<UsuarioResponse> ListarUsuarios(UsuarioListarRequest request)
         {
             PaginacaoConsulta<Usuario> response = usuariosRepositorio.ListarUsuarios(request);
             return mapper.Map<PaginacaoConsulta<UsuarioResponse>>(response);

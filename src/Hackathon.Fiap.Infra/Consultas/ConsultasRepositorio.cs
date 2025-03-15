@@ -15,6 +15,7 @@ namespace Hackathon.Fiap.Infra.Consultas
     {
         public async Task<PaginacaoConsulta<ConsultaConsulta>> ListarConsultasAsync(ConsultasListarFiltro filtro, CancellationToken ct)
         {
+            DynamicParameters dp = new();
             StringBuilder sql = new(
               @"select
 	                c.id as IdConsulta,
@@ -49,14 +50,28 @@ namespace Hackathon.Fiap.Infra.Consultas
 	                paciente.id = c.paciente_id
                 where 1 = 1 ");
 
-            string sqlPaginado = GerarQueryPaginacao(sql.ToString(), filtro.Pg, filtro.Qt, filtro.CpOrd, filtro.TpOrd.ToString());
+            if (filtro.IdMedico > 0)
+            {
+                sql.AppendLine($" and medico.id = @IDMEDICO ");
+                dp.Add("@IDMEDICO", filtro.IdMedico);
+            }
 
-            IEnumerable<ConsultaConsulta> queryResult = await session.QueryAsync<ConsultaConsulta>(sqlPaginado);
+            if (filtro.IdPaciente > 0)
+            {
+                sql.AppendLine($" and paciente.id = @IDPACIENTE ");
+                dp.Add("@IDPACIENTE", filtro.IdPaciente);
+            }
+
+
+            string sqlPaginado = GerarQueryPaginacao(sql.ToString(), filtro.Pg, filtro.Qt, filtro.CpOrd, filtro.TpOrd.ToString());
+            
+            
+            IEnumerable<ConsultaConsulta> queryResult = await session.QueryAsync<ConsultaConsulta>(sqlPaginado, dp);
 
             PaginacaoConsulta<ConsultaConsulta> response = new()
             {
                 Registros = queryResult,
-                Total = RecuperarTotalLinhas(sql.ToString())
+                Total = RecuperarTotalLinhas(sql.ToString(), dp)
             };
             
             return response;
