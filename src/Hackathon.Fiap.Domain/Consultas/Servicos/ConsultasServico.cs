@@ -1,6 +1,6 @@
-﻿using Hackathon.Fiap.DataTransfer.Utils;
+﻿using Hackathon.Fiap.DataTransfer.Consultas.Enumeradores;
+using Hackathon.Fiap.DataTransfer.Utils;
 using Hackathon.Fiap.Domain.Consultas.Entidades;
-using Hackathon.Fiap.Domain.Consultas.Enumeradores;
 using Hackathon.Fiap.Domain.Consultas.Repositorios;
 using Hackathon.Fiap.Domain.Consultas.Repositorios.Filtros;
 using Hackathon.Fiap.Domain.Consultas.Servicos.Interfaces;
@@ -12,8 +12,49 @@ using Hackathon.Fiap.Infra.Consultas.Consultas;
 
 namespace Hackathon.Fiap.Domain.Consultas.Servicos
 {
-    public class ConsultasServicos(IConsultasRepositorio consultasRepositorio, IMedicosRepositorio medicosRepositorio, IPacientesRepositorio pacientesRepositorio) : IConsultaServico
+    public class ConsultasServico(IConsultasRepositorio consultasRepositorio, IMedicosRepositorio medicosRepositorio, IPacientesRepositorio pacientesRepositorio) : IConsultaServico
     {
+        public async Task<Consulta?> AtualizarStatusConsultaAsync(Consulta consulta, StatusConsultaEnum status, CancellationToken ct)
+        {
+            if (status is StatusConsultaEnum.Cancelada or StatusConsultaEnum.Recusada or StatusConsultaEnum.Aceita)
+                ValidarCancelamentoRecusa(consulta);
+
+            if (status is StatusConsultaEnum.Aceita && consulta.Status != StatusConsultaEnum.Pendente)
+                throw new InvalidOperationException("A consulta não pode ser aceita.");
+
+            consulta.Status = status;
+
+            ConsultasListarFiltro filtro = new()
+            {
+                IdConsulta = consulta.IdConsulta,
+            };
+
+            int v = await consultasRepositorio.AtualizarStatusConsultaAsync(consulta, ct);
+
+            return await RecuperarConsultaAsync(filtro, ct);
+        }
+
+        public static void ValidarCancelamentoRecusa(Consulta consulta)
+        {
+            switch (consulta.Status)
+            {
+                case StatusConsultaEnum.Cancelada:
+                    throw new InvalidOperationException("A consulta está cancelada.");
+                case StatusConsultaEnum.Recusada:
+                    throw new InvalidOperationException("A consulta está recusada");
+            }
+        }
+
+        public async Task<Consulta?> RecuperarConsultaAsync(ConsultasListarFiltro filtro, CancellationToken ct)
+        {
+            PaginacaoConsulta<Consulta> paginacaoConsulta = await ListarConsultasAsync(filtro, ct);
+            ArgumentNullException.ThrowIfNull(paginacaoConsulta);
+            if (paginacaoConsulta.Registros.Any())
+                return paginacaoConsulta.Registros.FirstOrDefault();
+
+            return null;
+        }
+
         public async Task<PaginacaoConsulta<Consulta>> ListarConsultasAsync(ConsultasListarFiltro filtro, CancellationToken ct)
         {
             PaginacaoConsulta<ConsultaConsulta> paginacaoConsulta = await consultasRepositorio.ListarConsultasAsync(filtro, ct);
@@ -29,7 +70,10 @@ namespace Hackathon.Fiap.Domain.Consultas.Servicos
                 if (itenConsulta.Status == null)
                     throw new InvalidCastException($"Não foi possível identificar a situação da consulta.");
 
-                Enum.TryParse(itenConsulta.Status, out StatusConsultaEnum statusConsulta);
+                bool conversao = Enum.TryParse(itenConsulta.Status, out StatusConsultaEnum statusConsulta);
+
+                if (!conversao)
+                    throw new InvalidCastException("Não foi possivel determinar a situação da consulta.");
 
                 Consulta consulta = new(itenConsulta.IdConsulta,
                                         itenConsulta.DataHora,

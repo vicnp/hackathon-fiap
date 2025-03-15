@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Hackathon.Fiap.Application.Consultas.Interfaces;
+using Hackathon.Fiap.DataTransfer.Consultas.Enumeradores;
 using Hackathon.Fiap.DataTransfer.Consultas.Requests;
 using Hackathon.Fiap.DataTransfer.Consultas.Responses;
 using Hackathon.Fiap.DataTransfer.Utils;
@@ -19,6 +20,32 @@ namespace Hackathon.Fiap.Application.Consultas.Servicos
 
             PaginacaoConsulta<ConsultaResponse> response = mapper.Map<PaginacaoConsulta<ConsultaResponse>>(consulta);
             return response;
+        }
+
+        public async Task<ConsultaResponse> AlterarStatusConsultaAsync(ConsultaStatusRequest request, CancellationToken ct)
+        {
+            ArgumentNullException.ThrowIfNull(request);
+            Consulta consulta = await ValidarConsulta(request, ct);
+
+            Consulta? consultaResponse = await consultasServico.AtualizarStatusConsultaAsync(consulta, request.Status, ct);
+
+            return mapper.Map<ConsultaResponse>(consultaResponse);
+        }
+       
+        private async Task<Consulta> ValidarConsulta(ConsultaStatusRequest request, CancellationToken ct)
+        {
+            ConsultasListarFiltro filtro = new()
+            {
+                IdConsulta = request.IdConsulta,
+            };
+            PaginacaoConsulta<Consulta> consultas = await consultasServico.ListarConsultasAsync(filtro, ct);
+
+            ArgumentNullException.ThrowIfNull(consultas);
+
+            if (!consultas.Registros.Any())
+                throw new ArgumentException("Consulta não encontrada!");
+
+            return consultas.Registros.First();
         }
     }
 }

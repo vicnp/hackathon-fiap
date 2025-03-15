@@ -26,5 +26,20 @@ namespace Hackathon.Fiap.API.Controllers.Consultas
             PaginacaoConsulta<ConsultaResponse> response = await consultasAppServico.ListarConsultasAsync(request, ct);
             return Ok(response);
         }
+
+        /// <summary>
+        /// Altera situação de uma consulta.
+        /// </summary>
+        /// <param name="request"></param>
+        /// <param name="ct"></param>
+        /// <returns></returns>
+        [HttpPut]
+        [Route("situacoes")]
+        [Authorize(Roles = $"{Roles.Paciente},{Roles.Medico}")]
+        public async Task<ActionResult<ConsultaResponse>> AlterarStatusConsultaAsync([FromQuery] ConsultaStatusRequest request, CancellationToken ct)
+        {
+            ConsultaResponse response = await consultasAppServico.AlterarStatusConsultaAsync(request, ct);
+            return Ok(response);
+        }
     }
 }

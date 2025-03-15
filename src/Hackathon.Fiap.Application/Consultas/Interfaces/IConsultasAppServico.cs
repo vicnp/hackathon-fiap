@@ -6,6 +6,7 @@ namespace Hackathon.Fiap.Application.Consultas.Interfaces
 {
     public interface IConsultasAppServico
     {
+        Task<ConsultaResponse> AlterarStatusConsultaAsync(ConsultaStatusRequest request, CancellationToken ct);
         Task<PaginacaoConsulta<ConsultaResponse>> ListarConsultasAsync(ConsultaListarRequest request, CancellationToken ct);
     }
 }

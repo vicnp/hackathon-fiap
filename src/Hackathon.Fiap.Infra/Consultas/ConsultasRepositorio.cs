@@ -1,16 +1,37 @@
 ﻿using System.Text;
 using Dapper;
 using Hackathon.Fiap.DataTransfer.Utils;
+using Hackathon.Fiap.Domain.Consultas.Entidades;
 using Hackathon.Fiap.Domain.Consultas.Repositorios;
 using Hackathon.Fiap.Domain.Consultas.Repositorios.Filtros;
 using Hackathon.Fiap.Infra.Consultas.Consultas;
 using Hackathon.Fiap.Infra.Utils;
 using Hackathon.Fiap.Infra.Utils.DBContext;
+using static Dapper.SqlMapper;
 
 namespace Hackathon.Fiap.Infra.Consultas
 {
     public class ConsultasRepositorio (DapperContext dapperContext) : RepositorioDapper<ConsultaConsulta>(dapperContext), IConsultasRepositorio
     {
+        public async Task<int> AtualizarStatusConsultaAsync(Consulta consulta, CancellationToken ct)
+        {
+            DynamicParameters dp = new();
+            StringBuilder sql = new(
+              @"
+                UPDATE
+	                techchallenge.Consultas
+                SET
+	                status = @STATUS
+                WHERE
+	                id = @IDCONSULTA;
+                ");
+
+            dp.Add("@IDCONSULTA", consulta.IdConsulta);
+            dp.Add("@STATUS", consulta.Status.ToString());
+
+            return await session.ExecuteAsync(new CommandDefinition(sql.ToString(), dp, cancellationToken: ct));
+        }
+
         public async Task<PaginacaoConsulta<ConsultaConsulta>> ListarConsultasAsync(ConsultasListarFiltro filtro, CancellationToken ct)
         {
             DynamicParameters dp = new();
@@ -60,6 +81,17 @@ namespace Hackathon.Fiap.Infra.Consultas
                 dp.Add("@IDPACIENTE", filtro.IdPaciente);
             }
 
+            if(filtro.IdPaciente > 0)
+            {
+                sql.AppendLine($" and c.Id = @IDCONSULTA ");
+                dp.Add("@IDCONSULTA", filtro.IdPaciente);
+            }
+
+            if(filtro.Status != null && filtro.Status != 0)
+            {
+                sql.AppendLine($" and c.Status = @STATUS ");
+                dp.Add("@STATUS", filtro.Status.ToString());
+            }
 
             string sqlPaginado = GerarQueryPaginacao(sql.ToString(), filtro.Pg, filtro.Qt, filtro.CpOrd, filtro.TpOrd.ToString());
             
