@@ -15,7 +15,7 @@ namespace Hackathon.Fiap.Infra.Usuarios
         public Usuario RecuperarUsuario(string identificador, string hash)
         {
             StringBuilder sql = new($@"
-                                     SELECT u.id as Id,
+                                     SELECT u.id as IdUsuario,
                                             u.nome as Nome,
                                             u.email as Email,
                                             u.cpf as Cpf,

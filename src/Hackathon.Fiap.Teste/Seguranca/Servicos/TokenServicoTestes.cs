@@ -4,7 +4,6 @@ using Hackathon.Fiap.Domain.Usuarios.Repositorios;
 using Hackathon.Fiap.Domain.Utils.Repositorios;
 using Microsoft.Extensions.Configuration;
 using NSubstitute;
-using Usuarios.Entidades;
 
 namespace Hackathon.Fiap.Teste.Seguranca.Servicos
 {

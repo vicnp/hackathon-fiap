@@ -4,7 +4,7 @@ namespace Hackathon.Fiap.Domain.Usuarios.Entidades
 {
     public class Usuario
     {
-        public int Id { get; protected set; }
+        public int IdUsuario { get; protected set; }
         public string Nome { get; protected set; }
         public string Email { get; protected set; }
         public string Cpf { get; protected set; }
@@ -19,7 +19,7 @@ namespace Hackathon.Fiap.Domain.Usuarios.Entidades
 
         public Usuario(int id, string nome, string email, string cpf, string senhaHash, TipoUsuario tipo)
         {
-            Id = id;
+            IdUsuario = id;
             Nome = nome;
             Email = email;
             Cpf = cpf;

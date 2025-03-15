@@ -13,6 +13,7 @@ namespace Hackathon.Fiap.API.Controllers.Pacientes
     public class PacientesController(IPacientesAppServico pacientesAppServico) : ControllerBase
     {
         [HttpGet]
+        [Route("paginados")]
         [Authorize(Roles = Roles.Medico)]
         public ActionResult<PaginacaoConsulta<PacienteResponse>> RecuperarPacientes([FromQuery] UsuarioListarRequest request)
         {

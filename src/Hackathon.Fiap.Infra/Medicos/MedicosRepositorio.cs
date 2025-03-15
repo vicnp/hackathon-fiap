@@ -16,7 +16,7 @@ namespace Hackathon.Fiap.Infra.Medicos
         {
             StringBuilder sql = new(
                 @"SELECT
-	                    u.id as Id,
+	                    u.id as IdUsuario,
 	                    u.cpf as Cpf,
 	                    u.email as Email,
 	                    u.nome as Nome,
@@ -36,6 +36,9 @@ namespace Hackathon.Fiap.Infra.Medicos
                     ON e.id = me.especialidade_id 
                   WHERE 1 = 1");
 
+            if (filtro.Id > 0)
+                sql.AppendLine($" AND u.id = {filtro.Id} ");
+
             if (!filtro.Email.InvalidOrEmpty())
                 sql.AppendLine($" AND u.email = '{filtro.Email}' ");
 
@@ -45,7 +48,7 @@ namespace Hackathon.Fiap.Infra.Medicos
             if (!filtro.Crm.InvalidOrEmpty())
                 sql.AppendLine($" AND m.crm = '{filtro.Crm}' ");
 
-            if (!filtro.CodigoEspecialidade.HasValue)
+            if (!filtro.CodigoEspecialidade.HasValue && filtro.CodigoEspecialidade != null)
                 sql.AppendLine($" AND e.id = '{filtro.CodigoEspecialidade}' ");
 
             if (!filtro.NomeEspecialidade.InvalidOrEmpty())
@@ -56,10 +59,10 @@ namespace Hackathon.Fiap.Infra.Medicos
 
             var queryResult = await session.QueryAsync<Medico, Especialidade, Medico>(sqlPaginado, (medico, especialidade) =>
             {
-                if (!registros.TryGetValue(medico.Id, out var existingMedico))
+                if (!registros.TryGetValue(medico.IdUsuario, out var existingMedico))
                 {
                     existingMedico = medico;
-                    registros[medico.Id] = existingMedico;
+                    registros[medico.IdUsuario] = existingMedico;
                 }
                 existingMedico.SetEspecialidade(especialidade);
                 return existingMedico;
@@ -72,6 +75,12 @@ namespace Hackathon.Fiap.Infra.Medicos
             };
 
             return response;
+        }
+        public async Task<Medico?> RecuperarMedico(int codigoMedico)
+        {
+            MedicosPaginacaoFiltro filtro = new() { Id = codigoMedico };
+            PaginacaoConsulta<Medico> paginacaoConsulta = await ListarMedicosPaginadosAsync(filtro);
+            return paginacaoConsulta.Registros.FirstOrDefault();
         }
     }
 }

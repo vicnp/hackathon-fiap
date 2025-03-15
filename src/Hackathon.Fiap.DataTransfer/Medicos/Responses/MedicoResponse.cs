@@ -2,7 +2,7 @@
 {
     public class MedicoResponse
     {
-        public int Id { get; protected set; }
+        public int IdUsuario { get; protected set; }
         public string Nome { get; protected set; } = string.Empty;
         public string Email { get; protected set; } = string.Empty;
         public string Cpf { get; protected set; } = string.Empty;

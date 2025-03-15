@@ -1,8 +1,8 @@
 ﻿using System.Text;
-using Hackathon.Fiap.DataTransfer.Usuarios.Request;
 using Hackathon.Fiap.DataTransfer.Utils;
 using Hackathon.Fiap.Domain.Pacientes.Entidades;
 using Hackathon.Fiap.Domain.Pacientes.Repositorios;
+using Hackathon.Fiap.Domain.Pacientes.Repositorios.Filtros;
 using Hackathon.Fiap.Domain.Utils;
 using Hackathon.Fiap.Infra.Utils;
 using Hackathon.Fiap.Infra.Utils.DBContext;
@@ -11,10 +11,10 @@ namespace Hackathon.Fiap.Infra.Pacientes
 {
     public class PacientesRepositorio(DapperContext dapperContext) : RepositorioDapper<Paciente>(dapperContext), IPacientesRepositorio
     {
-        public PaginacaoConsulta<Paciente> ListarPacientes(UsuarioListarRequest request)
+        public PaginacaoConsulta<Paciente> ListarPacientes(UsuarioListarFiltro request)
         {
             StringBuilder sql = new($@"
-                                    SELECT id as Id,
+                                    SELECT id as IdUsuario,
                                            nome as Nome,
                                            email as Email,
                                            cpf as Cpf,
@@ -40,6 +40,13 @@ namespace Hackathon.Fiap.Infra.Pacientes
             }
 
             return ListarPaginado(sql.ToString(), request.Pg, request.Qt, request.CpOrd, request.TpOrd.ToString());
+        }
+
+        public async Task<Paciente?> RecuperarPaciente(int idPaciente)
+        {
+            UsuarioListarFiltro filtro = new() { Id = idPaciente };
+            PaginacaoConsulta<Paciente> paginacaoConsulta = ListarPacientes(filtro);
+            return await Task.FromResult(paginacaoConsulta.Registros.FirstOrDefault());  
         }
     }
 }

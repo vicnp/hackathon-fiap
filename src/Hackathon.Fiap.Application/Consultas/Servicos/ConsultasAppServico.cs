@@ -1,0 +1,29 @@
+﻿using AutoMapper;
+using Hackathon.Fiap.Application.Consultas.Interfaces;
+using Hackathon.Fiap.DataTransfer.Consultas.Requests;
+using Hackathon.Fiap.DataTransfer.Consultas.Responses;
+using Hackathon.Fiap.DataTransfer.Utils;
+using Hackathon.Fiap.Domain.Consultas.Entidades;
+using Hackathon.Fiap.Domain.Consultas.Repositorios;
+using Hackathon.Fiap.Domain.Consultas.Repositorios.Filtros;
+using Hackathon.Fiap.Domain.Consultas.Servicos.Interfaces;
+using Hackathon.Fiap.Domain.Medicos.Entidades;
+using Hackathon.Fiap.Domain.Medicos.Repositorios;
+using Hackathon.Fiap.Infra.Consultas.Consultas;
+using Hackathon.Fiap.Infra.Medicos;
+
+namespace Hackathon.Fiap.Application.Consultas.Servicos
+{
+    public class ConsultasAppServico(IMapper mapper, IConsultaServico consultasServico, IMedicosRepositorio medicosRepositorio) : IConsultasAppServico
+    {
+        public async Task<PaginacaoConsulta<ConsultaResponse>> ListarConsultasAsync(ConsultaListarRequest request, CancellationToken ct)
+        {
+            ConsultasListarFiltro filtro = mapper.Map<ConsultasListarFiltro>(request);
+
+            PaginacaoConsulta<Consulta> consulta = await consultasServico.ListarConsultasAsync(filtro, ct);
+
+            PaginacaoConsulta<ConsultaResponse> response = mapper.Map<PaginacaoConsulta<ConsultaResponse>>(consulta);
+            return response;
+        }
+    }
+}

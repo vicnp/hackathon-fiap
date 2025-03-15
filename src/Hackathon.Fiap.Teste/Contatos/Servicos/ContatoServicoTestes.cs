@@ -1,7 +1,6 @@
 using FluentAssertions;
 using Hackathon.Fiap.DataTransfer.Utils.Enumeradores;
 using NSubstitute;
-using Utils;
 
 namespace Hackathon.Fiap.Teste.Contatos.Servicos;
 

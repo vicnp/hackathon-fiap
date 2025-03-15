@@ -8,7 +8,7 @@ namespace Hackathon.Fiap.Domain.Medicos.Repositorios.Filtros
         public MedicosPaginacaoFiltro() : base("nome", TipoOrdernacao.Desc)
         {
         }
-
+        public int Id { get; set; }
         public int? CodigoEspecialidade { get; set; }
         public string NomeEspecialidade { get; set; } = string.Empty;
         public string Nome { get; set; } = string.Empty;
