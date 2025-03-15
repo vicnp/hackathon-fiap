@@ -5,12 +5,12 @@ namespace Hackathon.Fiap.Domain.Usuarios.Entidades
     public class Usuario
     {
         public int IdUsuario { get; protected set; }
-        public string Nome { get; protected set; }
-        public string Email { get; protected set; }
-        public string Cpf { get; protected set; }
-        public string Hash { get; set; }
-        public TipoUsuario Tipo { get; protected set; }
-        public DateTime CriadoEm { get; protected set; }
+        public string Nome { get; protected set; } = string.Empty;
+        public string Email { get; protected set; } = string.Empty;
+        public string Cpf { get; protected set; } = string.Empty;
+        public string Hash { get; set; } = string.Empty;
+        public TipoUsuario Tipo { get; protected set; } = new TipoUsuario();
+        public DateTime CriadoEm { get; protected set; } = new DateTime();
 
         public Usuario()
         {

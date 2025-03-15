@@ -6,7 +6,7 @@ namespace Hackathon.Fiap.Infra.Utils.DBContext
 {
     public class DapperContext
     {
-        private readonly IConfiguration _configuration;
+        private readonly IConfiguration? _configuration;
         private readonly string connectionString;
 
         public DapperContext(string connectionString)

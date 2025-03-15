@@ -5,7 +5,7 @@ namespace Hackathon.Fiap.Domain.Medicos.Entidades
     public class Medico : Usuario
     {
         public string Crm { get; protected set; } = "";
-        public Especialidade Especialidade { get; protected set; }
+        public Especialidade Especialidade { get; protected set; } = new Especialidade();
         public Medico() { }
 
         public void SetCrm(string crm)

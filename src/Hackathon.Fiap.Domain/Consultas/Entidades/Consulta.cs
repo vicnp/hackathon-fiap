@@ -7,8 +7,8 @@ namespace Hackathon.Fiap.Domain.Consultas.Entidades
     public class Consulta
     {
         public int IdConsulta {  get; set; }
-        public Medico Medico { get; set; }
-        public Paciente Paciente { get; set; }
+        public Medico Medico { get; set; } = new Medico();
+        public Paciente Paciente { get; set; } = new Paciente();
         public DateTime DataHora { get; set; }
         public double Valor { get; set; }
         public StatusConsultaEnum Status { get; set; }
