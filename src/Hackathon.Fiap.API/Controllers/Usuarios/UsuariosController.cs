@@ -1,7 +1,4 @@
-﻿using Hackathon.Fiap.Application.Medicos.Servicos;
-using Hackathon.Fiap.Application.Usuarios.Interfaces;
-using Hackathon.Fiap.DataTransfer.Medicos.Requests;
-using Hackathon.Fiap.DataTransfer.Medicos.Responses;
+﻿using Hackathon.Fiap.Application.Usuarios.Interfaces;
 using Hackathon.Fiap.DataTransfer.Usuarios.Request;
 using Hackathon.Fiap.DataTransfer.Usuarios.Response;
 using Hackathon.Fiap.DataTransfer.Utils;
