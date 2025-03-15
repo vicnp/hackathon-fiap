@@ -10,9 +10,9 @@ namespace Hackathon.Fiap.Application.Usuarios
 {
     public class UsuariosAppServico(IUsuariosRepositorio usuariosRepositorio, IMapper mapper) : IUsuariosAppServico
     {
-        public PaginacaoConsulta<UsuarioResponse> ListarUsuarios(UsuarioListarRequest request)
+        public async Task<PaginacaoConsulta<UsuarioResponse>> ListarUsuariosAsync(UsuarioListarRequest request, CancellationToken ct)
         {
-            PaginacaoConsulta<Usuario> response = usuariosRepositorio.ListarUsuarios(request);
+            PaginacaoConsulta<Usuario> response = await usuariosRepositorio.ListarUsuariosAsync(request, ct);
             return mapper.Map<PaginacaoConsulta<UsuarioResponse>>(response);
         }
     }

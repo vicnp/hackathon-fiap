@@ -34,8 +34,8 @@ namespace Hackathon.Fiap.Teste.Seguranca.Servicos
                 string hash = "qwertyuiopasdfghjklzxcvbnm";
                 utilRepositorio.GetValueConfigurationHash(configuration).Returns("6i9BiR4fRpbbIKxxEoEyjQ==");
                 utilRepositorio.GetValueConfigurationKeyJWT(configuration).Returns("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c");
-                usuariosRepositorio.RecuperarUsuario(email, Arg.Any<string>()).Returns(x => null);
-                tokenServico.Invoking(x => x.GetToken(email, senha)).Should().NotThrow();
+                usuariosRepositorio.RecuperarUsuarioAsync(email, Arg.Any<string>()).Returns(x => null);
+                tokenServico.Invoking(x => x.GetTokenAsync(email, senha)).Should().NotThrow();
 
                 //Caso usuario encontrado!!
                 //ARRANGE
@@ -45,8 +45,8 @@ namespace Hackathon.Fiap.Teste.Seguranca.Servicos
 
                 //ACT
                 var usuario = new Usuario(id, nome, hash, email, permissao);
-                usuariosRepositorio.RecuperarUsuario(email, Arg.Any<string>()).Returns(usuario);
-                tokenServico.Invoking(x => x.GetToken(email, senha)).Should().NotThrow();
+                usuariosRepositorio.RecuperarUsuarioAsync(email, Arg.Any<string>()).Returns(usuario);
+                tokenServico.Invoking(x => x.GetTokenAsync(email, senha)).Should().NotThrow();
             }
         }
 

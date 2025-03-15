@@ -6,6 +6,6 @@ namespace Hackathon.Fiap.Application.Usuarios.Interfaces
 {
     public interface IUsuariosAppServico
     {
-        PaginacaoConsulta<UsuarioResponse> ListarUsuarios(UsuarioListarRequest request);
+        Task<PaginacaoConsulta<UsuarioResponse>> ListarUsuariosAsync(UsuarioListarRequest request, CancellationToken ct);
     }
 }

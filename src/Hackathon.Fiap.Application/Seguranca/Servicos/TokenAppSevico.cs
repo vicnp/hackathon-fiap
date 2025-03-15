@@ -5,9 +5,9 @@ namespace Hackathon.Fiap.Application.Seguranca.Servicos
 {
     public class TokenAppSevico(ITokenServico tokenServico) : ITokenAppSevico
     {
-        public string GetToken(string identificador, string senha)
+        public async Task<string> GetTokenAsync(string identificador, string senha, CancellationToken ct)
         {
-            var token = tokenServico.GetToken(identificador, senha);
+            var token = await tokenServico.GetTokenAsync(identificador, senha, ct);
             return token;
         }
     }

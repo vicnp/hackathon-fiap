@@ -12,7 +12,7 @@ namespace Hackathon.Fiap.Infra.Pacientes
 {
     public class PacientesRepositorio(DapperContext dapperContext) : RepositorioDapper<Paciente>(dapperContext), IPacientesRepositorio
     {
-        public PaginacaoConsulta<Paciente> ListarPacientes(UsuarioListarFiltro filtro)
+        public async Task<PaginacaoConsulta<Paciente>> ListarPacientesAsync(UsuarioListarFiltro filtro, CancellationToken ct)
         {
             DynamicParameters dp = new ();
             StringBuilder sql = new($@"
@@ -43,14 +43,14 @@ namespace Hackathon.Fiap.Infra.Pacientes
                 sql.AppendLine($@" AND u.cpf = @CPF ");
                 dp.Add("@CPF", filtro.Cpf);
             }
-
-            return ListarPaginado(sql.ToString(), filtro.Pg, filtro.Qt, filtro.CpOrd, filtro.TpOrd.ToString(), dp);
+            PaginacaoConsulta<Paciente> paginacaoConsulta = await ListarPaginadoAsync(sql.ToString(), filtro.Pg, filtro.Qt, filtro.CpOrd, filtro.TpOrd.ToString(), dp, ct);
+            return paginacaoConsulta;
         }
 
-        public async Task<Paciente?> RecuperarPaciente(int idPaciente)
+        public async Task<Paciente?> RecuperarPaciente(int idPaciente, CancellationToken ct)
         {
             UsuarioListarFiltro filtro = new() { Id = idPaciente };
-            PaginacaoConsulta<Paciente> paginacaoConsulta = ListarPacientes(filtro);
+            PaginacaoConsulta<Paciente> paginacaoConsulta = await ListarPacientesAsync(filtro, ct);
             return await Task.FromResult(paginacaoConsulta.Registros.FirstOrDefault());  
         }
     }

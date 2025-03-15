@@ -20,9 +20,9 @@ namespace Hackathon.Fiap.API.Controllers.Medicos
         [HttpGet]
         [Route("paginados")]
         [Authorize(Roles = $"{Roles.Paciente},{Roles.Medico}")]
-        public async Task<ActionResult<PaginacaoConsulta<MedicoResponse>>> ListarMedicosComPaginacaoAsync([FromQuery] MedicosPaginacaoRequest request)
+        public async Task<ActionResult<PaginacaoConsulta<MedicoResponse>>> ListarMedicosComPaginacaoAsync([FromQuery] MedicosPaginacaoRequest request, CancellationToken ct)
         {
-            PaginacaoConsulta<MedicoResponse> paginacaoConsulta = await medicosAppServico.ListarMedicosComPaginacaoAsync(request);
+            PaginacaoConsulta<MedicoResponse> paginacaoConsulta = await medicosAppServico.ListarMedicosComPaginacaoAsync(request, ct);
             return Ok(paginacaoConsulta);
         }
     }

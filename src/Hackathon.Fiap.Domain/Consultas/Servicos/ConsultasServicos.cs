@@ -40,8 +40,8 @@ namespace Hackathon.Fiap.Domain.Consultas.Servicos
                                         itenConsulta.IdHorariosDisponiveis);
 
                
-                Medico? medico = await medicosRepositorio.RecuperarMedico(itenConsulta.IdMedico);
-                Paciente? paciente = await pacientesRepositorio.RecuperarPaciente(itenConsulta.IdPaciente);
+                Medico? medico = await medicosRepositorio.RecuperarMedico(itenConsulta.IdMedico, ct);
+                Paciente? paciente = await pacientesRepositorio.RecuperarPaciente(itenConsulta.IdPaciente, ct);
                 
                 if(medico != null)
                     consulta.SetMedico(medico);

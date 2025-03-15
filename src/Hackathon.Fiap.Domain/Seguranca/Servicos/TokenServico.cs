@@ -13,11 +13,11 @@ namespace Hackathon.Fiap.Domain.Seguranca.Servicos
 {
     public class TokenServico(IConfiguration configuration, IUsuariosRepositorio usuariosRepositorio, IUtilRepositorio utilRepositorio) : ITokenServico
     {
-        public string GetToken(string identificador, string senha)
+        public async Task<string> GetTokenAsync(string identificador, string senha, CancellationToken ct)
         {
             var hash = EncryptPassword(senha);
 
-            Usuario? usuario = usuariosRepositorio.RecuperarUsuario(identificador, hash);
+            Usuario? usuario = await usuariosRepositorio.RecuperarUsuarioAsync(identificador, hash, ct);
 
             if (usuario == null)
                 return string.Empty;

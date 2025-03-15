@@ -64,7 +64,7 @@ namespace Hackathon.Fiap.Infra.Consultas
             string sqlPaginado = GerarQueryPaginacao(sql.ToString(), filtro.Pg, filtro.Qt, filtro.CpOrd, filtro.TpOrd.ToString());
             
             
-            IEnumerable<ConsultaConsulta> queryResult = await session.QueryAsync<ConsultaConsulta>(sqlPaginado, dp);
+            IEnumerable<ConsultaConsulta> queryResult = await session.QueryAsync<ConsultaConsulta>(new CommandDefinition(sqlPaginado, dp, cancellationToken: ct));
 
             PaginacaoConsulta<ConsultaConsulta> response = new()
             {

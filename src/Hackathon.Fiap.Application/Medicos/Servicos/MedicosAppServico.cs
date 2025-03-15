@@ -11,11 +11,11 @@ namespace Hackathon.Fiap.Application.Medicos.Servicos
 {
     public class MedicosAppServico(IMapper mapper, IMedicosRepositorio medicosRepositorio) : IMedicosAppServico
     {
-        public async Task<DataTransfer.Utils.PaginacaoConsulta<MedicoResponse>> ListarMedicosComPaginacaoAsync(MedicosPaginacaoRequest request)
+        public async Task<DataTransfer.Utils.PaginacaoConsulta<MedicoResponse>> ListarMedicosComPaginacaoAsync(MedicosPaginacaoRequest request, CancellationToken ct)
         {
             MedicosPaginacaoFiltro contatosFiltro = mapper.Map<MedicosPaginacaoFiltro>(request);
 
-            PaginacaoConsulta<Medico> consulta = await medicosRepositorio.ListarMedicosPaginadosAsync(contatosFiltro);
+            PaginacaoConsulta<Medico> consulta = await medicosRepositorio.ListarMedicosPaginadosAsync(contatosFiltro, ct);
 
             PaginacaoConsulta<MedicoResponse> response = mapper.Map<PaginacaoConsulta<MedicoResponse>>(consulta);
 

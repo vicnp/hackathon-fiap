@@ -6,7 +6,7 @@ namespace Hackathon.Fiap.Domain.Pacientes.Repositorios
 {
     public interface IPacientesRepositorio
     {
-        PaginacaoConsulta<Paciente> ListarPacientes(UsuarioListarFiltro request);
-        Task<Paciente?> RecuperarPaciente(int idPaciente);
+        Task<PaginacaoConsulta<Paciente>> ListarPacientesAsync(UsuarioListarFiltro request, CancellationToken ct);
+        Task<Paciente?> RecuperarPaciente(int idPaciente, CancellationToken ct);
     }
 }

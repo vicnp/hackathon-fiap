@@ -12,7 +12,7 @@ namespace Hackathon.Fiap.Infra.Medicos
 {
     public class MedicosRepositorio(DapperContext dapperContext) : RepositorioDapper<Medico>(dapperContext), IMedicosRepositorio
     {
-        public async Task<PaginacaoConsulta<Medico>> ListarMedicosPaginadosAsync(MedicosPaginacaoFiltro filtro)
+        public async Task<PaginacaoConsulta<Medico>> ListarMedicosPaginadosAsync(MedicosPaginacaoFiltro filtro, CancellationToken ct)
         {
             DynamicParameters dp = new();
             StringBuilder sql = new(
@@ -77,7 +77,7 @@ namespace Hackathon.Fiap.Infra.Medicos
 
             var registros = new Dictionary<int, Medico>();
 
-            var queryResult = await session.QueryAsync<Medico, Especialidade, Medico>(sqlPaginado, (medico, especialidade) =>
+            Task<IEnumerable<Medico>> task = session.QueryAsync<Medico, Especialidade, Medico>(sqlPaginado, (medico, especialidade) =>
             {
                 if (!registros.TryGetValue(medico.IdUsuario, out var existingMedico))
                 {
@@ -88,6 +88,10 @@ namespace Hackathon.Fiap.Infra.Medicos
                 return existingMedico;
             }, splitOn: "IdEspecialidade", param: dp);
 
+            await Task.Run(async () => {
+                await task;
+            }, ct);
+
             PaginacaoConsulta<Medico> response = new()
             {
                 Registros = registros.Values,
@@ -96,10 +100,10 @@ namespace Hackathon.Fiap.Infra.Medicos
 
             return response;
         }
-        public async Task<Medico?> RecuperarMedico(int codigoMedico)
+        public async Task<Medico?> RecuperarMedico(int codigoMedico, CancellationToken ct)
         {
             MedicosPaginacaoFiltro filtro = new() { Id = codigoMedico };
-            PaginacaoConsulta<Medico> paginacaoConsulta = await ListarMedicosPaginadosAsync(filtro);
+            PaginacaoConsulta<Medico> paginacaoConsulta = await ListarMedicosPaginadosAsync(filtro, ct);
             return paginacaoConsulta.Registros.FirstOrDefault();
         }
     }

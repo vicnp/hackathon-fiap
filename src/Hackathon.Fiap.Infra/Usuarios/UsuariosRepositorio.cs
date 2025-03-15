@@ -12,7 +12,7 @@ namespace Hackathon.Fiap.Infra.Usuarios
 {
     public class UsuariosRepositorio(DapperContext dapperContext) : RepositorioDapper<Usuario>(dapperContext), IUsuariosRepositorio
     {
-        public Usuario? RecuperarUsuario(string identificador, string hash)
+        public Task<Usuario?> RecuperarUsuarioAsync(string identificador, string hash, CancellationToken ct)
         {
             StringBuilder sql = new($@"
                                      SELECT u.id as IdUsuario,
@@ -31,12 +31,10 @@ namespace Hackathon.Fiap.Infra.Usuarios
             dp.Add("identificador", identificador);
             dp.Add("hash", hash);
 
-            return session.QueryFirstOrDefault<Usuario>(sql.ToString(), dp);
+            return session.QueryFirstOrDefaultAsync<Usuario>(new CommandDefinition(sql.ToString(), dp, cancellationToken: ct));
         }
 
-
-
-        public PaginacaoConsulta<Usuario> ListarUsuarios(UsuarioListarRequest request)
+        public async Task<PaginacaoConsulta<Usuario>> ListarUsuariosAsync(UsuarioListarRequest request, CancellationToken ct)
         {
             StringBuilder sql = new($@"
                            SELECT u.id as IdUsuario,
@@ -58,7 +56,7 @@ namespace Hackathon.Fiap.Infra.Usuarios
                 sql.AppendLine($@" AND u.nome = '{request.NomeUsuario}' ");
             }
 
-            return ListarPaginado(sql.ToString(), request.Pg, request.Qt, request.CpOrd, request.TpOrd.ToString());
+            return await ListarPaginadoAsync(sql.ToString(), request.Pg, request.Qt, request.CpOrd, request.TpOrd.ToString(), ct: ct);
         }
     }
 }

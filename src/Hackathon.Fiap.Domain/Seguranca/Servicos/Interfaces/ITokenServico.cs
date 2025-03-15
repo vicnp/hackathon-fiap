@@ -2,6 +2,6 @@
 {
     public interface ITokenServico
     {
-        string GetToken(string email, string senha);
+        Task<string> GetTokenAsync(string email, string senha, CancellationToken ct);
     }
 }

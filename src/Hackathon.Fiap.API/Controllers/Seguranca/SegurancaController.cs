@@ -1,4 +1,5 @@
 ﻿using Hackathon.Fiap.Application.Seguranca.Interfaces;
+using Hackathon.Fiap.Domain.Utils;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 
@@ -15,10 +16,10 @@ namespace Hackathon.Fiap.API.Controllers.Seguranca
         /// <param name="senha"></param>
         /// <returns></returns>
         [HttpPost]
-        public IActionResult Autenticar(string identificador, string senha)
+        public async Task<IActionResult> Autenticar(string identificador, string senha, CancellationToken ct)
         {
-            string token = tokenAppSevico.GetToken(identificador, senha);
-            if (token.IsNullOrEmpty())
+            string token = await tokenAppSevico.GetTokenAsync(identificador, senha, ct);
+            if (token.InvalidOrEmpty())
             {
                 return Unauthorized("Usuário ou senha errados.");
             }

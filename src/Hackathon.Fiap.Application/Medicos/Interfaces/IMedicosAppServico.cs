@@ -6,6 +6,6 @@ namespace Hackathon.Fiap.Application.Medicos.Interfaces
 {
     public interface IMedicosAppServico
     {
-        Task<PaginacaoConsulta<MedicoResponse>> ListarMedicosComPaginacaoAsync(MedicosPaginacaoRequest request);
+        Task<PaginacaoConsulta<MedicoResponse>> ListarMedicosComPaginacaoAsync(MedicosPaginacaoRequest request, CancellationToken ct);
     }
 }

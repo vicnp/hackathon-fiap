@@ -20,9 +20,9 @@ namespace Hackathon.Fiap.API.Controllers.Usuarios
         [HttpGet]
         [Route("paginados")]
         [Authorize(Roles = Roles.Administrador)]
-        public ActionResult<PaginacaoConsulta<UsuarioResponse>> ListarUsuarios([FromQuery] UsuarioListarRequest request)
+        public async Task<ActionResult<PaginacaoConsulta<UsuarioResponse>>> ListarUsuarios([FromQuery] UsuarioListarRequest request, CancellationToken ct)
         {
-            PaginacaoConsulta<UsuarioResponse> paginacaoConsulta = usuariosAppServico.ListarUsuarios(request);
+            PaginacaoConsulta<UsuarioResponse> paginacaoConsulta = await usuariosAppServico.ListarUsuariosAsync(request, ct);
             return Ok(paginacaoConsulta);
         }
     }

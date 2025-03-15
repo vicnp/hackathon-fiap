@@ -2,6 +2,6 @@
 {
     public interface ITokenAppSevico
     {
-        string GetToken(string identificador, string senha);
+        Task<string> GetTokenAsync(string identificador, string senha, CancellationToken ct);
     }
 }

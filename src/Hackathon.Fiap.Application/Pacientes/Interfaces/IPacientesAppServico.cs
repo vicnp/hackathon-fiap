@@ -6,6 +6,6 @@ namespace Hackathon.Fiap.Application.Pacientes.Interfaces
 {
     public interface IPacientesAppServico
     {
-        PaginacaoConsulta<PacienteResponse> ListarPacientes(UsuarioListarRequest request);
+        Task<PaginacaoConsulta<PacienteResponse>> ListarPacientesAsync(UsuarioListarRequest request, CancellationToken ct);
     }
 }

@@ -6,7 +6,7 @@ namespace Hackathon.Fiap.Domain.Usuarios.Repositorios
 {
     public interface IUsuariosRepositorio
     {
-        PaginacaoConsulta<Usuario> ListarUsuarios(UsuarioListarRequest request);
-        Usuario? RecuperarUsuario(string email, string hash);
+        Task<PaginacaoConsulta<Usuario>> ListarUsuariosAsync(UsuarioListarRequest request, CancellationToken ct);
+        Task<Usuario?> RecuperarUsuarioAsync(string email, string hash, CancellationToken ct);
     }
 }
