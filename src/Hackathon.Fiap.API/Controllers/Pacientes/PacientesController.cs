@@ -12,6 +12,11 @@ namespace Hackathon.Fiap.API.Controllers.Pacientes
     [Route("api/pacientes")]
     public class PacientesController(IPacientesAppServico pacientesAppServico) : ControllerBase
     {
+        /// <summary>
+        /// Recuperar pacientes com paginação.
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
         [HttpGet]
         [Route("paginados")]
         [Authorize(Roles = Roles.Medico)]

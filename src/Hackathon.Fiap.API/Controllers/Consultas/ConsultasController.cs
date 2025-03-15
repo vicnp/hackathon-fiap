@@ -13,7 +13,7 @@ namespace Hackathon.Fiap.API.Controllers.Consultas
     public class ConsultasController(IConsultasAppServico consultasAppServico) :ControllerBase
     {
         /// <summary>
-        /// Recupera as consultas cadastradas conforme os filtros informados.
+        /// Recupera as consultas com paginação
         /// </summary>
         /// <param name="request"></param>
         /// <param name="ct"></param>

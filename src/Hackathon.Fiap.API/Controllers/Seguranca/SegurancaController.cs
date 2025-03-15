@@ -8,6 +8,12 @@ namespace Hackathon.Fiap.API.Controllers.Seguranca
     [Route("/auth")]
     public class SegurancaController(ITokenAppSevico tokenAppSevico) : ControllerBase
     {
+        /// <summary>
+        /// Recuperar o token JWT.
+        /// </summary>
+        /// <param name="identificador"></param>
+        /// <param name="senha"></param>
+        /// <returns></returns>
         [HttpPost]
         public IActionResult Autenticar(string identificador, string senha)
         {

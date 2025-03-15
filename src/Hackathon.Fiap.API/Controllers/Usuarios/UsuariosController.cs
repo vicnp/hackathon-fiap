@@ -15,6 +15,11 @@ namespace Hackathon.Fiap.API.Controllers.Usuarios
     [ApiController]
     public class UsuariosController(IUsuariosAppServico usuariosAppServico) : ControllerBase
     {
+        /// <summary>
+        /// Consulta de usuários, limitado ao administrador.
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
         [HttpGet]
         [Route("paginados")]
         [Authorize(Roles = Roles.Administrador)]
