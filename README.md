@@ -12,8 +12,8 @@ Para viabilizar o desenvolvimento de um sistema que esteja em conformidade com a
 1. Autenticação do Usuário (Médico) ✔
  - O sistema deve permitir que o médico faça login usando o número de CRM e uma senha. ✔
 
-2. Cadastro/Edição de Horários Disponíveis (Médico)
- - O sistema deve permitir que o médico cadastre e edite os horários disponíveis para agendamento de consultas.
+2. Cadastro/Edição de Horários Disponíveis (Médico) ✔
+ - O sistema deve permitir que o médico cadastre e edite os horários disponíveis para agendamento de consultas. ✔
 
 3. Aceite ou Recusa de Consultas Médicas (Médico) ✔
  - O médico deve poder aceitar ou recusar consultas médicas agendadas. ✔
