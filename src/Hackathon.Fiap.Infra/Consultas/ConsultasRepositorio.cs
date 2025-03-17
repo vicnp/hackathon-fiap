@@ -7,6 +7,7 @@ using Hackathon.Fiap.Domain.Consultas.Repositorios.Filtros;
 using Hackathon.Fiap.Infra.Consultas.Consultas;
 using Hackathon.Fiap.Infra.Utils;
 using Hackathon.Fiap.Infra.Utils.DBContext;
+using Microsoft.IdentityModel.Tokens;
 using static Dapper.SqlMapper;
 
 namespace Hackathon.Fiap.Infra.Consultas
@@ -21,13 +22,20 @@ namespace Hackathon.Fiap.Infra.Consultas
                 UPDATE
 	                techchallenge.Consultas
                 SET
-	                status = @STATUS
-                WHERE
-	                id = @IDCONSULTA;
-                ");
+	                status = @STATUS ");
+
+            if (!consulta.JustificativaCancelamento.IsNullOrEmpty())
+            {
+                sql.Append(@", justificativa_cancelamento = @JUSTIFICATIVA ");
+                
+            }
+            sql.Append(@" WHERE
+	                       id = @IDCONSULTA;
+                        ");
 
             dp.Add("@IDCONSULTA", consulta.IdConsulta);
             dp.Add("@STATUS", consulta.Status.ToString());
+            dp.Add("@JUSTIFICATIVA", consulta.JustificativaCancelamento.ToLower());
 
             return await session.ExecuteAsync(new CommandDefinition(sql.ToString(), dp, cancellationToken: ct));
         }

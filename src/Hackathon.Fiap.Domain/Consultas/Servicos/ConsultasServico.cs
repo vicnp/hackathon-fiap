@@ -9,6 +9,7 @@ using Hackathon.Fiap.Domain.Medicos.Repositorios;
 using Hackathon.Fiap.Domain.Pacientes.Entidades;
 using Hackathon.Fiap.Domain.Pacientes.Repositorios;
 using Hackathon.Fiap.Infra.Consultas.Consultas;
+using Microsoft.IdentityModel.Tokens;
 
 namespace Hackathon.Fiap.Domain.Consultas.Servicos
 {
@@ -24,14 +25,23 @@ namespace Hackathon.Fiap.Domain.Consultas.Servicos
 
             consulta.Status = status;
 
+            if (consulta.Status is StatusConsultaEnum.Cancelada)
+                ValidarJustificativa(consulta);
+
             ConsultasListarFiltro filtro = new()
             {
                 IdConsulta = consulta.IdConsulta,
             };
 
-            int v = await consultasRepositorio.AtualizarStatusConsultaAsync(consulta, ct);
+            await consultasRepositorio.AtualizarStatusConsultaAsync(consulta, ct);
 
             return await RecuperarConsultaAsync(filtro, ct);
+        }
+
+        private static void ValidarJustificativa(Consulta consulta)
+        {
+            if (consulta.JustificativaCancelamento.IsNullOrEmpty())
+                throw new InvalidOperationException("Por favor forneça uma justificativa para o cancelamento.");
         }
 
         public static void ValidarCancelamentoRecusa(Consulta consulta)
