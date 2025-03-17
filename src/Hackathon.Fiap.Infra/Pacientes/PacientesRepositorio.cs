@@ -26,6 +26,12 @@ namespace Hackathon.Fiap.Infra.Pacientes
                                     FROM techchallenge.Usuarios u
 	                                WHERE u.tipo = 'Paciente'");
 
+            if (filtro.Id > 0)
+            {
+                sql.AppendLine($@" AND u.id = @ID ");
+                dp.Add("@ID", filtro.Id);
+            }
+            
             if (!filtro.Email.InvalidOrEmpty())
             {
                 sql.AppendLine($@" AND u.email = @EMAIL ");
@@ -49,6 +55,9 @@ namespace Hackathon.Fiap.Infra.Pacientes
 
         public async Task<Paciente?> RecuperarPaciente(int idPaciente, CancellationToken ct)
         {
+            if (idPaciente <= 0)
+                return null;
+            
             UsuarioListarFiltro filtro = new() { Id = idPaciente };
             PaginacaoConsulta<Paciente> paginacaoConsulta = await ListarPacientesAsync(filtro, ct);
             return await Task.FromResult(paginacaoConsulta.Registros.FirstOrDefault());  
