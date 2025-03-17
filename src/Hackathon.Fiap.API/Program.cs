@@ -1,5 +1,6 @@
 using Hackathon.Fiap.Application.Medicos.Servicos;
 using Hackathon.Fiap.Domain.Medicos.Servicos;
+using Hackathon.Fiap.Domain.Utils;
 using Hackathon.Fiap.Infra.Medicos;
 using Hackathon.Fiap.Infra.Utils.DBContext;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -93,6 +94,7 @@ app.UseSwagger();
 app.UseSwaggerUI();
 app.UseMetricServer();
 app.UseHttpMetrics();
+app.UseMiddleware<ExceptionHandlingMiddleware>();
 
 
 app.UseCors(c =>
