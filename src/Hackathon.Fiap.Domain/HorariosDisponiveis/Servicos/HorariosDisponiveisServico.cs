@@ -10,6 +10,7 @@ using Hackathon.Fiap.Domain.Medicos.Entidades;
 using Hackathon.Fiap.Domain.Medicos.Repositorios;
 using Hackathon.Fiap.Domain.Pacientes.Entidades;
 using Hackathon.Fiap.Domain.Pacientes.Repositorios;
+using Hackathon.Fiap.Domain.Utils.Excecoes;
 
 namespace Hackathon.Fiap.Domain.HorariosDisponiveis.Servicos;
 
@@ -58,11 +59,15 @@ public class HorariosDisponiveisServico(IHorariosDisponiveisRepositorio horarios
 
         // Ajusta o intervalo para múltiplos de 30 minutos
         DateTime dataHoraAtual = comando.DataHoraInicio;
+
+        Medico? medico = await medicosRepositorio.RecuperarMedico(comando.IdMedico, ct: ct);
+        RegistroNaoEncontradoExcecao.LancarExcecaoSeNulo(medico, "Medico não encontrado.");
+
         while (dataHoraAtual.AddMinutes(30) <= comando.DataHoraFim)
         {
             horarios.Add(new HorarioDisponivel
             {
-                Medico = await medicosRepositorio.RecuperarMedico(comando.IdMedico, ct: ct),
+                Medico = medico,
                 DataHoraInicio = dataHoraAtual,
                 DataHoraFim = dataHoraAtual.AddMinutes(30),
                 Status = StatusHorarioDisponivelEnum.Disponivel
