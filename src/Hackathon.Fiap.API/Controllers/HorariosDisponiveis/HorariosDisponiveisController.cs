@@ -1,6 +1,4 @@
 using Hackathon.Fiap.Application.HorariosDisponiveis.Interfaces;
-using Hackathon.Fiap.DataTransfer.Consultas.Requests;
-using Hackathon.Fiap.DataTransfer.Consultas.Responses;
 using Hackathon.Fiap.DataTransfer.HorariosDisponiveis.Requests;
 using Hackathon.Fiap.DataTransfer.HorariosDisponiveis.Responses;
 using Hackathon.Fiap.DataTransfer.Utils;

@@ -7,7 +7,6 @@ using Hackathon.Fiap.Domain.HorariosDisponiveis.Repositorios;
 using Hackathon.Fiap.Domain.HorariosDisponiveis.Repositorios.Filtros;
 using Hackathon.Fiap.Infra.Utils;
 using Hackathon.Fiap.Infra.Utils.DBContext;
-using MySql.Data.MySqlClient;
 
 namespace Hackathon.Fiap.Infra.HorariosDisponiveis
 {

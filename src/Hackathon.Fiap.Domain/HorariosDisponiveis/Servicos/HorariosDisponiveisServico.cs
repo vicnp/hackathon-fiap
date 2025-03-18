@@ -1,6 +1,5 @@
 using Hackathon.Fiap.DataTransfer.HorariosDisponiveis.Consultas;
 using Hackathon.Fiap.DataTransfer.HorariosDisponiveis.Enumeradores;
-using Hackathon.Fiap.DataTransfer.HorariosDisponiveis.Responses;
 using Hackathon.Fiap.DataTransfer.Utils;
 using Hackathon.Fiap.Domain.HorariosDisponiveis.Entidades;
 using Hackathon.Fiap.Domain.HorariosDisponiveis.Repositorios;
@@ -72,7 +71,7 @@ public class HorariosDisponiveisServico(IHorariosDisponiveisRepositorio horarios
             dataHoraAtual = dataHoraAtual.AddMinutes(30);
         }
 
-        if (!horarios.Any())
+        if (horarios.Count == 0)
             throw new InvalidOperationException("Nenhum horário disponível foi gerado. Verifique os horários informados.");
 
         await horariosDisponiveisRepositorio.InserirHorariosDisponiveisAsync(horarios, ct);

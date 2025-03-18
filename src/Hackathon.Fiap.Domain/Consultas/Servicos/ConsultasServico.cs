@@ -8,6 +8,7 @@ using Hackathon.Fiap.Domain.Medicos.Entidades;
 using Hackathon.Fiap.Domain.Medicos.Repositorios;
 using Hackathon.Fiap.Domain.Pacientes.Entidades;
 using Hackathon.Fiap.Domain.Pacientes.Repositorios;
+using Hackathon.Fiap.Domain.Utils.Excecoes;
 using Hackathon.Fiap.Infra.Consultas.Consultas;
 using Microsoft.IdentityModel.Tokens;
 
@@ -21,7 +22,7 @@ namespace Hackathon.Fiap.Domain.Consultas.Servicos
                 ValidarCancelamentoRecusa(consulta);
 
             if (status is StatusConsultaEnum.Aceita && consulta.Status != StatusConsultaEnum.Pendente)
-                throw new InvalidOperationException("A consulta não pode ser aceita.");
+                throw new RegraDeNegocioExcecao("A consulta não pode ser aceita.");
 
             consulta.Status = status;
 
@@ -41,7 +42,7 @@ namespace Hackathon.Fiap.Domain.Consultas.Servicos
         private static void ValidarJustificativa(Consulta consulta)
         {
             if (consulta.JustificativaCancelamento.IsNullOrEmpty())
-                throw new InvalidOperationException("Por favor forneça uma justificativa para o cancelamento.");
+                throw new RegraDeNegocioExcecao("Por favor forneça uma justificativa para o cancelamento.");
         }
 
         public static void ValidarCancelamentoRecusa(Consulta consulta)
@@ -49,16 +50,16 @@ namespace Hackathon.Fiap.Domain.Consultas.Servicos
             switch (consulta.Status)
             {
                 case StatusConsultaEnum.Cancelada:
-                    throw new InvalidOperationException("A consulta está cancelada.");
+                    throw new RegraDeNegocioExcecao("A consulta está cancelada.");
                 case StatusConsultaEnum.Recusada:
-                    throw new InvalidOperationException("A consulta está recusada");
+                    throw new RegraDeNegocioExcecao("A consulta está recusada");
             }
         }
 
         public async Task<Consulta?> RecuperarConsultaAsync(ConsultasListarFiltro filtro, CancellationToken ct)
         {
             PaginacaoConsulta<Consulta> paginacaoConsulta = await ListarConsultasAsync(filtro, ct);
-            ArgumentNullException.ThrowIfNull(paginacaoConsulta);
+            RegraDeNegocioExcecao.LancarExcecaoSeNulo(paginacaoConsulta);
             if (paginacaoConsulta.Registros.Any())
                 return paginacaoConsulta.Registros.FirstOrDefault();
 
@@ -78,12 +79,12 @@ namespace Hackathon.Fiap.Domain.Consultas.Servicos
             foreach (ConsultaConsulta itenConsulta in paginacaoConsulta.Registros)
             {
                 if (itenConsulta.Status == null)
-                    throw new InvalidCastException($"Não foi possível identificar a situação da consulta.");
+                    throw new RegraDeNegocioExcecao($"Não foi possível identificar a situação da consulta.");
 
                 bool conversao = Enum.TryParse(itenConsulta.Status, out StatusConsultaEnum statusConsulta);
 
                 if (!conversao)
-                    throw new InvalidCastException("Não foi possivel determinar a situação da consulta.");
+                    throw new FalhaConversaoExcecao("Não foi possivel determinar a situação da consulta.");
 
                 Consulta consulta = new(itenConsulta.IdConsulta,
                                         itenConsulta.DataHora,

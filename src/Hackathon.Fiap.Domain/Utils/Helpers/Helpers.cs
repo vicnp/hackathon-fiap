@@ -1,4 +1,4 @@
-﻿namespace Hackathon.Fiap.Domain.Utils
+﻿namespace Hackathon.Fiap.Domain.Utils.Helpers
 {
     public static class Helpers
     {

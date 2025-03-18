@@ -1,10 +1,9 @@
-﻿using System;
-using System.Net;
+﻿using System.Net;
 using System.Text.Json;
-using System.Threading.Tasks;
+using Hackathon.Fiap.Domain.Utils.Excecoes;
 using Microsoft.AspNetCore.Http;
 
-namespace Hackathon.Fiap.Domain.Utils
+namespace Hackathon.Fiap.Domain.Utils.Middleware
 {
     public class ExceptionHandlingMiddleware(RequestDelegate next)
     {
@@ -27,10 +26,13 @@ namespace Hackathon.Fiap.Domain.Utils
 
             var statusCode = exception switch
             {
-                ArgumentException => HttpStatusCode.BadRequest,
-                InvalidOperationException => HttpStatusCode.BadRequest,
-                UnauthorizedAccessException => HttpStatusCode.Unauthorized,
+                RegraDeNegocioExcecao => HttpStatusCode.BadRequest,
+                RequestInvalidoExcecao => HttpStatusCode.BadRequest,
+                NaoAutorizadoExcecao => HttpStatusCode.Unauthorized,
                 KeyNotFoundException => HttpStatusCode.NotFound,
+                FalhaConversaoExcecao => HttpStatusCode.InternalServerError,
+                ErroInternoExcecao => HttpStatusCode.InternalServerError,
+                RegistroNaoEncontradoExcecao => HttpStatusCode.InternalServerError,
                 _ => HttpStatusCode.InternalServerError
             };
 
@@ -42,7 +44,7 @@ namespace Hackathon.Fiap.Domain.Utils
                 {
                     Mensagem = exception.Message,
                     Tipo = exception.GetType().Name,
-                    StatusCode = response.StatusCode
+                    response.StatusCode
                 }
             });
 

@@ -2,7 +2,7 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 
-namespace Hackathon.Fiap.Domain.Utils
+namespace Hackathon.Fiap.Domain.Utils.Helpers
 {
     [ExcludeFromCodeCoverage]
     public class EnumValue

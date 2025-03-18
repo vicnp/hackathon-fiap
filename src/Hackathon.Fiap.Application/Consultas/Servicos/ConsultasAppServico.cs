@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using Hackathon.Fiap.Application.Consultas.Interfaces;
-using Hackathon.Fiap.DataTransfer.Consultas.Enumeradores;
 using Hackathon.Fiap.DataTransfer.Consultas.Requests;
 using Hackathon.Fiap.DataTransfer.Consultas.Responses;
 using Hackathon.Fiap.DataTransfer.Utils;

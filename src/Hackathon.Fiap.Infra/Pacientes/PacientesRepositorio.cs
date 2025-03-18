@@ -4,7 +4,7 @@ using Hackathon.Fiap.DataTransfer.Utils;
 using Hackathon.Fiap.Domain.Pacientes.Entidades;
 using Hackathon.Fiap.Domain.Pacientes.Repositorios;
 using Hackathon.Fiap.Domain.Pacientes.Repositorios.Filtros;
-using Hackathon.Fiap.Domain.Utils;
+using Hackathon.Fiap.Domain.Utils.Helpers;
 using Hackathon.Fiap.Infra.Utils;
 using Hackathon.Fiap.Infra.Utils.DBContext;
 

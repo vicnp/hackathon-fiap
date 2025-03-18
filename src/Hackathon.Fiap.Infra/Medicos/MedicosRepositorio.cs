@@ -1,12 +1,12 @@
 ﻿using Dapper;
 using System.Text;
 using Hackathon.Fiap.DataTransfer.Utils;
-using Hackathon.Fiap.Domain.Utils;
 using Hackathon.Fiap.Domain.Medicos.Entidades;
 using Hackathon.Fiap.Domain.Medicos.Repositorios;
 using Hackathon.Fiap.Domain.Medicos.Repositorios.Filtros;
 using Hackathon.Fiap.Infra.Utils;
 using Hackathon.Fiap.Infra.Utils.DBContext;
+using Hackathon.Fiap.Domain.Utils.Helpers;
 
 namespace Hackathon.Fiap.Infra.Medicos
 {
