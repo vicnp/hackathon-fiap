@@ -10,7 +10,8 @@ using Newtonsoft.Json;
 
 namespace Hackathon.Fiap.Teste.Integracao.Consultas
 {
-    public class ConsultasIntegracaoTestes(HackatonApiFactory hackatonApi) : IClassFixture<HackatonApiFactory>
+    [Collection("Hackathon API Collection")]
+    public class ConsultasIntegracaoTestes(HackatonApiFactory hackatonApi)
     {
         private readonly HttpClient apiFactoryClient = hackatonApi.CreateClient();
         private string tokenJwt = string.Empty;
