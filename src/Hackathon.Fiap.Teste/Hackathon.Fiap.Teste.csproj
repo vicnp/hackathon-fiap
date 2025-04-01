@@ -54,4 +54,13 @@
 		<None Remove="Usuarios\Servicos\**" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <Folder Include="Consultas\Entidades\" />
+	  <Folder Include="Consultas\Servicos\" />
+	  <Folder Include="Medicos\Entidades\" />
+	  <Folder Include="Medicos\Servicos\" />
+	  <Folder Include="Pacientes\Entidades\" />
+	  <Folder Include="Pacientes\Servicos\" />
+	</ItemGroup>
+
 </Project>
