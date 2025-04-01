@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Hackathon.Fiap.API.Controllers.Seguranca
 {
     [ApiController]
-    [Route("/auth")]
+    [Route("api/auth")]
     public class SegurancaController(ITokenAppSevico tokenAppSevico) : ControllerBase
     {
         /// <summary>

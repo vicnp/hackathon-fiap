@@ -57,6 +57,8 @@ namespace Hackathon.Fiap.Teste.Integracao
                     INSERT INTO `Usuarios` VALUES (3,'SIS_MEDICO','SIS@MEDICO.com','00000000000','VVGM/EaxD7EYh7UQB7mBAQ==','Medico','2025-03-12 00:59:26');
                     INSERT INTO `Usuarios` VALUES (4,'SIS_PACIENTE','SIS@PACIENTE.com','00000000001','VVGM/EaxD7EYh7UQB7mBAQ==','Paciente','2025-03-12 00:59:26');
                     INSERT INTO `Usuarios` VALUES (5,'SIS_ADMINISTRADOR','SIS@ADMINISTRADOR.com','00000000002','VVGM/EaxD7EYh7UQB7mBAQ==','Administrador','2025-03-12 00:59:26');
+                    
+
                     CREATE TABLE `Medicos` (
                       `id` int NOT NULL,
                       `crm` varchar(20) NOT NULL,
@@ -87,6 +89,7 @@ namespace Hackathon.Fiap.Teste.Integracao
 
 
                     INSERT INTO `Consultas` VALUES (1,1,1,'2025-03-13 00:31:32',9252.00,'Cancelada','string','2025-03-13 23:58:14',NULL);
+                    INSERT INTO `Consultas` VALUES (2,1,1,'2025-03-13 00:31:32',9252.00,'Pendente','string','2025-03-13 23:58:15',NULL);
 
                     CREATE TABLE `Especialidades` (
                       `id` int NOT NULL AUTO_INCREMENT,

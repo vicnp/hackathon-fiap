@@ -27,7 +27,7 @@ namespace Hackathon.Fiap.Teste.Integracao
         {
             string usuario = $"SIS@{role.ToUpper()}.com";
             string senha = "123";
-            HttpResponseMessage result = await apiFactoryClient.PostAsync($"auth?identificador={usuario}&senha={senha}", null);
+            HttpResponseMessage result = await apiFactoryClient.PostAsync($"api/auth?identificador={usuario}&senha={senha}", null);
             Assert.True(result.IsSuccessStatusCode, "Autenticação falhou.");
             tokenJwt = await result.Content.ReadAsStringAsync();
             apiFactoryClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", tokenJwt);
@@ -94,6 +94,43 @@ namespace Hackathon.Fiap.Teste.Integracao
             Assert.Equal(Convert.ToInt32(HttpStatusCode.BadRequest), consultaAlterada.Erro.StatusCode);
             Assert.Equal("A consulta está cancelada.", consultaAlterada.Erro.Mensagem);
             Assert.Equal("RegraDeNegocioExcecao", consultaAlterada.Erro.Tipo);
+        }
+
+        [Fact]
+        public async Task AlterarSituacaoConsulta_Status_Valido_Espero_Consulta_Cancelada()
+        {
+            await AutenticarAplicacao(Roles.Medico);
+
+            HttpResponseMessage resultConsulta = await apiFactoryClient.GetAsync("api/consultas/paginados");
+            PaginacaoConsulta<ConsultaResponse>? consultasPaginadas = JsonConvert.DeserializeObject<PaginacaoConsulta<ConsultaResponse>>(await resultConsulta.Content.ReadAsStringAsync());
+
+            Assert.NotNull(consultasPaginadas);
+            Assert.NotEmpty(consultasPaginadas.Registros);
+
+            ConsultaResponse consultaResponse = consultasPaginadas.Registros.First();
+            ConsultaStatusRequest consultaStatusRequest = new()
+            {
+                IdConsulta = consultaResponse.IdConsulta,
+                Justificativa = "Justificativa",
+                Status = StatusConsultaEnum.Aceita
+            };
+
+            string jsonContent = JsonConvert.SerializeObject(consultaStatusRequest);
+            HttpContent httpContent = new StringContent(jsonContent, Encoding.UTF8, "application/json");
+
+
+            HttpResponseMessage resultAlteracao =
+                await apiFactoryClient.PutAsync($"api/consultas/situacoes?IdConsulta={consultaResponse.IdConsulta}&Status=Aceita", httpContent);
+
+            Assert.True(resultAlteracao.IsSuccessStatusCode, "O endpoint não respondeu como esperado.");   
+
+            if (resultAlteracao.IsSuccessStatusCode)
+            {
+                ConsultaResponse? consultaAlterada = JsonConvert.DeserializeObject<ConsultaResponse>(await resultAlteracao.Content.ReadAsStringAsync());
+                Assert.NotNull(consultaAlterada);
+                Assert.Equal("Aceita", consultaAlterada.Status);
+                Assert.Equal(consultaStatusRequest.Justificativa.ToLower(), consultaAlterada.JustificativaCancelamento.ToLower());
+            }
         }
 
     }
