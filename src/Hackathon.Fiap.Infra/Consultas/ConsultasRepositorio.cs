@@ -101,6 +101,12 @@ namespace Hackathon.Fiap.Infra.Consultas
                 dp.Add("@STATUS", filtro.Status.ToString());
             }
 
+            if(filtro.IdConsulta > 0)
+            {
+                sql.AppendLine($" and c.id = @IDCONSULTA ");
+                dp.Add("@IDCONSULTA", filtro.IdConsulta);
+            }
+
             string sqlPaginado = GerarQueryPaginacao(sql.ToString(), filtro.Pg, filtro.Qt, filtro.CpOrd, filtro.TpOrd.ToString());
             
             

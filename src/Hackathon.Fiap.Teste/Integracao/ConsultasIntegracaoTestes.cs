@@ -65,7 +65,10 @@ namespace Hackathon.Fiap.Teste.Integracao
             Assert.NotNull(consultasPaginadas);
             Assert.NotEmpty(consultasPaginadas.Registros);
 
-            ConsultaResponse consultaResponse = consultasPaginadas.Registros.First();
+            ConsultaResponse consultaResponse = consultasPaginadas.Registros.Where(x => x.Status == "Cancelada").First();
+
+            Assert.NotNull(consultaResponse);
+
             ConsultaStatusRequest consultaStatusRequest = new()
             {
                 IdConsulta = consultaResponse.IdConsulta,
@@ -99,7 +102,10 @@ namespace Hackathon.Fiap.Teste.Integracao
             Assert.NotNull(consultasPaginadas);
             Assert.NotEmpty(consultasPaginadas.Registros);
 
-            ConsultaResponse consultaResponse = consultasPaginadas.Registros.First();
+            ConsultaResponse consultaResponse = consultasPaginadas.Registros.Where(x => x.Status == "Pendente").First();
+
+            Assert.NotNull(consultaResponse);
+
             ConsultaStatusRequest consultaStatusRequest = new()
             {
                 IdConsulta = consultaResponse.IdConsulta,
@@ -109,7 +115,6 @@ namespace Hackathon.Fiap.Teste.Integracao
 
             string jsonContent = JsonConvert.SerializeObject(consultaStatusRequest);
             HttpContent httpContent = new StringContent(jsonContent, Encoding.UTF8, "application/json");
-
 
             HttpResponseMessage resultAlteracao =
                 await apiFactoryClient.PutAsync($"api/consultas/situacoes?IdConsulta={consultaResponse.IdConsulta}&Status=Aceita", httpContent);
