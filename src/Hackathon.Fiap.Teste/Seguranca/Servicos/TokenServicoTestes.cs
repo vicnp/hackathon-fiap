@@ -1,5 +1,4 @@
-﻿using System.Text;
-using FluentAssertions;
+﻿using FluentAssertions;
 using Hackathon.Fiap.Domain.Seguranca.Servicos;
 using Hackathon.Fiap.Domain.Usuarios.Entidades;
 using Hackathon.Fiap.Domain.Usuarios.Enumeradores;

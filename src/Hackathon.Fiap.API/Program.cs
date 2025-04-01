@@ -1,6 +1,5 @@
 using Hackathon.Fiap.Application.Medicos.Servicos;
 using Hackathon.Fiap.Domain.Medicos.Servicos;
-using Hackathon.Fiap.Domain.Utils.Excecoes;
 using Hackathon.Fiap.Domain.Utils.Middleware;
 using Hackathon.Fiap.Infra.Medicos;
 using Hackathon.Fiap.Infra.Utils.DBContext;

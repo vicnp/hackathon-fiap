@@ -1,19 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http.Json;
+﻿using System.Net;
 using System.Text;
-using System.Threading.Tasks;
-using Azure;
-using FluentAssertions;
 using Hackathon.Fiap.DataTransfer.Consultas.Enumeradores;
 using Hackathon.Fiap.DataTransfer.Consultas.Requests;
 using Hackathon.Fiap.DataTransfer.Consultas.Responses;
 using Hackathon.Fiap.DataTransfer.Utils;
 using Hackathon.Fiap.Domain.Usuarios.Entidades;
 using Hackathon.Fiap.Teste.Integracao.ClassesHelper;
-using MySqlX.XDevAPI;
 using Newtonsoft.Json;
 
 namespace Hackathon.Fiap.Teste.Integracao
@@ -154,12 +146,12 @@ namespace Hackathon.Fiap.Teste.Integracao
             string jsonContent = JsonConvert.SerializeObject(consultaStatusRequest);
             HttpContent httpContent = new StringContent(jsonContent, Encoding.UTF8, "application/json");
 
-
             HttpResponseMessage resultAlteracao =
                 await apiFactoryClient.PutAsync($"api/consultas/situacoes?IdConsulta={consultaResponse.IdConsulta}&Status=Aceita", httpContent);
 
             Assert.True(!resultAlteracao.IsSuccessStatusCode, "O endpoint não respondeu como esperado.");
             Assert.Equal(HttpStatusCode.BadRequest, resultAlteracao.StatusCode);
+            
             if (!resultAlteracao.IsSuccessStatusCode)
             {
                 ErroResponse? consultaAlterada = JsonConvert.DeserializeObject<ErroResponse>(await resultAlteracao.Content.ReadAsStringAsync());

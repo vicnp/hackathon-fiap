@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Hackathon.Fiap.Teste.Integracao.ClassesHelper
+﻿namespace Hackathon.Fiap.Teste.Integracao.ClassesHelper
 {
     public class ErroResponse
     {
