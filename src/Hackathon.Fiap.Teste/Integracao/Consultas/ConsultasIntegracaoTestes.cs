@@ -8,7 +8,7 @@ using Hackathon.Fiap.Domain.Usuarios.Entidades;
 using Hackathon.Fiap.Teste.Integracao.ClassesHelper;
 using Newtonsoft.Json;
 
-namespace Hackathon.Fiap.Teste.Integracao
+namespace Hackathon.Fiap.Teste.Integracao.Consultas
 {
     public class ConsultasIntegracaoTestes(HackatonApiFactory hackatonApi) : IClassFixture<HackatonApiFactory>
     {
@@ -43,7 +43,7 @@ namespace Hackathon.Fiap.Teste.Integracao
 
             HttpResponseMessage result = await apiFactoryClient.GetAsync("api/consultas/paginados");
 
-            Assert.Equal(System.Net.HttpStatusCode.Forbidden, result.StatusCode);
+            Assert.Equal(HttpStatusCode.Forbidden, result.StatusCode);
         }
 
         [Fact]
@@ -51,7 +51,7 @@ namespace Hackathon.Fiap.Teste.Integracao
         {
             await AutenticarAplicacao(Roles.Administrador);
             HttpResponseMessage result = await apiFactoryClient.PutAsync("api/consultas/situacoes", null);
-            Assert.Equal(System.Net.HttpStatusCode.Forbidden, result.StatusCode);
+            Assert.Equal(HttpStatusCode.Forbidden, result.StatusCode);
         }
 
         [Fact]
