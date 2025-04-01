@@ -6,5 +6,6 @@ namespace Hackathon.Fiap.DataTransfer.Consultas.Requests
     {
         public int IdConsulta {  get; set; }
         public StatusConsultaEnum Status {  get; set; } 
+        public string? Justificativa { get; set; }
     }
 }

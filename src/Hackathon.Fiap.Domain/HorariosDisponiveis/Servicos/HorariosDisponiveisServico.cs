@@ -77,7 +77,7 @@ public class HorariosDisponiveisServico(IHorariosDisponiveisRepositorio horarios
         }
 
         if (horarios.Count == 0)
-            throw new InvalidOperationException("Nenhum horário disponível foi gerado. Verifique os horários informados.");
+            throw new RegraDeNegocioExcecao("Nenhum horário disponível foi gerado. Verifique os horários informados.");
 
         await horariosDisponiveisRepositorio.InserirHorariosDisponiveisAsync(horarios, ct);
     }

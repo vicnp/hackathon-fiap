@@ -21,11 +21,11 @@ namespace Hackathon.Fiap.Application.Consultas.Servicos
             return response;
         }
 
-        public async Task<ConsultaResponse> AlterarStatusConsultaAsync(ConsultaStatusRequest request, string justificativa, CancellationToken ct)
+        public async Task<ConsultaResponse> AlterarStatusConsultaAsync(ConsultaStatusRequest request, string? justificativa, CancellationToken ct)
         {
             ArgumentNullException.ThrowIfNull(request);
             Consulta consulta = await ValidarConsulta(request, ct);
-            consulta.JustificativaCancelamento = justificativa;
+            consulta.JustificativaCancelamento = justificativa!;
             Consulta? consultaResponse = await consultasServico.AtualizarStatusConsultaAsync(consulta, request.Status, ct);
 
             return mapper.Map<ConsultaResponse>(consultaResponse);

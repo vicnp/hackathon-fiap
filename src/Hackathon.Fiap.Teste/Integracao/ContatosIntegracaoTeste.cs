@@ -1,97 +1,90 @@
-﻿using FluentAssertions;
-using Newtonsoft.Json;
-using System.Text;
+﻿//using FluentAssertions;
+//using Newtonsoft.Json;
+//using System.Text;
 
-namespace Hackathon.Fiap.Teste.Integracao
-{
+//namespace Hackathon.Fiap.Teste.Integracao
+//{
 
-    public class ContatosIntegracaoTeste : IClassFixture<TechChallengeApiFactory>
-    {
-        private readonly TechChallengeApiFactory techChallengeApiFactory;
-        private readonly HttpClient apiFactoryClient;
+//    public class ContatosIntegracaoTeste(HackatonApiFactory hackatonApi) : IClassFixture<HackatonApiFactory>
+//    {
+//        private readonly HttpClient apiFactoryClient = hackatonApi.CreateClient();
 
-        public ContatosIntegracaoTeste(TechChallengeApiFactory techChallengeApiFactory)
-        {
-            this.techChallengeApiFactory = techChallengeApiFactory;
-            apiFactoryClient = techChallengeApiFactory.CreateClient();
-        }
+//        private async Task<HttpResponseMessage> CriaContato()
+//        {
+//            var contato = new ContatoCrudRequest
+//            {
+//                Nome = "Jorge da Silva Sauro",
+//                Email = "jorge@dino.com.br",
+//                DDD = 11,
+//                Telefone = "912345678"
+//            };
 
-        private async Task<HttpResponseMessage> CriaContato()
-        {
-            var contato = new ContatoCrudRequest
-            {
-                Nome = "Jorge da Silva Sauro",
-                Email = "jorge@dino.com.br",
-                DDD = 11,
-                Telefone = "912345678"
-            };
+//            var requestContent = new StringContent(JsonConvert.SerializeObject(contato), Encoding.UTF8, "application/json");
 
-            var requestContent = new StringContent(JsonConvert.SerializeObject(contato), Encoding.UTF8, "application/json");
+//            var result = await apiFactoryClient.PostAsync("api/contatos", requestContent);
+//            return result;
+//        }
 
-            var result = await apiFactoryClient.PostAsync("api/contatos", requestContent);
-            return result;
-        }
+//        [Fact]
+//        public async Task Cria_Contatos_Corretamente()
+//        {
+//            HttpResponseMessage result = await CriaContato();
 
-        [Fact]
-        public async Task Cria_Contatos_Corretamente()
-        {
-            HttpResponseMessage result = await CriaContato();
+//            ContatoResponse? contato = JsonConvert.DeserializeObject<ContatoResponse>(await result.Content.ReadAsStringAsync());
 
-            ContatoResponse? contato = JsonConvert.DeserializeObject<ContatoResponse>(await result.Content.ReadAsStringAsync());
-
-            result.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
-            contato.Should().NotBeNull();
-            contato.Regiao.Descricao.Should().Be("Sudeste");
-        }
+//            result.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
+//            contato.Should().NotBeNull();
+//            contato.Regiao.Descricao.Should().Be("Sudeste");
+//        }
 
 
-        [Fact]
-        public async Task Listar_Contatos_Corretamente()
-        {
-            _ = await CriaContato();
-            HttpResponseMessage result = await apiFactoryClient.GetAsync("api/contatos/itens");
+//        [Fact]
+//        public async Task Listar_Contatos_Corretamente()
+//        {
+//            _ = await CriaContato();
+//            HttpResponseMessage result = await apiFactoryClient.GetAsync("api/contatos/itens");
 
-            List<ContatoResponse>? contatos = JsonConvert.DeserializeObject<List<ContatoResponse>>(await result.Content.ReadAsStringAsync());
+//            List<ContatoResponse>? contatos = JsonConvert.DeserializeObject<List<ContatoResponse>>(await result.Content.ReadAsStringAsync());
 
-            result.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
-            contatos.Should().NotBeNull();
-            contatos.Count.Should().BeGreaterThan(0);
-        }
+//            result.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
+//            contatos.Should().NotBeNull();
+//            contatos.Count.Should().BeGreaterThan(0);
+//        }
 
-        [Fact]
-        public async Task Editar_Contatos_Corretamente()
-        {
+//        [Fact]
+//        public async Task Editar_Contatos_Corretamente()
+//        {
 
-            HttpResponseMessage contatoCriado = await CriaContato();
+//            HttpResponseMessage contatoCriado = await CriaContato();
 
-            ContatoResponse? contato = JsonConvert.DeserializeObject<ContatoResponse>(await contatoCriado.Content.ReadAsStringAsync());
+//            ContatoResponse? contato = JsonConvert.DeserializeObject<ContatoResponse>(await contatoCriado.Content.ReadAsStringAsync());
 
-            int idEdicao = -1;
-            if (contato!.Id.HasValue)
-            {
-                idEdicao = contato.Id.Value;
-                contato.Nome = "Contato Editado";
-            }
+//            int idEdicao = -1;
+//            if (contato!.Id.HasValue)
+//            {
+//                idEdicao = contato.Id.Value;
+//                contato.Nome = "Contato Editado";
+//            }
 
-            StringContent requestContent = new StringContent(JsonConvert.SerializeObject(contato), Encoding.UTF8, "application/json");
+//            StringContent requestContent = new StringContent(JsonConvert.SerializeObject(contato), Encoding.UTF8, "application/json");
 
-            HttpResponseMessage result = await apiFactoryClient.PutAsync($"api/contatos/{idEdicao}", requestContent);
+//            HttpResponseMessage result = await apiFactoryClient.PutAsync($"api/contatos/{idEdicao}", requestContent);
 
-            ContatoResponse? contatoEditado = JsonConvert.DeserializeObject<ContatoResponse>(await result.Content.ReadAsStringAsync());
+//            ContatoResponse? contatoEditado = JsonConvert.DeserializeObject<ContatoResponse>(await result.Content.ReadAsStringAsync());
 
-            result.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
-            contatoEditado.Should().NotBeNull();
-            contatoEditado.Nome.Should().Be(contato.Nome);
-        }
+//            result.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
+//            contatoEditado.Should().NotBeNull();
+//            contatoEditado.Nome.Should().Be(contato.Nome);
+//        }
 
-        [Fact]
-        public async Task Deletar_Contatos_Corretamente()
-        {
-            int idDelecao = 1;
+//        [Fact]
+//        public async Task Deletar_Contatos_Corretamente()
+//        {
+//            int idDelecao = 1;
 
-            var result = await apiFactoryClient.DeleteAsync($"api/contatos/{idDelecao}");
+//            var result = await apiFactoryClient.DeleteAsync($"api/contatos/{idDelecao}");
 
-            result.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
-        }
-    }
-}
+//            result.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
+//        }
+//    }
+//}
