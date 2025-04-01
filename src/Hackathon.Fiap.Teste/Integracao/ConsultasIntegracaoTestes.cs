@@ -97,7 +97,7 @@ namespace Hackathon.Fiap.Teste.Integracao
         }
 
         [Fact]
-        public async Task AlterarSituacaoConsulta_Status_Valido_Espero_Consulta_Cancelada()
+        public async Task AlterarSituacaoConsulta_Status_Valido_Espero_Consulta_Aceita()
         {
             await AutenticarAplicacao(Roles.Medico);
 
@@ -130,6 +130,42 @@ namespace Hackathon.Fiap.Teste.Integracao
                 Assert.NotNull(consultaAlterada);
                 Assert.Equal("Aceita", consultaAlterada.Status);
                 Assert.Equal(consultaStatusRequest.Justificativa.ToLower(), consultaAlterada.JustificativaCancelamento.ToLower());
+            }
+        }
+
+        [Fact]
+        public async Task AlterarSituacaoConsulta_Status_Valido__Request_Incompleto_Espero_RegraDeNegocioExcecao()
+        {
+            await AutenticarAplicacao(Roles.Medico);
+
+            HttpResponseMessage resultConsulta = await apiFactoryClient.GetAsync("api/consultas/paginados");
+            PaginacaoConsulta<ConsultaResponse>? consultasPaginadas = JsonConvert.DeserializeObject<PaginacaoConsulta<ConsultaResponse>>(await resultConsulta.Content.ReadAsStringAsync());
+
+            Assert.NotNull(consultasPaginadas);
+            Assert.NotEmpty(consultasPaginadas.Registros);
+
+            ConsultaResponse consultaResponse = consultasPaginadas.Registros.First();
+            ConsultaStatusRequest consultaStatusRequest = new()
+            {
+                IdConsulta = consultaResponse.IdConsulta,
+                Status = StatusConsultaEnum.Cancelada
+            };
+
+            string jsonContent = JsonConvert.SerializeObject(consultaStatusRequest);
+            HttpContent httpContent = new StringContent(jsonContent, Encoding.UTF8, "application/json");
+
+
+            HttpResponseMessage resultAlteracao =
+                await apiFactoryClient.PutAsync($"api/consultas/situacoes?IdConsulta={consultaResponse.IdConsulta}&Status=Aceita", httpContent);
+
+            Assert.True(!resultAlteracao.IsSuccessStatusCode, "O endpoint não respondeu como esperado.");
+            Assert.Equal(HttpStatusCode.BadRequest, resultAlteracao.StatusCode);
+            if (!resultAlteracao.IsSuccessStatusCode)
+            {
+                ErroResponse? consultaAlterada = JsonConvert.DeserializeObject<ErroResponse>(await resultAlteracao.Content.ReadAsStringAsync());
+                Assert.NotNull(consultaAlterada);
+                Assert.Equal("Por favor forneça uma justificativa para o cancelamento.", consultaAlterada.Erro.Mensagem);
+                Assert.Equal("RegraDeNegocioExcecao", consultaAlterada.Erro.Tipo);
             }
         }
 

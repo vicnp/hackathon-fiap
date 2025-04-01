@@ -35,7 +35,7 @@ namespace Hackathon.Fiap.Infra.Consultas
 
             dp.Add("@IDCONSULTA", consulta.IdConsulta);
             dp.Add("@STATUS", consulta.Status.ToString());
-            dp.Add("@JUSTIFICATIVA", consulta.JustificativaCancelamento.ToLower());
+            dp.Add("@JUSTIFICATIVA", consulta.JustificativaCancelamento?.ToLower());
 
             return await session.ExecuteAsync(new CommandDefinition(sql.ToString(), dp, cancellationToken: ct));
         }
