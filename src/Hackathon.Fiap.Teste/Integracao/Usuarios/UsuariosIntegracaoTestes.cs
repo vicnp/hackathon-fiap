@@ -4,17 +4,15 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
-using Hackathon.Fiap.DataTransfer.Consultas.Responses;
-using Hackathon.Fiap.DataTransfer.Medicos.Responses;
+using Hackathon.Fiap.DataTransfer.Pacientes.Responses;
 using Hackathon.Fiap.DataTransfer.Utils;
 using Hackathon.Fiap.Domain.Usuarios.Entidades;
-using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
 
-namespace Hackathon.Fiap.Teste.Integracao.Medicos
+namespace Hackathon.Fiap.Teste.Integracao.Usuarios
 {
     [Collection("Hackathon API Collection")]
-    public class MedicosIntegracaoTestes(HackatonApiFactory hackatonApi)
+    public class UsuariosIntegracaoTestes(HackatonApiFactory hackatonApi)
     {
         private readonly HttpClient apiFactoryClient = hackatonApi.CreateClient();
         private string tokenJwt = string.Empty;
@@ -30,21 +28,21 @@ namespace Hackathon.Fiap.Teste.Integracao.Medicos
         }
 
         [Fact]
-        public async Task Listar_Medicos_Paginas_Corretamente()
+        public async Task Listar_Usuarios_Paginas_Corretamente()
         {
-            await AutenticarAplicacao(Roles.Medico);
-            HttpResponseMessage result = await apiFactoryClient.GetAsync("api/medicos/paginados");
-            PaginacaoConsulta<MedicoResponse>? medicosPaginados = JsonConvert.DeserializeObject<PaginacaoConsulta<MedicoResponse>>(await result.Content.ReadAsStringAsync());
+            await AutenticarAplicacao(Roles.Administrador);
+            HttpResponseMessage result = await apiFactoryClient.GetAsync("api/usuarios/paginados");
+            PaginacaoConsulta<PacienteResponse>? medicosPaginados = JsonConvert.DeserializeObject<PaginacaoConsulta<PacienteResponse>>(await result.Content.ReadAsStringAsync());
 
             Assert.NotNull(medicosPaginados);
             Assert.NotEmpty(medicosPaginados.Registros);
         }
 
         [Fact]
-        public async Task Listar_Medicos_Paginas_Autorizacao_NaoAutorizado()
+        public async Task Listar_Usuarios_Paginas_Autorizacao_NaoAutorizado()
         {
-            await AutenticarAplicacao(Roles.Administrador);
-            HttpResponseMessage result = await apiFactoryClient.GetAsync("api/medicos/paginados");
+            await AutenticarAplicacao(Roles.Paciente);
+            HttpResponseMessage result = await apiFactoryClient.GetAsync("api/usuarios/paginados");
 
             Assert.Equal(HttpStatusCode.Forbidden, result.StatusCode);
         }
