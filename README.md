@@ -71,3 +71,12 @@ Os grupos deverão entregar o seguinte:
   - Busca por Médicos (Paciente)
  
   - Agendamento de Consultas (Paciente)
+ 
+
+## Integrantes
+
+| Nome                      | RM     |
+| ------------------------- | ------ |
+| Edinam Marcondes          | 357908 |
+| João Paulo Coaio          | 357906 |
+| Victor Nascimetno Peroba  | 357907 | 
