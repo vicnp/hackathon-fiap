@@ -1,3 +1,4 @@
+using System.Net;
 using Hackathon.Fiap.Application.HorariosDisponiveis.Interfaces;
 using Hackathon.Fiap.DataTransfer.HorariosDisponiveis.Requests;
 using Hackathon.Fiap.DataTransfer.HorariosDisponiveis.Responses;
@@ -39,10 +40,10 @@ namespace Hackathon.Fiap.API.Controllers.HorariosDisponiveis
         [HttpPost]
         [Route("inserir")]
         [Authorize(Roles = $"{Roles.Medico},{Roles.Administrador}")]
-        public async Task<ActionResult<HorarioDisponivelResponse>> InserirHorariosDisponiveisAsync([FromBody] HorarioDisponivelInserirRequest request, CancellationToken ct)
+        public async Task<ActionResult> InserirHorariosDisponiveisAsync([FromBody] HorarioDisponivelInserirRequest request, CancellationToken ct)
         {
             await horariosDisponiveisAppServico.InserirHorariosDisponiveisAsync(request, ct);
-            return Created();
+            return Created("api/horarios-disponiveis/inserir", "Registro Gravado");
         }
     }
 }

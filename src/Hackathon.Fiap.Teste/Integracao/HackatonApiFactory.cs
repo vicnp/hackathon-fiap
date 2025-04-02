@@ -102,7 +102,6 @@ namespace Hackathon.Fiap.Teste.Integracao
              
                     INSERT INTO `Especialidades` VALUES (1,'Especialista.', 'Descricao');
 
-
                     CREATE TABLE `Horarios_Disponiveis` (
                       `id` int NOT NULL AUTO_INCREMENT,
                       `medico_id` int NOT NULL,
@@ -116,7 +115,10 @@ namespace Hackathon.Fiap.Teste.Integracao
                       CONSTRAINT `Horarios_Disponiveis_ibfk_1` FOREIGN KEY (`medico_id`) REFERENCES `Medicos` (`id`) ON DELETE CASCADE,
                       CONSTRAINT `Horarios_Disponiveis_ibfk_2` FOREIGN KEY (`paciente_id`) REFERENCES `Usuarios` (`id`) ON DELETE SET NULL
                     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
+                    
+                    INSERT INTO techchallenge.Horarios_Disponiveis (id, medico_id, paciente_id, data_hora_inicio, status, data_hora_fim)
+                                                             VALUES(1, 1, 1, '2025-03-18 08:00:00', 'Disponivel', '2025-03-18 08:30:00');
+                    
                     CREATE TABLE `Medico_Especialidades` (
                       `medico_id` int NOT NULL,
                       `especialidade_id` int NOT NULL,
