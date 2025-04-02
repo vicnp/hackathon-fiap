@@ -1,5 +1,8 @@
-﻿namespace Hackathon.Fiap.Domain.Utils.Excecoes
+﻿using System.Diagnostics.CodeAnalysis;
+
+namespace Hackathon.Fiap.Domain.Utils.Excecoes
 {
+    [ExcludeFromCodeCoverage]
     public class FalhaConversaoExcecao : Exception
     {
         public FalhaConversaoExcecao()

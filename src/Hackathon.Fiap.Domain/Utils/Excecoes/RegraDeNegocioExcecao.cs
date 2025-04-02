@@ -3,6 +3,7 @@ using System.Runtime.CompilerServices;
 
 namespace Hackathon.Fiap.Domain.Utils.Excecoes
 {
+    [ExcludeFromCodeCoverage]
     public class RegraDeNegocioExcecao : Exception
     {
         public RegraDeNegocioExcecao()

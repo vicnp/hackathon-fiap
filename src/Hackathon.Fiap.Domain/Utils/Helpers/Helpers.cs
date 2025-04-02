@@ -1,5 +1,8 @@
-﻿namespace Hackathon.Fiap.Domain.Utils.Helpers
+﻿using System.Diagnostics.CodeAnalysis;
+
+namespace Hackathon.Fiap.Domain.Utils.Helpers
 {
+    [ExcludeFromCodeCoverage]
     public static class Helpers
     {
         /// <summary>
