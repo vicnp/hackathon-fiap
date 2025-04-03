@@ -80,3 +80,80 @@ Os grupos deverão entregar o seguinte:
 | Edinam Marcondes          | 357908 |
 | João Paulo Coaio          | 357906 |
 | Victor Nascimetno Peroba  | 357907 | 
+
+## Arquitetura
+
+<img width="564" alt="arquitetura" src="https://github.com/user-attachments/assets/fcd522f0-52c7-4eb7-8f17-8edee1058f29" />
+
+
+## Subdomínios
+
+![subdominios](https://github.com/user-attachments/assets/23d3df6f-0fdb-4edb-b150-d0e773952f90)
+
+
+## Objetos de Valor
+
+![objetos de velor](https://github.com/user-attachments/assets/eb2da194-1883-49cd-928d-14e705d8d0c1)
+
+
+
+## Domain Storytelling
+
+### Cadastro de Médico
+
+![Cadastro Medico](https://github.com/user-attachments/assets/ef3aa9d0-b26e-4f2c-a30c-434f377ec61c)
+
+
+### Cadastro de Paciente
+
+![Cadastro Paciente](https://github.com/user-attachments/assets/0d32dbfb-b21a-4ffd-8d16-fce6cfe45fe7)
+
+
+### Agendamento de Consulta
+
+![Agendamento Consulta](https://github.com/user-attachments/assets/4d1bd5e8-492f-4222-bec1-a646d0e219a3)
+
+
+### Aceite/Recusa de Consulta
+
+![Aceite e Recusa de consulta](https://github.com/user-attachments/assets/689bb1fe-070a-4c8c-b933-aae00a0a5355)
+
+
+
+## Justificativas das Escolhas Técnicas
+### API REST (ASP.NET Core)
+- Framework robusto e maduro
+- Excelente performance
+- Suporte nativo a async/await
+- Fácil integração com MySQL
+- Suporte a containers Docker
+- Documentação automática com Swagger
+
+### Banco de Dados (MySQL)
+- Open source
+- Alta performance
+- Suporte a transações
+- Índices otimizados
+- Backup e replicação
+- Compatibilidade com .NET
+
+## Estratégias de Implementação
+### Autenticação
+- JWT para autenticação stateless
+- Refresh tokens para renovação
+- Validação de CRM e CPF
+- Senhas criptografadas com bcrypt
+
+### Agendamento
+- Validação de conflitos de horário
+- Notificações via email
+- Status da consulta
+- Histórico de consultas
+
+### Segurança
+- Autenticação JWT
+- Criptografia de dados sensíveis
+- HTTPS em todas as comunicações
+- Validação de entrada de dados
+- Logs de auditoria
+- Conformidade com LGPD
