@@ -81,6 +81,14 @@ Os grupos deverão entregar o seguinte:
 | João Paulo Coaio          | 357906 |
 | Victor Nascimetno Peroba  | 357907 | 
 
+
+## Pipeline do Projeto
+
+A pipeline CI é executada a cada commit em qualquer branch que tenha o prefixo 'feature/*', já a pipeline CD é executada a cada merge na branch main.
+
+https://github.com/edinanxs/hackathon-fiap/actions
+
+
 ## Arquitetura
 
 <img width="564" alt="arquitetura" src="https://github.com/user-attachments/assets/fcd522f0-52c7-4eb7-8f17-8edee1058f29" />
