@@ -24,9 +24,9 @@ Para viabilizar o desenvolvimento de um sistema que esteja em conformidade com a
 5. Busca por Médicos (Paciente) ✔
  - O sistema deve permitir que o paciente visualize a lista de médicos disponíveis, utilizando filtros como especialidade.✔
 
-6. Agendamento de Consultas (Paciente)
- - Após selecionar o médico, o paciente deve poder visualizar a agenda do médico e o valor da consulta, e efetuar o agendamento.
- - O usuário paciente poderá cancelar a consulta mediante justificativa.
+6. Agendamento de Consultas (Paciente)✔
+ - Após selecionar o médico, o paciente deve poder visualizar a agenda do médico e o valor da consulta, e efetuar o agendamento.✔
+ - O usuário paciente poderá cancelar a consulta mediante justificativa.✔
 
 
 
