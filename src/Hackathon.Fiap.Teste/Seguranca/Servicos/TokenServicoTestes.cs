@@ -7,6 +7,7 @@ using Hackathon.Fiap.Domain.Utils.Excecoes;
 using Hackathon.Fiap.Domain.Utils.Repositorios;
 using Microsoft.Extensions.Configuration;
 using NSubstitute;
+using NSubstitute.ReturnsExtensions;
 
 namespace Hackathon.Fiap.Teste.Seguranca.Servicos
 {
@@ -41,7 +42,7 @@ namespace Hackathon.Fiap.Teste.Seguranca.Servicos
                 utilRepositorio.GetValueConfigurationHash(configuration).Returns("6i9BiR4fRpbbIKxxEoEyjQ==");
                 utilRepositorio.GetValueConfigurationKeyJWT(configuration).Returns("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c");
                 usuariosRepositorio.RecuperarUsuarioAsync(email, Arg.Any<string>(), Arg.Any<CancellationToken>())
-                    .Returns(default(Task<Usuario?>));
+                    .ReturnsNull();
                 
                 await FluentActions.Awaiting(() => tokenServico.GetTokenAsync(email, senha, ct))
                     .Should().ThrowAsync<NaoAutorizadoExcecao>()

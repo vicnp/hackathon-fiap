@@ -102,6 +102,9 @@ namespace Hackathon.Fiap.Teste.Integracao
                                   CONSTRAINT `Consulta_ibfk_3` FOREIGN KEY (`horario_disponivel_id`) REFERENCES `Horario_Disponivel` (`id`) ON DELETE CASCADE
                                 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
                                 
+                                INSERT INTO `Consulta` VALUES (1,2,1,9252.00,'Cancelada','string','2025-03-13 23:58:14',1);
+                                INSERT INTO `Consulta` VALUES (2,2,1,9252.00,'Pendente','string','2025-03-13 23:58:15',1);
+
                                 CREATE TABLE `Especialidade` (
                                   `id` int NOT NULL AUTO_INCREMENT,
                                   `nome` varchar(255) NOT NULL,

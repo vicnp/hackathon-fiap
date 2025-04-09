@@ -20,7 +20,7 @@ namespace Hackathon.Fiap.Infra.Consultas
             StringBuilder sql = new(
               @"
                 UPDATE
-	                techchallenge.Consultas
+	                techchallenge.Consulta
                 SET
 	                status = @STATUS ");
 
@@ -46,7 +46,6 @@ namespace Hackathon.Fiap.Infra.Consultas
             StringBuilder sql = new(
               @"select
 	                c.id as ConsultaId,
-	                c.data_hora as DataHora,
 	                c.valor as Valor,
 	                c.status as Status,
 	                c.justificativa_cancelamento as JustificativaCancelamento,

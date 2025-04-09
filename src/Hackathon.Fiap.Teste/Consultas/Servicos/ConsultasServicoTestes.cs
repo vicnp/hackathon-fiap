@@ -50,7 +50,6 @@ public class ConsultasServicoTestes
         var consultaConsulta = new ConsultaConsulta
         {
             ConsultaId = 1,
-            DataHora = DateTime.Now.AddDays(1),
             Valor = 150.00,
             Status = StatusConsultaEnum.Pendente.ToString(),
             JustificativaCancelamento = "",
