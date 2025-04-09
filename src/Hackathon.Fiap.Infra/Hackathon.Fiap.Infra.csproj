@@ -18,5 +18,9 @@
     <ProjectReference Include="..\Hackathon.Fiap.Domain\Hackathon.Fiap.Domain.csproj" />
     <ProjectReference Include="..\Hackathon.Fiap.Domain\Hackathon.Fiap.Domain.csproj" />
   </ItemGroup>
+  
+  <ItemGroup>
+    <AssemblyAttribute Include="System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage" />
+  </ItemGroup>
 
 </Project>

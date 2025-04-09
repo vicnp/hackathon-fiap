@@ -3,6 +3,7 @@ using System.Runtime.CompilerServices;
 
 namespace Hackathon.Fiap.Domain.Utils.Excecoes
 {
+    [ExcludeFromCodeCoverage]
     public class RegistroNaoEncontradoExcecao : Exception
     {
         public RegistroNaoEncontradoExcecao(string? message) : base(message)

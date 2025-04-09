@@ -34,7 +34,7 @@ Task("BuildTest")
     .Does(() => 
     {
 
-        DotNetTest("./TC - Teste/TC - Teste.csproj", new DotNetTestSettings
+        DotNetTest("./src/Hackathon.Fiap.Teste/Hackathon.Fiap.Teste.csproj", new DotNetTestSettings
             {
             Configuration = "Debug",
             ArgumentCustomization = args => args
@@ -64,7 +64,7 @@ Task("TestRun")
 			ExcludeByAttribute = new List<string> { "*.ExcludeFromCodeCoverage*" }
 		};
 
-    	DotNetTest("./TC - Teste/TC - Teste.csproj", testSettings, coverletSettings);
+    	DotNetTest("./src/Hackathon.Fiap.Teste/Hackathon.Fiap.Teste.csproj", testSettings, coverletSettings);
     }); 
 
 Task("TestReport")

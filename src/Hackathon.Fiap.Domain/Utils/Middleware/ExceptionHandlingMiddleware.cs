@@ -1,10 +1,12 @@
-﻿using System.Net;
+﻿using System.Diagnostics.CodeAnalysis;
+using System.Net;
 using System.Text.Json;
 using Hackathon.Fiap.Domain.Utils.Excecoes;
 using Microsoft.AspNetCore.Http;
 
 namespace Hackathon.Fiap.Domain.Utils.Middleware
 {
+    [ExcludeFromCodeCoverage]
     public class ExceptionHandlingMiddleware(RequestDelegate next)
     {
         public async Task Invoke(HttpContext context)

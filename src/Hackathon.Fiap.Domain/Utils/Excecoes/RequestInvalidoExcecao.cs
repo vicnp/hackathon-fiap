@@ -3,6 +3,7 @@ using System.Runtime.CompilerServices;
 
 namespace Hackathon.Fiap.Domain.Utils.Excecoes
 {
+    [ExcludeFromCodeCoverage]
     public class RequestInvalidoExcecao : Exception
     {
         public RequestInvalidoExcecao()

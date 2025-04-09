@@ -29,4 +29,8 @@
     <ProjectReference Include="..\Hackathon.Fiap.Infra\Hackathon.Fiap.Infra.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <AssemblyAttribute Include="System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage" />
+  </ItemGroup>
+  
 </Project>
