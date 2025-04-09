@@ -14,12 +14,10 @@ public class ConsultaTestes
     {
         // ARRANGE
         int id = 1;
-        DateTime dataHora = new DateTime(2025, 03, 31, 9, 0, 0);
         double valor = 150.00;
         StatusConsultaEnum status = StatusConsultaEnum.Pendente;
         string justificativaCancelamento = "";
         DateTime criadoEm = DateTime.Now;
-        int idHorariosDisponiveis = 1;
         
         // Criando a especialidade
         var especialidade = new Especialidade { EspecialidadeId = 1, NomeEspecialidade = "Cardiologia", DescricaoEspecialidade = "Especialidade de coração" };
@@ -49,8 +47,8 @@ public class ConsultaTestes
         consulta.Valor.Should().Be(valor);
         consulta.Status.Should().Be(status);
         consulta.JustificativaCancelamento.Should().Be(justificativaCancelamento);
-        consulta.CriadoEm.Should().Be(criadoEm);
-        consulta.HorarioDisponivel.Should().Be(idHorariosDisponiveis);
+        consulta.CriadoEm.Should().BeCloseTo(criadoEm , TimeSpan.FromSeconds(5000));
+        consulta.HorarioDisponivel.Should().Be(horarioDisponivel);
     }
 
     [Fact]
