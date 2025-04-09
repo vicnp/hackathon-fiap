@@ -21,7 +21,9 @@ namespace Hackathon.Fiap.Domain.Utils.Excecoes
         }
 
         [DoesNotReturn]
-        internal static void Throw(string? paramName) =>
-           throw new RegistroNaoEncontradoExcecao(paramName);
+        internal static void Throw(string? paramName)
+        {
+            throw new RegistroNaoEncontradoExcecao(paramName);
+        }
     }
 }

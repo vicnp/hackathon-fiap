@@ -6,11 +6,11 @@ namespace Hackathon.Fiap.DataTransfer.Consultas.Requests
 {
     public class ConsultaListarRequest : PaginacaoFiltro
     {
-        public int IdMedico { get; set; }
-        public int IdPaciente { get; set; }
-        public int IdHorariosDisponiveis { get; set; }
+        public int MedicoId { get; set; }
+        public int PacienteId { get; set; }
+        public int HorarioDisponiveId { get; set; }
         public StatusConsultaEnum Status { get; set; }
-        public ConsultaListarRequest() : base("IdConsulta", TipoOrdernacao.Desc)
+        public ConsultaListarRequest() : base("ConsultaId", TipoOrdernacao.Desc)
         {
         }
     }

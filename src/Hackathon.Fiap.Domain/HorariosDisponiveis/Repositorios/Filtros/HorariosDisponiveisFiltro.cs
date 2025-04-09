@@ -6,11 +6,12 @@ namespace Hackathon.Fiap.Domain.HorariosDisponiveis.Repositorios.Filtros;
 
 public class HorariosDisponiveisFiltro : PaginacaoFiltro
 {
-    public int IdMedico;
-    public int? IdPaciente;
+    public int? HorarioDisponivelId;
+    public int? MedicoId;
+    public int? PacienteId;
     public StatusHorarioDisponivelEnum? Status;
 
-    public HorariosDisponiveisFiltro() : base("IdHorarioDisponivel", TipoOrdernacao.Desc)
+    public HorariosDisponiveisFiltro() : base("HorarioDisponivelId", TipoOrdernacao.Desc)
     {
         
     }

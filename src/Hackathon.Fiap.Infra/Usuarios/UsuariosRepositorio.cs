@@ -15,15 +15,15 @@ namespace Hackathon.Fiap.Infra.Usuarios
         public Task<Usuario?> RecuperarUsuarioAsync(string identificador, string hash, CancellationToken ct)
         {
             StringBuilder sql = new($@"
-                                     SELECT u.id as IdUsuario,
+                                     SELECT u.id as UsuarioId,
                                             u.nome as Nome,
                                             u.email as Email,
                                             u.cpf as Cpf,
                                             u.hash as Hash,
                                             u.tipo as Tipo,
                                             u.criado_em as CriadoEm
-                                     FROM techchallenge.Usuarios u
-                                     LEFT JOIN techchallenge.Medicos m ON m.id = u.id
+                                     FROM techchallenge.Usuario u
+                                     LEFT JOIN techchallenge.Medico m ON m.id = u.id
                         	         WHERE u.hash = @hash
                         	         AND (u.email = @identificador OR u.cpf = @identificador OR m.crm = @identificador)");
 
@@ -37,13 +37,13 @@ namespace Hackathon.Fiap.Infra.Usuarios
         public async Task<PaginacaoConsulta<Usuario>> ListarUsuariosAsync(UsuarioListarRequest request, CancellationToken ct)
         {
             StringBuilder sql = new($@"
-                           SELECT u.id as IdUsuario,
+                           SELECT u.id as UsuarioId,
 		                          u.nome as Nome,
 		                          u.email as Email,
 		                          u.hash as Hash,
 		                          u.criado_em as CriadoEm,
 		                          u.tipo as Tipo
-                    FROM techchallenge.Usuarios u
+                    FROM techchallenge.Usuario u
 	                    WHERE 1 = 1");
 
             if (!request.Email.IsNullOrEmpty())

@@ -11,6 +11,7 @@ namespace Hackathon.Fiap.Application.Consultas.Profiles
     {
         public ConsultasProfiles()
         {
+            CreateMap<ConsultaRequest, ConsultaInserirFiltro>().ReverseMap();
             CreateMap<ConsultaListarRequest, ConsultasListarFiltro>().ReverseMap();
             CreateMap<PaginacaoConsulta<Consulta>, PaginacaoConsulta<ConsultaResponse>>().ReverseMap();
             CreateMap<Consulta, ConsultaResponse>().ReverseMap();

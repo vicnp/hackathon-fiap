@@ -6,12 +6,12 @@ namespace Hackathon.Fiap.Domain.Consultas.Repositorios.Filtros
 {
     public class ConsultasListarFiltro : PaginacaoFiltro
     {
-        public int IdMedico { get; set; }
-        public int IdPaciente {  get; set; }
-        public int IdHorariosDisponiveis {  get; set; }
+        public int MedicoId { get; set; }
+        public int PacienteId {  get; set; }
+        public int HorarioDisponivelId {  get; set; }
         public StatusConsultaEnum? Status { get; set; }
-        public int IdConsulta {  get; set; }
-        public ConsultasListarFiltro() : base("IdConsulta", TipoOrdernacao.Desc)
+        public int ConsultaId {  get; set; }
+        public ConsultasListarFiltro() : base("ConsultaId", TipoOrdernacao.Desc)
         {
         }
     }

@@ -6,30 +6,40 @@ using Hackathon.Fiap.Domain.Consultas.Repositorios;
 using Hackathon.Fiap.Domain.Consultas.Repositorios.Filtros;
 using Hackathon.Fiap.Domain.Consultas.Servicos;
 using Hackathon.Fiap.Domain.Consultas.Servicos.Interfaces;
+using Hackathon.Fiap.Domain.HorariosDisponiveis.Repositorios;
+using Hackathon.Fiap.Domain.HorariosDisponiveis.Servicos;
+using Hackathon.Fiap.Domain.HorariosDisponiveis.Servicos.Interfaces;
 using Hackathon.Fiap.Domain.Medicos.Entidades;
 using Hackathon.Fiap.Domain.Medicos.Repositorios;
+using Hackathon.Fiap.Domain.Medicos.Servicos.Interfaces;
 using Hackathon.Fiap.Domain.Pacientes.Entidades;
 using Hackathon.Fiap.Domain.Pacientes.Repositorios;
+using Hackathon.Fiap.Domain.Pacientes.Servicos.Interfaces;
 using Hackathon.Fiap.Domain.Utils.Excecoes;
+using Hackathon.Fiap.Infra.Consultas;
 using Hackathon.Fiap.Infra.Consultas.Consultas;
+using Hackathon.Fiap.Infra.HorariosDisponiveis;
 using NSubstitute;
 
 namespace Hackathon.Fiap.Teste.Consultas.Servicos;
 
 public class ConsultasServicoTestes
 {
-    private readonly IConsultaServico consultaServico;
     private readonly IConsultasRepositorio consultasRepositorio;
-    private readonly IMedicosRepositorio medicosRepositorio;
-    private readonly IPacientesRepositorio pacientesRepositorio;
-
+    private readonly IConsultasServico consultaServico;
+    private readonly IMedicosServico medicosServico;
+    private readonly IPacientesServicos pacientesServicos;
+    private readonly IHorariosDisponiveisServico horariosDisponiveisServico;
+    private readonly IHorariosDisponiveisRepositorio horariosDisponiveisRepositorio;
     public ConsultasServicoTestes()
     {
+        consultaServico = Substitute.For<IConsultasServico>();
+        medicosServico = Substitute.For<IMedicosServico>();
+        pacientesServicos = Substitute.For<IPacientesServicos>();
+        horariosDisponiveisServico = Substitute.For<IHorariosDisponiveisServico>();
         consultasRepositorio = Substitute.For<IConsultasRepositorio>();
-        medicosRepositorio = Substitute.For<IMedicosRepositorio>();
-        pacientesRepositorio = Substitute.For<IPacientesRepositorio>();
-
-        consultaServico = new ConsultasServico(consultasRepositorio, medicosRepositorio, pacientesRepositorio);
+        horariosDisponiveisRepositorio = Substitute.For<IHorariosDisponiveisRepositorio>();
+        consultaServico = new ConsultasServico(consultasRepositorio, medicosServico, horariosDisponiveisServico, horariosDisponiveisRepositorio, pacientesServicos);
     }
 
     [Fact]
@@ -39,21 +49,21 @@ public class ConsultasServicoTestes
         var filtro = new ConsultasListarFiltro();
         var consultaConsulta = new ConsultaConsulta
         {
-            IdConsulta = 1,
+            ConsultaId = 1,
             DataHora = DateTime.Now.AddDays(1),
             Valor = 150.00,
             Status = StatusConsultaEnum.Pendente.ToString(),
             JustificativaCancelamento = "",
             CriadoEm = DateTime.Now,
-            IdHorariosDisponiveis = 1,
-            IdMedico = 1,
-            IdPaciente = 1
+            HorarioDisponivelId = 1,
+            MedicoId = 1,
+            PacienteId = 1
         };
 
         var paginacaoConsulta = new PaginacaoConsulta<ConsultaConsulta>
         {
             Total = 1,
-            Registros = new List<ConsultaConsulta> { consultaConsulta }
+            Registros = [consultaConsulta]
         };
 
         consultasRepositorio.ListarConsultasAsync(Arg.Any<ConsultasListarFiltro>(), Arg.Any<CancellationToken>())
@@ -63,8 +73,8 @@ public class ConsultasServicoTestes
         medico.SetCrm("123456");
         var paciente = new Paciente();
 
-        medicosRepositorio.RecuperarMedico(Arg.Any<int>(), Arg.Any<CancellationToken>()).Returns(medico);
-        pacientesRepositorio.RecuperarPaciente(Arg.Any<int>(), Arg.Any<CancellationToken>()).Returns(paciente);
+        medicosServico.ValidarMedicoAsync(Arg.Any<int>(), Arg.Any<CancellationToken>()).Returns(medico);
+        pacientesServicos.ValidarPacienteAsync(Arg.Any<int>(), Arg.Any<CancellationToken>()).Returns(paciente);
 
         // ACT
         var resultado = await consultaServico.ListarConsultasAsync(filtro, CancellationToken.None);
@@ -84,7 +94,7 @@ public class ConsultasServicoTestes
         // ARRANGE
         var consulta = new Consulta
         {
-            IdConsulta = 1,
+            ConsultaId = 1,
             Status = StatusConsultaEnum.Pendente,
             JustificativaCancelamento = ""
         };
@@ -101,7 +111,7 @@ public class ConsultasServicoTestes
         // ARRANGE
         var consulta = new Consulta
         {
-            IdConsulta = 1,
+            ConsultaId = 1,
             Status = StatusConsultaEnum.Cancelada,
             JustificativaCancelamento = "Cancelada pelo paciente"
         };
@@ -118,7 +128,7 @@ public class ConsultasServicoTestes
         // ARRANGE
         var consulta = new Consulta
         {
-            IdConsulta = 1,
+            ConsultaId = 1,
             Status = StatusConsultaEnum.Pendente
         };
 
@@ -133,7 +143,7 @@ public class ConsultasServicoTestes
             {
                 new ConsultaConsulta
                 {
-                    IdConsulta = 1,
+                    ConsultaId = 1,
                     Status = StatusConsultaEnum.Aceita.ToString()
                 }
             }

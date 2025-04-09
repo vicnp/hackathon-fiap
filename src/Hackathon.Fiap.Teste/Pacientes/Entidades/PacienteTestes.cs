@@ -14,7 +14,6 @@ public class PacienteTestes
         string nome = "João da Silva";
         string cpf = "12345678900";
         string email = "fiap@contato.com.br";
-        string senha = "pastel de frango";
         string hash = "qwertyuiopasdfghjklzxcvbnm";
 
         // ACT

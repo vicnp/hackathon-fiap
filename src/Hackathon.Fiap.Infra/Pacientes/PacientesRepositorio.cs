@@ -16,14 +16,14 @@ namespace Hackathon.Fiap.Infra.Pacientes
         {
             DynamicParameters dp = new ();
             StringBuilder sql = new($@"
-                                    SELECT id as IdUsuario,
+                                    SELECT id as UsuarioId,
                                            nome as Nome,
                                            email as Email,
                                            cpf as Cpf,
                                            hash as Hash,
                                            tipo as Tipo,
                                            criado_em as CriadoEm
-                                    FROM techchallenge.Usuarios u
+                                    FROM techchallenge.Usuario u
 	                                WHERE u.tipo = 'Paciente'");
 
             if (filtro.Id > 0)
@@ -54,13 +54,10 @@ namespace Hackathon.Fiap.Infra.Pacientes
         }
 
         public async Task<Paciente?> RecuperarPaciente(int idPaciente, CancellationToken ct)
-        {
-            if (idPaciente <= 0)
-                return null;
-            
+        {            
             UsuarioListarFiltro filtro = new() { Id = idPaciente };
             PaginacaoConsulta<Paciente> paginacaoConsulta = await ListarPacientesAsync(filtro, ct);
-            return await Task.FromResult(paginacaoConsulta.Registros.FirstOrDefault());  
+            return paginacaoConsulta.Registros.FirstOrDefault();
         }
     }
 }

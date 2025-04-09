@@ -40,7 +40,7 @@ namespace Hackathon.Fiap.Domain.Seguranca.Servicos
                     new Claim(ClaimTypes.Email, usuario.Email),
                     new Claim(ClaimTypes.Name, usuario.Nome),
                     new Claim(ClaimTypes.Role, usuario.Tipo.ToString()),
-                    new Claim(ClaimTypes.Sid, usuario.IdUsuario.ToString())
+                    new Claim(ClaimTypes.Sid, usuario.UsuarioId.ToString())
                 ]),
 
                 Expires = DateTime.UtcNow.AddHours(5),

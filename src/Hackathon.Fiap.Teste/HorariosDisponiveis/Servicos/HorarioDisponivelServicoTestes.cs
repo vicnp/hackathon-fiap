@@ -41,12 +41,12 @@ public class HorariosDisponiveisServicoTestes
         var filtro = new HorariosDisponiveisFiltro(); // Ajuste conforme necessário
         var horarioDisponivelConsulta = new HorarioDisponivelConsulta
         {
-            IdHorarioDisponivel = 1,
+            HorarioDisponivelId = 1,
             DataHoraInicio = DateTime.Now.AddHours(1),
             DataHoraFim = DateTime.Now.AddHours(2),
             Status = StatusHorarioDisponivelEnum.Disponivel,
-            IdMedico = 1,
-            IdPaciente = 2
+            MedicoId = 1,
+            PacienteId = 2
         };
         
         var paginacaoConsulta = new PaginacaoConsulta<HorarioDisponivelConsulta>
@@ -63,7 +63,7 @@ public class HorariosDisponiveisServicoTestes
         medico.SetCrm("123456");
         var paciente = new Paciente();
 
-        medicosRepositorio.RecuperarMedico(Arg.Any<int>(), Arg.Any<CancellationToken>()).Returns(medico);
+        medicosRepositorio.RecuperarMedicoAsync(Arg.Any<int>(), Arg.Any<CancellationToken>()).Returns(medico);
         pacientesRepositorio.RecuperarPaciente(Arg.Any<int>(), Arg.Any<CancellationToken>()).Returns(paciente);
 
         // ACT
@@ -84,14 +84,14 @@ public class HorariosDisponiveisServicoTestes
         // ARRANGE
         var comando = new HorariosDisponiveisInserirComando
         {
-            IdMedico = 1,
+            MedicoId = 1,
             DataHoraInicio = DateTime.Now.AddHours(1),
             DataHoraFim = DateTime.Now.AddHours(3)
         };
 
         var medico = new Medico();
         medico.SetCrm("123456");
-        medicosRepositorio.RecuperarMedico(Arg.Any<int>(), Arg.Any<CancellationToken>()).Returns(medico);
+        medicosRepositorio.RecuperarMedicoAsync(Arg.Any<int>(), Arg.Any<CancellationToken>()).Returns(medico);
 
         // ACT
         await horariosDisponiveisServico.InserirHorariosDisponiveisAsync(comando, CancellationToken.None);
@@ -106,14 +106,14 @@ public class HorariosDisponiveisServicoTestes
         // ARRANGE
         var comando = new HorariosDisponiveisInserirComando
         {
-            IdMedico = 1,
+            MedicoId = 1,
             DataHoraInicio = DateTime.Now.AddHours(1),
             DataHoraFim = DateTime.Now.AddMinutes(10) // Intervalo muito curto para gerar horários
         };
 
         var medico = new Medico();
         medico.SetCrm("123456");
-        medicosRepositorio.RecuperarMedico(Arg.Any<int>(), Arg.Any<CancellationToken>()).Returns(medico);
+        medicosRepositorio.RecuperarMedicoAsync(Arg.Any<int>(), Arg.Any<CancellationToken>()).Returns(medico);
 
         // ACT & ASSERT
         Func<Task> act = async () => await horariosDisponiveisServico.InserirHorariosDisponiveisAsync(comando, CancellationToken.None);

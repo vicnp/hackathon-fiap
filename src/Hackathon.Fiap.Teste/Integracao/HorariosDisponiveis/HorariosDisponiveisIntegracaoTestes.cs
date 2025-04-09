@@ -51,7 +51,7 @@ namespace Hackathon.Fiap.Teste.Integracao.HorariosDisponiveis
             {
                 DataHoraFim = DateTime.Now.AddDays(1),
                 DataHoraInicio = DateTime.Now,
-                IdMedico = 1
+                MedicoId = 1
             };
 
             string jsonContent = JsonConvert.SerializeObject(horarioDisponivelInserirRequest);

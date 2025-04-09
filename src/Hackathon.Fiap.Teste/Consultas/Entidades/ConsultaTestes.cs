@@ -1,6 +1,7 @@
 using FluentAssertions;
 using Hackathon.Fiap.DataTransfer.Consultas.Enumeradores;
 using Hackathon.Fiap.Domain.Consultas.Entidades;
+using Hackathon.Fiap.Domain.HorariosDisponiveis.Entidades;
 using Hackathon.Fiap.Domain.Medicos.Entidades;
 using Hackathon.Fiap.Domain.Pacientes.Entidades;
 
@@ -21,7 +22,7 @@ public class ConsultaTestes
         int idHorariosDisponiveis = 1;
         
         // Criando a especialidade
-        var especialidade = new Especialidade { IdEspecialidade = 1, NomeEspecialidade = "Cardiologia", DescricaoEspecialidade = "Especialidade de coração" };
+        var especialidade = new Especialidade { EspecialidadeId = 1, NomeEspecialidade = "Cardiologia", DescricaoEspecialidade = "Especialidade de coração" };
         
         // Criando o médico com a especialidade e CRM
         var medico = new Medico();
@@ -31,22 +32,25 @@ public class ConsultaTestes
         // Criando o paciente
         var paciente = new Paciente();
 
+        // Criando o horario disponivel
+        HorarioDisponivel horarioDisponivel = new ();
+
         // ACT
-        var consulta = new Consulta(id, dataHora, valor, status, justificativaCancelamento, criadoEm, idHorariosDisponiveis);
+        Consulta consulta = new(id, valor, status, medico, horarioDisponivel, paciente, justificativaCancelamento);
         consulta.SetMedico(medico);
         consulta.SetPaciente(paciente);
+        consulta.SetHorarioDisponivel(horarioDisponivel);
 
         // ASSERT
         consulta.Medico.Should().Be(medico);
         consulta.Medico.Crm.Should().Be("123456");
         consulta.Medico.Especialidade.Should().Be(especialidade);
         consulta.Paciente.Should().Be(paciente);
-        consulta.DataHora.Should().Be(dataHora);
         consulta.Valor.Should().Be(valor);
         consulta.Status.Should().Be(status);
         consulta.JustificativaCancelamento.Should().Be(justificativaCancelamento);
         consulta.CriadoEm.Should().Be(criadoEm);
-        consulta.IdHorariosDisponiveis.Should().Be(idHorariosDisponiveis);
+        consulta.HorarioDisponivel.Should().Be(idHorariosDisponiveis);
     }
 
     [Fact]
@@ -54,15 +58,26 @@ public class ConsultaTestes
     {
         // ARRANGE
         int id = 1;
-        DateTime dataHora = new DateTime(2025, 03, 31, 9, 0, 0);
         double valor = 150.00;
         StatusConsultaEnum status = StatusConsultaEnum.Cancelada;
         string justificativaCancelamento = "Paciente solicitou cancelamento";
-        DateTime criadoEm = DateTime.Now;
-        int idHorariosDisponiveis = 1;
+
+        // Criando a especialidade
+        var especialidade = new Especialidade { EspecialidadeId = 1, NomeEspecialidade = "Cardiologia", DescricaoEspecialidade = "Especialidade de coração" };
+
+        // Criando o médico com a especialidade e CRM
+        var medico = new Medico();
+        medico.SetCrm("123456");
+        medico.SetEspecialidade(especialidade);
+
+        // Criando o paciente
+        var paciente = new Paciente();
+
+        // Criando o horario disponivel
+        HorarioDisponivel horarioDisponivel = new();
 
         // ACT
-        var consulta = new Consulta(id, dataHora, valor, status, justificativaCancelamento, criadoEm, idHorariosDisponiveis);
+        Consulta consulta = new(id, valor, status, medico, horarioDisponivel, paciente, justificativaCancelamento);
 
         // ASSERT
         consulta.Status.Should().Be(StatusConsultaEnum.Cancelada);

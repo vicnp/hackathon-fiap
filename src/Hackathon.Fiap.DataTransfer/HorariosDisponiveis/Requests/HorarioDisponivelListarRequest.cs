@@ -6,11 +6,11 @@ namespace Hackathon.Fiap.DataTransfer.HorariosDisponiveis.Requests;
 
 public class HorarioDisponivelListarRequest : PaginacaoFiltro
 {
-    public int IdMedico { get; set; }
-    public int? IdPaciente { get; set; }
+    public int MedicoId { get; set; }
+    public int? PacienteId { get; set; }
     public StatusHorarioDisponivelEnum? Status { get; set; }
     
-    public HorarioDisponivelListarRequest() : base("IdHorarioDisponivel", TipoOrdernacao.Desc)
+    public HorarioDisponivelListarRequest() : base("HorarioDisponivelId", TipoOrdernacao.Desc)
     {
         
     }

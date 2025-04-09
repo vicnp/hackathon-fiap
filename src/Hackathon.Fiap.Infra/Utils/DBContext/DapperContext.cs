@@ -20,6 +20,9 @@ namespace Hackathon.Fiap.Infra.Utils.DBContext
             connectionString = _configuration.GetConnectionString("mysql")!;
         }
 
-        public IDbConnection CreateConnection() => new MySqlConnection(connectionString);
+        public IDbConnection CreateConnection()
+        {
+            return new MySqlConnection(connectionString);
+        }
     }
 }

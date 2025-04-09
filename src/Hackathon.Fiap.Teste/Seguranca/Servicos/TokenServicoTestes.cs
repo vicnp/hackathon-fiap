@@ -41,7 +41,7 @@ namespace Hackathon.Fiap.Teste.Seguranca.Servicos
                 utilRepositorio.GetValueConfigurationHash(configuration).Returns("6i9BiR4fRpbbIKxxEoEyjQ==");
                 utilRepositorio.GetValueConfigurationKeyJWT(configuration).Returns("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c");
                 usuariosRepositorio.RecuperarUsuarioAsync(email, Arg.Any<string>(), Arg.Any<CancellationToken>())
-                    .Returns((Usuario)null);
+                    .Returns(default(Task<Usuario?>));
                 
                 await FluentActions.Awaiting(() => tokenServico.GetTokenAsync(email, senha, ct))
                     .Should().ThrowAsync<NaoAutorizadoExcecao>()
@@ -67,13 +67,12 @@ namespace Hackathon.Fiap.Teste.Seguranca.Servicos
         public class DecryptPasswordMetodo : TokenServicoTestes
         {
             [Fact]
-            public async Task Quando_DecryptPassword_Espero_ObjValidos()
+            public void Quando_DecryptPassword_Espero_ObjValidos()
             {
                 string encryptedPassword = "Ot23Q5J0ZfcMXMFRGdbF0OxTFavCzXQ6PROYafL2HiU=";
                 utilRepositorio.GetValueConfigurationKeyJWT(configuration).Returns("6i9BiR4fRpbbIKxxEoEyjQ==");
                 tokenServico.Invoking(x => x.DecryptPassword(encryptedPassword)).Should().NotThrow();
             }
-
 
         }
     }

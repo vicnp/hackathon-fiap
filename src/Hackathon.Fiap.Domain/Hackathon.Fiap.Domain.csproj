@@ -27,10 +27,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Pacientes\Servicos\Interfaces\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\Hackathon.Fiap.DataTransfer\Hackathon.Fiap.DataTransfer.csproj" />
   </ItemGroup>
 
