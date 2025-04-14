@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: svc-consumer
+  namespace: techchallenge
+  labels:
+    app: techchallenge
+    component: consumer
+spec:
+  type: NodePort  # Define o tipo como NodePort
+  ports:
+    - name: consumer
+      port: 8080
+      targetPort: 8080
+      nodePort: 30081
+    - name: prometheus
+      port: 1234
+      targetPort: 1234
+      nodePort: 30082
+  selector:
+    app: techchallenge
+    component: consumer

@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deployment-api
+  namespace: techchallenge
+  labels:
+    app: techchallenge
+    component: api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: techchallenge
+      component: api
+  template:
+    metadata:
+      labels:
+        app: techchallenge
+        component: api
+    spec:
+      containers:
+        - name: api
+          image: jcoaio/techchallenge-api:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
+          env:
+            - name: ConnectionStrings__mysql
+              valueFrom:
+                secretKeyRef:
+                  name: secrets
+                  key: database-connectionString
+            - name: Mensageria__Servidor
+              valueFrom:
+                secretKeyRef:
+                  name: secrets
+                  key: bus-server
+            - name: Mensageria__Usuario
+              valueFrom:
+                secretKeyRef:
+                  name: secrets
+                  key: bus-user
+            - name: Mensageria__Senha
+              valueFrom:
+                secretKeyRef:
+                  name: secrets
+                  key: bus-password

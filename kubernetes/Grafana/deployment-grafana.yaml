@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deployment-grafana
+  namespace: techchallenge
+  labels:
+    app: techchallenge
+    component: grafana
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: techchallenge
+      component: grafana
+  template:
+    metadata:
+      labels:
+        app: techchallenge
+        component: grafana
+    spec:
+      containers:
+        - name: grafana
+          image: grafana/grafana:latest
+          ports:
+            - containerPort: 3000
+          volumeMounts:
+            - name: grafana-data
+              mountPath: /var/lib/grafana
+      volumes:
+        - name: grafana-data
+          persistentVolumeClaim:
+            claimName: grafana-storage
