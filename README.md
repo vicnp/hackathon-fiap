@@ -7,7 +7,6 @@ Recentemente, a empresa recebeu um aporte e decidiu investir no desenvolvimento 
  
 Para viabilizar o desenvolvimento de um sistema que esteja em conformidade com as melhores práticas de qualidade e arquitetura de software, a Health&Med contratou os alunos do curso 5NETT para fazer a análise do projeto, arquitetura do software e desenvolvimento do MVP.
 
-
 ## Requisitos Funcionais
 1. Autenticação do Usuário (Médico) ✔
  - O sistema deve permitir que o médico faça login usando o número de CRM e uma senha. ✔
