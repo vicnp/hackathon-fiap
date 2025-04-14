@@ -1,0 +1,66 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net8.0</TargetFramework>
+		<RootNamespace>Hackathon.Fiap.Teste</RootNamespace>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+
+		<IsPackable>false</IsPackable>
+		<IsTestProject>true</IsTestProject>
+	</PropertyGroup>
+
+	<PropertyGroup>
+		<PreserveCompilationContext>true</PreserveCompilationContext>
+	</PropertyGroup>
+
+
+
+	<ItemGroup>
+		<PackageReference Include="coverlet.collector" Version="6.0.0" />
+		<PackageReference Include="FluentAssertions" Version="7.0.0-alpha.4" />
+		<PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" Version="8.0.8" />
+		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.8.0" />
+		<PackageReference Include="Dapper" Version="2.1.35" />
+		<PackageReference Include="MySql.Data" Version="8.4.0" />
+		<PackageReference Include="NSubstitute" Version="5.1.0" />
+		<PackageReference Include="Testcontainers" Version="3.10.0" />
+		<PackageReference Include="xunit" Version="2.5.3" />
+		<PackageReference Include="xunit.runner.visualstudio" Version="2.5.3" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Using Include="Xunit" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Compile Remove="UnitTest1.cs" />
+		<Compile Remove="Regioes\**" />
+		<Compile Remove="Usuarios\Servicos\**" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\Hackathon.Fiap.API\Hackathon.Fiap.API.csproj" />
+		<ProjectReference Include="..\Hackathon.Fiap.Domain\Hackathon.Fiap.Domain.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<EmbeddedResource Remove="Regioes\**" />
+		<EmbeddedResource Remove="Usuarios\Servicos\**" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<None Remove="Regioes\**" />
+		<None Remove="Usuarios\Servicos\**" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="Consultas\Entidades\" />
+	  <Folder Include="Consultas\Servicos\" />
+	  <Folder Include="Medicos\Entidades\" />
+	  <Folder Include="Medicos\Servicos\" />
+	  <Folder Include="Pacientes\Entidades\" />
+	  <Folder Include="Pacientes\Servicos\" />
+	</ItemGroup>
+
+</Project>
