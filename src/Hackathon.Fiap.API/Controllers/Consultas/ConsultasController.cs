@@ -23,7 +23,7 @@ namespace Hackathon.Fiap.API.Controllers.Consultas
         /// <returns></returns>
         [HttpPost]
         [Route("inserir")]
-        [Authorize(Roles = $"{Roles.Medico},{Roles.Administrador}")]
+        [Authorize(Roles = $"{Roles.Medico},{Roles.Administrador},{Roles.Paciente}")]
         public async Task<ActionResult> InserirHorariosDisponiveisAsync([FromBody] ConsultaRequest request, CancellationToken ct)
         {
             ConsultaResponse response = await consultasAppServico.InserirConsultaAsync(request, ct);
