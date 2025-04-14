@@ -2,9 +2,9 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: prometheus-config
-  namespace: techchallenge
+  namespace: hackathon
   labels:
-    app: techchallenge
+    app: hackathon
     component: prometheus
 data:
   prometheus.yml: |

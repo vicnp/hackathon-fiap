@@ -2,9 +2,9 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: db-storage
-  namespace: techchallenge
+  namespace: hackathon
   labels:
-    app: techchallenge
+    app: hackathon
     component: db
 spec:
   accessModes:

@@ -2,9 +2,9 @@ apiVersion: v1
 kind: Service
 metadata:
   name: svc-database
-  namespace: techchallenge
+  namespace: hackathon
   labels:
-    app: techchallenge
+    app: hackathon
     component: db
 spec:
   ports:
@@ -12,6 +12,6 @@ spec:
       targetPort: 3306
       nodePort: 30087
   selector:
-    app: techchallenge
+    app: hackathon
     component: db
   type: NodePort

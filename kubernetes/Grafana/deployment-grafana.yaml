@@ -2,20 +2,20 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: deployment-grafana
-  namespace: techchallenge
+  namespace: hackathon
   labels:
-    app: techchallenge
+    app: hackathon
     component: grafana
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: techchallenge
+      app: hackathon
       component: grafana
   template:
     metadata:
       labels:
-        app: techchallenge
+        app: hackathon
         component: grafana
     spec:
       containers:

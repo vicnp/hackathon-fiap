@@ -2,20 +2,20 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: deployment-prometheus
-  namespace: techchallenge
+  namespace: hackathon
   labels:
-    app: techchallenge
+    app: hackathon
     component: prometheus
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: techchallenge
+      app: hackathon
       component: prometheus
   template:
     metadata:
       labels:
-        app: techchallenge
+        app: hackathon
         component: prometheus
     spec:
       containers:

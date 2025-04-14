@@ -2,25 +2,25 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: deployment-api
-  namespace: techchallenge
+  namespace: hackathon
   labels:
-    app: techchallenge
+    app: hackathon
     component: api
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: techchallenge
+      app: hackathon
       component: api
   template:
     metadata:
       labels:
-        app: techchallenge
+        app: hackathon
         component: api
     spec:
       containers:
         - name: api
-          image: jcoaio/techchallenge-api:latest
+          image: jcoaio/hackathon:latest
           imagePullPolicy: Always
           ports:
             - containerPort: 8080

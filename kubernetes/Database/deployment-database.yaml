@@ -2,20 +2,20 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: deployment-database
-  namespace: techchallenge
+  namespace: hackathon
   labels:
-    app: techchallenge
+    app: hackathon
     component: db
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: techchallenge
+      app: hackathon
       component: db
   template:
     metadata:
       labels:
-        app: techchallenge
+        app: hackathon
         component: db
     spec:
       containers:
