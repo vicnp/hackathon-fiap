@@ -2,7 +2,7 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: grafana-storage
-  namespace: techchallenge
+  namespace: hackathon
 spec:
   accessModes:
     - ReadWriteOnce
