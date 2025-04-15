@@ -29,6 +29,46 @@ namespace Hackathon.Fiap.Teste.Seguranca.Servicos
 
         public class GetTokenMetodo : TokenServicoTestes
         {
+
+            [Theory]
+            [InlineData(null)]
+            [InlineData("")]
+            public async Task Quando_GetSenhaInvalida_Espero_ObjException(string senha)
+            {
+                //Caso usuario não encontrado!!
+                string email = "fiap@contato.com.br";
+                var ct = CancellationToken.None;
+
+
+                utilRepositorio.GetValueConfigurationHash(configuration).Returns("6i9BiR4fRpbbIKxxEoEyjQ==");
+                utilRepositorio.GetValueConfigurationKeyJWT(configuration).Returns("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c");
+                usuariosRepositorio.RecuperarUsuarioAsync(email, Arg.Any<string>(), Arg.Any<CancellationToken>())
+                    .ReturnsNull();
+
+                await FluentActions.Awaiting(() => tokenServico.GetTokenAsync(email, senha, ct))
+                    .Should().ThrowAsync<NaoAutorizadoExcecao>()
+                    .WithMessage("Usuário ou senha incorretos.");
+            }
+
+
+            [Fact]
+            public async Task Quando_ConfigurationKeyJWT_Espero_ObjException()
+            {
+                //Caso usuario não encontrado!!
+                string email = "fiap@contato.com.br";
+                var ct = CancellationToken.None;
+                string senha = "senha";
+
+                utilRepositorio.GetValueConfigurationHash(configuration).Returns("6i9BiR4fRpbbIKxxEoEyjQ==");
+                utilRepositorio.GetValueConfigurationKeyJWT(configuration).ReturnsNull();
+                usuariosRepositorio.RecuperarUsuarioAsync(email, Arg.Any<string>(), Arg.Any<CancellationToken>())
+                    .ReturnsNull();
+
+                await FluentActions.Awaiting(() => tokenServico.GetTokenAsync(email, senha, ct))
+                    .Should().ThrowAsync<NullReferenceException>()
+                    .WithMessage("GetValueConfigurationKeyJWT Retornou valor nulo.");
+            }
+
             [Fact]
             public async Task Quando_GetToken_Espero_ObjValidos()
             {
@@ -41,18 +81,7 @@ namespace Hackathon.Fiap.Teste.Seguranca.Servicos
                 
                 utilRepositorio.GetValueConfigurationHash(configuration).Returns("6i9BiR4fRpbbIKxxEoEyjQ==");
                 utilRepositorio.GetValueConfigurationKeyJWT(configuration).Returns("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c");
-                usuariosRepositorio.RecuperarUsuarioAsync(email, Arg.Any<string>(), Arg.Any<CancellationToken>())
-                    .ReturnsNull();
                 
-                await FluentActions.Awaiting(() => tokenServico.GetTokenAsync(email, senha, ct))
-                    .Should().ThrowAsync<NaoAutorizadoExcecao>()
-                    .WithMessage("Usuário ou senha incorretos.");
-                
-                // await FluentActions.Awaiting(() => tokenServico.GetTokenAsync(email, senha, ct))
-                //     .Should().NotThrowAsync();
-
-                //Caso usuario encontrado!!
-                //ARRANGE
                 int id = 1;
                 string nome = "Fiap";
                 string cpf = "61529748364";

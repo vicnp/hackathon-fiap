@@ -17,21 +17,20 @@ namespace Hackathon.Fiap.Domain.Seguranca.Servicos
     {
         private const string autenticacaoFalha = "Usuário ou senha incorretos.";
 
-        public async Task<string> GetTokenAsync(string? identificador, string? senha, CancellationToken ct)
+        public async Task<string> GetTokenAsync(string identificador, string senha, CancellationToken ct)
         {
 
-            if (identificador == null || identificador.InvalidOrEmpty() || senha == null || senha.InvalidOrEmpty())
+            if (identificador.IsNullOrEmpty() || senha.IsNullOrEmpty())
                 throw new NaoAutorizadoExcecao(autenticacaoFalha);
 
             var hash = EncryptPassword(senha);
 
-           Usuario? usuario = await usuariosRepositorio.RecuperarUsuarioAsync(identificador, hash, ct);
+            Usuario? usuario = await usuariosRepositorio.RecuperarUsuarioAsync(identificador, hash, ct);
 
-           NaoAutorizadoExcecao.LancarExcecaoSeNulo(usuario, autenticacaoFalha);
+            NaoAutorizadoExcecao.LancarExcecaoSeNulo(usuario, autenticacaoFalha);
 
             var tokenHanlder = new JwtSecurityTokenHandler();
-            string? configurationValue = utilRepositorio.GetValueConfigurationKeyJWT(configuration)
-                ?? throw new NullReferenceException("GetValueConfigurationKeyJWT Retornou valor nulo.");
+            string configurationValue = ConfiguracaoHash();
             var chaveCriptografia = Encoding.ASCII.GetBytes(configurationValue);
 
             var tokenProps = new SecurityTokenDescriptor()
@@ -50,11 +49,18 @@ namespace Hackathon.Fiap.Domain.Seguranca.Servicos
             var token = tokenHanlder.CreateToken(tokenProps);
             return tokenHanlder.WriteToken(token);
         }
+
+        private string ConfiguracaoHash()
+        {
+            return utilRepositorio.GetValueConfigurationKeyJWT(configuration)
+                            ?? throw new NullReferenceException("GetValueConfigurationKeyJWT Retornou valor nulo.");
+        }
+
         public string EncryptPassword(string password)
         {
             using Aes aes = Aes.Create();
-            string? configurationValue = utilRepositorio.GetValueConfigurationHash(configuration) 
-                ?? throw new NullReferenceException("GetValueConfigurationKeyJWT Retornou valor nulo.");
+            string configurationValue = ConfiguracaoHash();
+
             aes.Key = Encoding.UTF8.GetBytes(configurationValue);
             aes.IV = new byte[16];
             ICryptoTransform encryptor = aes.CreateEncryptor(aes.Key, aes.IV);
