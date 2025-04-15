@@ -2,9 +2,11 @@
 using Microsoft.AspNetCore.Http;
 using Hackathon.Fiap.Domain.Seguranca.Servicos.Interfaces;
 using Hackathon.Fiap.Domain.Usuarios.Enumeradores;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Hackathon.Fiap.Domain.Seguranca.Servicos
 {
+    [ExcludeFromCodeCoverage]
     public class SessaoServico(IHttpContextAccessor httpContextAccessor) : ISessaoServico
     {
         public TipoUsuario? RecuperarRoleUsuario()

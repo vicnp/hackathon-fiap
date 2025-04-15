@@ -61,7 +61,8 @@ namespace Hackathon.Fiap.Teste.Integracao.Consultas
             await AutenticarAplicacao(Roles.Medico);
 
             HttpResponseMessage resultConsulta = await apiFactoryClient.GetAsync("api/consultas/paginados");
-            PaginacaoConsulta<ConsultaResponse>? consultasPaginadas = JsonConvert.DeserializeObject<PaginacaoConsulta<ConsultaResponse>>(await resultConsulta.Content.ReadAsStringAsync());
+            PaginacaoConsulta<ConsultaResponse>? consultasPaginadas = 
+                JsonConvert.DeserializeObject<PaginacaoConsulta<ConsultaResponse>>(await resultConsulta.Content.ReadAsStringAsync());
             
             Assert.NotNull(consultasPaginadas);
             Assert.NotEmpty(consultasPaginadas.Registros);
