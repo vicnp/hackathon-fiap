@@ -28,7 +28,7 @@ namespace Hackathon.Fiap.Domain.Consultas.Servicos
     {
         public async Task<Consulta?> AtualizarStatusConsultaAsync(Consulta consulta, StatusConsultaEnum status, CancellationToken ct)
         {
-            if (status is StatusConsultaEnum.Cancelada or StatusConsultaEnum.Recusada or StatusConsultaEnum.Aceita)
+            if (status is StatusConsultaEnum.Cancelada or StatusConsultaEnum.Recusada)
                 ValidarCancelamentoRecusa(consulta);
 
             if (status is StatusConsultaEnum.Aceita && consulta.Status != StatusConsultaEnum.Pendente)
@@ -62,7 +62,7 @@ namespace Hackathon.Fiap.Domain.Consultas.Servicos
                 case StatusConsultaEnum.Cancelada:
                     throw new RegraDeNegocioExcecao("A consulta está cancelada.");
                 case StatusConsultaEnum.Recusada:
-                    throw new RegraDeNegocioExcecao("A consulta está recusada");
+                    throw new RegraDeNegocioExcecao("A consulta está recusada.");
             }
         }
 

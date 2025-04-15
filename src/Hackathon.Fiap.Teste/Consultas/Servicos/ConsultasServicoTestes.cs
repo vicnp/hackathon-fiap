@@ -20,6 +20,7 @@ using Hackathon.Fiap.Infra.Consultas;
 using Hackathon.Fiap.Infra.Consultas.Consultas;
 using Hackathon.Fiap.Infra.HorariosDisponiveis;
 using NSubstitute;
+using NSubstitute.ReturnsExtensions;
 
 namespace Hackathon.Fiap.Teste.Consultas.Servicos;
 
@@ -88,14 +89,118 @@ public class ConsultasServicoTestes
     }
 
     [Fact]
-    public async Task Quando_AtualizarStatusConsulta_ParaCancelada_SemJustificativa_DeveLancarExcecao()
+    public async Task Quando_ListarConsultasAsync_DeveRetornarConsultasStatusNullIncorreto()
+    {
+        // ARRANGE
+        var filtro = new ConsultasListarFiltro();
+        var consultaConsulta = new ConsultaConsulta
+        {
+            ConsultaId = 1,
+            Valor = 150.00,
+            Status = null,
+            JustificativaCancelamento = "",
+            CriadoEm = DateTime.Now,
+            HorarioDisponivelId = 1,
+            MedicoId = 1,
+            PacienteId = 1
+        };
+
+        var paginacaoConsulta = new PaginacaoConsulta<ConsultaConsulta>
+        {
+            Total = 1,
+            Registros = [consultaConsulta]
+        };
+
+        consultasRepositorio.ListarConsultasAsync(Arg.Any<ConsultasListarFiltro>(), Arg.Any<CancellationToken>())
+            .Returns(paginacaoConsulta);
+
+        var medico = new Medico();
+        medico.SetCrm("123456");
+        var paciente = new Paciente();
+
+        medicosServico.ValidarMedicoAsync(Arg.Any<int>(), Arg.Any<CancellationToken>()).Returns(medico);
+        pacientesServicos.ValidarPacienteAsync(Arg.Any<int>(), Arg.Any<CancellationToken>()).Returns(paciente);
+
+        // ACT & ASSERT
+        Func<Task> act = async () => await consultaServico.ListarConsultasAsync(filtro, CancellationToken.None);
+        await act.Should().ThrowAsync<RegraDeNegocioExcecao>()
+            .WithMessage("Não foi possível identificar a situação da consulta.");
+    }
+
+    [Fact]
+    public async Task QuandoListarConsultasAsyncDeveRetornarConsultasNull()
+    {
+        var consulta = new Consulta
+        {
+            ConsultaId = 1,
+            Status = StatusConsultaEnum.Aceita,
+            JustificativaCancelamento = ""
+        };
+
+        var paginacaoConsulta = new PaginacaoConsulta<ConsultaConsulta>
+        {
+            Total = 0,
+            Registros = []
+        };
+
+        consultasRepositorio.ListarConsultasAsync(Arg.Any<ConsultasListarFiltro>(), Arg.Any<CancellationToken>())
+            .Returns(paginacaoConsulta);
+
+        // ACT & ASSERT
+        Func<Task> act = async () => await consultaServico.AtualizarStatusConsultaAsync(consulta, StatusConsultaEnum.Pendente, CancellationToken.None);
+        await act.Should().NotThrowAsync();
+    }
+
+    [Fact]
+    public async Task Quando_ListarConsultasAsync_DeveRetornarConsultasStatusincorreto()
+    {
+        // ARRANGE
+        var filtro = new ConsultasListarFiltro();
+        var consultaConsulta = new ConsultaConsulta
+        {
+            ConsultaId = 1,
+            Valor = 150.00,
+            Status = "nsdaull",
+            JustificativaCancelamento = "",
+            CriadoEm = DateTime.Now,
+            HorarioDisponivelId = 1,
+            MedicoId = 1,
+            PacienteId = 1
+        };
+
+        var paginacaoConsulta = new PaginacaoConsulta<ConsultaConsulta>
+        {
+            Total = 1,
+            Registros = [consultaConsulta]
+        };
+
+        consultasRepositorio.ListarConsultasAsync(Arg.Any<ConsultasListarFiltro>(), Arg.Any<CancellationToken>())
+            .Returns(paginacaoConsulta);
+
+        var medico = new Medico();
+        medico.SetCrm("123456");
+        var paciente = new Paciente();
+
+        medicosServico.ValidarMedicoAsync(Arg.Any<int>(), Arg.Any<CancellationToken>()).Returns(medico);
+        pacientesServicos.ValidarPacienteAsync(Arg.Any<int>(), Arg.Any<CancellationToken>()).Returns(paciente);
+
+        // ACT & ASSERT
+        Func<Task> act = async () => await consultaServico.ListarConsultasAsync(filtro, CancellationToken.None);
+        await act.Should().ThrowAsync<FalhaConversaoExcecao>()
+            .WithMessage("Não foi possivel determinar a situação da consulta.");
+    }
+
+    [Theory]
+    [InlineData(null)]
+    [InlineData("")]
+    public async Task Quando_AtualizarStatusConsulta_ParaCancelada_SemJustificativa_DeveLancarExcecao(string JustificativaCancelamento)
     {
         // ARRANGE
         var consulta = new Consulta
         {
             ConsultaId = 1,
             Status = StatusConsultaEnum.Pendente,
-            JustificativaCancelamento = ""
+            JustificativaCancelamento = JustificativaCancelamento
         };
 
         // ACT & ASSERT
@@ -122,6 +227,23 @@ public class ConsultasServicoTestes
     }
 
     [Fact]
+    public async Task Quando_AtualizarStatusConsulta_ParaAceita_QuandoJaRecusada_DeveLancarExcecao()
+    {
+        // ARRANGE
+        var consulta = new Consulta
+        {
+            ConsultaId = 1,
+            Status = StatusConsultaEnum.Recusada,
+            JustificativaCancelamento = "Recusada pelo paciente"
+        };
+
+        // ACT & ASSERT
+        Func<Task> act = async () => await consultaServico.AtualizarStatusConsultaAsync(consulta, StatusConsultaEnum.Aceita, CancellationToken.None);
+        await act.Should().ThrowAsync<RegraDeNegocioExcecao>()
+            .WithMessage("A consulta está recusada.");
+    }
+
+    [Fact]
     public async Task Quando_AtualizarStatusConsulta_ParaAceita_QuandoPendente_DeveAtualizarCorretamente()
     {
         // ARRANGE
@@ -138,14 +260,13 @@ public class ConsultasServicoTestes
         var paginacaoConsulta = new PaginacaoConsulta<ConsultaConsulta>
         {
             Total = 1,
-            Registros = new List<ConsultaConsulta>
-            {
-                new ConsultaConsulta
-                {
+            Registros =
+            [
+                new() {
                     ConsultaId = 1,
                     Status = StatusConsultaEnum.Aceita.ToString()
                 }
-            }
+            ]
         };
 
         consultasRepositorio.ListarConsultasAsync(Arg.Any<ConsultasListarFiltro>(), Arg.Any<CancellationToken>())
@@ -159,4 +280,4 @@ public class ConsultasServicoTestes
         resultado!.Status.Should().Be(StatusConsultaEnum.Aceita);
         await consultasRepositorio.Received(1).AtualizarStatusConsultaAsync(Arg.Any<Consulta>(), Arg.Any<CancellationToken>());
     }
-} 
+}

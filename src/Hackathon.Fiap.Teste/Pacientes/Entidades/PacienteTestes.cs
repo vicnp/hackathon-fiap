@@ -54,4 +54,18 @@ public class PacienteTestes
         // ASSERT
         paciente.Email.Should().Be(email);
     }
+
+    [Fact]
+    public void Quando_SetSenha_ComValorValido_DeveAtualizarPropriedade()
+    {
+        // ARRANGE
+        var paciente = new Paciente();
+        var senha = "123";
+
+        // ACT
+        paciente.AtualizarSenha(senha);
+
+        // ASSERT
+        paciente.Hash.Should().Be(senha);
+    }
 } 

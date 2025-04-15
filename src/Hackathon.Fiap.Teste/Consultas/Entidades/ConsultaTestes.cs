@@ -55,7 +55,6 @@ public class ConsultaTestes
     public void Quando_CriarConsulta_ComStatusCancelada_DeveInicializarComJustificativa()
     {
         // ARRANGE
-        int id = 1;
         double valor = 150.00;
         StatusConsultaEnum status = StatusConsultaEnum.Cancelada;
         string justificativaCancelamento = "Paciente solicitou cancelamento";
@@ -75,7 +74,7 @@ public class ConsultaTestes
         HorarioDisponivel horarioDisponivel = new();
 
         // ACT
-        Consulta consulta = new(id, valor, status, medico, horarioDisponivel, paciente, justificativaCancelamento);
+        Consulta consulta = new(valor, status, medico, horarioDisponivel, paciente, justificativaCancelamento);
 
         // ASSERT
         consulta.Status.Should().Be(StatusConsultaEnum.Cancelada);
