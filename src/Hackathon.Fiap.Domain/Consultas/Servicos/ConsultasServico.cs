@@ -28,7 +28,7 @@ namespace Hackathon.Fiap.Domain.Consultas.Servicos
     {
         public async Task<Consulta?> AtualizarStatusConsultaAsync(Consulta consulta, StatusConsultaEnum status, CancellationToken ct)
         {
-            if (status is StatusConsultaEnum.Cancelada or StatusConsultaEnum.Recusada)
+            if (status is StatusConsultaEnum.Cancelada or StatusConsultaEnum.Recusada or StatusConsultaEnum.Aceita)
                 ValidarCancelamentoRecusa(consulta);
 
             if (status is StatusConsultaEnum.Aceita && consulta.Status != StatusConsultaEnum.Pendente)
