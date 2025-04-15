@@ -88,7 +88,13 @@ namespace Hackathon.Fiap.Infra.Consultas
                 dp.Add("@PACIENTEID", filtro.PacienteId);
             }
 
-            if(filtro.Status != null && filtro.Status != 0)
+            if (filtro.HorarioDisponivelId > 0)
+            {
+                sql.AppendLine($" and c.horario_disponivel_id = @HORARIODISPONIVELID ");
+                dp.Add("@HORARIODISPONIVELID", filtro.HorarioDisponivelId);
+            }
+
+            if (filtro.Status != null && filtro.Status != 0)
             {
                 sql.AppendLine($" and c.Status = @STATUS ");
                 dp.Add("@STATUS", filtro.Status.ToString());
