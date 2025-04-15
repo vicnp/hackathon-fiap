@@ -1,5 +1,6 @@
 # HACKATHON 5NETT
 
+ 
 ## O Contexto
 A Health&Med, uma startup inovadora no setor de saúde, está desenvolvendo um novo sistema que irá revolucionar a Telemedicina no país. Atualmente, a startup oferece a possibilidade de agendamento de consultas e realização de consultas online (Telemedicina) por meio de sistemas terceiros como Google Agenda e Google Meetings.
 
@@ -79,14 +80,14 @@ Os grupos deverão entregar o seguinte:
 | ------------------------- | ------ |
 | Edinam Marcondes          | 357908 |
 | João Paulo Coaio          | 357906 |
-| Victor Nascimetno Peroba  | 357907 | 
+| Victor Nascimento Peroba  | 357907 | 
 
 
 ## Pipeline do Projeto
 
 A pipeline CI é executada a cada commit em qualquer branch que tenha o prefixo 'feature/*', já a pipeline CD é executada a cada merge na branch main.
 
-https://github.com/edinanxs/hackathon-fiap/actions
+[https://github.com/edinanxs/hackathon-fiap/actions](https://github.com/vicnp/techchallange/actions)
 
 
 ## Arquitetura

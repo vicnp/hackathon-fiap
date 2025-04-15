@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: svc-database
+  namespace: hackathon
+  labels:
+    app: hackathon
+    component: db
+spec:
+  ports:
+    - port: 3306
+      targetPort: 3306
+      nodePort: 30087
+  selector:
+    app: hackathon
+    component: db
+  type: NodePort
