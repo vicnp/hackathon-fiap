@@ -80,7 +80,7 @@ Os grupos deverão entregar o seguinte:
 | ------------------------- | ------ |
 | Edinam Marcondes          | 357908 |
 | João Paulo Coaio          | 357906 |
-| Victor Nascimetno Peroba  | 357907 | 
+| Victor Nascimento Peroba  | 357907 | 
 
 
 ## Pipeline do Projeto
