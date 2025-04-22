@@ -1,4 +1,5 @@
 ﻿using FluentAssertions;
+using FluentAssertions.Equivalency;
 using Hackathon.Fiap.Domain.Seguranca.Servicos;
 using Hackathon.Fiap.Domain.Usuarios.Entidades;
 using Hackathon.Fiap.Domain.Usuarios.Enumeradores;
@@ -8,6 +9,7 @@ using Hackathon.Fiap.Domain.Utils.Repositorios;
 using Microsoft.Extensions.Configuration;
 using NSubstitute;
 using NSubstitute.ReturnsExtensions;
+using System.Security.Policy;
 
 namespace Hackathon.Fiap.Teste.Seguranca.Servicos
 {
@@ -50,6 +52,16 @@ namespace Hackathon.Fiap.Teste.Seguranca.Servicos
                     .WithMessage("Usuário ou senha incorretos.");
             }
 
+            [Fact]
+            public void QuandoEncryptPasswordEsperoObjException()
+            {
+                string senha = "senha";
+
+                utilRepositorio.GetValueConfigurationHash(configuration).ReturnsNull();
+
+                tokenServico.Invoking(x => x.EncryptPassword(senha)).Should().Throw<NullReferenceException>()
+                    .WithMessage("GetValueConfigurationKeyJWT Retornou valor nulo.");
+            }
 
             [Fact]
             public async Task Quando_ConfigurationKeyJWT_Espero_ObjException()
@@ -61,8 +73,15 @@ namespace Hackathon.Fiap.Teste.Seguranca.Servicos
 
                 utilRepositorio.GetValueConfigurationHash(configuration).Returns("6i9BiR4fRpbbIKxxEoEyjQ==");
                 utilRepositorio.GetValueConfigurationKeyJWT(configuration).ReturnsNull();
+
+                int id = 1;
+                string nome = "Fiap";
+                string cpf = "61529748364";
+                string hash = "qwertyuiopasdfghjklzxcvbnm";
+
+                var usuario = new Usuario(id, nome, email, cpf, hash, TipoUsuario.Administrador);
                 usuariosRepositorio.RecuperarUsuarioAsync(email, Arg.Any<string>(), Arg.Any<CancellationToken>())
-                    .ReturnsNull();
+                    .Returns(usuario);
 
                 await FluentActions.Awaiting(() => tokenServico.GetTokenAsync(email, senha, ct))
                     .Should().ThrowAsync<NullReferenceException>()
@@ -102,6 +121,15 @@ namespace Hackathon.Fiap.Teste.Seguranca.Servicos
                 string encryptedPassword = "Ot23Q5J0ZfcMXMFRGdbF0OxTFavCzXQ6PROYafL2HiU=";
                 utilRepositorio.GetValueConfigurationKeyJWT(configuration).Returns("6i9BiR4fRpbbIKxxEoEyjQ==");
                 tokenServico.Invoking(x => x.DecryptPassword(encryptedPassword)).Should().NotThrow();
+            }
+
+            [Fact]
+            public void Quando_DecryptPassword_Espero_ObjException()
+            {
+                string encryptedPassword = "Ot23Q5J0ZfcMXMFRGdbF0OxTFavCzXQ6PROYafL2HiU=";
+                utilRepositorio.GetValueConfigurationKeyJWT(configuration).ReturnsNull();
+                tokenServico.Invoking(x => x.DecryptPassword(encryptedPassword)).Should().Throw<NullReferenceException>()
+                    .WithMessage("GetValueConfigurationKeyJWT Retornou valor nulo.");
             }
 
         }

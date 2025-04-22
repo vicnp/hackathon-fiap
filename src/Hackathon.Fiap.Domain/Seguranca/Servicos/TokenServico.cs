@@ -30,7 +30,8 @@ namespace Hackathon.Fiap.Domain.Seguranca.Servicos
             NaoAutorizadoExcecao.LancarExcecaoSeNulo(usuario, autenticacaoFalha);
 
             var tokenHanlder = new JwtSecurityTokenHandler();
-            string configurationValue = ConfiguracaoHash();
+            string? configurationValue = utilRepositorio.GetValueConfigurationKeyJWT(configuration)
+                ?? throw new NullReferenceException("GetValueConfigurationKeyJWT Retornou valor nulo.");
             var chaveCriptografia = Encoding.ASCII.GetBytes(configurationValue);
 
             var tokenProps = new SecurityTokenDescriptor()
@@ -49,18 +50,11 @@ namespace Hackathon.Fiap.Domain.Seguranca.Servicos
             var token = tokenHanlder.CreateToken(tokenProps);
             return tokenHanlder.WriteToken(token);
         }
-
-        private string ConfiguracaoHash()
-        {
-            return utilRepositorio.GetValueConfigurationKeyJWT(configuration)
-                            ?? throw new NullReferenceException("GetValueConfigurationKeyJWT Retornou valor nulo.");
-        }
-
         public string EncryptPassword(string password)
         {
             using Aes aes = Aes.Create();
-            string configurationValue = ConfiguracaoHash();
-
+            string? configurationValue = utilRepositorio.GetValueConfigurationHash(configuration)
+                ?? throw new NullReferenceException("GetValueConfigurationKeyJWT Retornou valor nulo.");
             aes.Key = Encoding.UTF8.GetBytes(configurationValue);
             aes.IV = new byte[16];
             ICryptoTransform encryptor = aes.CreateEncryptor(aes.Key, aes.IV);
@@ -77,7 +71,7 @@ namespace Hackathon.Fiap.Domain.Seguranca.Servicos
         public string DecryptPassword(string encryptedPassword)
         {
             using Aes aes = Aes.Create();
-            string? configurationValue = utilRepositorio.GetValueConfigurationKeyJWT(configuration) 
+            string? configurationValue = utilRepositorio.GetValueConfigurationKeyJWT(configuration)
                 ?? throw new NullReferenceException("GetValueConfigurationKeyJWT Retornou valor nulo.");
             aes.Key = Encoding.UTF8.GetBytes(configurationValue);
             aes.IV = new byte[16];
