@@ -1,6 +1,7 @@
 using FluentAssertions;
 using Hackathon.Fiap.DataTransfer.Consultas.Enumeradores;
 using Hackathon.Fiap.Domain.Consultas.Entidades;
+using Hackathon.Fiap.Domain.Consultas.Repositorios.Filtros;
 using Hackathon.Fiap.Domain.HorariosDisponiveis.Entidades;
 using Hackathon.Fiap.Domain.Medicos.Entidades;
 using Hackathon.Fiap.Domain.Pacientes.Entidades;
@@ -96,5 +97,29 @@ public class ConsultaTestes
         // ASSERT
         consulta.Medico.Should().Be(medico);
         consulta.Paciente.Should().Be(paciente);
+    }
+
+    [Fact]
+    public void Quando_Criar_ConsultaFiltro_Espero_Objeto_Vazio()
+    {
+        // ARRANGE
+        var consulta = new ConsultaInserirFiltro();
+        // ACT
+        consulta.Should().NotBeNull();
+        // ASSERT
+    }
+
+    [Fact]
+    public void Quando_Criar_ConsultaFiltro_Espero_Objeto_Com_Valores()
+    {
+        // ARRANGE
+        var consulta = new ConsultaInserirFiltro(1,2,3,StatusConsultaEnum.Aceita, 25.4);
+        // ASSERT
+        consulta.Should().NotBeNull();
+        consulta.Status.Should().Be(StatusConsultaEnum.Aceita);
+        consulta.PacienteId.Should().Be(2);
+        consulta.MedicoId.Should().Be(1);
+        consulta.HorarioDisponivelId.Should().Be(3);
+
     }
 } 
