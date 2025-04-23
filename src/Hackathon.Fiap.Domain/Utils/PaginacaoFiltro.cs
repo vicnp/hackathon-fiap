@@ -1,6 +1,6 @@
-﻿using Hackathon.Fiap.DataTransfer.Utils.Enumeradores;
+﻿using Hackathon.Fiap.Domain.Utils.Enumeradores;
 
-namespace Hackathon.Fiap.DataTransfer.Utils
+namespace Hackathon.Fiap.Domain.Utils
 {
     public class PaginacaoFiltro(string CampoOrdernacao, TipoOrdernacao tipoOrdernacao)
     {

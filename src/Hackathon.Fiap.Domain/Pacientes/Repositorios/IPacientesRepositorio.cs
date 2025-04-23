@@ -1,6 +1,6 @@
-﻿using Hackathon.Fiap.DataTransfer.Utils;
-using Hackathon.Fiap.Domain.Pacientes.Entidades;
+﻿using Hackathon.Fiap.Domain.Pacientes.Entidades;
 using Hackathon.Fiap.Domain.Pacientes.Repositorios.Filtros;
+using Hackathon.Fiap.Domain.Utils;
 
 namespace Hackathon.Fiap.Domain.Pacientes.Repositorios
 {

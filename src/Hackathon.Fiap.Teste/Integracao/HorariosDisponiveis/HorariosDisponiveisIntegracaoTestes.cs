@@ -8,8 +8,8 @@ using Hackathon.Fiap.DataTransfer.Consultas.Requests;
 using Hackathon.Fiap.DataTransfer.Consultas.Responses;
 using Hackathon.Fiap.DataTransfer.HorariosDisponiveis.Requests;
 using Hackathon.Fiap.DataTransfer.HorariosDisponiveis.Responses;
-using Hackathon.Fiap.DataTransfer.Utils;
 using Hackathon.Fiap.Domain.Usuarios.Entidades;
+using Hackathon.Fiap.Domain.Utils;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Newtonsoft.Json;
 

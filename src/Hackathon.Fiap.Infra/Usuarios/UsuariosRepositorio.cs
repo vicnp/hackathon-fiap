@@ -1,12 +1,13 @@
 ﻿using Dapper;
 using Hackathon.Fiap.DataTransfer.Usuarios.Request;
-using Hackathon.Fiap.DataTransfer.Utils;
 using Hackathon.Fiap.Domain.Usuarios.Entidades;
 using Hackathon.Fiap.Domain.Usuarios.Repositorios;
 using Hackathon.Fiap.Infra.Utils;
 using Hackathon.Fiap.Infra.Utils.DBContext;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using Hackathon.Fiap.Domain.Pacientes.Repositorios.Filtros;
+using Hackathon.Fiap.Domain.Utils;
 
 namespace Hackathon.Fiap.Infra.Usuarios
 {
@@ -34,7 +35,7 @@ namespace Hackathon.Fiap.Infra.Usuarios
             return session.QueryFirstOrDefaultAsync<Usuario>(new CommandDefinition(sql.ToString(), dp, cancellationToken: ct));
         }
 
-        public async Task<PaginacaoConsulta<Usuario>> ListarUsuariosAsync(UsuarioListarRequest request, CancellationToken ct)
+        public async Task<PaginacaoConsulta<Usuario>> ListarUsuariosAsync(UsuarioListarFiltro filtro, CancellationToken ct)
         {
             StringBuilder sql = new($@"
                            SELECT u.id as IdUsuario,
@@ -46,17 +47,17 @@ namespace Hackathon.Fiap.Infra.Usuarios
                     FROM techchallenge.Usuarios u
 	                    WHERE 1 = 1");
 
-            if (!request.Email.IsNullOrEmpty())
+            if (!filtro.Email.IsNullOrEmpty())
             {
-                sql.AppendLine($@" AND u.email = '{request.Email}' ");
+                sql.AppendLine($@" AND u.email = '{filtro.Email}' ");
             }
 
-            if (!request.NomeUsuario.IsNullOrEmpty())
+            if (!filtro.NomeUsuario.IsNullOrEmpty())
             {
-                sql.AppendLine($@" AND u.nome = '{request.NomeUsuario}' ");
+                sql.AppendLine($@" AND u.nome = '{filtro.NomeUsuario}' ");
             }
 
-            return await ListarPaginadoAsync(sql.ToString(), request.Pg, request.Qt, request.CpOrd, request.TpOrd.ToString(), ct: ct);
+            return await ListarPaginadoAsync(sql.ToString(), filtro.Pg, filtro.Qt, filtro.CpOrd, filtro.TpOrd.ToString(), ct: ct);
         }
     }
 }

@@ -1,4 +1,4 @@
-namespace Hackathon.Fiap.DataTransfer.HorariosDisponiveis.Enumeradores;
+namespace Hackathon.Fiap.Domain.HorariosDisponiveis.Enumeradores;
 
 public enum StatusHorarioDisponivelEnum
 {

@@ -1,7 +1,7 @@
-﻿using Hackathon.Fiap.DataTransfer.Consultas.Enumeradores;
-using Hackathon.Fiap.DataTransfer.Utils;
-using Hackathon.Fiap.Domain.Consultas.Entidades;
+﻿using Hackathon.Fiap.Domain.Consultas.Entidades;
+using Hackathon.Fiap.Domain.Consultas.Enumeradores;
 using Hackathon.Fiap.Domain.Consultas.Repositorios.Filtros;
+using Hackathon.Fiap.Domain.Utils;
 
 namespace Hackathon.Fiap.Domain.Consultas.Servicos.Interfaces
 {

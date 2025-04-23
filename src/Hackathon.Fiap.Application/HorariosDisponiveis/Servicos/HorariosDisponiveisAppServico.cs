@@ -2,11 +2,11 @@ using AutoMapper;
 using Hackathon.Fiap.Application.HorariosDisponiveis.Interfaces;
 using Hackathon.Fiap.DataTransfer.HorariosDisponiveis.Requests;
 using Hackathon.Fiap.DataTransfer.HorariosDisponiveis.Responses;
-using Hackathon.Fiap.DataTransfer.Utils;
 using Hackathon.Fiap.Domain.HorariosDisponiveis.Entidades;
 using Hackathon.Fiap.Domain.HorariosDisponiveis.Repositorios.Comandos;
 using Hackathon.Fiap.Domain.HorariosDisponiveis.Repositorios.Filtros;
 using Hackathon.Fiap.Domain.HorariosDisponiveis.Servicos.Interfaces;
+using Hackathon.Fiap.Domain.Utils;
 
 namespace Hackathon.Fiap.Application.HorariosDisponiveis.Servicos;
 

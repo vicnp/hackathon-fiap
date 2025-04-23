@@ -1,8 +1,8 @@
 ﻿using Hackathon.Fiap.Application.Medicos.Interfaces;
 using Hackathon.Fiap.DataTransfer.Medicos.Requests;
 using Hackathon.Fiap.DataTransfer.Medicos.Responses;
-using Hackathon.Fiap.DataTransfer.Utils;
 using Hackathon.Fiap.Domain.Usuarios.Entidades;
+using Hackathon.Fiap.Domain.Utils;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 

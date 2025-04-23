@@ -1,4 +1,4 @@
-﻿namespace Hackathon.Fiap.DataTransfer.Utils
+﻿namespace Hackathon.Fiap.Domain.Utils
 {
     public class PaginacaoConsulta<T> where T : class
     {

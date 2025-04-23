@@ -1,6 +1,7 @@
 ﻿using Dapper;
 using DotNet.Testcontainers.Builders;
 using DotNet.Testcontainers.Containers;
+using Hackathon.Fiap.API;
 using Hackathon.Fiap.Infra.Utils.DBContext;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;

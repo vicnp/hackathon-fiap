@@ -1,10 +1,10 @@
 ﻿using System.Net;
 using System.Text;
-using Hackathon.Fiap.DataTransfer.Consultas.Enumeradores;
 using Hackathon.Fiap.DataTransfer.Consultas.Requests;
 using Hackathon.Fiap.DataTransfer.Consultas.Responses;
-using Hackathon.Fiap.DataTransfer.Utils;
+using Hackathon.Fiap.Domain.Consultas.Enumeradores;
 using Hackathon.Fiap.Domain.Usuarios.Entidades;
+using Hackathon.Fiap.Domain.Utils;
 using Hackathon.Fiap.Teste.Integracao.ClassesHelper;
 using Newtonsoft.Json;
 

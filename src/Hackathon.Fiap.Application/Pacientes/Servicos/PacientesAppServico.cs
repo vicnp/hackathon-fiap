@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using Hackathon.Fiap.DataTransfer.Utils;
 using Hackathon.Fiap.DataTransfer.Pacientes.Responses;
 using Hackathon.Fiap.DataTransfer.Usuarios.Request;
 using Hackathon.Fiap.Application.Pacientes.Interfaces;
@@ -8,6 +7,7 @@ using Hackathon.Fiap.Domain.Seguranca.Servicos.Interfaces;
 using Hackathon.Fiap.Domain.Pacientes.Entidades;
 using Hackathon.Fiap.Domain.Usuarios.Enumeradores;
 using Hackathon.Fiap.Domain.Pacientes.Repositorios.Filtros;
+using Hackathon.Fiap.Domain.Utils;
 
 namespace Hackathon.Fiap.Application.Pacientes.Servicos
 {

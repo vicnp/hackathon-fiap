@@ -1,7 +1,7 @@
 using FluentAssertions;
-using Hackathon.Fiap.DataTransfer.Consultas.Enumeradores;
-using Hackathon.Fiap.DataTransfer.Utils;
+using Hackathon.Fiap.Domain.Consultas.Consultas;
 using Hackathon.Fiap.Domain.Consultas.Entidades;
+using Hackathon.Fiap.Domain.Consultas.Enumeradores;
 using Hackathon.Fiap.Domain.Consultas.Repositorios;
 using Hackathon.Fiap.Domain.Consultas.Repositorios.Filtros;
 using Hackathon.Fiap.Domain.Consultas.Servicos;
@@ -10,8 +10,8 @@ using Hackathon.Fiap.Domain.Medicos.Entidades;
 using Hackathon.Fiap.Domain.Medicos.Repositorios;
 using Hackathon.Fiap.Domain.Pacientes.Entidades;
 using Hackathon.Fiap.Domain.Pacientes.Repositorios;
+using Hackathon.Fiap.Domain.Utils;
 using Hackathon.Fiap.Domain.Utils.Excecoes;
-using Hackathon.Fiap.Infra.Consultas.Consultas;
 using NSubstitute;
 
 namespace Hackathon.Fiap.Teste.Consultas.Servicos;
