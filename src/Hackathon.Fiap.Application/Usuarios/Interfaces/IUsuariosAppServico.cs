@@ -6,6 +6,8 @@ namespace Hackathon.Fiap.Application.Usuarios.Interfaces
 {
     public interface IUsuariosAppServico
     {
+        Task<UsuarioResponse> CadastrarUsuarioAsync(UsuarioCadastroRequest request, CancellationToken ct);
+        Task DeletarUsuarioAsync(int id, CancellationToken ct);
         Task<PaginacaoConsulta<UsuarioResponse>> ListarUsuariosAsync(UsuarioListarRequest request, CancellationToken ct);
     }
 }

@@ -14,18 +14,15 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Remove="Usuarios\Servicos\**" />
     <Compile Remove="Utils\Mapper.cs" />
     <Compile Remove="Usuarios\Repositorios\Filtros\**" />
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Remove="Usuarios\Servicos\**" />
     <EmbeddedResource Remove="Usuarios\Repositorios\Filtros\**" />
   </ItemGroup>
 
   <ItemGroup>
-    <None Remove="Usuarios\Servicos\**" />
     <None Remove="Usuarios\Repositorios\Filtros\**" />
   </ItemGroup>
 
