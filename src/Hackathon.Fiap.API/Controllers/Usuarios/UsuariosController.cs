@@ -26,7 +26,12 @@ namespace Hackathon.Fiap.API.Controllers.Usuarios
             return Ok(paginacaoConsulta);
         }
 
-
+        /// <summary>
+        /// Realiza o cadastro de um usuário no sistema.
+        /// </summary>
+        /// <param name="request"></param>
+        /// <param name="ct"></param>
+        /// <returns></returns>
         [HttpPost]
         [Authorize(Roles = Roles.Administrador)]
         public async Task<ActionResult<UsuarioResponse>> CadastraUsuarioAsync([FromBody] UsuarioCadastroRequest request, CancellationToken ct)
