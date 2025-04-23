@@ -1,3 +1,5 @@
+using System.Text;
+using System.Text.Json.Serialization;
 using Hackathon.Fiap.Application.Medicos.Servicos;
 using Hackathon.Fiap.Domain.Medicos.Servicos;
 using Hackathon.Fiap.Domain.Utils.Middleware;
@@ -7,8 +9,6 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Prometheus;
-using System.Text;
-using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -112,4 +112,7 @@ app.MapControllers();
 
 app.Run();
 
-public partial class Program { }
+namespace Hackathon.Fiap.API
+{
+    public partial class Program { }
+}

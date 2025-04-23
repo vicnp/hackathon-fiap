@@ -1,4 +1,4 @@
-﻿namespace Hackathon.Fiap.Infra.Consultas.Consultas
+﻿namespace Hackathon.Fiap.Domain.Consultas.Consultas
 {
     public class ConsultaConsulta
     {

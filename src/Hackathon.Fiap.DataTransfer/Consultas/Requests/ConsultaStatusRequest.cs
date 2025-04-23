@@ -1,4 +1,4 @@
-﻿using Hackathon.Fiap.DataTransfer.Consultas.Enumeradores;
+﻿using Hackathon.Fiap.Domain.Consultas.Enumeradores;
 
 namespace Hackathon.Fiap.DataTransfer.Consultas.Requests
 {

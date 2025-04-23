@@ -10,4 +10,20 @@
   <ItemGroup>
     <AssemblyAttribute Include="System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage" />
   </ItemGroup>
+  
+  <ItemGroup>
+    <Compile Remove="Utils\**" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <EmbeddedResource Remove="Utils\**" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <None Remove="Utils\**" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <ProjectReference Include="..\Hackathon.Fiap.Domain\Hackathon.Fiap.Domain.csproj" />
+  </ItemGroup>
 </Project>

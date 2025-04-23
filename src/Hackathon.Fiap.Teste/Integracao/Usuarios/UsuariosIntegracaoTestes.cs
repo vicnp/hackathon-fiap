@@ -5,8 +5,8 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using Hackathon.Fiap.DataTransfer.Pacientes.Responses;
-using Hackathon.Fiap.DataTransfer.Utils;
 using Hackathon.Fiap.Domain.Usuarios.Entidades;
+using Hackathon.Fiap.Domain.Utils;
 using Newtonsoft.Json;
 
 namespace Hackathon.Fiap.Teste.Integracao.Usuarios

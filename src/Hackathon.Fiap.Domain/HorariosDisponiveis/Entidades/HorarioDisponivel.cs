@@ -1,4 +1,4 @@
-using Hackathon.Fiap.DataTransfer.HorariosDisponiveis.Enumeradores;
+using Hackathon.Fiap.Domain.HorariosDisponiveis.Enumeradores;
 using Hackathon.Fiap.Domain.Medicos.Entidades;
 using Hackathon.Fiap.Domain.Pacientes.Entidades;
 

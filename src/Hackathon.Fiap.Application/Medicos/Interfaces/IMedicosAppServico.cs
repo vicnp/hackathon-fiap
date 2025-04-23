@@ -1,6 +1,6 @@
 ﻿using Hackathon.Fiap.DataTransfer.Medicos.Requests;
 using Hackathon.Fiap.DataTransfer.Medicos.Responses;
-using Hackathon.Fiap.DataTransfer.Utils;
+using Hackathon.Fiap.Domain.Utils;
 
 namespace Hackathon.Fiap.Application.Medicos.Interfaces
 {
