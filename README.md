@@ -110,23 +110,17 @@ A pipeline CI é executada a cada commit em qualquer branch que tenha o prefixo 
 
 ### Cadastro de Médico
 
-![Cadastro Medico](https://github.com/user-attachments/assets/ef3aa9d0-b26e-4f2c-a30c-434f377ec61c)
+![Cadastro de Médico](https://github.com/user-attachments/assets/cfb85320-fce0-4978-aba1-9d79625007d8)
 
 
 ### Cadastro de Paciente
 
-![Cadastro Paciente](https://github.com/user-attachments/assets/0d32dbfb-b21a-4ffd-8d16-fce6cfe45fe7)
+![Cadastro de Paciente](https://github.com/user-attachments/assets/031a3e7f-06a2-42d4-b996-cde23c57dfce)
 
 
 ### Agendamento de Consulta
 
-![Agendamento Consulta](https://github.com/user-attachments/assets/4d1bd5e8-492f-4222-bec1-a646d0e219a3)
-
-
-### Aceite/Recusa de Consulta
-
-![Aceite e Recusa de consulta](https://github.com/user-attachments/assets/689bb1fe-070a-4c8c-b933-aae00a0a5355)
-
+![Agendamento de Consulta](https://github.com/user-attachments/assets/4a314479-4df1-44f9-98ac-1b321fb2606e)
 
 
 ## Justificativas das Escolhas Técnicas
