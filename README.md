@@ -110,15 +110,22 @@ A pipeline CI é executada a cada commit em qualquer branch que tenha o prefixo 
 
 ### Cadastro de Médico
 
+- O médico preenche uma ficha funcional com seus dados, suas especialidades e CRM para avaliação do Time administrativo do hospital, que por sua vez faz uma avaliação e o devido arquivamento do documento.
+
 ![Cadastro de Médico](https://github.com/user-attachments/assets/cfb85320-fce0-4978-aba1-9d79625007d8)
 
-
+  
 ### Cadastro de Paciente
 
+- O paciente preenche a ficha cadastral na recepção, que é avaliada e devidamente arquivada pelos recepcionistas do hospital.
+  
 ![Cadastro de Paciente](https://github.com/user-attachments/assets/031a3e7f-06a2-42d4-b996-cde23c57dfce)
 
 
 ### Agendamento de Consulta
+
+- O Paciente, depois de sua ficha feita na recepção do hospital, usa o sistema para agendar uma próxima consulta.
+- Assim que o agendamento é solicitado pelo paciente, a equipe da recepção recebe uma notificação, faz a avaliação da ficha cadastral do paciente, consulta os horários disponíveis, realizam o agendamento e notificam o paciente por email.
 
 ![Agendamento de Consulta](https://github.com/user-attachments/assets/4a314479-4df1-44f9-98ac-1b321fb2606e)
 
