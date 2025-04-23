@@ -1,13 +1,14 @@
-﻿using Dapper;
-using Hackathon.Fiap.DataTransfer.Usuarios.Request;
+﻿using System.Text;
+using Dapper;
+using Hackathon.Fiap.Domain.Pacientes.Repositorios.Filtros;
 using Hackathon.Fiap.Domain.Usuarios.Entidades;
+using Hackathon.Fiap.Domain.Usuarios.Enumeradores;
 using Hackathon.Fiap.Domain.Usuarios.Repositorios;
+using Hackathon.Fiap.Domain.Utils;
+using Hackathon.Fiap.Domain.Utils.Excecoes;
 using Hackathon.Fiap.Infra.Utils;
 using Hackathon.Fiap.Infra.Utils.DBContext;
 using Microsoft.IdentityModel.Tokens;
-using System.Text;
-using Hackathon.Fiap.Domain.Pacientes.Repositorios.Filtros;
-using Hackathon.Fiap.Domain.Utils;
 
 namespace Hackathon.Fiap.Infra.Usuarios
 {
@@ -58,6 +59,54 @@ namespace Hackathon.Fiap.Infra.Usuarios
             }
 
             return await ListarPaginadoAsync(sql.ToString(), filtro.Pg, filtro.Qt, filtro.CpOrd, filtro.TpOrd.ToString(), ct: ct);
+        }
+
+        private async Task InserirUsuarioMedicoAsync(string crmMedico, int codigoUsuario, CancellationToken ct)
+        {
+
+            StringBuilder sql = new($@"
+                                       INSERT INTO `Medicos` VALUES (@IDMEDICO,@CRM);
+                                     ");
+
+            DynamicParameters dp = new();
+
+            dp.Add("@IDMEDICO", codigoUsuario);
+            dp.Add("@CRM", crmMedico);
+
+            await session.ExecuteAsync(new CommandDefinition(sql.ToString(), dp, cancellationToken: ct));
+        }
+
+        public async Task<Usuario> InserirUsuarioAsync(Usuario novoUsuario, CancellationToken ct)
+        {
+            StringBuilder sql = new($@"
+                                      INSERT INTO `Usuarios`
+                                     (nome, email, cpf, hash, tipo, criado_em)
+                                      VALUES (@NOME,
+                                              @EMAIL,
+                                             @CPF,
+                                             @HASH,
+                                             @TIPO,
+                                             @CRIADOEM
+                                            );
+                                     ");
+
+            DynamicParameters dp = new();
+
+            dp.Add("@CPF", novoUsuario.Cpf);
+            dp.Add("@HASH", novoUsuario.Hash);
+            dp.Add("@NOME", novoUsuario.Nome);
+            dp.Add("@EMAIL", novoUsuario.Email);
+            dp.Add("@HASH", novoUsuario.Cpf);
+            dp.Add("@TIPO", novoUsuario.Tipo.ToString());
+            dp.Add("@CRIADOEM", novoUsuario.CriadoEm);
+
+            await session.ExecuteAsync(new CommandDefinition(sql.ToString(), dp, cancellationToken: ct));
+
+            if (novoUsuario.Tipo == TipoUsuario.Medico)
+                await InserirUsuarioMedicoAsync(novoUsuario.Cpf, novoUsuario.IdUsuario, ct);
+
+            Usuario? result = await RecuperarUsuarioAsync(novoUsuario.Cpf, novoUsuario.Hash, ct);
+            return result ?? throw new RegistroNaoEncontradoExcecao("Não foi possível cadastrar o usuário");
         }
     }
 }

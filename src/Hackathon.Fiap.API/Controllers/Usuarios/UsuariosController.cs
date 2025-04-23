@@ -25,5 +25,13 @@ namespace Hackathon.Fiap.API.Controllers.Usuarios
             PaginacaoConsulta<UsuarioResponse> paginacaoConsulta = await usuariosAppServico.ListarUsuariosAsync(request, ct);
             return Ok(paginacaoConsulta);
         }
+
+
+        [HttpPost]
+        public async Task<ActionResult<UsuarioResponse>> CadastraUsuarioAsync([FromBody] UsuarioCadastroRequest request, CancellationToken ct)
+        {
+            UsuarioResponse response = await usuariosAppServico.CadastrarUsuarioAsync(request, ct);
+            return Ok(response);
+        }
     }
 }
