@@ -40,6 +40,12 @@ namespace Hackathon.Fiap.API.Controllers.Usuarios
             return Ok(response);
         }
 
+        /// <summary>
+        /// Remove um usuário no sistema.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="ct"></param>
+        /// <returns></returns>
         [HttpDelete("{id:int}")]
         [Authorize(Roles = Roles.Administrador)]
         public async Task<ActionResult> DeletarUsuarioAsync(int id, CancellationToken ct)

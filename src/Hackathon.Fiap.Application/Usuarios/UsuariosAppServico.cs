@@ -13,7 +13,9 @@ using Hackathon.Fiap.Domain.Utils.Excecoes;
 
 namespace Hackathon.Fiap.Application.Usuarios
 {
-    public partial class UsuariosAppServico(IUsuariosRepositorio usuariosRepositorio, IUsuariosServico usuarioServico, IMapper mapper) : IUsuariosAppServico
+    public partial class UsuariosAppServico(IUsuariosRepositorio usuariosRepositorio,
+                                            IUsuariosServico usuarioServico,
+                                            IMapper mapper) : IUsuariosAppServico
     {
         [GeneratedRegex(@"Duplicate entry '.*' for key '(Usuarios|Medicos)\.(\w+)'")]
         private static partial Regex RegexErroMessage();
@@ -55,15 +57,10 @@ namespace Hackathon.Fiap.Application.Usuarios
 
         public async Task DeletarUsuarioAsync(int id, CancellationToken ct)
         {
-            Usuario? response = await usuariosRepositorio.RecuperarUsuarioPorIdAsync(id, ct);
+            Usuario? response = await usuariosRepositorio.RecuperarUsuarioPorIdAsync(id, ct)
+                ?? throw new RegistroNaoEncontradoExcecao("Usuário não existe.");
 
-            if (response != null)
-            {
-                await usuariosRepositorio.DeletarUsuarioAsync(id, ct);
-                return;
-            }
-
-            throw new RegistroNaoEncontradoExcecao("Usuário não existe.");
+            await usuariosRepositorio.DeletarUsuarioAsync(response.IdUsuario, ct);
         }
     }
 }
