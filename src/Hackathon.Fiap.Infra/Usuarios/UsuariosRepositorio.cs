@@ -36,6 +36,25 @@ namespace Hackathon.Fiap.Infra.Usuarios
             return session.QueryFirstOrDefaultAsync<Usuario>(new CommandDefinition(sql.ToString(), dp, cancellationToken: ct));
         }
 
+        public Task<Usuario?> RecuperarUsuarioPorIdAsync(int id, CancellationToken ct)
+        {
+            StringBuilder sql = new($@"
+                                     SELECT u.id as IdUsuario,
+                                            u.nome as Nome,
+                                            u.email as Email,
+                                            u.cpf as Cpf,
+                                            u.hash as Hash,
+                                            u.tipo as Tipo,
+                                            u.criado_em as CriadoEm
+                                     FROM techchallenge.Usuarios u
+                                     LEFT JOIN techchallenge.Medicos m ON m.id = u.id
+                        	         WHERE u.id = @ID ");
+
+            DynamicParameters dp = new();
+            dp.Add("ID", id);
+            return session.QueryFirstOrDefaultAsync<Usuario>(new CommandDefinition(sql.ToString(), dp, cancellationToken: ct));
+        }
+
         public async Task<PaginacaoConsulta<Usuario>> ListarUsuariosAsync(UsuarioListarFiltro filtro, CancellationToken ct)
         {
             StringBuilder sql = new($@"
@@ -114,5 +133,19 @@ namespace Hackathon.Fiap.Infra.Usuarios
             return novoUsuario;
         }
 
+        public Task DeletarUsuarioAsync(int id, CancellationToken ct)
+        {
+            StringBuilder sql = new($@"
+                                       DELETE FROM techchallenge.Usuarios
+                                       WHERE id = @ID;
+
+                                       DELETE FROM techchallenge.Medicos
+                                       WHERE Id = @ID;
+                                     ");
+
+            DynamicParameters dp = new();
+            dp.Add("@ID", id);
+            return session.ExecuteAsync(new CommandDefinition(sql.ToString(), dp, cancellationToken: ct));
+        }
     }
 }

@@ -32,6 +32,7 @@ namespace Hackathon.Fiap.Application.Usuarios
             }
 
         }
+
         public static string SanitizeErrorMessage(string errorMessage)
         {
             Regex regex = RegexErroMessage();
@@ -52,6 +53,17 @@ namespace Hackathon.Fiap.Application.Usuarios
             return mapper.Map<PaginacaoConsulta<UsuarioResponse>>(response);
         }
 
+        public async Task DeletarUsuarioAsync(int id, CancellationToken ct)
+        {
+            Usuario? response = await usuariosRepositorio.RecuperarUsuarioPorIdAsync(id, ct);
 
+            if (response != null)
+            {
+                await usuariosRepositorio.DeletarUsuarioAsync(id, ct);
+                return;
+            }
+
+            throw new RegistroNaoEncontradoExcecao("Usuário não existe.");
+        }
     }
 }

@@ -16,7 +16,7 @@ namespace Hackathon.Fiap.API.Controllers.Usuarios
         /// Consulta de usuários, limitado ao administrador.
         /// </summary>
         /// <param name="request"></param>
-        /// <returns></returns>
+        /// <returns>Lista paginada de usuários</returns>
         [HttpGet]
         [Route("paginados")]
         [Authorize(Roles = Roles.Administrador)]
@@ -31,13 +31,20 @@ namespace Hackathon.Fiap.API.Controllers.Usuarios
         /// </summary>
         /// <param name="request"></param>
         /// <param name="ct"></param>
-        /// <returns></returns>
+        /// <returns>O usuário cadastrado</returns>
         [HttpPost]
         [Authorize(Roles = Roles.Administrador)]
         public async Task<ActionResult<UsuarioResponse>> CadastraUsuarioAsync([FromBody] UsuarioCadastroRequest request, CancellationToken ct)
         {
             UsuarioResponse response = await usuariosAppServico.CadastrarUsuarioAsync(request, ct);
             return Ok(response);
+        }
+
+        [HttpDelete("{id:int}")]
+        public async Task<ActionResult> DeletarUsuarioAsync(int id, CancellationToken ct)
+        {
+            await usuariosAppServico.DeletarUsuarioAsync(id, ct);
+            return Ok();
         }
     }
 }
