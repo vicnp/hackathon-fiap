@@ -28,6 +28,7 @@ namespace Hackathon.Fiap.API.Controllers.Usuarios
 
 
         [HttpPost]
+        [Authorize(Roles = Roles.Administrador)]
         public async Task<ActionResult<UsuarioResponse>> CadastraUsuarioAsync([FromBody] UsuarioCadastroRequest request, CancellationToken ct)
         {
             UsuarioResponse response = await usuariosAppServico.CadastrarUsuarioAsync(request, ct);
