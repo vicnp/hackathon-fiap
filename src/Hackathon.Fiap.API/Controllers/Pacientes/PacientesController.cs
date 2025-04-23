@@ -1,10 +1,10 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Hackathon.Fiap.DataTransfer.Utils;
 using Hackathon.Fiap.DataTransfer.Pacientes.Responses;
 using Hackathon.Fiap.DataTransfer.Usuarios.Request;
 using Hackathon.Fiap.Application.Pacientes.Interfaces;
 using Hackathon.Fiap.Domain.Usuarios.Entidades;
+using Hackathon.Fiap.Domain.Utils;
 
 namespace Hackathon.Fiap.API.Controllers.Pacientes
 {

@@ -1,6 +1,6 @@
-using Hackathon.Fiap.DataTransfer.HorariosDisponiveis.Enumeradores;
 using Hackathon.Fiap.DataTransfer.Medicos.Responses;
 using Hackathon.Fiap.DataTransfer.Pacientes.Responses;
+using Hackathon.Fiap.Domain.HorariosDisponiveis.Enumeradores;
 
 namespace Hackathon.Fiap.DataTransfer.HorariosDisponiveis.Responses;
 

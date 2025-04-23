@@ -1,6 +1,6 @@
-﻿using Hackathon.Fiap.DataTransfer.Utils;
-using Hackathon.Fiap.DataTransfer.Usuarios.Response;
+﻿using Hackathon.Fiap.DataTransfer.Usuarios.Response;
 using Hackathon.Fiap.DataTransfer.Usuarios.Request;
+using Hackathon.Fiap.Domain.Utils;
 
 namespace Hackathon.Fiap.Application.Usuarios.Interfaces
 {

@@ -1,7 +1,7 @@
 ﻿using Dapper;
-using Hackathon.Fiap.DataTransfer.Utils;
 using Hackathon.Fiap.Infra.Utils.DBContext;
 using System.Data;
+using Hackathon.Fiap.Domain.Utils;
 
 namespace Hackathon.Fiap.Infra.Utils
 {

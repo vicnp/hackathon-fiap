@@ -1,6 +1,6 @@
 using FluentAssertions;
-using Hackathon.Fiap.DataTransfer.Consultas.Enumeradores;
 using Hackathon.Fiap.Domain.Consultas.Entidades;
+using Hackathon.Fiap.Domain.Consultas.Enumeradores;
 using Hackathon.Fiap.Domain.Medicos.Entidades;
 using Hackathon.Fiap.Domain.Pacientes.Entidades;
 

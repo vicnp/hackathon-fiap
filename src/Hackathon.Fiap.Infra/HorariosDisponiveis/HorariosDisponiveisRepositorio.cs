@@ -1,10 +1,10 @@
 using System.Text;
 using Dapper;
 using Hackathon.Fiap.DataTransfer.HorariosDisponiveis.Consultas;
-using Hackathon.Fiap.DataTransfer.Utils;
 using Hackathon.Fiap.Domain.HorariosDisponiveis.Entidades;
 using Hackathon.Fiap.Domain.HorariosDisponiveis.Repositorios;
 using Hackathon.Fiap.Domain.HorariosDisponiveis.Repositorios.Filtros;
+using Hackathon.Fiap.Domain.Utils;
 using Hackathon.Fiap.Infra.Utils;
 using Hackathon.Fiap.Infra.Utils.DBContext;
 
