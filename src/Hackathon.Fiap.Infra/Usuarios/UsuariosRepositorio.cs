@@ -1,8 +1,8 @@
 ﻿using System.Text;
 using Dapper;
+using Hackathon.Fiap.Domain.Medicos.Entidades;
 using Hackathon.Fiap.Domain.Pacientes.Repositorios.Filtros;
 using Hackathon.Fiap.Domain.Usuarios.Entidades;
-using Hackathon.Fiap.Domain.Usuarios.Enumeradores;
 using Hackathon.Fiap.Domain.Usuarios.Repositorios;
 using Hackathon.Fiap.Domain.Utils;
 using Hackathon.Fiap.Domain.Utils.Excecoes;
@@ -88,25 +88,31 @@ namespace Hackathon.Fiap.Infra.Usuarios
                                              @TIPO,
                                              @CRIADOEM
                                             );
+                                    SELECT LAST_INSERT_ID();
                                      ");
 
             DynamicParameters dp = new();
 
-            dp.Add("@CPF", novoUsuario.Cpf);
-            dp.Add("@HASH", novoUsuario.Hash);
             dp.Add("@NOME", novoUsuario.Nome);
             dp.Add("@EMAIL", novoUsuario.Email);
-            dp.Add("@HASH", novoUsuario.Cpf);
+            dp.Add("@CPF", novoUsuario.Cpf);
+            dp.Add("@HASH", novoUsuario.Hash);
             dp.Add("@TIPO", novoUsuario.Tipo.ToString());
             dp.Add("@CRIADOEM", novoUsuario.CriadoEm);
 
-            await session.ExecuteAsync(new CommandDefinition(sql.ToString(), dp, cancellationToken: ct));
-
-            if (novoUsuario.Tipo == TipoUsuario.Medico)
-                await InserirUsuarioMedicoAsync(novoUsuario.Cpf, novoUsuario.IdUsuario, ct);
+            int IdNovoUsuario = await session.ExecuteScalarAsync<int>(new CommandDefinition(sql.ToString(), dp, cancellationToken: ct));
 
             Usuario? result = await RecuperarUsuarioAsync(novoUsuario.Cpf, novoUsuario.Hash, ct);
+
             return result ?? throw new RegistroNaoEncontradoExcecao("Não foi possível cadastrar o usuário");
         }
+
+        public async Task<Usuario> InserirUsuarioAsync(Medico novoMedico, CancellationToken ct)
+        {
+            Usuario novoUsuario = await InserirUsuarioAsync((Usuario)novoMedico, ct);
+            await InserirUsuarioMedicoAsync(novoMedico.Crm, novoUsuario.IdUsuario, ct);
+            return novoUsuario;
+        }
+
     }
 }
