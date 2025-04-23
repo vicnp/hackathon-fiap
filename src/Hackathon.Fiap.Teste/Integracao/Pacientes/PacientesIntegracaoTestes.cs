@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Text;
-using System.Threading.Tasks;
-using Hackathon.Fiap.DataTransfer.Medicos.Responses;
+﻿using System.Net;
 using Hackathon.Fiap.DataTransfer.Pacientes.Responses;
 using Hackathon.Fiap.Domain.Usuarios.Entidades;
 using Hackathon.Fiap.Domain.Utils;
