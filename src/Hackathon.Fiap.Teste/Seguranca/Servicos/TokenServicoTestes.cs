@@ -53,6 +53,25 @@ namespace Hackathon.Fiap.Teste.Seguranca.Servicos
             }
 
             [Fact]
+            public async Task Quando_GetEmailInvalido_Espero_ObjException()
+            {
+                //Caso usuario não encontrado!!
+                string senha = "123";
+                string email = "";
+                var ct = CancellationToken.None;
+
+
+                utilRepositorio.GetValueConfigurationHash(configuration).Returns("6i9BiR4fRpbbIKxxEoEyjQ==");
+                utilRepositorio.GetValueConfigurationKeyJWT(configuration).Returns("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c");
+                usuariosRepositorio.RecuperarUsuarioAsync(email, Arg.Any<string>(), Arg.Any<CancellationToken>())
+                    .ReturnsNull();
+
+                await FluentActions.Awaiting(() => tokenServico.GetTokenAsync(email, senha, ct))
+                    .Should().ThrowAsync<NaoAutorizadoExcecao>()
+                    .WithMessage("Usuário ou senha incorretos.");
+            }
+
+            [Fact]
             public void QuandoEncryptPasswordEsperoObjException()
             {
                 string senha = "senha";

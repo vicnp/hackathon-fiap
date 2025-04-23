@@ -1,11 +1,13 @@
 using FluentAssertions;
 using Hackathon.Fiap.DataTransfer.Consultas.Enumeradores;
+using Hackathon.Fiap.DataTransfer.HorariosDisponiveis.Enumeradores;
 using Hackathon.Fiap.DataTransfer.Utils;
 using Hackathon.Fiap.Domain.Consultas.Entidades;
 using Hackathon.Fiap.Domain.Consultas.Repositorios;
 using Hackathon.Fiap.Domain.Consultas.Repositorios.Filtros;
 using Hackathon.Fiap.Domain.Consultas.Servicos;
 using Hackathon.Fiap.Domain.Consultas.Servicos.Interfaces;
+using Hackathon.Fiap.Domain.HorariosDisponiveis.Entidades;
 using Hackathon.Fiap.Domain.HorariosDisponiveis.Repositorios;
 using Hackathon.Fiap.Domain.HorariosDisponiveis.Servicos;
 using Hackathon.Fiap.Domain.HorariosDisponiveis.Servicos.Interfaces;
@@ -86,6 +88,49 @@ public class ConsultasServicoTestes
         consulta.Medico.Should().Be(medico);
         consulta.Paciente.Should().Be(paciente);
         consulta.Status.Should().Be(StatusConsultaEnum.Pendente);
+    }
+
+    [Fact]
+    public async Task Quando_InserirConsultasAsync_DeveRetornarErro()
+    {
+        var medico = new Medico();
+        medico.SetCrm("123456");
+        var paciente = new Paciente();
+        var horarioDisponivel = new HorarioDisponivel(
+            horarioDisponivelId: 1, 
+            dataHoraInicio: DateTime.Now, 
+            dataHoraFim: DateTime.Now, 
+            status: StatusHorarioDisponivelEnum.Reservado);
+        ConsultaInserirFiltro filtro = new();
+
+        medicosServico.ValidarMedicoAsync(Arg.Any<int>(), Arg.Any<CancellationToken>()).Returns(medico);
+        pacientesServicos.ValidarPacienteAsync(Arg.Any<int>(), Arg.Any<CancellationToken>()).Returns(paciente);
+        horariosDisponiveisServico.ValidarHorarioDisponivelAsync(Arg.Any<int>(), Arg.Any<CancellationToken>()).Returns(horarioDisponivel);
+
+        Func <Task> act = async () => await consultaServico.InserirConsultaAsync(filtro, CancellationToken.None);
+        await act.Should().ThrowAsync<RegraDeNegocioExcecao>()
+            .WithMessage("O horário selecionado não está mais disponível!");
+    }
+
+    [Fact]
+    public async Task Quando_InserirConsultasAsync_DeveRetornarNenhumErro()
+    {
+        var medico = new Medico();
+        medico.SetCrm("123456");
+        var paciente = new Paciente();
+        var horarioDisponivel = new HorarioDisponivel(
+            horarioDisponivelId: 1,
+            dataHoraInicio: DateTime.Now,
+            dataHoraFim: DateTime.Now,
+            status: StatusHorarioDisponivelEnum.Disponivel);
+        ConsultaInserirFiltro filtro = new();
+
+        medicosServico.ValidarMedicoAsync(Arg.Any<int>(), Arg.Any<CancellationToken>()).Returns(medico);
+        pacientesServicos.ValidarPacienteAsync(Arg.Any<int>(), Arg.Any<CancellationToken>()).Returns(paciente);
+        horariosDisponiveisServico.ValidarHorarioDisponivelAsync(Arg.Any<int>(), Arg.Any<CancellationToken>()).Returns(horarioDisponivel);
+
+        Func<Task> act = async () => await consultaServico.InserirConsultaAsync(filtro, CancellationToken.None);
+        await act.Should().NotThrowAsync();
     }
 
     [Fact]
@@ -210,6 +255,40 @@ public class ConsultasServicoTestes
     }
 
     [Fact]
+    public async Task Quando_AtualizarStatusConsulta_ParaCancelada_ComJustificativa_NaoExcecao()
+    {
+        // ARRANGE
+        var consulta = new Consulta
+        {
+            ConsultaId = 1,
+            Status = StatusConsultaEnum.Pendente,
+            JustificativaCancelamento = "asd asd"
+        };
+
+        // Configurando o mock para retornar 1 (sucesso)
+        consultasRepositorio.AtualizarStatusConsultaAsync(Arg.Any<Consulta>(), Arg.Any<CancellationToken>())
+            .Returns(Task.FromResult(1));
+
+        var paginacaoConsulta = new PaginacaoConsulta<ConsultaConsulta>
+        {
+            Total = 1,
+            Registros =
+            [
+                new() {
+                    ConsultaId = 1,
+                    Status = StatusConsultaEnum.Aceita.ToString()
+                }
+            ]
+        };
+
+        consultasRepositorio.ListarConsultasAsync(Arg.Any<ConsultasListarFiltro>(), Arg.Any<CancellationToken>())
+            .Returns(paginacaoConsulta);
+
+
+        await consultaServico.AtualizarStatusConsultaAsync(consulta, StatusConsultaEnum.Cancelada, CancellationToken.None);
+    }
+
+    [Fact]
     public async Task Quando_AtualizarStatusConsulta_ParaAceita_QuandoJaCancelada_DeveLancarExcecao()
     {
         // ARRANGE
@@ -279,5 +358,21 @@ public class ConsultasServicoTestes
         resultado.Should().NotBeNull();
         resultado!.Status.Should().Be(StatusConsultaEnum.Aceita);
         await consultasRepositorio.Received(1).AtualizarStatusConsultaAsync(Arg.Any<Consulta>(), Arg.Any<CancellationToken>());
+    }
+
+    [Fact]
+    public async Task Quando_ConsultaAceitastatusPendenteDeveLancarExcecao()
+    {
+        // ARRANGE
+        var consulta = new Consulta
+        {
+            ConsultaId = 1,
+            Status = StatusConsultaEnum.Aceita
+        };
+
+        // ACT & ASSERT
+        Func<Task> act = async () => await consultaServico.AtualizarStatusConsultaAsync(consulta, StatusConsultaEnum.Aceita, CancellationToken.None);
+        await act.Should().ThrowAsync<RegraDeNegocioExcecao>()
+            .WithMessage("A consulta não pode ser aceita.");
     }
 }

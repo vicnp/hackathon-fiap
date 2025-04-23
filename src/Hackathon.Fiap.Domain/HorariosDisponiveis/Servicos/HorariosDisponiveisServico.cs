@@ -19,7 +19,7 @@ public class HorariosDisponiveisServico(IHorariosDisponiveisRepositorio horarios
 
     public async Task<HorarioDisponivel> ValidarHorarioDisponivelAsync(int horarioDisponivelId, CancellationToken cancellationToken)
     {
-        return await horariosDisponiveisRepositorio.RecuperarHorarioDisponivel(horarioDisponivelId, cancellationToken) ?? throw new RegistroNaoEncontradoExcecao("Horario Disponivel");
+        return await horariosDisponiveisRepositorio.RecuperarHorarioDisponivel(horarioDisponivelId, cancellationToken) ?? throw new RegistroNaoEncontradoExcecao("Horario Disponivel não encontrado!");
     }
 
     public async Task<PaginacaoConsulta<HorarioDisponivel>> ListarHorariosDisponiveisAsync(HorariosDisponiveisFiltro filtro, CancellationToken ct)

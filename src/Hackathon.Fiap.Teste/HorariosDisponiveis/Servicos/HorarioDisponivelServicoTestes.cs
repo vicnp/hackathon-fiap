@@ -12,6 +12,7 @@ using Hackathon.Fiap.Domain.Medicos.Entidades;
 using Hackathon.Fiap.Domain.Medicos.Repositorios;
 using Hackathon.Fiap.Domain.Pacientes.Entidades;
 using Hackathon.Fiap.Domain.Pacientes.Repositorios;
+using Hackathon.Fiap.Domain.Pacientes.Servicos;
 using Hackathon.Fiap.Domain.Utils.Excecoes;
 using NSubstitute;
 
@@ -32,6 +33,23 @@ public class HorariosDisponiveisServicoTestes
         pacientesRepositorio = Substitute.For<IPacientesRepositorio>();
 
         horariosDisponiveisServico = new HorariosDisponiveisServico(horariosDisponiveisRepositorio, medicosRepositorio, pacientesRepositorio);
+    }
+
+    [Fact]
+    public async Task Quando_GetHorarioDisponivellValido_Espero_ObjException()
+    {
+        HorarioDisponivel horarioDisponivel = new();
+        horariosDisponiveisRepositorio.RecuperarHorarioDisponivel(1, CancellationToken.None).Returns(horarioDisponivel);
+        Func<Task> act = async () => await horariosDisponiveisServico.ValidarHorarioDisponivelAsync(1, CancellationToken.None);
+        await act.Should().NotThrowAsync();
+    }
+
+    [Fact]
+    public async Task Quando_GetHorarioDisponivelInvalido_Espero_ObjException()
+    {
+        await FluentActions.Awaiting(() => horariosDisponiveisServico.ValidarHorarioDisponivelAsync(Arg.Any<int>(), Arg.Any<CancellationToken>()))
+            .Should().ThrowAsync<RegistroNaoEncontradoExcecao>()
+            .WithMessage("Horario Disponivel não encontrado!");
     }
 
     [Fact]
