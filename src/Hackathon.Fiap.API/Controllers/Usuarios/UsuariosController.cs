@@ -41,6 +41,7 @@ namespace Hackathon.Fiap.API.Controllers.Usuarios
         }
 
         [HttpDelete("{id:int}")]
+        [Authorize(Roles = Roles.Administrador)]
         public async Task<ActionResult> DeletarUsuarioAsync(int id, CancellationToken ct)
         {
             await usuariosAppServico.DeletarUsuarioAsync(id, ct);
