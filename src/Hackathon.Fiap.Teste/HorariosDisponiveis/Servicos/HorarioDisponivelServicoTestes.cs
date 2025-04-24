@@ -1,8 +1,7 @@
 using FluentAssertions;
 using Hackathon.Fiap.DataTransfer.HorariosDisponiveis.Consultas;
-using Hackathon.Fiap.DataTransfer.HorariosDisponiveis.Enumeradores;
-using Hackathon.Fiap.DataTransfer.Utils;
 using Hackathon.Fiap.Domain.HorariosDisponiveis.Entidades;
+using Hackathon.Fiap.Domain.HorariosDisponiveis.Enumeradores;
 using Hackathon.Fiap.Domain.HorariosDisponiveis.Repositorios;
 using Hackathon.Fiap.Domain.HorariosDisponiveis.Repositorios.Comandos;
 using Hackathon.Fiap.Domain.HorariosDisponiveis.Repositorios.Filtros;
@@ -12,6 +11,7 @@ using Hackathon.Fiap.Domain.Medicos.Entidades;
 using Hackathon.Fiap.Domain.Medicos.Repositorios;
 using Hackathon.Fiap.Domain.Pacientes.Entidades;
 using Hackathon.Fiap.Domain.Pacientes.Repositorios;
+using Hackathon.Fiap.Domain.Utils;
 using Hackathon.Fiap.Domain.Pacientes.Servicos;
 using Hackathon.Fiap.Domain.Utils.Excecoes;
 using NSubstitute;

@@ -1,14 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Text;
-using System.Threading.Tasks;
-using Hackathon.Fiap.DataTransfer.Consultas.Responses;
+﻿using System.Net;
 using Hackathon.Fiap.DataTransfer.Medicos.Responses;
-using Hackathon.Fiap.DataTransfer.Utils;
 using Hackathon.Fiap.Domain.Usuarios.Entidades;
-using Microsoft.AspNetCore.Http;
+using Hackathon.Fiap.Domain.Utils;
 using Newtonsoft.Json;
 
 namespace Hackathon.Fiap.Teste.Integracao.Medicos

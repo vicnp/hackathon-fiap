@@ -1,4 +1,4 @@
-using Hackathon.Fiap.DataTransfer.HorariosDisponiveis.Enumeradores;
+using Hackathon.Fiap.Domain.HorariosDisponiveis.Enumeradores;
 
 namespace Hackathon.Fiap.DataTransfer.HorariosDisponiveis.Consultas;
 

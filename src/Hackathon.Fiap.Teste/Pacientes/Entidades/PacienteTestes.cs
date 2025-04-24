@@ -1,4 +1,3 @@
-using System.Security.Policy;
 using FluentAssertions;
 using Hackathon.Fiap.Domain.Pacientes.Entidades;
 using Hackathon.Fiap.Domain.Usuarios.Enumeradores;

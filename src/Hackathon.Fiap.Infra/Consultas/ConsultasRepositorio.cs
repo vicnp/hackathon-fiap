@@ -1,10 +1,10 @@
 ﻿using System.Text;
 using Dapper;
-using Hackathon.Fiap.DataTransfer.Utils;
+using Hackathon.Fiap.Domain.Consultas.Consultas;
 using Hackathon.Fiap.Domain.Consultas.Entidades;
 using Hackathon.Fiap.Domain.Consultas.Repositorios;
 using Hackathon.Fiap.Domain.Consultas.Repositorios.Filtros;
-using Hackathon.Fiap.Infra.Consultas.Consultas;
+using Hackathon.Fiap.Domain.Utils;
 using Hackathon.Fiap.Infra.Utils;
 using Hackathon.Fiap.Infra.Utils.DBContext;
 using Microsoft.IdentityModel.Tokens;

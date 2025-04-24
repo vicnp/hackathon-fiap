@@ -1,4 +1,8 @@
-﻿using Hackathon.Fiap.Domain.Seguranca.Servicos.Interfaces;
+﻿using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Security.Cryptography;
+using System.Text;
+using Hackathon.Fiap.Domain.Seguranca.Servicos.Interfaces;
 using Hackathon.Fiap.Domain.Usuarios.Entidades;
 using Hackathon.Fiap.Domain.Usuarios.Repositorios;
 using Hackathon.Fiap.Domain.Utils.Excecoes;
@@ -6,10 +10,6 @@ using Hackathon.Fiap.Domain.Utils.Helpers;
 using Hackathon.Fiap.Domain.Utils.Repositorios;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
-using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
-using System.Security.Cryptography;
-using System.Text;
 
 namespace Hackathon.Fiap.Domain.Seguranca.Servicos
 {
@@ -23,18 +23,18 @@ namespace Hackathon.Fiap.Domain.Seguranca.Servicos
             if (identificador.IsNullOrEmpty() || senha.IsNullOrEmpty())
                 throw new NaoAutorizadoExcecao(autenticacaoFalha);
 
-            var hash = EncryptPassword(senha);
+            string hash = EncryptPassword(senha);
 
             Usuario? usuario = await usuariosRepositorio.RecuperarUsuarioAsync(identificador, hash, ct);
 
             NaoAutorizadoExcecao.LancarExcecaoSeNulo(usuario, autenticacaoFalha);
 
-            var tokenHanlder = new JwtSecurityTokenHandler();
+            JwtSecurityTokenHandler tokenHanlder = new JwtSecurityTokenHandler();
             string? configurationValue = utilRepositorio.GetValueConfigurationKeyJWT(configuration)
                 ?? throw new NullReferenceException("GetValueConfigurationKeyJWT Retornou valor nulo.");
-            var chaveCriptografia = Encoding.ASCII.GetBytes(configurationValue);
+            byte[] chaveCriptografia = Encoding.ASCII.GetBytes(configurationValue);
 
-            var tokenProps = new SecurityTokenDescriptor()
+            SecurityTokenDescriptor tokenProps = new SecurityTokenDescriptor()
             {
                 Subject = new ClaimsIdentity([
                     new Claim(ClaimTypes.Email, usuario.Email),
@@ -47,7 +47,7 @@ namespace Hackathon.Fiap.Domain.Seguranca.Servicos
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(chaveCriptografia), SecurityAlgorithms.HmacSha256Signature)
             };
 
-            var token = tokenHanlder.CreateToken(tokenProps);
+            SecurityToken token = tokenHanlder.CreateToken(tokenProps);
             return tokenHanlder.WriteToken(token);
         }
         public string EncryptPassword(string password)

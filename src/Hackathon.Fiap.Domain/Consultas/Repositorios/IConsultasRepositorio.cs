@@ -1,7 +1,7 @@
-﻿using Hackathon.Fiap.DataTransfer.Utils;
+﻿using Hackathon.Fiap.Domain.Consultas.Consultas;
 using Hackathon.Fiap.Domain.Consultas.Entidades;
 using Hackathon.Fiap.Domain.Consultas.Repositorios.Filtros;
-using Hackathon.Fiap.Infra.Consultas.Consultas;
+using Hackathon.Fiap.Domain.Utils;
 
 namespace Hackathon.Fiap.Domain.Consultas.Repositorios
 {

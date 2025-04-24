@@ -28,6 +28,16 @@ namespace Hackathon.Fiap.Domain.Usuarios.Entidades
             CriadoEm = DateTime.Now;
         }
 
+        public Usuario(string nome, string email, string cpf, string senhaHash, TipoUsuario tipo)
+        {
+            Nome = nome;
+            Email = email;
+            Cpf = cpf;
+            Hash = senhaHash;
+            Tipo = tipo;
+            CriadoEm = DateTime.Now;
+        }
+
         public void AtualizarNome(string novoNome)
         {
             Nome = novoNome;

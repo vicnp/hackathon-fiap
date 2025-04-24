@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deployment-database
+  namespace: hackathon
+  labels:
+    app: hackathon
+    component: db
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hackathon
+      component: db
+  template:
+    metadata:
+      labels:
+        app: hackathon
+        component: db
+    spec:
+      containers:
+        - name: mysql
+          image: mysql:latest
+          ports:
+            - containerPort: 3306
+          env:
+            - name: MYSQL_ROOT_PASSWORD
+              value: "123456Tech"
+            - name: MYSQL_DATABASE
+              value: "techchallenge"
+            - name: MYSQL_USER
+              value: "sis_techchallenge"
+            - name: MYSQL_PASSWORD
+              value: "123456Tech"
+          volumeMounts:
+            - name: db-storage
+              mountPath: /var/lib/mysql
+            - name: initdb
+              mountPath: /docker-entrypoint-initdb.d
+      volumes:
+        - name: db-storage
+          persistentVolumeClaim:
+            claimName: db-storage
+        - name: initdb
+          configMap:
+            name: database-config

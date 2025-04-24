@@ -2,6 +2,7 @@ using Hackathon.Fiap.DataTransfer.Utils;
 using Hackathon.Fiap.Domain.HorariosDisponiveis.Entidades;
 using Hackathon.Fiap.Domain.HorariosDisponiveis.Repositorios.Comandos;
 using Hackathon.Fiap.Domain.HorariosDisponiveis.Repositorios.Filtros;
+using Hackathon.Fiap.Domain.Utils;
 
 namespace Hackathon.Fiap.Domain.HorariosDisponiveis.Servicos.Interfaces;
 

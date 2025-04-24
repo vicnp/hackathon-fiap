@@ -23,6 +23,6 @@ jobs:
       with:
         context: .
         push: true
-        tags: ${{ secrets.DOCKER_USERNAME }}/techchallenge:latest
+        tags: ${{ secrets.DOCKER_USERNAME }}/hackathon:latest
 
               

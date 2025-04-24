@@ -5,6 +5,7 @@ using Hackathon.Fiap.DataTransfer.HorariosDisponiveis.Requests;
 using Hackathon.Fiap.DataTransfer.Utils;
 using Hackathon.Fiap.Domain.Consultas.Entidades;
 using Hackathon.Fiap.Domain.Usuarios.Entidades;
+using Hackathon.Fiap.Domain.Utils;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 

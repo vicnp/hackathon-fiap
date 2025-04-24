@@ -1,16 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
+﻿using System.Net;
 using System.Text;
-using System.Threading.Tasks;
-using Hackathon.Fiap.DataTransfer.Consultas.Requests;
-using Hackathon.Fiap.DataTransfer.Consultas.Responses;
 using Hackathon.Fiap.DataTransfer.HorariosDisponiveis.Requests;
 using Hackathon.Fiap.DataTransfer.HorariosDisponiveis.Responses;
-using Hackathon.Fiap.DataTransfer.Utils;
 using Hackathon.Fiap.Domain.Usuarios.Entidades;
-using Microsoft.AspNetCore.Http.HttpResults;
+using Hackathon.Fiap.Domain.Utils;
 using Newtonsoft.Json;
 
 namespace Hackathon.Fiap.Teste.Integracao.HorariosDisponiveis

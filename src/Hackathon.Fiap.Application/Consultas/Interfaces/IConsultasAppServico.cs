@@ -1,6 +1,6 @@
 ﻿using Hackathon.Fiap.DataTransfer.Consultas.Requests;
 using Hackathon.Fiap.DataTransfer.Consultas.Responses;
-using Hackathon.Fiap.DataTransfer.Utils;
+using Hackathon.Fiap.Domain.Utils;
 
 namespace Hackathon.Fiap.Application.Consultas.Interfaces
 {

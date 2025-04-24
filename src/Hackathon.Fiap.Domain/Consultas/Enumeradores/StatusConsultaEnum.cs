@@ -1,4 +1,4 @@
-﻿namespace Hackathon.Fiap.DataTransfer.Consultas.Enumeradores
+﻿namespace Hackathon.Fiap.Domain.Consultas.Enumeradores
 {
     public enum StatusConsultaEnum
     {
