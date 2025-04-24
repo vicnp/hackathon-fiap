@@ -12,7 +12,6 @@ using Hackathon.Fiap.Domain.Medicos.Repositorios;
 using Hackathon.Fiap.Domain.Pacientes.Entidades;
 using Hackathon.Fiap.Domain.Pacientes.Repositorios;
 using Hackathon.Fiap.Domain.Utils;
-using Hackathon.Fiap.Domain.Pacientes.Servicos;
 using Hackathon.Fiap.Domain.Utils.Excecoes;
 using NSubstitute;
 

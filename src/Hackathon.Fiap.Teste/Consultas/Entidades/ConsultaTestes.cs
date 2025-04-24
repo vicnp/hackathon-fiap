@@ -1,5 +1,6 @@
 using FluentAssertions;
 using Hackathon.Fiap.Domain.Consultas.Entidades;
+using Hackathon.Fiap.Domain.Consultas.Enumeradores;
 using Hackathon.Fiap.Domain.Consultas.Repositorios.Filtros;
 using Hackathon.Fiap.Domain.HorariosDisponiveis.Entidades;
 using Hackathon.Fiap.Domain.Medicos.Entidades;

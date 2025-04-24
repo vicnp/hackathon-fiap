@@ -2,14 +2,8 @@
 using Hackathon.Fiap.Domain.Medicos.Entidades;
 using Hackathon.Fiap.Domain.Medicos.Repositorios;
 using Hackathon.Fiap.Domain.Medicos.Servicos;
-using Hackathon.Fiap.Domain.Pacientes.Entidades;
-using Hackathon.Fiap.Domain.Pacientes.Repositorios;
-using Hackathon.Fiap.Domain.Pacientes.Servicos;
-using Hackathon.Fiap.Domain.Usuarios.Enumeradores;
 using Hackathon.Fiap.Domain.Utils.Excecoes;
 using NSubstitute;
-using NSubstitute.ReturnsExtensions;
-using System.Threading;
 
 namespace Hackathon.Fiap.Teste.Medicos.Servicos
 {

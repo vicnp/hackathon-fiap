@@ -1,8 +1,4 @@
-﻿using Hackathon.Fiap.DataTransfer.Consultas.Enumeradores;
-using Hackathon.Fiap.DataTransfer.Consultas.Requests;
-using Hackathon.Fiap.DataTransfer.HorariosDisponiveis.Enumeradores;
-using Hackathon.Fiap.DataTransfer.Utils;
-using Hackathon.Fiap.Domain.Consultas.Entidades;
+﻿using Hackathon.Fiap.Domain.Consultas.Entidades;
 using Hackathon.Fiap.Domain.Consultas.Enumeradores;
 using Hackathon.Fiap.Domain.Consultas.Repositorios;
 using Hackathon.Fiap.Domain.Consultas.Repositorios.Filtros;
@@ -13,11 +9,12 @@ using Hackathon.Fiap.Domain.HorariosDisponiveis.Servicos.Interfaces;
 using Hackathon.Fiap.Domain.Medicos.Entidades;
 using Hackathon.Fiap.Domain.Medicos.Servicos.Interfaces;
 using Hackathon.Fiap.Domain.Pacientes.Entidades;
-using Hackathon.Fiap.Domain.Pacientes.Repositorios;
 using Hackathon.Fiap.Domain.Utils;
 using Hackathon.Fiap.Domain.Pacientes.Servicos.Interfaces;
 using Hackathon.Fiap.Domain.Utils.Excecoes;
 using Microsoft.IdentityModel.Tokens;
+using Hackathon.Fiap.Domain.Consultas.Consultas;
+using Hackathon.Fiap.Domain.HorariosDisponiveis.Enumeradores;
 
 namespace Hackathon.Fiap.Domain.Consultas.Servicos
 {

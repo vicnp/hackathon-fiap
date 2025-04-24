@@ -6,7 +6,6 @@ using Hackathon.Fiap.Domain.Seguranca.Servicos.Interfaces;
 using Hackathon.Fiap.Domain.Usuarios.Entidades;
 using Hackathon.Fiap.Domain.Usuarios.Repositorios;
 using Hackathon.Fiap.Domain.Utils.Excecoes;
-using Hackathon.Fiap.Domain.Utils.Helpers;
 using Hackathon.Fiap.Domain.Utils.Repositorios;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;

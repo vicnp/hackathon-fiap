@@ -1,9 +1,4 @@
-﻿using Hackathon.Fiap.DataTransfer.Consultas.Enumeradores;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Hackathon.Fiap.Domain.Consultas.Enumeradores;
 
 namespace Hackathon.Fiap.Domain.Consultas.Repositorios.Filtros
 {

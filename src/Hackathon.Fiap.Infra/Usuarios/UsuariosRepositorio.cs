@@ -129,7 +129,7 @@ namespace Hackathon.Fiap.Infra.Usuarios
         public async Task<Usuario> InserirUsuarioAsync(Medico novoMedico, CancellationToken ct)
         {
             Usuario novoUsuario = await InserirUsuarioAsync((Usuario)novoMedico, ct);
-            await InserirUsuarioMedicoAsync(novoMedico.Crm, novoUsuario.IdUsuario, ct);
+            await InserirUsuarioMedicoAsync(novoMedico.Crm, novoUsuario.UsuarioId, ct);
             return novoUsuario;
         }
 

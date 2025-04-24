@@ -27,8 +27,4 @@
     <None Remove="Usuarios\Servicos\**" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\Hackathon.Fiap.DataTransfer\Hackathon.Fiap.DataTransfer.csproj" />
-  </ItemGroup>
-
 </Project>

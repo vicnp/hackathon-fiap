@@ -2,10 +2,8 @@
 using Hackathon.Fiap.Domain.Pacientes.Entidades;
 using Hackathon.Fiap.Domain.Pacientes.Repositorios;
 using Hackathon.Fiap.Domain.Pacientes.Servicos;
-using Hackathon.Fiap.Domain.Usuarios.Enumeradores;
 using Hackathon.Fiap.Domain.Utils.Excecoes;
 using NSubstitute;
-using NSubstitute.ReturnsExtensions;
 
 namespace Hackathon.Fiap.Teste.Pacientes.Servicos
 {

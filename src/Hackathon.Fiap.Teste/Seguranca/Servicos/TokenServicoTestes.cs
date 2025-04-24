@@ -1,5 +1,4 @@
 ﻿using FluentAssertions;
-using FluentAssertions.Equivalency;
 using Hackathon.Fiap.Domain.Seguranca.Servicos;
 using Hackathon.Fiap.Domain.Usuarios.Entidades;
 using Hackathon.Fiap.Domain.Usuarios.Enumeradores;
@@ -9,7 +8,6 @@ using Hackathon.Fiap.Domain.Utils.Repositorios;
 using Microsoft.Extensions.Configuration;
 using NSubstitute;
 using NSubstitute.ReturnsExtensions;
-using System.Security.Policy;
 
 namespace Hackathon.Fiap.Teste.Seguranca.Servicos
 {

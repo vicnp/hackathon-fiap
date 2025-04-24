@@ -1,4 +1,5 @@
 ﻿using Hackathon.Fiap.Domain.Consultas.Enumeradores;
+using Hackathon.Fiap.Domain.HorariosDisponiveis.Entidades;
 using Hackathon.Fiap.Domain.Medicos.Entidades;
 using Hackathon.Fiap.Domain.Pacientes.Entidades;
 
