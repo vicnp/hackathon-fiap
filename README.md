@@ -92,17 +92,14 @@ A pipeline CI é executada a cada commit em qualquer branch que tenha o prefixo 
 
 ## Arquitetura
 
-<img width="564" alt="arquitetura" src="https://github.com/user-attachments/assets/fcd522f0-52c7-4eb7-8f17-8edee1058f29" />
+<img width="564" alt="arquitetura" src="https://github.com/user-attachments/assets/88c75c7b-fc99-49c6-9b55-f664fc7dd6be" />
 
 
 ## Subdomínios
 
-![subdominios](https://github.com/user-attachments/assets/23d3df6f-0fdb-4edb-b150-d0e773952f90)
+<img width="564" alt="arquitetura" src="https://github.com/user-attachments/assets/5df55893-e232-4786-ba14-54fd3d938dc8" />
 
 
-## Objetos de Valor
-
-![objetos de velor](https://github.com/user-attachments/assets/eb2da194-1883-49cd-928d-14e705d8d0c1)
 
 
 
