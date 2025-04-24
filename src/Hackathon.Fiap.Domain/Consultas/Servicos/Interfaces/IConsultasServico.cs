@@ -5,9 +5,10 @@ using Hackathon.Fiap.Domain.Utils;
 
 namespace Hackathon.Fiap.Domain.Consultas.Servicos.Interfaces
 {
-    public interface IConsultaServico
+    public interface IConsultasServico
     {
         Task<Consulta?> AtualizarStatusConsultaAsync(Consulta consulta, StatusConsultaEnum status, CancellationToken ct);
+        Task<Consulta> InserirConsultaAsync(ConsultaInserirFiltro filtro, CancellationToken ct);
         Task<PaginacaoConsulta<Consulta>> ListarConsultasAsync(ConsultasListarFiltro filtro, CancellationToken ct);
         Task<Consulta?> RecuperarConsultaAsync(ConsultasListarFiltro filtro, CancellationToken ct);
     }

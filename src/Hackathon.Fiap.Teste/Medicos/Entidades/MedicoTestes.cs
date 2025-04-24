@@ -11,7 +11,7 @@ public class MedicoTestes
         // ARRANGE
         var especialidade = new Especialidade 
         { 
-            IdEspecialidade = 1, 
+            EspecialidadeId = 1, 
             NomeEspecialidade = "Cardiologia", 
             DescricaoEspecialidade = "Especialidade do coração" 
         };

@@ -17,30 +17,30 @@ namespace Hackathon.Fiap.Infra.Medicos
             DynamicParameters dp = new();
             StringBuilder sql = new(
                 @"SELECT
-	                    u.id as IdUsuario,
+	                    u.id as UsuarioId,
 	                    u.cpf as Cpf,
 	                    u.email as Email,
 	                    u.nome as Nome,
 	                    u.tipo as TipoUsuario,
                         m.crm as Crm,
 	                    u.criado_em as CriadoEm,
-	                    e.id as IdEspecialidade,
+	                    e.id as EspecialidadeId,
 	                    e.nome as NomeEspecialidade,
 	                    e.descricao as DescricaoEspecialidade
                     FROM
-	                    techchallenge.Usuarios u
-                    INNER JOIN techchallenge.Medicos m 
+	                    techchallenge.Usuario u
+                    INNER JOIN techchallenge.Medico m 
                     ON m.id = u.id 
-                    INNER JOIN techchallenge.Medico_Especialidades me 
+                    INNER JOIN techchallenge.Medico_Especialidade me 
                     ON me.medico_id = u.id 
-                    INNER JOIN techchallenge.Especialidades e 
+                    INNER JOIN techchallenge.Especialidade e 
                     ON e.id = me.especialidade_id 
-                  WHERE 1 = 1");
+                  WHERE u.tipo = 'Medico'");
 
             if (filtro.Id > 0)
             {
-                sql.AppendLine($" AND u.id = @IDMEDICO ");
-                dp.Add("@IDMEDICO", filtro.Id);
+                sql.AppendLine($" AND u.id = @MEDICOID ");
+                dp.Add("@MEDICOID", filtro.Id);
             }
 
             if (!filtro.Email.InvalidOrEmpty())
@@ -63,8 +63,8 @@ namespace Hackathon.Fiap.Infra.Medicos
 
             if (!filtro.CodigoEspecialidade.HasValue && filtro.CodigoEspecialidade != null)
             {
-                sql.AppendLine($" AND e.id = @IDESPECIALIDADE ");
-                dp.Add("@IDESPECIALIDADE", filtro.CodigoEspecialidade.Value);
+                sql.AppendLine($" AND e.id = @ESPECIALIDADEID ");
+                dp.Add("@ESPECIALIDADEID", filtro.CodigoEspecialidade.Value);
             }
 
             if (!filtro.NomeEspecialidade.InvalidOrEmpty())
@@ -79,14 +79,14 @@ namespace Hackathon.Fiap.Infra.Medicos
 
             Task<IEnumerable<Medico>> task = session.QueryAsync<Medico, Especialidade, Medico>(sqlPaginado, (medico, especialidade) =>
             {
-                if (!registros.TryGetValue(medico.IdUsuario, out var existingMedico))
+                if (!registros.TryGetValue(medico.UsuarioId, out var existingMedico))
                 {
                     existingMedico = medico;
-                    registros[medico.IdUsuario] = existingMedico;
+                    registros[medico.UsuarioId] = existingMedico;
                 }
                 existingMedico.SetEspecialidade(especialidade);
                 return existingMedico;
-            }, splitOn: "IdEspecialidade", param: dp);
+            }, splitOn: "EspecialidadeId", param: dp);
 
             await Task.Run(async () => {
                 await task;
@@ -100,7 +100,8 @@ namespace Hackathon.Fiap.Infra.Medicos
 
             return response;
         }
-        public async Task<Medico?> RecuperarMedico(int codigoMedico, CancellationToken ct)
+
+        public async Task<Medico?> RecuperarMedicoAsync(int codigoMedico, CancellationToken ct)
         {
             MedicosPaginacaoFiltro filtro = new() { Id = codigoMedico };
             PaginacaoConsulta<Medico> paginacaoConsulta = await ListarMedicosPaginadosAsync(filtro, ct);

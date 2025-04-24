@@ -6,7 +6,7 @@ namespace Hackathon.Fiap.Domain.HorariosDisponiveis.Entidades
 {
     public class HorarioDisponivel
     {
-        public int IdHorarioDisponivel {  get; set; }
+        public int HorarioDisponivelId {  get; set; }
         public Medico Medico { get; set; } = new Medico();
         public Paciente? Paciente { get; set; }
         public DateTime DataHoraInicio { get; set; }
@@ -18,9 +18,9 @@ namespace Hackathon.Fiap.Domain.HorariosDisponiveis.Entidades
             
         }
 
-        public HorarioDisponivel(int idHorarioDisponivel, DateTime dataHoraInicio, DateTime dataHoraFim, StatusHorarioDisponivelEnum status)
+        public HorarioDisponivel(int horarioDisponivelId, DateTime dataHoraInicio, DateTime dataHoraFim, StatusHorarioDisponivelEnum status)
         {
-            IdHorarioDisponivel = idHorarioDisponivel;
+            HorarioDisponivelId = horarioDisponivelId;
             DataHoraInicio = dataHoraInicio;
             DataHoraFim = dataHoraFim;
             Status = status;

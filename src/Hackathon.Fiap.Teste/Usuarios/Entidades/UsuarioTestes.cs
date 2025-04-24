@@ -20,8 +20,8 @@ public class UsuarioTestes
         var usuarioDefault = new Usuario();
 
         //ASSERT
-        Assert.Equal(0, usuarioDefault.IdUsuario);
-        Assert.Equal(id, usuario.IdUsuario);
+        Assert.Equal(0, usuarioDefault.UsuarioId);
+        Assert.Equal(id, usuario.UsuarioId);
         Assert.Equal(nome, usuario.Nome);
         Assert.Equal(hash, usuario.Hash);
         Assert.Equal(email, usuario.Email);

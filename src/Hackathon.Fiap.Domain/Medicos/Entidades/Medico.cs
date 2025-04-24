@@ -22,7 +22,7 @@ namespace Hackathon.Fiap.Domain.Medicos.Entidades
             Crm = crm;
         }
 
-        public void SetEspecialidade(Especialidade especialidade)
+        public void SetEspecialidade(Especialidade? especialidade)
         {
             ArgumentNullException.ThrowIfNull(especialidade);
 
