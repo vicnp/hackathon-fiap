@@ -32,7 +32,6 @@ namespace Hackathon.Fiap.Application.Usuarios
             {
                 throw new RegraDeNegocioExcecao(SanitizeErrorMessage(e.Message));
             }
-
         }
 
         public static string SanitizeErrorMessage(string errorMessage)
