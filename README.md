@@ -87,7 +87,7 @@ Os grupos deverão entregar o seguinte:
 
 A pipeline CI é executada a cada commit em qualquer branch que tenha o prefixo 'feature/*', já a pipeline CD é executada a cada merge na branch main.
 
-[https://github.com/edinanxs/hackathon-fiap/actions](https://github.com/vicnp/techchallange/actions)
+[https://github.com/vicnp/hackathon-fiap/actions](https://github.com/vicnp/techchallange/actions)
 
 
 ## Arquitetura
