@@ -12,8 +12,8 @@ public class HorarioDisponivelTestes
     {
         // ARRANGE
         int id = 1;
-        DateTime dataHoraInicio = new DateTime(2025, 03, 31, 9, 0, 0);
-        DateTime dataHoraFim = new DateTime(2025, 03, 31, 10, 0, 0);
+        DateTime dataHoraInicio = new(2025, 03, 31, 9, 0, 0);
+        DateTime dataHoraFim = new(2025, 03, 31, 10, 0, 0);
         StatusHorarioDisponivelEnum status = StatusHorarioDisponivelEnum.Disponivel;
         
         // Criando a especialidade
@@ -51,8 +51,8 @@ public class HorarioDisponivelTestes
     {
         // ARRANGE
         int id = 1;
-        DateTime dataHoraInicio = new DateTime(2025, 03, 31, 9, 0, 0);
-        DateTime dataHoraFim = new DateTime(2025, 03, 31, 10, 0, 0);
+        DateTime dataHoraInicio = new(2025, 03, 31, 9, 0, 0);
+        DateTime dataHoraFim = new(2025, 03, 31, 10, 0, 0);
         StatusHorarioDisponivelEnum status = StatusHorarioDisponivelEnum.Disponivel;
         
         // Criando especialidade

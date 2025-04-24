@@ -61,7 +61,10 @@ Task("TestRun")
 			CoverletOutputFormat = CoverletOutputFormat.opencover,
 			CoverletOutputDirectory = Directory(@".\TestReports\"),
 			CoverletOutputName = $"coverage",
-			ExcludeByAttribute = new List<string> { "*.ExcludeFromCodeCoverage*" }
+			ExcludeByAttribute = new List<string> { "*.ExcludeFromCodeCoverage*" },
+            Exclude = new List<string> {
+                     "[Hackathon.Fiap.Domain]*Comando"
+            }
 		};
 
     	DotNetTest("./src/Hackathon.Fiap.Teste/Hackathon.Fiap.Teste.csproj", testSettings, coverletSettings);

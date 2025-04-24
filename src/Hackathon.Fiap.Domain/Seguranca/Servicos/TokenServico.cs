@@ -28,12 +28,12 @@ namespace Hackathon.Fiap.Domain.Seguranca.Servicos
 
             NaoAutorizadoExcecao.LancarExcecaoSeNulo(usuario, autenticacaoFalha);
 
-            JwtSecurityTokenHandler tokenHanlder = new JwtSecurityTokenHandler();
+            JwtSecurityTokenHandler tokenHanlder = new();
             string? configurationValue = utilRepositorio.GetValueConfigurationKeyJWT(configuration)
                 ?? throw new NullReferenceException("GetValueConfigurationKeyJWT Retornou valor nulo.");
             byte[] chaveCriptografia = Encoding.ASCII.GetBytes(configurationValue);
 
-            SecurityTokenDescriptor tokenProps = new SecurityTokenDescriptor()
+            SecurityTokenDescriptor tokenProps = new()
             {
                 Subject = new ClaimsIdentity([
                     new Claim(ClaimTypes.Email, usuario.Email),
