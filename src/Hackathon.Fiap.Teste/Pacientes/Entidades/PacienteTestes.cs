@@ -13,7 +13,6 @@ public class PacienteTestes
         string nome = "João da Silva";
         string cpf = "12345678900";
         string email = "fiap@contato.com.br";
-        string senha = "pastel de frango";
         string hash = "qwertyuiopasdfghjklzxcvbnm";
 
         // ACT
@@ -53,5 +52,19 @@ public class PacienteTestes
 
         // ASSERT
         paciente.Email.Should().Be(email);
+    }
+
+    [Fact]
+    public void Quando_SetSenha_ComValorValido_DeveAtualizarPropriedade()
+    {
+        // ARRANGE
+        var paciente = new Paciente();
+        var senha = "123";
+
+        // ACT
+        paciente.AtualizarSenha(senha);
+
+        // ASSERT
+        paciente.Hash.Should().Be(senha);
     }
 } 

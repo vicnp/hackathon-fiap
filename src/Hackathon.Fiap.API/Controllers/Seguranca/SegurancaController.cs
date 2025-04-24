@@ -16,7 +16,7 @@ namespace Hackathon.Fiap.API.Controllers.Seguranca
         /// <param name="senha"></param>
         /// <returns></returns>
         [HttpPost]
-        public async Task<IActionResult> Autenticar(string? identificador, string? senha, CancellationToken ct)
+        public async Task<IActionResult> Autenticar(string identificador, string senha, CancellationToken ct)
         {
             string token = await tokenAppSevico.GetTokenAsync(identificador, senha, ct);
             if (token.InvalidOrEmpty())

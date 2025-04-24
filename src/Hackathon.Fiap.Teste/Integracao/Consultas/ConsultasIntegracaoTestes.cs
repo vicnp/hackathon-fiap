@@ -61,7 +61,8 @@ namespace Hackathon.Fiap.Teste.Integracao.Consultas
             await AutenticarAplicacao(Roles.Medico);
 
             HttpResponseMessage resultConsulta = await apiFactoryClient.GetAsync("api/consultas/paginados");
-            PaginacaoConsulta<ConsultaResponse>? consultasPaginadas = JsonConvert.DeserializeObject<PaginacaoConsulta<ConsultaResponse>>(await resultConsulta.Content.ReadAsStringAsync());
+            PaginacaoConsulta<ConsultaResponse>? consultasPaginadas = 
+                JsonConvert.DeserializeObject<PaginacaoConsulta<ConsultaResponse>>(await resultConsulta.Content.ReadAsStringAsync());
             
             Assert.NotNull(consultasPaginadas);
             Assert.NotEmpty(consultasPaginadas.Registros);
@@ -72,7 +73,7 @@ namespace Hackathon.Fiap.Teste.Integracao.Consultas
 
             ConsultaStatusRequest consultaStatusRequest = new()
             {
-                IdConsulta = consultaResponse.IdConsulta,
+                ConsultaId = consultaResponse.ConsultaId,
                 Justificativa = "Justificativa",
                 Status = StatusConsultaEnum.Aceita
             };
@@ -82,7 +83,7 @@ namespace Hackathon.Fiap.Teste.Integracao.Consultas
 
 
             HttpResponseMessage resultAlteracao = 
-                await apiFactoryClient.PutAsync($"api/consultas/situacoes?IdConsulta={consultaResponse.IdConsulta}&Status=Aceita", httpContent);
+                await apiFactoryClient.PutAsync($"api/consultas/situacoes?ConsultaId={consultaResponse.ConsultaId}&Status=Aceita", httpContent);
 
             ErroResponse? consultaAlterada = JsonConvert.DeserializeObject<ErroResponse>(await resultAlteracao.Content.ReadAsStringAsync());
 
@@ -109,7 +110,7 @@ namespace Hackathon.Fiap.Teste.Integracao.Consultas
 
             ConsultaStatusRequest consultaStatusRequest = new()
             {
-                IdConsulta = consultaResponse.IdConsulta,
+                ConsultaId = consultaResponse.ConsultaId,
                 Justificativa = "Justificativa",
                 Status = StatusConsultaEnum.Aceita
             };
@@ -118,7 +119,7 @@ namespace Hackathon.Fiap.Teste.Integracao.Consultas
             HttpContent httpContent = new StringContent(jsonContent, Encoding.UTF8, "application/json");
 
             HttpResponseMessage resultAlteracao =
-                await apiFactoryClient.PutAsync($"api/consultas/situacoes?IdConsulta={consultaResponse.IdConsulta}&Status=Aceita", httpContent);
+                await apiFactoryClient.PutAsync($"api/consultas/situacoes?ConsultaId={consultaResponse.ConsultaId}&Status=Aceita", httpContent);
 
             Assert.True(resultAlteracao.IsSuccessStatusCode, "O endpoint não respondeu como esperado.");   
 
@@ -145,7 +146,7 @@ namespace Hackathon.Fiap.Teste.Integracao.Consultas
             ConsultaResponse consultaResponse = consultasPaginadas.Registros.First();
             ConsultaStatusRequest consultaStatusRequest = new()
             {
-                IdConsulta = consultaResponse.IdConsulta,
+                ConsultaId = consultaResponse.ConsultaId,
                 Status = StatusConsultaEnum.Cancelada
             };
 
@@ -153,7 +154,7 @@ namespace Hackathon.Fiap.Teste.Integracao.Consultas
             HttpContent httpContent = new StringContent(jsonContent, Encoding.UTF8, "application/json");
 
             HttpResponseMessage resultAlteracao =
-                await apiFactoryClient.PutAsync($"api/consultas/situacoes?IdConsulta={consultaResponse.IdConsulta}&Status=Aceita", httpContent);
+                await apiFactoryClient.PutAsync($"api/consultas/situacoes?ConsultaId={consultaResponse.ConsultaId}&Status=Aceita", httpContent);
 
             Assert.True(!resultAlteracao.IsSuccessStatusCode, "O endpoint não respondeu como esperado.");
             Assert.Equal(HttpStatusCode.BadRequest, resultAlteracao.StatusCode);

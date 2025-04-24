@@ -1,20 +1,29 @@
-﻿using Hackathon.Fiap.Domain.Consultas.Consultas;
-using Hackathon.Fiap.Domain.Consultas.Entidades;
+﻿using Hackathon.Fiap.Domain.Consultas.Entidades;
 using Hackathon.Fiap.Domain.Consultas.Enumeradores;
 using Hackathon.Fiap.Domain.Consultas.Repositorios;
 using Hackathon.Fiap.Domain.Consultas.Repositorios.Filtros;
 using Hackathon.Fiap.Domain.Consultas.Servicos.Interfaces;
+using Hackathon.Fiap.Domain.HorariosDisponiveis.Entidades;
+using Hackathon.Fiap.Domain.HorariosDisponiveis.Repositorios;
+using Hackathon.Fiap.Domain.HorariosDisponiveis.Servicos.Interfaces;
 using Hackathon.Fiap.Domain.Medicos.Entidades;
-using Hackathon.Fiap.Domain.Medicos.Repositorios;
+using Hackathon.Fiap.Domain.Medicos.Servicos.Interfaces;
 using Hackathon.Fiap.Domain.Pacientes.Entidades;
-using Hackathon.Fiap.Domain.Pacientes.Repositorios;
 using Hackathon.Fiap.Domain.Utils;
+using Hackathon.Fiap.Domain.Pacientes.Servicos.Interfaces;
 using Hackathon.Fiap.Domain.Utils.Excecoes;
 using Microsoft.IdentityModel.Tokens;
+using Hackathon.Fiap.Domain.Consultas.Consultas;
+using Hackathon.Fiap.Domain.HorariosDisponiveis.Enumeradores;
 
 namespace Hackathon.Fiap.Domain.Consultas.Servicos
 {
-    public class ConsultasServico(IConsultasRepositorio consultasRepositorio, IMedicosRepositorio medicosRepositorio, IPacientesRepositorio pacientesRepositorio) : IConsultaServico
+    public class ConsultasServico(
+        IConsultasRepositorio consultasRepositorio, 
+        IMedicosServico medicosServico,
+        IHorariosDisponiveisServico horariosDisponiveisServico,
+        IHorariosDisponiveisRepositorio horariosDisponiveisRepositorio,
+        IPacientesServicos pacientesServicos) : IConsultasServico
     {
         public async Task<Consulta?> AtualizarStatusConsultaAsync(Consulta consulta, StatusConsultaEnum status, CancellationToken ct)
         {
@@ -31,7 +40,7 @@ namespace Hackathon.Fiap.Domain.Consultas.Servicos
 
             ConsultasListarFiltro filtro = new()
             {
-                IdConsulta = consulta.IdConsulta,
+                ConsultaId = consulta.ConsultaId,
             };
 
             await consultasRepositorio.AtualizarStatusConsultaAsync(consulta, ct);
@@ -52,7 +61,7 @@ namespace Hackathon.Fiap.Domain.Consultas.Servicos
                 case StatusConsultaEnum.Cancelada:
                     throw new RegraDeNegocioExcecao("A consulta está cancelada.");
                 case StatusConsultaEnum.Recusada:
-                    throw new RegraDeNegocioExcecao("A consulta está recusada");
+                    throw new RegraDeNegocioExcecao("A consulta está recusada.");
             }
         }
 
@@ -76,38 +85,49 @@ namespace Hackathon.Fiap.Domain.Consultas.Servicos
                 Registros = []
             };
 
-            foreach (ConsultaConsulta itenConsulta in paginacaoConsulta.Registros)
+            foreach (ConsultaConsulta itemConsulta in paginacaoConsulta.Registros)
             {
-                if (itenConsulta.Status == null)
+                if (itemConsulta.Status == null)
                     throw new RegraDeNegocioExcecao($"Não foi possível identificar a situação da consulta.");
 
-                bool conversao = Enum.TryParse(itenConsulta.Status, out StatusConsultaEnum statusConsulta);
+                bool conversao = Enum.TryParse(itemConsulta.Status, out StatusConsultaEnum statusConsulta);
 
                 if (!conversao)
                     throw new FalhaConversaoExcecao("Não foi possivel determinar a situação da consulta.");
 
-                Consulta consulta = new(itenConsulta.IdConsulta,
-                                        itenConsulta.DataHora,
-                                        itenConsulta.Valor,
+                Consulta consulta = new(itemConsulta.ConsultaId,
+                                        itemConsulta.Valor,
                                         statusConsulta,
-                                        itenConsulta.JustificativaCancelamento,
-                                        itenConsulta.CriadoEm,
-                                        itenConsulta.IdHorariosDisponiveis);
-
+                                        await medicosServico.ValidarMedicoAsync(itemConsulta.MedicoId, ct),
+                                        await horariosDisponiveisServico.ValidarHorarioDisponivelAsync(itemConsulta.HorarioDisponivelId, ct),
+                                        await pacientesServicos.ValidarPacienteAsync(itemConsulta.PacienteId, ct),
+                                        itemConsulta.JustificativaCancelamento);
                
-                Medico? medico = await medicosRepositorio.RecuperarMedico(itenConsulta.IdMedico, ct);
-                Paciente? paciente = await pacientesRepositorio.RecuperarPaciente(itenConsulta.IdPaciente, ct);
-                
-                if(medico != null)
-                    consulta.SetMedico(medico);
-
-                if(paciente != null)
-                    consulta.SetPaciente(paciente);
-
                 consultas.Add(consulta);
             }
             response.Registros = consultas;
             return response;
+        }
+
+        public async Task<Consulta> InserirConsultaAsync(ConsultaInserirFiltro filtro, CancellationToken ct)
+        {
+            Medico medico = await medicosServico.ValidarMedicoAsync(filtro.MedicoId, ct);
+            Paciente paciente = await pacientesServicos.ValidarPacienteAsync(filtro.PacienteId, ct);
+            HorarioDisponivel horarioDisponivel = await horariosDisponiveisServico.ValidarHorarioDisponivelAsync(filtro.HorarioDisponivelId, ct);
+
+            if (horarioDisponivel.Status != StatusHorarioDisponivelEnum.Disponivel)
+                throw new RegraDeNegocioExcecao("O horário selecionado não está mais disponível!");
+
+            await horariosDisponiveisRepositorio.AtualizarStatusHorarioDisponivel(StatusHorarioDisponivelEnum.Reservado, horarioDisponivel.HorarioDisponivelId);
+
+            Consulta consulta = new(
+                filtro.Valor,
+                filtro.Status,
+                medico,
+                horarioDisponivel,
+                paciente,
+                string.Empty);
+          return await consultasRepositorio.InserirConsultaAsync(consulta, ct);
         }
     }
 }

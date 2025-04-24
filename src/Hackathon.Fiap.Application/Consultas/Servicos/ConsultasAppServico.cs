@@ -9,7 +9,7 @@ using Hackathon.Fiap.Domain.Utils;
 
 namespace Hackathon.Fiap.Application.Consultas.Servicos
 {
-    public class ConsultasAppServico(IMapper mapper, IConsultaServico consultasServico) : IConsultasAppServico
+    public class ConsultasAppServico(IMapper mapper, IConsultasServico consultasServico) : IConsultasAppServico
     {
         public async Task<PaginacaoConsulta<ConsultaResponse>> ListarConsultasAsync(ConsultaListarRequest request, CancellationToken ct)
         {
@@ -24,18 +24,25 @@ namespace Hackathon.Fiap.Application.Consultas.Servicos
         public async Task<ConsultaResponse> AlterarStatusConsultaAsync(ConsultaStatusRequest request, string? justificativa, CancellationToken ct)
         {
             ArgumentNullException.ThrowIfNull(request);
-            Consulta consulta = await ValidarConsulta(request, ct);
+            Consulta consulta = await ValidarConsulta(request.ConsultaId, ct);
             consulta.JustificativaCancelamento = justificativa!;
             Consulta? consultaResponse = await consultasServico.AtualizarStatusConsultaAsync(consulta, request.Status, ct);
 
             return mapper.Map<ConsultaResponse>(consultaResponse);
         }
-       
-        private async Task<Consulta> ValidarConsulta(ConsultaStatusRequest request, CancellationToken ct)
+
+        public async Task<ConsultaResponse> InserirConsultaAsync(ConsultaRequest request, CancellationToken ct)
+        {
+            ConsultaInserirFiltro consultaInserirFiltro = mapper.Map<ConsultaInserirFiltro>(request);
+            return mapper.Map<ConsultaResponse>(await consultasServico.InserirConsultaAsync(consultaInserirFiltro, ct));
+        }
+
+
+        private async Task<Consulta> ValidarConsulta(int consultaId, CancellationToken ct)
         {
             ConsultasListarFiltro filtro = new()
             {
-                IdConsulta = request.IdConsulta,
+                ConsultaId = consultaId,
             };
             PaginacaoConsulta<Consulta> consultas = await consultasServico.ListarConsultasAsync(filtro, ct);
 

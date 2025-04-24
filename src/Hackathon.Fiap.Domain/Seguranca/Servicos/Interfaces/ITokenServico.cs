@@ -3,6 +3,6 @@
     public interface ITokenServico
     {
         string EncryptPassword(string password);
-        Task<string> GetTokenAsync(string? identificador, string? senha, CancellationToken ct);
+        Task<string> GetTokenAsync(string identificador, string senha, CancellationToken ct);
     }
 }

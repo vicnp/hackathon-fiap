@@ -6,7 +6,6 @@ using Hackathon.Fiap.Domain.Seguranca.Servicos.Interfaces;
 using Hackathon.Fiap.Domain.Usuarios.Entidades;
 using Hackathon.Fiap.Domain.Usuarios.Repositorios;
 using Hackathon.Fiap.Domain.Utils.Excecoes;
-using Hackathon.Fiap.Domain.Utils.Helpers;
 using Hackathon.Fiap.Domain.Utils.Repositorios;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
@@ -17,10 +16,10 @@ namespace Hackathon.Fiap.Domain.Seguranca.Servicos
     {
         private const string autenticacaoFalha = "Usuário ou senha incorretos.";
 
-        public async Task<string> GetTokenAsync(string? identificador, string? senha, CancellationToken ct)
+        public async Task<string> GetTokenAsync(string identificador, string senha, CancellationToken ct)
         {
 
-            if (identificador == null || identificador.InvalidOrEmpty() || senha == null || senha.InvalidOrEmpty())
+            if (identificador.IsNullOrEmpty() || senha.IsNullOrEmpty())
                 throw new NaoAutorizadoExcecao(autenticacaoFalha);
 
             string hash = EncryptPassword(senha);
@@ -40,7 +39,7 @@ namespace Hackathon.Fiap.Domain.Seguranca.Servicos
                     new Claim(ClaimTypes.Email, usuario.Email),
                     new Claim(ClaimTypes.Name, usuario.Nome),
                     new Claim(ClaimTypes.Role, usuario.Tipo.ToString()),
-                    new Claim(ClaimTypes.Sid, usuario.IdUsuario.ToString())
+                    new Claim(ClaimTypes.Sid, usuario.UsuarioId.ToString())
                 ]),
 
                 Expires = DateTime.UtcNow.AddHours(5),

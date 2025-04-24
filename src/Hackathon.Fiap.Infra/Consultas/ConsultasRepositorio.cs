@@ -20,7 +20,7 @@ namespace Hackathon.Fiap.Infra.Consultas
             StringBuilder sql = new(
               @"
                 UPDATE
-	                techchallenge.Consultas
+	                techchallenge.Consulta
                 SET
 	                status = @STATUS ");
 
@@ -30,10 +30,10 @@ namespace Hackathon.Fiap.Infra.Consultas
                 
             }
             sql.Append(@" WHERE
-	                       id = @IDCONSULTA;
+	                       id = @CONSULTAID;
                         ");
 
-            dp.Add("@IDCONSULTA", consulta.IdConsulta);
+            dp.Add("@CONSULTAID", consulta.ConsultaId);
             dp.Add("@STATUS", consulta.Status.ToString());
             dp.Add("@JUSTIFICATIVA", consulta.JustificativaCancelamento?.ToLower());
 
@@ -45,70 +45,68 @@ namespace Hackathon.Fiap.Infra.Consultas
             DynamicParameters dp = new();
             StringBuilder sql = new(
               @"select
-	                c.id as IdConsulta,
-	                c.data_hora as DataHora,
+	                c.id as ConsultaId,
 	                c.valor as Valor,
 	                c.status as Status,
 	                c.justificativa_cancelamento as JustificativaCancelamento,
 	                c.criado_em as CriadoEm,
-	                c.horarios_disponiveis_id as IdHorariosDisponiveis,
-	                medico.id as IdMedico,
+	                c.horario_disponivel_id as HorarioDisponivelId,
+	                medico.id as MedicoId,
 	                medico.nome as NomeMedico,
 	                medico.cpf as CpfMedico,
 	                medico.criado_em as CriadoEmMedico,
 	                medico.email EmailMedico,
 	                medico.tipo as TipoMedico,
 	                m.crm as CrmMedico,
-	                paciente.id  as IdPaciente,
+	                paciente.id  as PacienteId,
 	                paciente.nome as NomePaciente,
 	                paciente.email as EmailPaciente,
                     paciente.cpf as CpfPaciente,
 	                paciente.criado_em as CriadoEmPaciente
                 from
-	                techchallenge.Consultas c
-                inner join techchallenge.Usuarios medico
+	                techchallenge.Consulta c
+                inner join techchallenge.Usuario medico
                 on
 	                medico.Id = c.medico_id
-                inner join techchallenge.Medicos m 
+                inner join techchallenge.Medico m 
                 on 
 	                m.id = medico.id 
-                inner join techchallenge.Usuarios paciente 
+                inner join techchallenge.Usuario paciente 
                 on 
 	                paciente.id = c.paciente_id
                 where 1 = 1 ");
 
-            if (filtro.IdMedico > 0)
+            if (filtro.MedicoId > 0)
             {
-                sql.AppendLine($" and medico.id = @IDMEDICO ");
-                dp.Add("@IDMEDICO", filtro.IdMedico);
+                sql.AppendLine($" and medico.id = @MEDICOID ");
+                dp.Add("@MEDICOID", filtro.MedicoId);
             }
 
-            if (filtro.IdPaciente > 0)
+            if (filtro.PacienteId > 0)
             {
-                sql.AppendLine($" and paciente.id = @IDPACIENTE ");
-                dp.Add("@IDPACIENTE", filtro.IdPaciente);
+                sql.AppendLine($" and paciente.id = @PACIENTEID ");
+                dp.Add("@PACIENTEID", filtro.PacienteId);
             }
 
-            if(filtro.IdPaciente > 0)
+            if (filtro.HorarioDisponivelId > 0)
             {
-                sql.AppendLine($" and c.Id = @IDCONSULTA ");
-                dp.Add("@IDCONSULTA", filtro.IdPaciente);
+                sql.AppendLine($" and c.horario_disponivel_id = @HORARIODISPONIVELID ");
+                dp.Add("@HORARIODISPONIVELID", filtro.HorarioDisponivelId);
             }
 
-            if(filtro.Status != null && filtro.Status != 0)
+            if (filtro.Status != null && filtro.Status != 0)
             {
                 sql.AppendLine($" and c.Status = @STATUS ");
                 dp.Add("@STATUS", filtro.Status.ToString());
             }
 
-            if(filtro.IdConsulta > 0)
+            if(filtro.ConsultaId > 0)
             {
-                sql.AppendLine($" and c.id = @IDCONSULTA ");
-                dp.Add("@IDCONSULTA", filtro.IdConsulta);
+                sql.AppendLine($" and c.id = @CONSULTAID ");
+                dp.Add("@CONSULTAID", filtro.ConsultaId);
             }
 
             string sqlPaginado = GerarQueryPaginacao(sql.ToString(), filtro.Pg, filtro.Qt, filtro.CpOrd, filtro.TpOrd.ToString());
-            
             
             IEnumerable<ConsultaConsulta> queryResult = await session.QueryAsync<ConsultaConsulta>(new CommandDefinition(sqlPaginado, dp, cancellationToken: ct));
 
@@ -120,5 +118,32 @@ namespace Hackathon.Fiap.Infra.Consultas
             
             return response;
         }
+
+
+        public async Task<Consulta> InserirConsultaAsync(Consulta consulta, CancellationToken ct)
+        {
+            const string sql = @"
+                INSERT INTO Consulta (paciente_id, medico_id, valor, status, horario_disponivel_id, criado_em)
+                    VALUES (@PacienteId, @MedicoId, @Valor, @Status, @HorariosDisponiveisId, @Criado);
+                SELECT LAST_INSERT_ID();";
+
+            var parametros = new
+            {
+                PacienteId = consulta.Paciente.UsuarioId,
+                MedicoId = consulta.Medico.UsuarioId,
+                consulta.Valor,
+                Status = consulta.Status.ToString(),
+                HorariosDisponiveisId = consulta.HorarioDisponivel.HorarioDisponivelId,
+                Criado = consulta.CriadoEm
+            };
+
+            var id = await session.QueryFirstOrDefaultAsync<int>(
+                new CommandDefinition(sql, parametros, commandTimeout: 30, transaction: null, cancellationToken: ct)
+            );
+
+            consulta.ConsultaId = id; 
+            return consulta;
+        }
+
     }
 }

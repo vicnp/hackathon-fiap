@@ -17,7 +17,7 @@ public class HorarioDisponivelTestes
         StatusHorarioDisponivelEnum status = StatusHorarioDisponivelEnum.Disponivel;
         
         // Criando a especialidade
-        var especialidade = new Especialidade { IdEspecialidade = 1, NomeEspecialidade = "Cardiologia", DescricaoEspecialidade = "Especialidade de coração" };
+        var especialidade = new Especialidade { EspecialidadeId = 1, NomeEspecialidade = "Cardiologia", DescricaoEspecialidade = "Especialidade de coração" };
         
         // Criando o médico com a especialidade e CRM
         var medico = new Medico();
@@ -38,10 +38,10 @@ public class HorarioDisponivelTestes
     public void Quando_SetEspecialidadeComNull_DeveLancarArgumentNullException()
     {
         // ARRANGE
-        var medico = new Medico();
-
+        Medico medico = new();
+        Especialidade? especialidade = default;
         // ACT & ASSERT
-        Action act = () => medico.SetEspecialidade(null);
+        Action act = () => medico.SetEspecialidade(especialidade);
         act.Should().Throw<ArgumentNullException>()
             .WithMessage("Value cannot be null. (Parameter 'especialidade')");
     }
@@ -56,7 +56,7 @@ public class HorarioDisponivelTestes
         StatusHorarioDisponivelEnum status = StatusHorarioDisponivelEnum.Disponivel;
         
         // Criando especialidade
-        var especialidade = new Especialidade { IdEspecialidade = 1, NomeEspecialidade = "Pediatria", DescricaoEspecialidade = "Cuidados com crianças" };
+        var especialidade = new Especialidade { EspecialidadeId = 1, NomeEspecialidade = "Pediatria", DescricaoEspecialidade = "Cuidados com crianças" };
         
         // Criando medico
         var medico = new Medico();
