@@ -46,8 +46,8 @@ namespace Hackathon.Fiap.Infra.Usuarios
                                             u.hash as Hash,
                                             u.tipo as Tipo,
                                             u.criado_em as CriadoEm
-                                     FROM techchallenge.Usuarios u
-                                     LEFT JOIN techchallenge.Medicos m ON m.id = u.id
+                                     FROM techchallenge.Usuario u
+                                     LEFT JOIN techchallenge.Medico m ON m.id = u.id
                         	         WHERE u.id = @ID ");
 
             DynamicParameters dp = new();
@@ -84,7 +84,7 @@ namespace Hackathon.Fiap.Infra.Usuarios
         {
 
             StringBuilder sql = new($@"
-                                       INSERT INTO `Medicos` VALUES (@IDMEDICO,@CRM);
+                                       INSERT INTO `Medico` VALUES (@IDMEDICO,@CRM);
                                      ");
 
             DynamicParameters dp = new();
@@ -98,7 +98,7 @@ namespace Hackathon.Fiap.Infra.Usuarios
         public async Task<Usuario> InserirUsuarioAsync(Usuario novoUsuario, CancellationToken ct)
         {
             StringBuilder sql = new($@"
-                                      INSERT INTO `Usuarios`
+                                      INSERT INTO `Usuario`
                                      (nome, email, cpf, hash, tipo, criado_em)
                                       VALUES (@NOME,
                                               @EMAIL,
@@ -136,10 +136,10 @@ namespace Hackathon.Fiap.Infra.Usuarios
         public Task DeletarUsuarioAsync(int id, CancellationToken ct)
         {
             StringBuilder sql = new($@"
-                                       DELETE FROM techchallenge.Usuarios
+                                       DELETE FROM techchallenge.Usuario
                                        WHERE id = @ID;
 
-                                       DELETE FROM techchallenge.Medicos
+                                       DELETE FROM techchallenge.Medico
                                        WHERE Id = @ID;
                                      ");
 
