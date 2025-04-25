@@ -32,7 +32,7 @@ namespace Hackathon.Fiap.Teste.Usuarios.Servicos
             {
                 UsuarioCadastroComando usuarioCadastroComando = new()
                 {
-                    Cpf = "165.904.007-84",
+                    Cpf = "437.959.990-65",
                     Crm = "04214/SP",
                     Email = "teste@tester.com",
                     Nome = "Quality",
@@ -44,7 +44,7 @@ namespace Hackathon.Fiap.Teste.Usuarios.Servicos
                 string nome = "Fiap";
                 string hash = "qwertyuiopasdfghjklzxcvbnm";
                 string email = "fiap@contato.com.br";
-                string cpf = "61529748364";
+                string cpf = "437.959.990-65";
 
                 //ACT
                 Usuario usuarioCadastro = new(nome, email, cpf, hash, TipoUsuario.Administrador);
@@ -67,7 +67,7 @@ namespace Hackathon.Fiap.Teste.Usuarios.Servicos
             {
                 UsuarioCadastroComando usuarioCadastroComando = new()
                 {
-                    Cpf = "165.904.007-84",
+                    Cpf = "437.959.990-65",
                     Crm = "04214/SP",
                     Email = "teste@tester.com",
                     Nome = "Quality",
@@ -79,7 +79,7 @@ namespace Hackathon.Fiap.Teste.Usuarios.Servicos
                 string nome = "Fiap";
                 string hash = "qwertyuiopasdfghjklzxcvbnm";
                 string email = "fiap@contato.com.br";
-                string cpf = "61529748364";
+                string cpf = "437.959.990-65";
 
                 //ACT
                 Usuario usuarioCadastro = new(nome, email, cpf, hash, TipoUsuario.Medico);
@@ -267,6 +267,48 @@ namespace Hackathon.Fiap.Teste.Usuarios.Servicos
                 tokenServico.EncryptPassword(Arg.Any<string>()).Returns("5-97FSAY*FASH#@$=asoihfdasf");
 
                 await sut.Invoking(x => x.CadastrarUsuarioAsync(usuarioCadastroComando, cancellationToken)).Should().ThrowAsync<RegraDeNegocioExcecao>();
+            }
+
+            [Theory]
+            [InlineData("437.959.990-65")]
+            [InlineData("238.619.770-01")]
+            [InlineData("247.241.370-02")]
+            [InlineData("116.410.470-54")]
+            [InlineData("579.216.950-00")]
+            [InlineData("044.696.840-40")]
+            [InlineData("680.618.340-90")]
+            [InlineData("649.739.030-86")]
+            [InlineData("006.983.010-05")]
+            [InlineData("324.992.350-80")]
+            [InlineData("946.203.850-34")]
+            [InlineData("215.869.710-50")]
+            [InlineData("301.635.420-90")]
+            [InlineData("123.456.789-09")]
+            public async Task Dado_Medico_Cpf_Valido_Espero_Excecao(string cpfTeste)
+            {
+                UsuarioCadastroComando usuarioCadastroComando = new()
+                {
+                    Cpf = cpfTeste,
+                    Crm = "012215/ES",
+                    Email = "teste@tester.com",
+                    Nome = "Quality",
+                    SobreNome = "Assurance",
+                    Senha = "12324",
+                    TipoUsuario = TipoUsuario.Medico
+                };
+
+                string nome = "Fiap";
+                string hash = "qwertyuiopasdfghjklzxcvbnm";
+
+                //ACT
+                Usuario usuarioCadastro = new(nome, usuarioCadastroComando.Email, cpfTeste, hash, TipoUsuario.Medico);
+
+                CancellationToken cancellationToken = new();
+
+                usuariosRepositorio.InserirUsuarioAsync(Arg.Any<Medico>(), cancellationToken).Returns(usuarioCadastro);
+                tokenServico.EncryptPassword(Arg.Any<string>()).Returns("5-97FSAY*FASH#@$=asoihfdasf");
+
+                await sut.Invoking(x => x.CadastrarUsuarioAsync(usuarioCadastroComando, cancellationToken)).Should().NotThrowAsync<RegraDeNegocioExcecao>();
             }
         }
     }
