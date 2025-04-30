@@ -7,12 +7,12 @@ using NSubstitute;
 
 namespace Hackathon.Fiap.Teste.Medicos.Servicos
 {
-    public class MedicosServicosTestes
+    public class MedicosServicoTestes
     {
         private readonly IMedicosRepositorio medicosRepositorio;
         private readonly MedicosServico medicosServico;
 
-        public MedicosServicosTestes()
+        public MedicosServicoTestes()
         {
             medicosRepositorio = Substitute.For<IMedicosRepositorio>();
             medicosServico = new MedicosServico(medicosRepositorio);

@@ -1,12 +1,12 @@
-﻿using System.Net;
-using System.Text;
-using Hackathon.Fiap.DataTransfer.Consultas.Requests;
+﻿using Hackathon.Fiap.DataTransfer.Consultas.Requests;
 using Hackathon.Fiap.DataTransfer.Consultas.Responses;
 using Hackathon.Fiap.Domain.Consultas.Enumeradores;
 using Hackathon.Fiap.Domain.Usuarios.Entidades;
 using Hackathon.Fiap.Domain.Utils;
 using Hackathon.Fiap.Teste.Integracao.ClassesHelper;
 using Newtonsoft.Json;
+using System.Net;
+using System.Text;
 
 namespace Hackathon.Fiap.Teste.Integracao.Consultas
 {
@@ -31,8 +31,8 @@ namespace Hackathon.Fiap.Teste.Integracao.Consultas
         {
             await AutenticarAplicacao(Roles.Medico);
             HttpResponseMessage result = await apiFactoryClient.GetAsync("api/consultas/paginados");
-            PaginacaoConsulta <ConsultaResponse>? consultasPaginadas = JsonConvert.DeserializeObject<PaginacaoConsulta<ConsultaResponse>> (await result.Content.ReadAsStringAsync());
-           
+            PaginacaoConsulta<ConsultaResponse>? consultasPaginadas = JsonConvert.DeserializeObject<PaginacaoConsulta<ConsultaResponse>>(await result.Content.ReadAsStringAsync());
+
             Assert.NotNull(consultasPaginadas);
             Assert.NotEmpty(consultasPaginadas.Registros);
         }
@@ -61,9 +61,9 @@ namespace Hackathon.Fiap.Teste.Integracao.Consultas
             await AutenticarAplicacao(Roles.Medico);
 
             HttpResponseMessage resultConsulta = await apiFactoryClient.GetAsync("api/consultas/paginados");
-            PaginacaoConsulta<ConsultaResponse>? consultasPaginadas = 
+            PaginacaoConsulta<ConsultaResponse>? consultasPaginadas =
                 JsonConvert.DeserializeObject<PaginacaoConsulta<ConsultaResponse>>(await resultConsulta.Content.ReadAsStringAsync());
-            
+
             Assert.NotNull(consultasPaginadas);
             Assert.NotEmpty(consultasPaginadas.Registros);
 
@@ -82,7 +82,7 @@ namespace Hackathon.Fiap.Teste.Integracao.Consultas
             HttpContent httpContent = new StringContent(jsonContent, Encoding.UTF8, "application/json");
 
 
-            HttpResponseMessage resultAlteracao = 
+            HttpResponseMessage resultAlteracao =
                 await apiFactoryClient.PutAsync($"api/consultas/situacoes?ConsultaId={consultaResponse.ConsultaId}&Status=Aceita", httpContent);
 
             ErroResponse? consultaAlterada = JsonConvert.DeserializeObject<ErroResponse>(await resultAlteracao.Content.ReadAsStringAsync());
@@ -121,7 +121,7 @@ namespace Hackathon.Fiap.Teste.Integracao.Consultas
             HttpResponseMessage resultAlteracao =
                 await apiFactoryClient.PutAsync($"api/consultas/situacoes?ConsultaId={consultaResponse.ConsultaId}&Status=Aceita", httpContent);
 
-            Assert.True(resultAlteracao.IsSuccessStatusCode, "O endpoint não respondeu como esperado.");   
+            Assert.True(resultAlteracao.IsSuccessStatusCode, "O endpoint não respondeu como esperado.");
 
             if (resultAlteracao.IsSuccessStatusCode)
             {
@@ -158,7 +158,7 @@ namespace Hackathon.Fiap.Teste.Integracao.Consultas
 
             Assert.True(!resultAlteracao.IsSuccessStatusCode, "O endpoint não respondeu como esperado.");
             Assert.Equal(HttpStatusCode.BadRequest, resultAlteracao.StatusCode);
-            
+
             if (!resultAlteracao.IsSuccessStatusCode)
             {
                 ErroResponse? consultaAlterada = JsonConvert.DeserializeObject<ErroResponse>(await resultAlteracao.Content.ReadAsStringAsync());
@@ -168,5 +168,27 @@ namespace Hackathon.Fiap.Teste.Integracao.Consultas
             }
         }
 
+        [Fact]
+        public async Task Inserir_Consulta_Corretamente()
+        {
+            await AutenticarAplicacao(Roles.Administrador);
+
+            ConsultaRequest consultaRequest = new()
+            {
+                MedicoId = 1,
+                HorarioDisponivelId = 1,
+                PacienteId = 2,
+                Status = StatusConsultaEnum.Pendente,
+                Valor = 1
+            };
+
+            string jsonContent = JsonConvert.SerializeObject(consultaRequest);
+            HttpContent httpContent = new StringContent(jsonContent, Encoding.UTF8, "application/json");
+
+            HttpResponseMessage result = await apiFactoryClient.PostAsync("api/consultas", httpContent);
+            Assert.True(result.StatusCode == HttpStatusCode.Created);
+            Assert.True(result.IsSuccessStatusCode);
+            Assert.True(result.ReasonPhrase == "Created");
+        }
     }
 }

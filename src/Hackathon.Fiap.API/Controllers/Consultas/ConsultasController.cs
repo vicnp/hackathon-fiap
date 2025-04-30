@@ -10,7 +10,7 @@ namespace Hackathon.Fiap.API.Controllers.Consultas
 {
     [ApiController]
     [Route("api/consultas")]
-    public class ConsultasController(IConsultasAppServico consultasAppServico) :ControllerBase
+    public class ConsultasController(IConsultasAppServico consultasAppServico) : ControllerBase
     {
 
         /// <summary>
@@ -20,12 +20,11 @@ namespace Hackathon.Fiap.API.Controllers.Consultas
         /// <param name="ct"></param>
         /// <returns></returns>
         [HttpPost]
-        [Route("inserir")]
         [Authorize(Roles = $"{Roles.Medico},{Roles.Administrador},{Roles.Paciente}")]
-        public async Task<ActionResult> InserirHorariosDisponiveisAsync([FromBody] ConsultaRequest request, CancellationToken ct)
+        public async Task<ActionResult> InserirConsultaAsync([FromBody] ConsultaRequest request, CancellationToken ct)
         {
             ConsultaResponse response = await consultasAppServico.InserirConsultaAsync(request, ct);
-            return Created("api/consultas/inserir", response);
+            return Created("api/consultas", response);
         }
 
         /// <summary>
