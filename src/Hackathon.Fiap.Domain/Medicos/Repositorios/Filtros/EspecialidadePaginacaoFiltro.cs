@@ -1,10 +1,5 @@
-﻿using Hackathon.Fiap.Domain.Utils.Enumeradores;
-using Hackathon.Fiap.Domain.Utils;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Hackathon.Fiap.Domain.Utils;
+using Hackathon.Fiap.Domain.Utils.Enumeradores;
 
 namespace Hackathon.Fiap.Domain.Medicos.Repositorios.Filtros
 {

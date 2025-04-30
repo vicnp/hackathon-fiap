@@ -14,6 +14,7 @@ namespace Hackathon.Fiap.Application.Medicos.Profiles
             CreateMap<MedicosPaginacaoRequest, MedicosPaginacaoFiltro>();
             CreateMap<Medico, MedicoResponse>();
             CreateMap<PaginacaoConsulta<Medico>, PaginacaoConsulta<MedicoResponse>>();
+            CreateMap<PaginacaoConsulta<Especialidade>, PaginacaoConsulta<EspecialidadeResponse>>();
             CreateMap<Especialidade, EspecialidadeResponse>();
             CreateMap<EspecialidadesPaginacaoRequest, EspecialidadePaginacaoFiltro>();
         }

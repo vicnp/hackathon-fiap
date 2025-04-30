@@ -59,7 +59,7 @@ namespace Hackathon.Fiap.Infra.Medicos
                 sql.AppendLine($@" AND e.nome = '{filtro.NomeEspecialidade}' ");
 
 
-            if (!filtro.CodigoEspecialidade.HasValue)
+            if (filtro.CodigoEspecialidade.HasValue)
                 sql.AppendLine($@" AND e.id = '{filtro.CodigoEspecialidade}' ");
 
             return ListarPaginadoAsync(sql.ToString(), filtro.Pg, filtro.Qt, filtro.CpOrd, filtro.TpOrd.ToString(), ct: ct);
