@@ -56,13 +56,17 @@ Task("TestRun")
 			ArgumentCustomization = args => args.Append("--logger trx;LogFileName=result.trx --results-directory TestReports")
 		};	
 
-		var coverletSettings = new CoverletSettings {
-			CollectCoverage = true,
-			CoverletOutputFormat = CoverletOutputFormat.opencover,
-			CoverletOutputDirectory = Directory(@".\TestReports\"),
-			CoverletOutputName = $"coverage",
-			ExcludeByAttribute = new List<string> { "*.ExcludeFromCodeCoverage*" }
-		};
+        var coverletSettings = new CoverletSettings {
+            CollectCoverage = true,
+            CoverletOutputFormat = CoverletOutputFormat.opencover,
+            CoverletOutputDirectory = Directory(@".\TestReports\"),
+            CoverletOutputName = $"coverage",
+            ExcludeByAttribute = new List<string> { "ExcludeFromCodeCoverage" },
+            Exclude = new List<string> {
+                "[*]*Comando*",
+                "[*]*RegularExpressions*"
+            }
+        };
 
     	DotNetTest("./src/Hackathon.Fiap.Teste/Hackathon.Fiap.Teste.csproj", testSettings, coverletSettings);
     }); 
@@ -72,27 +76,28 @@ Task("TestReport")
     .IsDependentOn("TestRun")
     .Does(() => 
     {
+        StartProcess("reportgenerator", new ProcessSettings {
+            Arguments = string.Join(" ", new[]
+            {
+                "-reports:\"./TestReports/**/coverage.cobertura.xml\"",
+                "-targetdir:\"./TestReports/ReportGeneratorOutput\"",
+                "-historydir:\"./TestReports/ReportsHistory\"",
+                "-reporttypes:Html",
+                "-classfilters:-System.Text.RegularExpressions.Generated*"
+            })
+        });
 
-            var reportGeneratorSettings = new ReportGeneratorSettings()
-            {
-                HistoryDirectory = new DirectoryPath("./TestReports/ReportsHistory")
-            };
+        var reportFilePath = "./TestReports/ReportGeneratorOutput/index.html";
 
-            ReportGenerator(new FilePath("./TestReports/**/coverage.cobertura.xml"), new DirectoryPath("./TestReports/ReportGeneratorOutput"), reportGeneratorSettings);
-			var reportFilePath = "./TestReports/ReportGeneratorOutput/index.html";
-         
-            if (System.Environment.OSVersion.Platform == PlatformID.Unix)
-            {
-                // Para macOS ou Linux
-                StartProcess("open", reportFilePath);
-            }
-            else
-            {
-                // Para Windows
-                StartProcess("explorer", reportFilePath);
-            }
-                
-            });
+        if (System.Environment.OSVersion.Platform == PlatformID.Unix)
+        {
+            StartProcess("open", reportFilePath);
+        }
+        else
+        {
+            StartProcess("explorer", reportFilePath);
+        }
+    });
 
 
 

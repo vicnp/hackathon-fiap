@@ -36,7 +36,6 @@
 	<ItemGroup>
 		<Compile Remove="UnitTest1.cs" />
 		<Compile Remove="Regioes\**" />
-		<Compile Remove="Usuarios\Servicos\**" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -46,18 +45,15 @@
 
 	<ItemGroup>
 		<EmbeddedResource Remove="Regioes\**" />
-		<EmbeddedResource Remove="Usuarios\Servicos\**" />
 	</ItemGroup>
 
 	<ItemGroup>
 		<None Remove="Regioes\**" />
-		<None Remove="Usuarios\Servicos\**" />
 	</ItemGroup>
 
 	<ItemGroup>
 	  <Folder Include="Consultas\Entidades\" />
 	  <Folder Include="Consultas\Servicos\" />
-	  <Folder Include="Medicos\Entidades\" />
 	  <Folder Include="Pacientes\Entidades\" />
 	</ItemGroup>
 

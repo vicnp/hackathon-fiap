@@ -34,10 +34,10 @@ namespace Hackathon.Fiap.Domain.Usuarios.Servicos
 
         private static void ValidarInformacoesUsuario(UsuarioCadastroComando comando)
         {
-            if (comando.TipoUsuario == Enumeradores.TipoUsuario.Medico && string.IsNullOrEmpty(comando.Crm))
+            if (comando.TipoUsuario == Enumeradores.TipoUsuario.Medico && !ValidarCrm(comando.Crm))
                 throw new RegraDeNegocioExcecao("Para o cadastro de médicos é obrigatório informar um código de CRM válido.");
 
-            if (string.IsNullOrEmpty(comando.Senha))
+            if (string.IsNullOrEmpty(comando.Senha) || comando.Senha.Length < TAMANHO_MINIMO_SENHA)
                 throw new RegraDeNegocioExcecao("Informe uma senha válida.");
 
             if (string.IsNullOrEmpty(comando.Nome) || comando.Nome.Length < TAMANHO_MINIMO_NOME)
@@ -46,20 +46,12 @@ namespace Hackathon.Fiap.Domain.Usuarios.Servicos
             if (string.IsNullOrEmpty(comando.SobreNome) || comando.SobreNome.Length < TAMANHO_MINIMO_NOME)
                 throw new RegraDeNegocioExcecao("Informe um sobre nome válido");
 
-            if (string.IsNullOrEmpty(comando.Email) || comando.Email.Length < TAMANHO_MINIMO_EMAIL)
+            if (!ValidarEmail(comando.Email) || comando.Email.Length < TAMANHO_MINIMO_EMAIL)
                 throw new RegraDeNegocioExcecao("Informe um Email válido");
-
-            if (comando.Senha.Length == TAMANHO_MINIMO_SENHA)
-                throw new RegraDeNegocioExcecao("Informe uma senha válida");
 
             if (!ValidarCpf(comando.Cpf))
                 throw new RegraDeNegocioExcecao("Informe um CPF válido");
 
-            if (!ValidarEmail(comando.Email))
-                throw new RegraDeNegocioExcecao("Informe um Email válido");
-
-            if (!ValidarCrm(comando.Crm))
-                throw new RegraDeNegocioExcecao("Informe um CRM válido");
         }
 
         public static bool ValidarCpf(string cpf)
@@ -98,7 +90,7 @@ namespace Hackathon.Fiap.Domain.Usuarios.Servicos
 
             try
             {
-                MailAddress addr = new MailAddress(email);
+                MailAddress addr = new(email);
                 return addr.Address == email;
             }
             catch

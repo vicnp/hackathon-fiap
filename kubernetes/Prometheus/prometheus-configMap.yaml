@@ -16,10 +16,6 @@ data:
         scrape_interval: 5s   
         static_configs:
           - targets: ['svc-api:8080']
-      - job_name: 'consumer'    
-        scrape_interval: 5s   
-        static_configs:
-          - targets: ['svc-consumer:1234']
       - job_name: 'prometheus'        
         static_configs:
           - targets: ['localhost:9090']

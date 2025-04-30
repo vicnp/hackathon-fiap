@@ -1,6 +1,10 @@
 ﻿using System.Net;
+using System.Text;
 using Hackathon.Fiap.DataTransfer.Pacientes.Responses;
+using Hackathon.Fiap.DataTransfer.Usuarios.Request;
+using Hackathon.Fiap.DataTransfer.Usuarios.Response;
 using Hackathon.Fiap.Domain.Usuarios.Entidades;
+using Hackathon.Fiap.Domain.Usuarios.Enumeradores;
 using Hackathon.Fiap.Domain.Utils;
 using Newtonsoft.Json;
 
@@ -40,6 +44,51 @@ namespace Hackathon.Fiap.Teste.Integracao.Usuarios
             HttpResponseMessage result = await apiFactoryClient.GetAsync("api/usuarios/paginados");
 
             Assert.Equal(HttpStatusCode.Forbidden, result.StatusCode);
+        }
+
+        [Fact]
+        public async Task CadastroUsuarioTeste_Bad_Request()
+        {
+            await AutenticarAplicacao(Roles.Administrador);
+
+            UsuarioCadastroRequest usuarioCadastroRequest = new()
+            {
+
+            };
+
+            string jsonContent = JsonConvert.SerializeObject(usuarioCadastroRequest);
+            HttpContent httpContent = new StringContent(jsonContent, Encoding.UTF8, "application/json");
+
+            HttpResponseMessage result = await apiFactoryClient.PostAsync("api/usuarios", httpContent);
+
+            Assert.Equal(HttpStatusCode.BadRequest, result.StatusCode);
+        }
+
+        [Fact]
+        public async Task CadastroUsuarioTeste_Usuario_Valido_Request()
+        {
+            await AutenticarAplicacao(Roles.Administrador);
+
+            UsuarioCadastroRequest usuarioCadastroRequest = new()
+            {
+                Cpf = "215.869.710-50",
+                Crm = "1255/SP",
+                Email = "email@teste.com",
+                Nome = "Teste",
+                Senha = "Siosad",
+                SobreNome = "Siosa",
+                TipoUsuario = TipoUsuario.Medico
+            };
+
+            string jsonContent = JsonConvert.SerializeObject(usuarioCadastroRequest);
+            HttpContent httpContent = new StringContent(jsonContent, Encoding.UTF8, "application/json");
+
+            HttpResponseMessage result = await apiFactoryClient.PostAsync("api/usuarios", httpContent);
+            UsuarioResponse? response = JsonConvert.DeserializeObject<UsuarioResponse>(await result.Content.ReadAsStringAsync());
+
+            Assert.Equal(HttpStatusCode.OK, result.StatusCode);
+            Assert.NotNull(response);
+            Assert.Equal(response.Nome, usuarioCadastroRequest.Nome + " " + usuarioCadastroRequest.SobreNome);
         }
     }
 }
