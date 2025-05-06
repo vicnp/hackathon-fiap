@@ -8,6 +8,6 @@ namespace Hackathon.Fiap.Application.Consultas.Interfaces
     {
         Task<ConsultaResponse> AlterarStatusConsultaAsync(ConsultaStatusRequest request, string? justificativa, CancellationToken ct);
         Task<ConsultaResponse> InserirConsultaAsync(ConsultaRequest request, CancellationToken ct);
-        Task<PaginacaoConsulta<ConsultaResponse>> ListarConsultasAsync(ConsultaListarRequest request, CancellationToken ct);
+        Task<PaginacaoConsulta<ConsultaResponse>> ListarConsultasPaginadasAsync(ConsultaListarRequest request, CancellationToken ct);
     }
 }

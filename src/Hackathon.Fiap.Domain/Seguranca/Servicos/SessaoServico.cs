@@ -24,7 +24,7 @@ namespace Hackathon.Fiap.Domain.Seguranca.Servicos
             };
         }
 
-        public int? RecuperarCodigoUsuario()
+        public int? RecuperarIdUsuario()
         {
             string? value = httpContextAccessor.HttpContext?.User.FindFirst(ClaimTypes.Sid)?.Value;
 

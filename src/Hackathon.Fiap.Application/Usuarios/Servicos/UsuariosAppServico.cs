@@ -4,6 +4,7 @@ using Hackathon.Fiap.Application.Usuarios.Interfaces;
 using Hackathon.Fiap.DataTransfer.Usuarios.Request;
 using Hackathon.Fiap.DataTransfer.Usuarios.Response;
 using Hackathon.Fiap.Domain.Pacientes.Repositorios.Filtros;
+using Hackathon.Fiap.Domain.Seguranca.Servicos.Interfaces;
 using Hackathon.Fiap.Domain.Usuarios.Comandos;
 using Hackathon.Fiap.Domain.Usuarios.Entidades;
 using Hackathon.Fiap.Domain.Usuarios.Repositorios;
@@ -15,6 +16,7 @@ namespace Hackathon.Fiap.Application.Usuarios
 {
     public partial class UsuariosAppServico(IUsuariosRepositorio usuariosRepositorio,
                                             IUsuariosServico usuarioServico,
+                                            ISessaoServico sessaoServico,
                                             IMapper mapper) : IUsuariosAppServico
     {
         [GeneratedRegex(@"Duplicate entry '.*' for key '(Usuarios|Medicos)\.(\w+)'")]
@@ -59,7 +61,8 @@ namespace Hackathon.Fiap.Application.Usuarios
             Usuario? response = await usuariosRepositorio.RecuperarUsuarioPorIdAsync(id, ct)
                 ?? throw new RegistroNaoEncontradoExcecao("Usuário não existe.");
 
-            await usuariosRepositorio.DeletarUsuarioAsync(response.UsuarioId, ct);
+            if (response.UsuarioId == sessaoServico.RecuperarIdUsuario())
+                await usuariosRepositorio.DeletarUsuarioPorIdAsync(response.UsuarioId, ct);
         }
     }
 }

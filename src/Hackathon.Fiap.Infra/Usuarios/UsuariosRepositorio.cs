@@ -133,7 +133,7 @@ namespace Hackathon.Fiap.Infra.Usuarios
             return novoUsuario;
         }
 
-        public Task DeletarUsuarioAsync(int id, CancellationToken ct)
+        public Task DeletarUsuarioPorIdAsync(int id, CancellationToken ct)
         {
             StringBuilder sql = new($@"
                                        DELETE FROM techchallenge.Usuario

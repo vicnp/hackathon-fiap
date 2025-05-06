@@ -38,7 +38,7 @@ namespace Hackathon.Fiap.API.Controllers.Consultas
         [Authorize(Roles = $"{Roles.Paciente},{Roles.Medico}")]
         public async Task<ActionResult<PaginacaoConsulta<ConsultaResponse>>> ListarConsultasPaginadasAsync([FromQuery] ConsultaListarRequest request, CancellationToken ct)
         {
-            PaginacaoConsulta<ConsultaResponse> response = await consultasAppServico.ListarConsultasAsync(request, ct);
+            PaginacaoConsulta<ConsultaResponse> response = await consultasAppServico.ListarConsultasPaginadasAsync(request, ct);
             return Ok(response);
         }
 

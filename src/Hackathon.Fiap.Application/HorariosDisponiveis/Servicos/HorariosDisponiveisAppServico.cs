@@ -12,7 +12,7 @@ namespace Hackathon.Fiap.Application.HorariosDisponiveis.Servicos;
 
 public class HorariosDisponiveisAppServico(IMapper mapper, IHorariosDisponiveisServico horariosDisponiveisServico) : IHorariosDisponiveisAppServico
 {
-    public async Task<PaginacaoConsulta<HorarioDisponivelResponse>> ListarHorariosDisponiveisAsync(HorarioDisponivelListarRequest request, CancellationToken ct)
+    public async Task<PaginacaoConsulta<HorarioDisponivelResponse>> ListarHorariosDisponiveisPaginadosAsync(HorarioDisponivelListarRequest request, CancellationToken ct)
     {
         HorariosDisponiveisFiltro filtro = mapper.Map<HorariosDisponiveisFiltro>(request);
 

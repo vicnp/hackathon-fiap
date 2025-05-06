@@ -6,7 +6,7 @@ namespace Hackathon.Fiap.Application.HorariosDisponiveis.Interfaces;
 
 public interface IHorariosDisponiveisAppServico
 {
-    Task<PaginacaoConsulta<HorarioDisponivelResponse>> ListarHorariosDisponiveisAsync(HorarioDisponivelListarRequest request, CancellationToken ct);
+    Task<PaginacaoConsulta<HorarioDisponivelResponse>> ListarHorariosDisponiveisPaginadosAsync(HorarioDisponivelListarRequest request, CancellationToken ct);
     Task InserirHorariosDisponiveisAsync(HorarioDisponivelInserirRequest request, CancellationToken ct);
 
 }

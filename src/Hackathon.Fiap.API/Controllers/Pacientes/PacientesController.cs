@@ -1,10 +1,10 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
+﻿using Hackathon.Fiap.Application.Pacientes.Interfaces;
 using Hackathon.Fiap.DataTransfer.Pacientes.Responses;
 using Hackathon.Fiap.DataTransfer.Usuarios.Request;
-using Hackathon.Fiap.Application.Pacientes.Interfaces;
 using Hackathon.Fiap.Domain.Usuarios.Entidades;
 using Hackathon.Fiap.Domain.Utils;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Hackathon.Fiap.API.Controllers.Pacientes
 {
@@ -20,9 +20,9 @@ namespace Hackathon.Fiap.API.Controllers.Pacientes
         [HttpGet]
         [Route("paginados")]
         [Authorize(Roles = $"{Roles.Medico},{Roles.Administrador}")]
-        public async Task<ActionResult<PaginacaoConsulta<PacienteResponse>>> RecuperarPacientesAsync([FromQuery] UsuarioListarRequest request, CancellationToken ct)
+        public async Task<ActionResult<PaginacaoConsulta<PacienteResponse>>> ListarPacientesPaginadosAsync([FromQuery] UsuarioListarRequest request, CancellationToken ct)
         {
-            PaginacaoConsulta<PacienteResponse> usuarios = await pacientesAppServico.ListarPacientesAsync(request, ct);
+            PaginacaoConsulta<PacienteResponse> usuarios = await pacientesAppServico.ListarPacientesPaginadosAsync(request, ct);
             return Ok(usuarios);
         }
     }

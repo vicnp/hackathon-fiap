@@ -13,10 +13,10 @@ namespace Hackathon.Fiap.Application.Pacientes.Servicos
 {
     public class PacientesAppServico(IMapper mapper, IPacientesRepositorio pacientesRepositorio, ISessaoServico sessaoServico) : IPacientesAppServico
     {
-        public async Task<PaginacaoConsulta<PacienteResponse>> ListarPacientesAsync(UsuarioListarRequest request, CancellationToken ct)
+        public async Task<PaginacaoConsulta<PacienteResponse>> ListarPacientesPaginadosAsync(UsuarioListarRequest request, CancellationToken ct)
         {
             TipoUsuario? exemploRole = sessaoServico.RecuperarRoleUsuario();
-            int? exemploId = sessaoServico.RecuperarCodigoUsuario();
+            int? exemploId = sessaoServico.RecuperarIdUsuario();
 
             UsuarioListarFiltro filtro = mapper.Map<UsuarioListarFiltro>(request);
 

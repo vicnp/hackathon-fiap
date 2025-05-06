@@ -11,7 +11,7 @@ namespace Hackathon.Fiap.Application.Consultas.Servicos
 {
     public class ConsultasAppServico(IMapper mapper, IConsultasServico consultasServico) : IConsultasAppServico
     {
-        public async Task<PaginacaoConsulta<ConsultaResponse>> ListarConsultasAsync(ConsultaListarRequest request, CancellationToken ct)
+        public async Task<PaginacaoConsulta<ConsultaResponse>> ListarConsultasPaginadasAsync(ConsultaListarRequest request, CancellationToken ct)
         {
             ConsultasListarFiltro filtro = mapper.Map<ConsultasListarFiltro>(request);
 

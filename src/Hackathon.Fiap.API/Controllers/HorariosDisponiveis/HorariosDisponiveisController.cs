@@ -10,10 +10,9 @@ namespace Hackathon.Fiap.API.Controllers.HorariosDisponiveis
 {
     [ApiController]
     [Route("api/horarios-disponiveis")]
-    public class HorariosDisponiveisController(IHorariosDisponiveisAppServico horariosDisponiveisAppServico)
-        : ControllerBase
+    public class HorariosDisponiveisController(IHorariosDisponiveisAppServico horariosDisponiveisAppServico) : ControllerBase
     {
-        
+
         /// <summary>
         /// Recupera os horários disponíveis para consultas com paginação
         /// </summary>
@@ -25,11 +24,11 @@ namespace Hackathon.Fiap.API.Controllers.HorariosDisponiveis
         [Authorize(Roles = $"{Roles.Paciente},{Roles.Medico},{Roles.Administrador}")]
         public async Task<ActionResult<PaginacaoConsulta<HorarioDisponivelResponse>>> ListarHorariosDisponiveisPaginadosAsync([FromQuery] HorarioDisponivelListarRequest request, CancellationToken ct)
         {
-            PaginacaoConsulta<HorarioDisponivelResponse> response = await horariosDisponiveisAppServico.ListarHorariosDisponiveisAsync(request, ct);
+            PaginacaoConsulta<HorarioDisponivelResponse> response = await horariosDisponiveisAppServico.ListarHorariosDisponiveisPaginadosAsync(request, ct);
             return Ok(response);
         }
-        
-        
+
+
         /// <summary>
         /// Insere horários disponíveis para consultas
         /// </summary>

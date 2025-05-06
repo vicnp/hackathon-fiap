@@ -19,7 +19,7 @@ namespace Hackathon.Fiap.API.Controllers.Medicos
         /// <param name="ct"></param>
         /// <returns></returns>
         [HttpPost]
-        [Authorize(Roles = $"{Roles.Medico},{Roles.Administrador}")]
+        [Authorize(Roles = Roles.Administrador)]
         public async Task<ActionResult> InserirEspecialidadeAsync([FromBody] EspecialidadeRequest request, CancellationToken ct)
         {
             EspecialidadeResponse response = await especialidadeAppServico.InserirEspecialidadeAsync(request, ct);
@@ -41,13 +41,13 @@ namespace Hackathon.Fiap.API.Controllers.Medicos
         }
 
         /// <summary>
-        /// Remove uma especialidade no sistema.
+        /// Recuperar especialidade por ID
         /// </summary>
         /// <param name="id"></param>
         /// <param name="ct"></param>
         /// <returns></returns>
         [HttpGet("{id:int}")]
-        [Authorize(Roles = Roles.Administrador)]
+        [Authorize(Roles = $"{Roles.Medico},{Roles.Administrador}, {Roles.Paciente}")]
         public async Task<ActionResult<EspecialidadeResponse>> RecuperarEspecialidadeAsync(int id, CancellationToken ct)
         {
             EspecialidadeResponse? response = await especialidadeAppServico.RecuperarEspecialidadeAsync(id, ct);
@@ -62,7 +62,7 @@ namespace Hackathon.Fiap.API.Controllers.Medicos
         [HttpGet]
         [Route("paginados")]
         [Authorize(Roles = $"{Roles.Medico},{Roles.Administrador}")]
-        public async Task<ActionResult<PaginacaoConsulta<EspecialidadeResponse>>> ListarUsuarios([FromQuery] EspecialidadesPaginacaoRequest request, CancellationToken ct)
+        public async Task<ActionResult<PaginacaoConsulta<EspecialidadeResponse>>> ListarEspecialidadesMedicosPaginadosAsync([FromQuery] EspecialidadesPaginacaoRequest request, CancellationToken ct)
         {
             PaginacaoConsulta<EspecialidadeResponse> paginacaoConsulta = await especialidadeAppServico.ListarEspecialidadesMedicosPaginadosAsync(request, ct);
             return Ok(paginacaoConsulta);

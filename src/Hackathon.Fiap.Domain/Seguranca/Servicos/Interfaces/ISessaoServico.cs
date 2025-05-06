@@ -4,7 +4,7 @@ namespace Hackathon.Fiap.Domain.Seguranca.Servicos.Interfaces
 {
     public interface ISessaoServico
     {
-        int? RecuperarCodigoUsuario();
+        int? RecuperarIdUsuario();
         TipoUsuario? RecuperarRoleUsuario();
     }
 }
