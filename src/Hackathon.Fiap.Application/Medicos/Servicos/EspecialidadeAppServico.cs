@@ -7,6 +7,7 @@ using Hackathon.Fiap.Domain.Medicos.Repositorios;
 using Hackathon.Fiap.Domain.Medicos.Repositorios.Filtros;
 using Hackathon.Fiap.Domain.Medicos.Servicos.Interfaces;
 using Hackathon.Fiap.Domain.Utils;
+using Hackathon.Fiap.Domain.Utils.Excecoes;
 
 namespace Hackathon.Fiap.Application.Medicos.Servicos
 {
@@ -17,7 +18,9 @@ namespace Hackathon.Fiap.Application.Medicos.Servicos
     {
         public async Task DeletarEspecialidadeAsync(int especialidadeId, CancellationToken ct)
         {
-            Especialidade especialidade = await especialidadesServico.ValidarEspecialidadeAsync(especialidadeId, ct);
+            Especialidade especialidade = await especialidadesServico.ValidarEspecialidadeAsync(especialidadeId, ct)
+                                        ?? throw new RegistroNaoEncontradoExcecao("Especialidade não encontrada.");
+
             await especialidadesRepositorio.DeletarEspecialidadeAsync(especialidade.EspecialidadeId, ct);
         }
 
@@ -31,13 +34,13 @@ namespace Hackathon.Fiap.Application.Medicos.Servicos
         public async Task<PaginacaoConsulta<EspecialidadeResponse>> ListarEspecialidadesMedicosPaginadosAsync(EspecialidadesPaginacaoRequest request, CancellationToken ct)
         {
             EspecialidadePaginacaoFiltro filtro = mapper.Map<EspecialidadePaginacaoFiltro>(request);
-            var result = await especialidadesRepositorio.ListarEspecialidadesMedicosPaginadosAsync(filtro, ct);
+            PaginacaoConsulta<Especialidade> result = await especialidadesRepositorio.ListarEspecialidadesMedicosPaginadosAsync(filtro, ct);
             return mapper.Map<PaginacaoConsulta<EspecialidadeResponse>>(result);
         }
 
         public async Task<EspecialidadeResponse> RecuperarEspecialidadeAsync(int especialidadeId, CancellationToken ct)
         {
-            var response = await especialidadesServico.ValidarEspecialidadeAsync(especialidadeId, ct);
+            Especialidade response = await especialidadesServico.ValidarEspecialidadeAsync(especialidadeId, ct);
             return mapper.Map<EspecialidadeResponse>(response);
         }
     }
