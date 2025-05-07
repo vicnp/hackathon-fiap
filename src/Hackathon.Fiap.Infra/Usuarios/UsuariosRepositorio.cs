@@ -27,10 +27,10 @@ namespace Hackathon.Fiap.Infra.Usuarios
                                      FROM techchallenge.Usuario u
                                      LEFT JOIN techchallenge.Medico m ON m.id = u.id
                         	         WHERE u.hash = @hash
-                        	         AND (u.email = @identificador OR u.cpf = @identificador OR m.crm = @identificador)");
+                        	         AND (LOWER(u.email) = @identificador OR u.cpf = @identificador OR LOWER(m.crm) = @identificador)");
 
             DynamicParameters dp = new();
-            dp.Add("identificador", identificador);
+            dp.Add("identificador", identificador.ToLower());
             dp.Add("hash", hash);
 
             return session.QueryFirstOrDefaultAsync<Usuario>(new CommandDefinition(sql.ToString(), dp, cancellationToken: ct));
