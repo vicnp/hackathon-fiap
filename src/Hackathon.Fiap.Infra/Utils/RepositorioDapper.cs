@@ -1,7 +1,7 @@
 ﻿using Dapper;
+using Hackathon.Fiap.Domain.Utils;
 using Hackathon.Fiap.Infra.Utils.DBContext;
 using System.Data;
-using Hackathon.Fiap.Domain.Utils;
 
 namespace Hackathon.Fiap.Infra.Utils
 {
@@ -69,6 +69,14 @@ namespace Hackathon.Fiap.Infra.Utils
                 return session.Query<T>(query);
 
             return session.Query<T>(query, dynamicParameters);
+        }
+
+        public Task<IEnumerable<T>> ListarAsync(string query, DynamicParameters? dynamicParameters = null, CancellationToken ct = default)
+        {
+            if (dynamicParameters == null)
+                return session.QueryAsync<T>(query);
+
+            return session.QueryAsync<T>(new CommandDefinition(query, dynamicParameters, cancellationToken: ct));
         }
     }
 }

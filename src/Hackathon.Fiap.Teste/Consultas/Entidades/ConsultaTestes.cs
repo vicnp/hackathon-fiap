@@ -19,10 +19,10 @@ public class ConsultaTestes
         StatusConsultaEnum status = StatusConsultaEnum.Pendente;
         string justificativaCancelamento = "";
         DateTime criadoEm = DateTime.Now;
-        
+
         // Criando a especialidade
         var especialidade = new Especialidade { EspecialidadeId = 1, NomeEspecialidade = "Cardiologia", DescricaoEspecialidade = "Especialidade de coração" };
-        
+
         // Criando o médico com a especialidade e CRM
         var medico = new Medico();
         medico.SetCrm("123456");
@@ -32,7 +32,7 @@ public class ConsultaTestes
         var paciente = new Paciente();
 
         // Criando o horario disponivel
-        HorarioDisponivel horarioDisponivel = new ();
+        HorarioDisponivel horarioDisponivel = new();
 
         // ACT
         Consulta consulta = new(id, valor, status, medico, horarioDisponivel, paciente, justificativaCancelamento);
@@ -43,12 +43,12 @@ public class ConsultaTestes
         // ASSERT
         consulta.Medico.Should().Be(medico);
         consulta.Medico.Crm.Should().Be("123456");
-        consulta.Medico.Especialidade.Should().Be(especialidade);
+        consulta.Medico.Especialidades.Should().Be(especialidade);
         consulta.Paciente.Should().Be(paciente);
         consulta.Valor.Should().Be(valor);
         consulta.Status.Should().Be(status);
         consulta.JustificativaCancelamento.Should().Be(justificativaCancelamento);
-        consulta.CriadoEm.Should().BeCloseTo(criadoEm , TimeSpan.FromSeconds(5000));
+        consulta.CriadoEm.Should().BeCloseTo(criadoEm, TimeSpan.FromSeconds(5000));
         consulta.HorarioDisponivel.Should().Be(horarioDisponivel);
     }
 
@@ -113,7 +113,7 @@ public class ConsultaTestes
     public void Quando_Criar_ConsultaFiltro_Espero_Objeto_Com_Valores()
     {
         // ARRANGE
-        var consulta = new ConsultaInserirFiltro(1,2,3,StatusConsultaEnum.Aceita, 25.4);
+        var consulta = new ConsultaInserirFiltro(1, 2, 3, StatusConsultaEnum.Aceita, 25.4);
         // ASSERT
         consulta.Should().NotBeNull();
         consulta.Status.Should().Be(StatusConsultaEnum.Aceita);
@@ -122,4 +122,4 @@ public class ConsultaTestes
         consulta.HorarioDisponivelId.Should().Be(3);
 
     }
-} 
+}

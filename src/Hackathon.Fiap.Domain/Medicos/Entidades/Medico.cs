@@ -5,7 +5,7 @@ namespace Hackathon.Fiap.Domain.Medicos.Entidades
     public class Medico : Usuario
     {
         public string Crm { get; protected set; } = "";
-        public Especialidade Especialidade { get; protected set; } = new Especialidade();
+        public IList<Especialidade> Especialidades { get; protected set; } = [];
         public Medico() { }
 
         public Medico(int id, string nome, string email, string cpf, string senhaHash, TipoUsuario tipo) : base(id, nome, email, cpf, senhaHash, tipo)
@@ -26,7 +26,7 @@ namespace Hackathon.Fiap.Domain.Medicos.Entidades
         {
             ArgumentNullException.ThrowIfNull(especialidade);
 
-            Especialidade = especialidade;
+            Especialidades.Add(especialidade);
         }
     }
 }

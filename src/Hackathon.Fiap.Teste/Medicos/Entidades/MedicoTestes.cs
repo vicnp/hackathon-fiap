@@ -25,8 +25,8 @@ public class MedicoTestes
 
         // ASSERT
         medico.Crm.Should().Be(crm);
-        medico.Especialidade.Should().Be(especialidade);
-        medico.Especialidade.NomeEspecialidade.Should().Be("Cardiologia");
+        medico.Especialidades.Should().Be(especialidade);
+        medico.Especialidades.NomeEspecialidade.Should().Be("Cardiologia");
     }
 
     [Fact]
@@ -48,8 +48,8 @@ public class MedicoTestes
 
         // ASSERT
         medico.Crm.Should().Be(crm);
-        medico.Especialidade.Should().Be(especialidade);
-        medico.Especialidade.NomeEspecialidade.Should().Be("Cardiologia");
+        medico.Especialidades.Should().Be(especialidade);
+        medico.Especialidades.NomeEspecialidade.Should().Be("Cardiologia");
     }
 
     [Fact]
@@ -71,8 +71,8 @@ public class MedicoTestes
 
         // ASSERT
         medico.Crm.Should().Be(crm);
-        medico.Especialidade.Should().Be(especialidade);
-        medico.Especialidade.NomeEspecialidade.Should().Be("Cardiologia");
+        medico.Especialidades.Should().Be(especialidade);
+        medico.Especialidades.NomeEspecialidade.Should().Be("Cardiologia");
     }
 
     [Fact]

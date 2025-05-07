@@ -31,7 +31,7 @@ public class HorarioDisponivelTestes
         // ASSERT
         horarioDisponivel.Medico.Should().Be(medico);
         horarioDisponivel.Medico.Crm.Should().Be("123456");
-        horarioDisponivel.Medico.Especialidade.Should().Be(especialidade);
+        horarioDisponivel.Medico.Especialidades.Should().Be(especialidade);
     }
 
     [Fact]
@@ -70,6 +70,6 @@ public class HorarioDisponivelTestes
         // ASSERT
         horarioDisponivel.Medico.Should().NotBeNull();
         horarioDisponivel.Medico.Crm.Should().Be("987654");
-        horarioDisponivel.Medico.Especialidade.Should().Be(especialidade);
+        horarioDisponivel.Medico.Especialidades.Should().Be(especialidade);
     }
 }

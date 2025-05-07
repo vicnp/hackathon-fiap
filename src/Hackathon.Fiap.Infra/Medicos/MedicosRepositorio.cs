@@ -1,32 +1,29 @@
 ﻿using Dapper;
-using System.Text;
 using Hackathon.Fiap.Domain.Medicos.Entidades;
 using Hackathon.Fiap.Domain.Medicos.Repositorios;
 using Hackathon.Fiap.Domain.Medicos.Repositorios.Filtros;
 using Hackathon.Fiap.Domain.Utils;
+using Hackathon.Fiap.Domain.Utils.Helpers;
 using Hackathon.Fiap.Infra.Utils;
 using Hackathon.Fiap.Infra.Utils.DBContext;
-using Hackathon.Fiap.Domain.Utils.Helpers;
+using System.Text;
 
 namespace Hackathon.Fiap.Infra.Medicos
 {
     public class MedicosRepositorio(DapperContext dapperContext) : RepositorioDapper<Medico>(dapperContext), IMedicosRepositorio
     {
-        public async Task<PaginacaoConsulta<Medico>> ListarMedicosPaginadosAsync(MedicosPaginacaoFiltro filtro, CancellationToken ct)
+        public Task<PaginacaoConsulta<Medico>> ListarMedicosPaginadosAsync(MedicosPaginacaoFiltro filtro, CancellationToken ct)
         {
             DynamicParameters dp = new();
             StringBuilder sql = new(
-                @"SELECT
+                @"SELECT DISTINCT
 	                    u.id as UsuarioId,
 	                    u.cpf as Cpf,
 	                    u.email as Email,
 	                    u.nome as Nome,
 	                    u.tipo as TipoUsuario,
                         m.crm as Crm,
-	                    u.criado_em as CriadoEm,
-	                    e.id as EspecialidadeId,
-	                    e.nome as NomeEspecialidade,
-	                    e.descricao as DescricaoEspecialidade
+	                    u.criado_em as CriadoEm
                     FROM
 	                    techchallenge.Usuario u
                     INNER JOIN techchallenge.Medico m 
@@ -73,32 +70,7 @@ namespace Hackathon.Fiap.Infra.Medicos
                 dp.Add("@NOMESPECIALIDADE", filtro.NomeEspecialidade);
             }
 
-            string sqlPaginado = GerarQueryPaginacao(sql.ToString(), filtro.Pg, filtro.Qt, filtro.CpOrd, filtro.TpOrd.ToString());
-
-            var registros = new Dictionary<int, Medico>();
-
-            Task<IEnumerable<Medico>> task = session.QueryAsync<Medico, Especialidade, Medico>(sqlPaginado, (medico, especialidade) =>
-            {
-                if (!registros.TryGetValue(medico.UsuarioId, out var existingMedico))
-                {
-                    existingMedico = medico;
-                    registros[medico.UsuarioId] = existingMedico;
-                }
-                existingMedico.SetEspecialidade(especialidade);
-                return existingMedico;
-            }, splitOn: "EspecialidadeId", param: dp);
-
-            await Task.Run(async () => {
-                await task;
-            }, ct);
-
-            PaginacaoConsulta<Medico> response = new()
-            {
-                Registros = registros.Values,
-                Total = RecuperarTotalLinhas(sql.ToString(), dp)
-            };
-
-            return response;
+            return ListarPaginadoAsync(sql.ToString(), filtro.Pg, filtro.Qt, filtro.CpOrd, filtro.TpOrd.ToString(), dp, ct);
         }
 
         public async Task<Medico?> RecuperarMedicoAsync(int codigoMedico, CancellationToken ct)

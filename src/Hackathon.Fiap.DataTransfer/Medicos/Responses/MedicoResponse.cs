@@ -8,6 +8,6 @@
         public string Cpf { get; protected set; } = string.Empty;
         public string Tipo { get; protected set; } = string.Empty;
         public string Crm { get; protected set; } = string.Empty;
-        public EspecialidadeResponse? Especialidade { get; protected set; }
+        public List<EspecialidadeResponse> Especialidades { get; protected set; } = [];
     }
 }

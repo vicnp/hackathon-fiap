@@ -65,6 +65,20 @@ namespace Hackathon.Fiap.Infra.Medicos
             return ListarPaginadoAsync(sql.ToString(), filtro.Pg, filtro.Qt, filtro.CpOrd, filtro.TpOrd.ToString(), ct: ct);
         }
 
+        public Task<IEnumerable<Especialidade>> ListarEspecialidadesMedicoAsync(int medicoId, CancellationToken ct)
+        {
+            StringBuilder sql = new($@"
+                                    SELECT e.id as EspecialidadeId,
+                                           e.nome as NomeEspecialidade,
+                                           e.descricao as DescricaoEspecialidade
+                                     FROM techchallenge.Medico_Especialidade me
+                                     INNER JOIN techchallenge.Especialidade e
+                                        ON e.id = me.especialidade_id
+	                                     WHERE me.medico_id = '{medicoId}'");
+
+            return ListarAsync(sql.ToString(), ct: ct);
+        }
+
         public Task<Especialidade?> RecuperarEspecialidadeAsync(int especialidadeId, CancellationToken ct)
         {
             StringBuilder sql = new($@"
