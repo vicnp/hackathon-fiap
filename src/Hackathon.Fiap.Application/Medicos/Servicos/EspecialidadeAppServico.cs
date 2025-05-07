@@ -7,7 +7,6 @@ using Hackathon.Fiap.Domain.Medicos.Repositorios;
 using Hackathon.Fiap.Domain.Medicos.Repositorios.Filtros;
 using Hackathon.Fiap.Domain.Medicos.Servicos.Interfaces;
 using Hackathon.Fiap.Domain.Utils;
-using Hackathon.Fiap.Domain.Utils.Excecoes;
 
 namespace Hackathon.Fiap.Application.Medicos.Servicos
 {
@@ -18,9 +17,7 @@ namespace Hackathon.Fiap.Application.Medicos.Servicos
     {
         public async Task DeletarEspecialidadeAsync(int especialidadeId, CancellationToken ct)
         {
-            Especialidade especialidade = await especialidadesServico.ValidarEspecialidadeAsync(especialidadeId, ct)
-                                        ?? throw new RegistroNaoEncontradoExcecao("Especialidade não encontrada.");
-
+            Especialidade especialidade = await especialidadesServico.ValidarEspecialidadeAsync(especialidadeId, ct);
             await especialidadesRepositorio.DeletarEspecialidadeAsync(especialidade.EspecialidadeId, ct);
         }
 
