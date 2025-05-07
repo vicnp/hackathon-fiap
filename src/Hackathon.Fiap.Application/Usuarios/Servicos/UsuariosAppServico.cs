@@ -62,7 +62,9 @@ namespace Hackathon.Fiap.Application.Usuarios
                 ?? throw new RegistroNaoEncontradoExcecao("Usuário não existe.");
 
             if (response.UsuarioId == sessaoServico.RecuperarIdUsuario())
-                await usuariosRepositorio.DeletarUsuarioPorIdAsync(response.UsuarioId, ct);
+                throw new RegraDeNegocioExcecao("Você não pode deletar seu próprio usuário.");
+
+            await usuariosRepositorio.DeletarUsuarioPorIdAsync(response.UsuarioId, ct);
         }
     }
 }

@@ -39,7 +39,7 @@ namespace Hackathon.Fiap.Infra.Usuarios
         public Task<Usuario?> RecuperarUsuarioPorIdAsync(int id, CancellationToken ct)
         {
             StringBuilder sql = new($@"
-                                     SELECT u.id as IdUsuario,
+                                     SELECT u.id as UsuarioId,
                                             u.nome as Nome,
                                             u.email as Email,
                                             u.cpf as Cpf,
