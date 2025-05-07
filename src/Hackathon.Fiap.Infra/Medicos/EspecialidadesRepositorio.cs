@@ -72,10 +72,10 @@ namespace Hackathon.Fiap.Infra.Medicos
                                             e.nome as NomeEspecialidade,
                                             e.descricao as DescricaoEspecialidade
                                      FROM Especialidade e
-                                      WHERE u.hash = @identificador");
+                                      WHERE e.id = @especialidade");
 
             DynamicParameters dp = new();
-            dp.Add("identificador", especialidadeId);
+            dp.Add("especialidade", especialidadeId);
 
             return session.QueryFirstOrDefaultAsync<Especialidade>(new CommandDefinition(sql.ToString(), dp, cancellationToken: ct));
         }
