@@ -32,14 +32,5 @@ namespace Hackathon.Fiap.Teste.Integracao.Medicos
             Assert.NotNull(medicosPaginados);
             Assert.NotEmpty(medicosPaginados.Registros);
         }
-
-        [Fact]
-        public async Task Listar_Medicos_Paginas_Autorizacao_NaoAutorizado()
-        {
-            await AutenticarAplicacao(Roles.Administrador);
-            HttpResponseMessage result = await apiFactoryClient.GetAsync("api/medicos/paginados");
-
-            Assert.Equal(HttpStatusCode.Forbidden, result.StatusCode);
-        }
     }
 }

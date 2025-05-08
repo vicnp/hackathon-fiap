@@ -43,7 +43,7 @@ public class ConsultaTestes
         // ASSERT
         consulta.Medico.Should().Be(medico);
         consulta.Medico.Crm.Should().Be("123456");
-        consulta.Medico.Especialidades.Should().Be(especialidade);
+        consulta.Medico.Especialidades.Should().Contain(especialidade);
         consulta.Paciente.Should().Be(paciente);
         consulta.Valor.Should().Be(valor);
         consulta.Status.Should().Be(status);
