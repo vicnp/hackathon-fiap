@@ -135,6 +135,10 @@ A pipeline CI é executada a cada commit em qualquer branch que tenha o prefixo 
 
 ![Captura de Tela 2025-05-07 às 20 53 16](https://github.com/user-attachments/assets/ade68d4f-9300-41c6-9d93-82c38065f203)
 
+## Aparelhagem da API
+
+![Captura de Tela 2025-05-07 às 21 39 23](https://github.com/user-attachments/assets/1528d7a1-8d47-4358-b446-c859783dfa14)
+
 
 ## Justificativas das Escolhas Técnicas
 ### API REST (ASP.NET Core)
