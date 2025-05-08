@@ -6,7 +6,7 @@ namespace Hackathon.Fiap.DataTransfer.HorariosDisponiveis.Responses;
 
 public class HorarioDisponivelResponse
 {
-    public int ConsultaId { get; set; }
+    public int HorarioDisponivelId { get; set; }
     public MedicoResponse Medico { get; set; } = new MedicoResponse();
     public PacienteResponse Paciente { get; set; } = new PacienteResponse();
     public DateTime DataHoraInicio { get; set; }
