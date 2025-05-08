@@ -137,7 +137,8 @@ A pipeline CI é executada a cada commit em qualquer branch que tenha o prefixo 
 
 ## Instrumentação da API
 
-![Captura de Tela 2025-05-07 às 21 39 23](https://github.com/user-attachments/assets/1528d7a1-8d47-4358-b446-c859783dfa14)
+![Captura de Tela 2025-05-08 às 20 09 37](https://github.com/user-attachments/assets/68186229-4a9a-4e28-8139-444ae75aa9fd)
+
 
 
 ## Justificativas das Escolhas Técnicas
